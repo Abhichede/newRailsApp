@@ -3,7 +3,7 @@ class CreateSites < ActiveRecord::Migration[5.0]
     create_table :sites do |t|
       t.string :name
       t.text :address
-      t.number :flat_count
+      t.integer :flat_count
       t.string :site_type
       t.string :unit_number
       t.string :area

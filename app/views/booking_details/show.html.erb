@@ -12,6 +12,8 @@
       </div>
       <div class="col-md-6">
         <h4><strong><%= 'Booking Details'.upcase %></strong></h4>
+        <span class="label label-primary"><%= @booking_detail.site.name.upcase %></span>
+        <span class="label label-info"><%= @booking_detail.flat.flat_number %></span>
       </div>
     </div>
     <div class="col-md-6">
@@ -19,14 +21,15 @@
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_booking_detail_path(@booking_detail), :class => 'btn btn-default' %>
+                    edit_booking_detail_path(@booking_detail),
+                    :class => 'btn btn-default btn-xs' %>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                     booking_detail_path(@booking_detail),
                     :method => 'delete',
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                    :class => 'btn btn-danger' %>
+                    :class => 'btn btn-danger btn-xs' %>
       </div>
     </div>
   </div>
@@ -115,7 +118,7 @@
     <strong>FLAT COST:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.flat_cost %>
+    &#8377; <%= flat_cost = @booking_detail.flat.flat_cost %>
   </div>
   <div class="col-md-3 ">
     <strong>MSEB CHARGES:</strong>
@@ -201,11 +204,17 @@
   </div>
 </div>
 <hr/>
+<!-- Final addition of all amount -->
+
+<%
+%>
+
+<!-- end of addition operations -->
 <div class="col-lg-6 pull-right">
   <div class="col-md-3 ">
     <strong>Total Amount:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.final_sale_deed_fees %>
+    &#8377; <%= @booking_detail.final_sale_deed_fees + flat_cost %>
   </div>
 </div>
