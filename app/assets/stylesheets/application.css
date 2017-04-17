@@ -53,6 +53,9 @@ div.row.custom-row{
     background-color: #730E15;
 }
 ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
-    background-color: #006352;
+    background-color: #00806e;
     color: #FFFFFF;
+}
+.navbar-default{
+    background-color: #006352 !important;
 }
