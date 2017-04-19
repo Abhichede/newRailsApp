@@ -232,7 +232,11 @@
       <strong>Paid Amount:</strong>
     </div>
     <div class="col-md-3">
+      <% if @booking_detail.paid_amount.blank? %>
+          &#8377; 0
+      <% else %>
       &#8377; <%= paid_amount = @booking_detail.paid_amount.to_i %>
+      <% end %>
     </div>
   </div>
 </div>
