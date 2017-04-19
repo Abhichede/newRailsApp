@@ -1,6 +1,6 @@
 class CreateBookingDetails < ActiveRecord::Migration[5.0]
   def change
-    create_table :booking_details do |t|
+    create_table :'booking_details.js' do |t|
       t.string :customer_name
       t.string :customer_address
       t.string :customer_contact

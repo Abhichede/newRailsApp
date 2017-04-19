@@ -12,12 +12,13 @@
  *
  *= require devise_bootstrap_views
  *= require bootstrap-material-design
+ * require bootstrap-material-design-rails
  *= require_tree .
  *= require_self
  */
 
 body{
-    background-color: #F5F5F5;
+    background-color: #F5F5F5 !important;
 }
 
 ul.nav.navbar-nav>li>a, div.navbar-header>a.navbar-brand{
@@ -35,8 +36,8 @@ a>div.flats-well:hover{
     box-shadow: #4DB6AC 5px !important;
 }
 a>div.flats-well{
-    color: #000000;
-    background-color: #4DB6AC !important;
+    color: #FFFFFF;
+    background-color: #006352 !important;
 }
 div.row.custom-row{
     margin-top: 0.5rem;
@@ -50,12 +51,20 @@ div.row.custom-row{
 
 }
 .badge{
-    background-color: #730E15;
+    background-color: rgb(133, 108, 82);
 }
 ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
     background-color: #00806e;
     color: #FFFFFF;
 }
-.navbar-default{
+.navbar-static-top, .btn-primary{
     background-color: #006352 !important;
+}
+.btn-warning{
+    background-color: #d64e27 !important;
+}
+.btn-success, .label-success{
+    background-color: #3e7d3e !important;
+}
+div.row>div.col-md-3{
 }

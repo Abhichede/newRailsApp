@@ -11,7 +11,7 @@
 
 <div class="row col-md-offset-1">
 <% @sites.each do |site| %>
-  <div class="card col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
+  <div class="card col col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
     <div class="card-block">
       <h4 class="card-title"><strong><%= site.name.upcase %></strong></h4>
       <hr />
@@ -26,7 +26,7 @@
     </div>
     <hr />
     <div class="card-footer text-muted">
-      Booked Flats <span class="badge"><%= site.flats.where(:booking_status=>1).count %></span>
+      Booked Flats <span class="badge"> <%= site.flats.where(:booking_status=>1).count %></span>
     </div>
   </div>
 <% end %>

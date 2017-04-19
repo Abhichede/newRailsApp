@@ -53,7 +53,7 @@
 
    <div class="row custom-row">
      <div class="col-lg-6">
-       <%= f.label "Site Name : #{Site.find(site_id).name}",
+       <%= f.label "Site Name : #{Site.find(site_id).name.upcase}",
                    :class => 'control-label col-lg-6' %>
        <%= f.hidden_field :site_id,
                         :value=> site_id %>
@@ -87,9 +87,15 @@
       </div>
       <%=f.error_span(:service_tax) %>
       <div class="col-lg-6">
-        <%= f.select(:loan_possible, options_for_select([['Loan Possible'],['Yes',1],['No',0]],
-                                                        :disabled=> 'Loan Possible', :selected=> 0),
+        <% if @booking_detail.loan_possible %>
+          <%= f.select(:loan_possible, options_for_select([['Loan Possible ?'],['Yes',1],['No',0]],
+                                                        :disabled=> 'Loan Possible ?'),
                      {}, class: 'form-control') %>
+        <% else %>
+          <%= f.select(:loan_possible, options_for_select([['Loan Possible ?'],['Yes',1],['No',0]],
+                                                            :disabled=> 'Loan Possible ?', :selected=> 'Loan Possible ?'),
+                         {}, class: 'form-control') %>
+        <% end %>
       </div>
       <%=f.error_span(:loan_possible) %>
    </div>

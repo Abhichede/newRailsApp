@@ -1,1 +1,1 @@
-json.partial! "booking_details/booking_detail", booking_detail: @booking_detail
+json.partial! "booking_details.js/booking_detail", booking_detail: @booking_detail

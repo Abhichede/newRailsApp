@@ -18,10 +18,13 @@
     </div>
     <div class="col-md-6">
       <div class="col-md-4 col-sm-4 col-xs-4">
+        <button class="btn btn-default btn-xs" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#myModal">Pay</button>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_booking_detail_path(@booking_detail),
+                    {controller: 'booking_details', action: 'edit', :flat_id=> @booking_detail.flat,
+                     :site_id=> @booking_detail.site},
                     :class => 'btn btn-default btn-xs' %>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -118,49 +121,49 @@
     <strong>FLAT COST:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= flat_cost = @booking_detail.flat.flat_cost %>
+    &#8377; <%= flat_cost = (@booking_detail.flat.flat_cost).to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>MSEB CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.MSEB_charges %>
+    &#8377; <%= mseb_charges = @booking_detail.flat.MSEB_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>WATER CHARGES :</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.water_charges %>
+    &#8377; <%= water_charges = @booking_detail.flat.water_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>BOOKING CHARGES :</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.booking_charges %>
+    &#8377; <%= booking_charges = @booking_detail.booking_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>VAT :</strong>
   </div>
   <div class="col-md-3 ">
-     <%= @booking_detail.vat %> %
+     <%= vat = @booking_detail.vat.to_i %> %
   </div>
   <div class="col-md-3 ">
     <strong>SERVICE TAX:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.service_tax %>
+    &#8377; <%= service_tax = @booking_detail.service_tax.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>ALLOTTED PARKING CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.parking_charges %>
+    &#8377; <%= parking_charges = @booking_detail.flat.parking_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>MAINTENANCE CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.maintainance_charges %>
+    &#8377; <%= maintenance_charges = @booking_detail.flat.maintainance_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>LOAN POSSIBLE:</strong>
@@ -176,45 +179,95 @@
     <strong>ACTUAL AGREEMENT COST:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.agreement_cost %>
+    &#8377; <%= agreement_cost = @booking_detail.agreement_cost.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>GOVERNMENT CONSIDERATION:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.flat.govt_charges %>
+    &#8377; <%= govt_charges = @booking_detail.flat.govt_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>STAMP DUTY:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.stamp_duty %>
+    &#8377; <%= stamp_duty = @booking_detail.stamp_duty.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>REGISTRATION FEES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.registration_fees %>
+    &#8377; <%= registration_fees = @booking_detail.registration_fees.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>FINAL SALE DEED FEES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.final_sale_deed_fees %>
+    &#8377; <%= final_sale_deed_fees = @booking_detail.final_sale_deed_fees.to_i %>
   </div>
 </div>
 <hr/>
 <!-- Final addition of all amount -->
 
 <%
+   final_cost = flat_cost + mseb_charges + water_charges + booking_charges +
+                service_tax + parking_charges + maintenance_charges + agreement_cost +
+                govt_charges + stamp_duty + registration_fees + final_sale_deed_fees;
 %>
 
 <!-- end of addition operations -->
-<div class="col-lg-6 pull-right">
+<div class="row">
+  <div class="">
+    <div class="col-md-3 ">
+      <strong>Total Amount:</strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= final_cost %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="">
+    <div class="col-md-3">
+      <strong>Paid Amount:</strong>
+    </div>
+    <div class="col-md-3">
+      &#8377; <%= paid_amount = @booking_detail.paid_amount.to_i %>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-3 ">
-    <strong>Total Amount:</strong>
+    <strong>Balance Amount:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= @booking_detail.final_sale_deed_fees + flat_cost %>
+    &#8377; <%= final_cost - paid_amount %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Fill Payment</h4>
+      </div>
+      <div class="modal-body">
+            <%= form_tag update_paid_amount_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
+                    <%= hidden_field_tag :booking_id, params[:id], value: @booking_detail.id %>
+                    <%= text_field_tag :search, params[:search],placeholder: 'Payable Amount',
+                                       class: 'form-control search-box', id: 'search-box' %>
+      </div>
+      <div class="modal-footer">
+          <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: 'add-stock-btn') do %>
+              Save
+          <% end %>
+        <% end %>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>

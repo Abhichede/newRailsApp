@@ -15,4 +15,20 @@
 //= require twitter/bootstrap
 //= require bootstrap-material-design
 //= require turbolinks
+//= require booking_details
 //= require_tree .
+
+$(document).ready(function () {
+    var hide_spinner = function () {
+        $("#spinner").hide();
+    };
+
+
+    var show_spinner = function () {
+        $("#spinner").show();
+    };
+
+    update_paid_amount_function();
+
+
+});

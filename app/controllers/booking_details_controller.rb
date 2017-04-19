@@ -1,28 +1,28 @@
 class BookingDetailsController < ApplicationController
   before_action :set_booking_detail, only: [:show, :edit, :update, :destroy]
 
-  # GET /booking_details
-  # GET /booking_details.json
+  # GET /booking_details.js
+  # GET /booking_details.js.json
   def index
     @booking_details = BookingDetail.all
   end
 
-  # GET /booking_details/1
-  # GET /booking_details/1.json
+  # GET /booking_details.js/1
+  # GET /booking_details.js/1.json
   def show
   end
 
-  # GET /booking_details/new
+  # GET /booking_details.js/new
   def new
     @booking_detail = BookingDetail.new
   end
 
-  # GET /booking_details/1/edit
+  # GET /booking_details.js/1/edit
   def edit
   end
 
-  # POST /booking_details
-  # POST /booking_details.json
+  # POST /booking_details.js
+  # POST /booking_details.js.json
   def create
     @booking_detail = BookingDetail.new(booking_detail_params)
 
@@ -39,8 +39,8 @@ class BookingDetailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /booking_details/1
-  # PATCH/PUT /booking_details/1.json
+  # PATCH/PUT /booking_details.js/1
+  # PATCH/PUT /booking_details.js/1.json
   def update
     respond_to do |format|
       if @booking_detail.update(booking_detail_params)
@@ -53,8 +53,29 @@ class BookingDetailsController < ApplicationController
     end
   end
 
-  # DELETE /booking_details/1
-  # DELETE /booking_details/1.json
+  def update_paid_amount
+
+    @booking_detail = BookingDetail.find(params[:booking_id])
+    if params[:search].blank?
+        respond_to do |format|
+          format.html { redirect_to @booking_detail, alert: "Blank Amount" }
+          format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+        end
+      return
+    end
+    if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
+
+      respond_to do |format|
+        format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
+        format.json { render json: @booking_detail }
+      end
+
+    end
+
+  end
+
+  # DELETE /booking_details.js/1
+  # DELETE /booking_details.js/1.json
   def destroy
     @booking_detail.destroy
     @flat = Flat.find(@booking_detail.flat_id)

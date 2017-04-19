@@ -12,8 +12,8 @@
         <h4>
           <div class="label label-success">
                 Available Flats
-                <span class="badge"><%= "#{@site.flat_count - @site.flats.where(:booking_status=>1).count}" %></span>
           </div>
+          <span class="label label-danger"><%= "#{@site.flat_count - @site.flats.where(:booking_status=>1).count}" %></span>
         </h4>
       </div>
     </div>
