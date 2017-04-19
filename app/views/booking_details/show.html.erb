@@ -245,7 +245,11 @@
     <strong>Balance Amount:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= final_cost - paid_amount %>
+    <% if @booking_detail.paid_amount.blank? %>
+        &#8377; <%= final_cost - 0 %>
+    <% else %>
+        &#8377; <%= final_cost - paid_amount %>
+    <% end %>
   </div>
 </div>
 

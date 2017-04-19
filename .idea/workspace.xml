@@ -4,6 +4,7 @@
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/booking_details/show.html.erb" afterPath="$PROJECT_DIR$/app/views/booking_details/show.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb" afterPath="$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -21,11 +22,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/booking_details/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="238" column="6" lean-forward="false" selection-start-line="238" selection-start-column="6" selection-end-line="238" selection-end-column="6" />
+            <state relative-caret-position="348">
+              <caret line="250" column="44" lean-forward="false" selection-start-line="250" selection-start-column="44" selection-end-line="250" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20170418081116_add_column_to_booking_details.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20170414190554_create_booking_details.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20170414190554_create_booking_details.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -138,7 +159,6 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/views/sites/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/show.html.erb" />
-        <option value="$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb" />
         <option value="$PROJECT_DIR$/app/views/booking_details/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/bootstrap.js" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
@@ -146,6 +166,7 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/booking_details.js" />
         <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/booking_details/show.html.erb" />
+        <option value="$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb" />
       </list>
     </option>
   </component>
@@ -1305,7 +1326,7 @@
       <workItem from="1492489285666" duration="1523000" />
       <workItem from="1492491714706" duration="9321000" />
       <workItem from="1492504224217" duration="17715000" />
-      <workItem from="1492580642062" duration="632000" />
+      <workItem from="1492580642062" duration="1139000" />
     </task>
     <task id="LOCAL-00001" summary="Very first Commit">
       <created>1491973444762</created>
@@ -1398,11 +1419,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492580931267</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added on screen payment option.">
+      <created>1492581327052</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1492581327052</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139532000" />
+    <option name="totallyTimeSpent" value="140039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
@@ -1690,22 +1718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20170414190554_create_booking_details.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/booking_details/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1132">
@@ -1803,8 +1815,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/booking_details/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="238" column="6" lean-forward="false" selection-start-line="238" selection-start-column="6" selection-end-line="238" selection-end-column="6" />
+        <state relative-caret-position="348">
+          <caret line="250" column="44" lean-forward="false" selection-start-line="250" selection-start-column="44" selection-end-line="250" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20170414190554_create_booking_details.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20170418081116_add_column_to_booking_details.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
           <folding />
         </state>
       </provider>
