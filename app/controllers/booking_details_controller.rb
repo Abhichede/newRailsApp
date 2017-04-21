@@ -63,6 +63,7 @@ class BookingDetailsController < ApplicationController
         end
       return
     end
+    
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
 
       respond_to do |format|

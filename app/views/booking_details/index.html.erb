@@ -1,54 +1,26 @@
 <%- model_class = BookingDetail -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h3>Customers</h3>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:customer_name) %></th>
-      <th><%= model_class.human_attribute_name(:customer_address) %></th>
-      <th><%= model_class.human_attribute_name(:customer_contact) %></th>
-      <th><%= model_class.human_attribute_name(:customer_pan) %></th>
-      <th><%= model_class.human_attribute_name(:customer_adhar) %></th>
-      <th><%= model_class.human_attribute_name(:site_id) %></th>
-      <th><%= model_class.human_attribute_name(:flat_id) %></th>
-      <th><%= model_class.human_attribute_name(:booking_charges) %></th>
-      <th><%= model_class.human_attribute_name(:vat) %></th>
-      <th><%= model_class.human_attribute_name(:service_tax) %></th>
-      <th><%= model_class.human_attribute_name(:loan_possible) %></th>
-      <th><%= model_class.human_attribute_name(:agreement_cost) %></th>
-      <th><%= model_class.human_attribute_name(:registration_fees) %></th>
-      <th><%= model_class.human_attribute_name(:final_sale_deed_fees) %></th>
-      <th><%= model_class.human_attribute_name(:stamp_duty) %></th>
-      <th><%= model_class.human_attribute_name(:other_charges) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @booking_details.each do |booking_detail| %>
-      <tr>
-        <td><%= link_to booking_detail.id, booking_detail_path(booking_detail) %></td>
-        <td><%= booking_detail.customer_name %></td>
-        <td><%= booking_detail.customer_address %></td>
-        <td><%= booking_detail.customer_contact %></td>
-        <td><%= booking_detail.customer_pan %></td>
-        <td><%= booking_detail.customer_adhar %></td>
-        <td><%= booking_detail.site_id %></td>
-        <td><%= booking_detail.flat_id %></td>
-        <td><%= booking_detail.booking_charges %></td>
-        <td><%= booking_detail.vat %></td>
-        <td><%= booking_detail.service_tax %></td>
-        <td><%= booking_detail.loan_possible %></td>
-        <td><%= booking_detail.agreement_cost %></td>
-        <td><%= booking_detail.registration_fees %></td>
-        <td><%= booking_detail.final_sale_deed_fees %></td>
-        <td><%= booking_detail.stamp_duty %></td>
-        <td><%= booking_detail.other_charges %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_booking_detail_path,
-            :class => 'btn btn-primary' %>
+<div class="row col-md-offset-1">
+  <% @booking_details.each do |booking_detail| %>
+      <div class="card col col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
+        <div class="card-block">
+          <h4 class="card-title"><strong><%= booking_detail.customer_name %></strong></h4>
+          <hr />
+          <p class="card-text">
+            <strong>Addres: </strong> <%= booking_detail.customer_address %> <br />
+            <strong>Contact: </strong> <%= booking_detail.customer_contact %> <br />
+            <strong>Site(BUILDING): </strong> <%= booking_detail.site.name %> <br />
+            <strong>Flat Number: </strong> <%= booking_detail.flat.flat_number %>
+          </p>
+          <hr />
+          <%= link_to 'Visit', booking_detail_path(booking_detail), class: 'btn btn-warning btn-sm' %>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+  <% end %>
+</div>

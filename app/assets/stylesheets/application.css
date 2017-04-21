@@ -68,3 +68,13 @@ ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
 }
 div.row>div.col-md-3{
 }
+.card-text{
+    height: 9rem;
+    overflow: auto;
+}
+form .error {
+    color: #ff130a;
+    font-weight: 200;
+    font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+}
