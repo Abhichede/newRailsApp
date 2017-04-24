@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :sites
   resource :payment_details
   devise_for :users
-  root 'simple#index'
+  root 'sites#index'
   get 'show_payment_details', to: 'payment_details#show'
   get 'destroy_payment', to: 'payment_details#show'
   get 'update_paid_amount', to: 'booking_details#update_paid_amount'
