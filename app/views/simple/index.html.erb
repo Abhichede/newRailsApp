@@ -1,3 +1,35 @@
-<h1>Simple#index</h1>
-<p>Find me in app/views/simple/index.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-success">
+      <div class="panel-heading text-center">
+        <%= Site.all.count %>
+      </div>
+      <div class="panel-body text-center">
+        Sites
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <%= BookingDetail.all.count %>
+      </div>
+      <div class="panel-body text-center">
+        Customers
+        <span class="fa fa-spinner fa-spin fa-lg"></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-danger">
+      <div class="panel-heading text-center">
+        <%= Flat.all.count %>
+      </div>
+      <div class="panel-body text-center">
+        Flats
+      </div>
+    </div>
+  </div>
+
+</div>
 

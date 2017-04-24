@@ -56,6 +56,8 @@ class BookingDetailsController < ApplicationController
   def update_paid_amount
 
     @booking_detail = BookingDetail.find(params[:booking_id])
+    @payment_detail = PaymentDetail.new(:payable_amount=>params[:search], :payment_type=>params[:payment_type],
+                                        :payment_desc=>params[:check_desc], :booking_detail_id=>params[:booking_id])
     if params[:search].blank?
         respond_to do |format|
           format.html { redirect_to @booking_detail, alert: "Blank Amount" }
@@ -66,13 +68,45 @@ class BookingDetailsController < ApplicationController
     
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
 
-      respond_to do |format|
-        format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
-        format.json { render json: @booking_detail }
+      if @payment_detail.save
+        respond_to do |format|
+          format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
+          format.json { render json: @booking_detail }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @booking_detail, alert: "Something went wrong" }
+          format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+        end
       end
-
     end
 
+  end
+
+  def search
+    if params[:search_customer]
+      @booking_detail =  BookingDetail.find_by(:customer_name => params[:search_customer])
+      # Stock.where('trade_name = ? OR serial_no = ?', params[:search], params[:search])
+    end
+
+    if @booking_detail
+      render json: @booking_detail
+      #render partial: 'outwords/table_data'
+    else
+      render status: :not_found, nothing: true
+    end
+  end
+
+  def autocomplete
+
+    @booking_detail = BookingDetail.where('customer_name LIKE ?', "%#{params[:term]}%")
+
+    respond_to do |format|
+      format.html
+      format.json{
+        render json: @booking_detail.map(&:customer_name).to_json
+      }
+    end
   end
 
   # DELETE /booking_details.js/1
@@ -95,6 +129,11 @@ class BookingDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_detail_params
-      params.require(:booking_detail).permit(:customer_name, :customer_address, :customer_contact, :customer_pan, :customer_adhar, :site_id, :flat_id, :booking_charges, :vat, :service_tax, :loan_possible, :agreement_cost, :registration_fees, :final_sale_deed_fees, :stamp_duty, :other_charges)
+      params.require(:booking_detail).permit(:customer_name, :customer_address, :customer_contact,
+                                             :customer_pan, :customer_adhar, :site_id, :flat_id,
+                                             :booking_charges, :vat, :service_tax, :loan_possible,
+                                             :agreement_cost, :registration_fees, :final_sale_deed_fees,
+                                             :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
+                                             :parking_charges, :maintenance_charges, :govt_charges)
     end
 end

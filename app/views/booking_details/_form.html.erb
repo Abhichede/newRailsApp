@@ -124,10 +124,34 @@
 
    <div class="row custom-row">
       <div class="col-lg-6">
+        <%= f.text_field :water_charges, :class => 'form-control', placeholder: :water_charges %>
+      </div>
+       <%=f.error_span(:water_charges) %>
+     <div class="col-lg-6">
+       <%= f.text_field :MSEB_charges, :class => 'form-control', placeholder: :MSEB_charges %>
+     </div>
+     <%=f.error_span(:MSEB_charges) %>
+   </div>
+    <div class="row custom-row">
+      <div class="col-lg-6">
+        <%= f.text_field :parking_charges, :class => 'form-control', placeholder: :parking_charges %>
+      </div>
+      <%=f.error_span(:parking_charges) %>
+      <div class="col-lg-6">
+        <%= f.text_field :maintenance_charges, :class => 'form-control', placeholder: :maintenance_charges %>
+      </div>
+      <%=f.error_span(:maintenance_charges) %>
+    </div>
+    <div class="row custom-row">
+      <div class="col-lg-6">
+        <%= f.text_field :govt_charges, :class => 'form-control', placeholder: :govt_charges %>
+      </div>
+      <%=f.error_span(:govt_charges) %>
+      <div class="col-lg-6">
         <%= f.text_field :other_charges, :class => 'form-control', placeholder: :other_charges %>
       </div>
-       <%=f.error_span(:other_charges) %>
-   </div>
+      <%=f.error_span(:other_charges) %>
+    </div>
 
 
   <div class="form-group">

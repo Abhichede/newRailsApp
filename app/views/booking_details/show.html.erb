@@ -1,13 +1,10 @@
 <%- model_class = BookingDetail -%>
 <div class="page-header">
-
-</div>
-<div class="page-header">
   <div class="row">
     <div class="col-md-6">
       <div class="col-md-2">
         <%= link_to flat_path(@booking_detail.flat) do %>
-            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
       <div class="col-md-6">
@@ -17,22 +14,27 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="col-md-4 col-sm-4 col-xs-4">
-        <button class="btn btn-default btn-xs" id="payment-btn-on-booking"
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#myModal">Pay</button>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-4">
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <%= link_to 'Payment details',
+                    {controller: 'payment_details', action: 'show', :booking_id=>@booking_detail.id},
+                    class: 'btn btn-primary btn-sm' %>
+      </div>
+      <div class="col-md-2 col-sm-6 col-xs-6">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
                     {controller: 'booking_details', action: 'edit', :flat_id=> @booking_detail.flat,
                      :site_id=> @booking_detail.site},
-                    :class => 'btn btn-default btn-xs' %>
+                    :class => 'btn btn-default btn-sm' %>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-4">
+      <div class="col-md-2 col-sm-6 col-xs-6">
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                     booking_detail_path(@booking_detail),
                     :method => 'delete',
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                    :class => 'btn btn-danger btn-xs' %>
+                    :class => 'btn btn-danger btn-sm' %>
       </div>
     </div>
   </div>
@@ -92,7 +94,7 @@
     <strong>AREA :</strong>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.site.area %>
+    <%= @booking_detail.flat.area %> Sq.Ft.
   </div>
   <div class="col-md-3 ">
     <strong>FLOOR :</strong>
@@ -127,13 +129,13 @@
     <strong>MSEB CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= mseb_charges = @booking_detail.flat.MSEB_charges.to_i %>
+    &#8377; <%= mseb_charges = @booking_detail.MSEB_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>WATER CHARGES :</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= water_charges = @booking_detail.flat.water_charges.to_i %>
+    &#8377; <%= water_charges = @booking_detail.water_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>BOOKING CHARGES :</strong>
@@ -157,13 +159,13 @@
     <strong>ALLOTTED PARKING CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= parking_charges = @booking_detail.flat.parking_charges.to_i %>
+    &#8377; <%= parking_charges = @booking_detail.parking_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>MAINTENANCE CHARGES:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= maintenance_charges = @booking_detail.flat.maintainance_charges.to_i %>
+    &#8377; <%= maintenance_charges = @booking_detail.maintenance_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>LOAN POSSIBLE:</strong>
@@ -185,7 +187,7 @@
     <strong>GOVERNMENT CONSIDERATION:</strong>
   </div>
   <div class="col-md-3 ">
-    &#8377; <%= govt_charges = @booking_detail.flat.govt_charges.to_i %>
+    &#8377; <%= govt_charges = @booking_detail.govt_charges.to_i %>
   </div>
   <div class="col-md-3 ">
     <strong>STAMP DUTY:</strong>
@@ -260,7 +262,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100">Fill Payment</h4>
+        <h4 class="modal-title w-100">Fill Payment details</h4>
       </div>
       <% if (final_cost-@booking_detail.paid_amount.to_i) <= 0 %>
           <div class="modal-body">
@@ -276,6 +278,10 @@
                       <%= hidden_field_tag :booking_id, params[:id], value: @booking_detail.id %>
                       <%= text_field_tag :search, params[:search],placeholder: 'Payable Amount',
                                          class: 'form-control search-box', id: 'search-box' %>
+                      <%= select_tag :payment_type, options_for_select([['Payment Type'],['CASH','CASH'],['CHECK','CHECK']],:disabled=> 'Payment Type'),
+                                         class: 'form-control search-box', id: 'payment_type' %>
+                      <%= text_field_tag :check_desc, params[:check_desc],placeholder: 'Check Description',
+                                         class: 'form-control search-box', id: 'check_desc' %>
         </div>
         <div class="modal-footer">
             <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',

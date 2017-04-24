@@ -10,12 +10,11 @@
       <th><%= model_class.human_attribute_name(:area) %></th>
       <th><%= model_class.human_attribute_name(:floor) %></th>
       <th><%= model_class.human_attribute_name(:flat_cost) %></th>
-      <th><%= model_class.human_attribute_name(:MSEB_charges) %></th>
-      <th><%= model_class.human_attribute_name(:other_charges) %></th>
-      <th><%= model_class.human_attribute_name(:water_charges) %></th>
-      <th><%= model_class.human_attribute_name(:parking_charges) %></th>
-      <th><%= model_class.human_attribute_name(:maintainance_charges) %></th>
-      <th><%= model_class.human_attribute_name(:govt_charges) %></th>
+      <th><%= model_class.human_attribute_name(:govt_rate) %></th>
+      <th><%= model_class.human_attribute_name(:govt_value) %></th>
+      <th><%= model_class.human_attribute_name(:flat_type) %></th>
+      <th><%= model_class.human_attribute_name(:wing) %></th>
+      <th><%= model_class.human_attribute_name(:amenities) %></th>
     </tr>
   </thead>
   <tbody>
@@ -25,12 +24,11 @@
         <td><%= flat.area %></td>
         <td><%= flat.floor %></td>
         <td><%= flat.flat_cost %></td>
-        <td><%= flat.MSEB_charges %></td>
-        <td><%= flat.other_charges %></td>
-        <td><%= flat.water_charges %></td>
-        <td><%= flat.parking_charges %></td>
-        <td><%= flat.maintainance_charges %></td>
-        <td><%= flat.govt_charges %></td>
+        <td><%= flat.govt_rate %></td>
+        <td><%= flat.govt_value %></td>
+        <td><%= flat.flat_type %></td>
+        <td><%= flat.wing %></td>
+        <td><%= flat.amenities %></td>
       </tr>
     <% end %>
   </tbody>

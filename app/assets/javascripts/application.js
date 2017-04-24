@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require bootstrap-material-design
+// require bootstrap-material-design
 // require turbolinks
 //= require booking_details
 //= require_tree .
@@ -21,6 +21,7 @@
 $(document).ready(function () {
 
     update_paid_amount_function();
+    search_customer_function();
     var hide_spinner = function () {
         $("#spinner").hide();
     };

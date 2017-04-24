@@ -23,7 +23,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
-gem 'bootstrap-material-design'
+#gem 'bootstrap-material-design'
+gem "font-awesome-rails"
 gem 'pg'
 gem 'rails_12factor', group: :production
 

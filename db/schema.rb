@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418081116) do
+ActiveRecord::Schema.define(version: 20170424035117) do
 
-  create_table "booking_details.js", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
     t.string   "customer_address"
     t.string   "customer_contact"
@@ -32,24 +32,37 @@ ActiveRecord::Schema.define(version: 20170418081116) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "paid_amount"
+    t.string   "MSEB_charges"
+    t.string   "water_charges"
+    t.string   "parking_charges"
+    t.string   "maintenance_charges"
+    t.string   "govt_charges"
   end
 
   create_table "flats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "area"
     t.string   "floor"
     t.string   "flat_cost"
-    t.string   "MSEB_charges"
-    t.string   "other_charges"
-    t.string   "water_charges"
-    t.string   "parking_charges"
-    t.string   "maintainance_charges"
-    t.string   "govt_charges"
     t.integer  "site_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "flat_number"
     t.boolean  "booking_status"
     t.date     "booking_date"
+    t.string   "govt_rate"
+    t.string   "govt_value"
+    t.string   "flat_type"
+    t.string   "wing"
+    t.string   "amenities"
+  end
+
+  create_table "payment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "payable_amount"
+    t.string   "payment_type"
+    t.string   "payment_desc"
+    t.integer  "booking_detail_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

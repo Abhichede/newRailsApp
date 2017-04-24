@@ -3,10 +3,12 @@ var update_paid_amount_function = function () {
     console.log("Paid Amount");
     $("#update-paid-amount-form").on('ajax:before', function (event, data, status) {
         show_spinner();
+        console.log("Before");
     });
 
     $("#update-paid-amount-form").on('ajax:after', function (event, data, status) {
         //hide_spinner();
+        console.log("After");
     });
 
     $('#outward-lookup-form').on('ajax:success', function (event, data, status) {
@@ -14,6 +16,29 @@ var update_paid_amount_function = function () {
     });
     $('#outward-lookup-form').on('ajax:error', function (event, xhr, status, error) {
 
+        console.log("Error");
+        show_spinner();
+
+    });
+};
+var search_customer_function = function () {
+
+    $("#customer_search_form").on('ajax:before', function (event, data, status) {
+        show_spinner();
+        console.log("Before");
+    });
+
+    $("#customer_search_form").on('ajax:after', function (event, data, status) {
+        //hide_spinner();
+        console.log("After");
+    });
+
+    $('#customer_search_form').on('ajax:success', function (event, data, status) {
+        console.log("success");
+    });
+    $('#customer_search_form').on('ajax:error', function (event, xhr, status, error) {
+
+        console.log("Error");
         show_spinner();
 
     });
@@ -51,35 +76,55 @@ $(function() {
             },
             "booking_detail[booking_charges]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[vat]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[service_tax]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[agreement_cost]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[registration_fees]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[final_sale_deed_fees]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[stamp_duty]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
+            },
+            "booking_detail[MSEB_charges]":{
+                required: true,
+                pattern: /^[0-9]*$/
+            },
+            "booking_detail[water_charges]":{
+                required: true,
+                pattern: /^[0-9]*$/
+            },
+            "booking_detail[parking_charges]":{
+                required: true,
+                pattern: /^[0-9]*$/
+            },
+            "booking_detail[maintenance_charges]":{
+                required: true,
+                pattern: /^[0-9]*$/
+            },
+            "booking_detail[govt_charges]":{
+                required: true,
+                pattern: /^[0-9]*$/
             },
             "booking_detail[other_charges]":{
                 required: true,
-                pattern: /[0-9]/
+                pattern: /^[0-9]*$/
             },
             "booking_detail[loan_possible]":"required"
         },
@@ -125,6 +170,26 @@ $(function() {
             },
             "booking_detail[stamp_duty]": {
                 required: "Please enter stamp duty amount",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[MSEB_charges]": {
+                required: "Please enter MSEB Charges",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[water_charges]": {
+                required: "Please enter water charges",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[parking_charges]": {
+                required: "Please enter parking charges",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[maintenance_charges]": {
+                required: "Please enter Maintenance charges",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[govt_charges]": {
+                required: "Please enter GOVT. charges",
                 pattern: "please enter valid amount"
             },
             "booking_detail[other_charges]": {

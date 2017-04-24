@@ -25,8 +25,8 @@
       <%= link_to 'Visit', site_path(site), class: 'btn btn-warning btn-sm' %>
     </div>
     <hr />
-    <div class="card-footer text-muted">
-      Booked Flats <span class="badge"> <%= site.flats.where(:booking_status=>1).count %></span>
+    <div class="card-data text-muted">
+      Booked Flats <span class="badge black"> <%= site.flats.where(:booking_status=>1).count %></span>
     </div>
   </div>
 <% end %>
