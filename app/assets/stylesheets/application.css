@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require devise_bootstrap_views
+ *= require jquery-ui
  * require bootstrap-material-design
  *= require font-awesome
  * require bootstrap-material-design-rails
@@ -78,4 +79,17 @@ form .error {
     font-weight: 200;
     font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
+}
+.ui-menu .ui-widget .ui-widget-content .ui-autocomplete .ui-front{
+    position: absolute !important;
+    z-index: 2 !important;
+
+}
+.navbar-static-top {
+    z-index: auto !important;
+    border-width: 0 0 1px;
+}
+
+#customer-search-box{
+    color: #FFFFFF;
 }

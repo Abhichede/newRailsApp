@@ -90,10 +90,13 @@ class BookingDetailsController < ApplicationController
     end
 
     if @booking_detail
-      render json: @booking_detail
+      redirect_to booking_detail_path(@booking_detail)
       #render partial: 'outwords/table_data'
     else
-      render status: :not_found, nothing: true
+      respond_to do |format|
+        format.html { redirect_to booking_details_path, alert: "Something went wrong or customer not available" }
+        format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+      end
     end
   end
 

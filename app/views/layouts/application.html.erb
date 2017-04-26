@@ -73,17 +73,20 @@
               <% end %>
             </li>
           </ul>
-         <!-- <% form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
-                       class: 'navbar-form navbar-left' do %>
-              <div class="form-group text-center">
-                  <% text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name',
-                                     autofocus: true,  class: 'form-control', id: '' %>
-                </div>
-                    <% button_tag(type: :submit, class: 'btn btn-primary', id: 'add-stock-btn') do %>
-                      Search <i class="fa fa-search"></i>
-                    <% end %>
-
-          <% end %> -->
+              <div class="col-lg-6">
+                <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
+                             class: 'navbar-form navbar-right' do %>
+                    <div class="input-group input-group-sm">
+                      <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name',
+                                         class: 'form-control', id: 'customer-search-box' %>
+                      <span class="input-group-btn">
+                      <%= button_tag(type: :submit, class: 'btn btn-success btn-sm', id: 'add-stock-btn') do %>
+                        <i class="fa fa-search"></i>
+                      <% end %>
+                    </span>
+                    </div>
+                <% end %>
+              </div>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
           </ul>
@@ -96,6 +99,7 @@
       <div class="notifications top-left">
         <%= bootstrap_flash %>
       </div>
+
       <%= yield %>
    </div>
 
@@ -103,5 +107,12 @@
     <footer class="text-center footer">
       <p>&copy; Linker-IT Solutions 2017</p>
     </footer>
+    <script>
+        $("#customer-search-box").autocomplete({
+            source: '<%= autocomplete_booking_details_path(:json) %>'
+        });
+    </script>
   </body>
 </html>
+
+
