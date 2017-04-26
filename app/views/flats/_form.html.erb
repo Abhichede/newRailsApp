@@ -14,17 +14,16 @@
       </div>
     </div>
   <% end %>
-<div class="container pull-left col-md-6">
+<div class="container">
   <div class="form-group">
     <%= f.label :flat_number, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :flat_number, :class => 'form-control' %>
     </div>
     <%=f.error_span(:flat_number) %>
-  </div>
-  <div class="form-group">
+
     <%= f.label :area, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10 input-group">
+    <div class="col-lg-4 input-group">
       <%= f.text_field :area, :class => 'form-control'%>
       <span class="input-group-addon">
         Sq.Ft.
@@ -32,55 +31,62 @@
     </div>
     <%=f.error_span(:area) %>
   </div>
+
   <div class="form-group">
+    <%= f.label :wing, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :wing, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:wing) %>
+
     <%= f.label 'Location/Floor', :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :floor, :class => 'form-control' %>
     </div>
     <%=f.error_span(:floor) %>
   </div>
+
   <div class="form-group">
+    <%= f.label 'Flat rate/sqft.', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :flat_rate, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:flat_rate) %>
+
     <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :flat_cost, :class => 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.text_field :flat_cost, :class => 'form-control', readonly: true %>
     </div>
     <%=f.error_span(:flat_cost) %>
   </div>
+
   <div class="form-group">
     <%= f.label :govt_rate, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :govt_rate, :class => 'form-control' %>
     </div>
     <%=f.error_span(:govt_rate) %>
-  </div>
-  <div class="form-group">
+
     <%= f.label :govt_value, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :govt_value, :class => 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.text_field :govt_value, :class => 'form-control', readonly: true %>
     </div>
     <%=f.error_span(:govt_value) %>
   </div>
   <div class="form-group">
     <%= f.label :flat_type, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :flat_type, :class => 'form-control' %>
     </div>
     <%=f.error_span(:flat_type) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :wing, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :wing, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:wing) %>
-  </div>
-  <div class="form-group">
+
     <%= f.label :amenities, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :amenities, :class => 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.text_area :amenities, :class => 'form-control' %>
     </div>
     <%=f.error_span(:amenities) %>
   </div>
+
       <%= f.hidden_field :site_id, :class => 'form-control', :value => params[:site_id], :readonly => true %>
       <%= f.hidden_field :booking_status, :value => 0 %>
 </div>

@@ -10,6 +10,16 @@ $(function() {
             $("#flat_govt_value").val(flat_govt_rate * flat_area);
         }
     });
+    $("#flat_flat_rate").on('change paste keyup', function () {
+        var flat_area = $("#flat_area").val();
+
+        if(flat_area == null){
+            alert("Please enter flat area to calculate GOVT. Value");
+        }else{
+            var flat_govt_rate = $("#flat_flat_rate").val();
+            $("#flat_flat_cost").val(flat_govt_rate * flat_area);
+        }
+    });
 
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"

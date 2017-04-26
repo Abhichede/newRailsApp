@@ -45,6 +45,23 @@ var search_customer_function = function () {
 };
 
 $(function() {
+
+    $("#booking_detail_loan_possible").on("change", function () {
+       var is_loan_possible = $("#booking_detail_loan_possible").val();
+       if(is_loan_possible == '1'){
+           $("#loan-possible-div").attr('class', ' ');
+       }else if(is_loan_possible == '0'){
+           $("#loan-possible-div").attr('class', 'hidden');
+           $("#booking_detail_name_of_bank").attr('value', 'NA');
+           $("#booking_detail_branch_of_bank").attr('value', 'NA');
+           $("#booking_detail_sanctioned_amount").attr('value', '0');
+           $("#booking_detail_employee_name").attr('value', 'NA');
+       }
+    });
+
+
+
+
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     $("form.booking_detail").validate({
@@ -74,33 +91,23 @@ $(function() {
                 pattern: /[0-9]{12}$/,
                 maxlength: 12
             },
-            "booking_detail[booking_charges]":{
-                required: true,
-                pattern: /^[0-9]*$/
-            },
             "booking_detail[vat]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[service_tax]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[agreement_cost]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[registration_fees]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[final_sale_deed_fees]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[stamp_duty]":{
-                required: true,
-                pattern: /^[0-9]*$/
+                required: true
             },
             "booking_detail[MSEB_charges]":{
                 required: true,
@@ -115,10 +122,6 @@ $(function() {
                 pattern: /^[0-9]*$/
             },
             "booking_detail[maintenance_charges]":{
-                required: true,
-                pattern: /^[0-9]*$/
-            },
-            "booking_detail[govt_charges]":{
                 required: true,
                 pattern: /^[0-9]*$/
             },

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424123305) do
+ActiveRecord::Schema.define(version: 20170426142858) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -20,23 +20,26 @@ ActiveRecord::Schema.define(version: 20170424123305) do
     t.string   "customer_adhar"
     t.integer  "site_id"
     t.integer  "flat_id"
-    t.string   "booking_charges"
     t.string   "vat"
     t.string   "service_tax"
     t.boolean  "loan_possible"
     t.string   "agreement_cost"
     t.string   "registration_fees"
-    t.string   "final_sale_deed_fees"
+    t.string   "lbt"
     t.string   "stamp_duty"
     t.string   "other_charges"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "paid_amount"
     t.string   "MSEB_charges"
     t.string   "water_charges"
     t.string   "parking_charges"
     t.string   "maintenance_charges"
-    t.string   "govt_charges"
+    t.string   "legal_charges"
+    t.string   "name_of_bank"
+    t.string   "branch_of_bank"
+    t.string   "sanctioned_amount"
+    t.string   "employee_name"
   end
 
   create_table "flats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -54,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170424123305) do
     t.string   "flat_type"
     t.string   "wing"
     t.string   "amenities"
+    t.string   "flat_rate"
   end
 
   create_table "payment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -67,13 +71,15 @@ ActiveRecord::Schema.define(version: 20170424123305) do
 
   create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.text     "address",     limit: 65535
-    t.integer  "flat_count"
-    t.string   "site_type"
+    t.text     "address",             limit: 65535
+    t.integer  "no_of_units"
+    t.string   "type_of_structures"
     t.string   "unit_number"
-    t.string   "area"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "area_of_plot"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "project_approved_by"
+    t.string   "photo_path"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

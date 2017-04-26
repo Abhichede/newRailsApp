@@ -13,13 +13,13 @@
           <div class="label label-success">
                 Available Flats
           </div>
-          <span class="label label-danger"><%= "#{@site.flat_count - @site.flats.where(:booking_status=>1).count}" %></span>
+          <span class="label label-danger"><%= "#{@site.no_of_units - @site.flats.where(:booking_status=>1).count}" %></span>
         </h4>
       </div>
     </div>
     <div class="col-md-6">
         <div class="col-md-4 col-sm-4 col-xs-4">
-          <% if @site.flats.count != @site.flat_count %>
+          <% if @site.flats.count != @site.no_of_units %>
               <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id }, :class => 'btn btn-success btn-sm' %>
           <% end %>
         </div>
@@ -40,14 +40,14 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd><%= @site.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:flat_count) %>:</strong></dt>
-  <dd><%= @site.flat_count %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:site_type) %>:</strong></dt>
-  <dd><%= @site.site_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:unit_number) %>:</strong></dt>
-  <dd><%= @site.unit_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:area) %>:</strong></dt>
-  <dd><%= @site.area %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:no_of_units) %>:</strong></dt>
+  <dd><%= @site.no_of_units %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %>:</strong></dt>
+  <dd><%= @site.type_of_structures %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %>:</strong></dt>
+  <dd><%= @site.area_of_plot %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %>:</strong></dt>
+  <dd><%= @site.project_approved_by %></dd>
 </dl>
 <hr/>
 <div class="jumbotron" style="margin-top: 0.5em">

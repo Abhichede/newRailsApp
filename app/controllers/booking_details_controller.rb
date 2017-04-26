@@ -30,7 +30,7 @@ class BookingDetailsController < ApplicationController
       if @booking_detail.save
         @flat = Flat.find(@booking_detail.flat_id)
         @flat.update(:booking_status=> 1, :booking_date=> Time.current)
-        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created.' }
+        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created. You have pay/save Token Amount' }
         format.json { render :show, status: :created, location: @booking_detail }
       else
         format.html { render :new }
@@ -137,6 +137,7 @@ class BookingDetailsController < ApplicationController
                                              :booking_charges, :vat, :service_tax, :loan_possible,
                                              :agreement_cost, :registration_fees, :final_sale_deed_fees,
                                              :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
-                                             :parking_charges, :maintenance_charges, :govt_charges)
+                                             :parking_charges, :maintenance_charges, :govt_charges,:lbt,
+                                             :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,:employee_name)
     end
 end
