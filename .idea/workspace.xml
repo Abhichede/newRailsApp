@@ -1373,7 +1373,7 @@
       <workItem from="1493121119168" duration="7179000" />
       <workItem from="1493187661194" duration="179000" />
       <workItem from="1493193933284" duration="664000" />
-      <workItem from="1493208667958" duration="17509000" />
+      <workItem from="1493208667958" duration="17533000" />
     </task>
     <task id="LOCAL-00001" summary="Very first Commit">
       <created>1491973444762</created>
@@ -1557,11 +1557,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493231169072</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="mailer host added.">
+      <created>1493232284437</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1493232284437</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223981000" />
+    <option name="totallyTimeSpent" value="224005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
@@ -1621,7 +1628,8 @@
     <MESSAGE value="updaated additional customer info one more time." />
     <MESSAGE value="changed scripts from http to https." />
     <MESSAGE value="Changes by customers are done." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by customers are done." />
+    <MESSAGE value="mailer host added." />
+    <option name="LAST_COMMIT_MESSAGE" value="mailer host added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
