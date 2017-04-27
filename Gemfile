@@ -26,9 +26,8 @@ gem 'devise-bootstrap-views'
 #gem 'bootstrap-material-design'
 gem 'jquery-ui-rails'
 gem "font-awesome-rails"
-gem 'pg'
+#gem 'pg'
 gem 'rails_12factor', group: :production
-
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -66,4 +65,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#ruby '2.2.3'
+#ruby 'Harak-Patil-Constructionsce'
