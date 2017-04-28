@@ -21,6 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'devise'
+gem 'figaro'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 #gem 'bootstrap-material-design'

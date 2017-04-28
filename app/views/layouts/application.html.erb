@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Swaraj Constructions" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "HARAK PATIL" %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -51,11 +51,9 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="fa fa-bars" style="color: #FFFFFF;"></span>
           </button>
-          <%= link_to 'Swaraj Construction', root_path, class: 'navbar-brand' %>
+          <%= link_to 'HARAK PATIL', root_path, class: 'navbar-brand' %>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <% if user_signed_in? %>
