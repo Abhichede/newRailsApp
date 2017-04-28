@@ -37,6 +37,14 @@
     <%=f.error_span(:type_of_structures) %>
   </div>
   <div class="form-group">
+      <%= f.label :site_type, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.text_field :site_type, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:site_type) %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :no_of_units, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :no_of_units, :class => 'form-control' %>
