@@ -14,34 +14,19 @@
   <h4 class="text-center">Customer Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>CUSTOMER NAME:</strong>
+    <strong>CUSTOMER NAME: </strong> <%= @booking_detail.customer_name %>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.customer_name %>
+    <strong>CUSTOMER ADDRESS: </strong> <%= @booking_detail.customer_address %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER ADDRESS:</strong>
+    <strong>CUSTOMER CONTACT: </strong> <%= @booking_detail.customer_contact %>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.customer_address %>
+    <strong>CUSTOMER PAN: </strong> <%= @booking_detail.customer_pan %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER CONTACT:</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.customer_contact %>
-  </div>
-  <div class="col-md-3 ">
-    <strong>CUSTOMER PAN:</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.customer_pan %>
-  </div>
-  <div class="col-md-3 ">
-    <strong>CUSTOMER ADHAR:</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.customer_adhar %>
+    <strong>CUSTOMER ADHAR: </strong> <%= @booking_detail.customer_adhar %>
   </div>
 </div>
 
@@ -50,53 +35,31 @@
   <h4 class="text-center">Site Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>SITE (BUILDING) NAME:</strong>
+    <strong>SITE (BUILDING) NAME: </strong> <%= @booking_detail.site.name.upcase %>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.site.name.upcase %>
+    <strong>AREA : </strong> <%= @booking_detail.flat.area %> Sq.Ft.
   </div>
   <div class="col-md-3 ">
-    <strong>AREA :</strong>
+    <strong>FLOOR : </strong> <%= @booking_detail.flat.floor %>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.flat.area %> Sq.Ft.
+    <strong>TYPE OF UNIT : </strong> <%= @booking_detail.flat.flat_type %>
   </div>
   <div class="col-md-3 ">
-    <strong>FLOOR :</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.flat.floor %>
-  </div>
-  <div class="col-md-3 ">
-    <strong>TYPE OF UNIT :</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.flat.flat_type %>
-  </div>
-  <div class="col-md-3 ">
-    <strong>FLAT NUMBER:</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.flat.flat_number %>
+    <strong>FLAT NUMBER: </strong>  <%= @booking_detail.flat.flat_number %>
   </div>
 </div>
 <hr/>
 
 <div class="row">
-  <hr/>
   <h4 class="text-center">Cost Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>FLAT COST</strong>
+    <strong>FLAT COST : </strong>  &#8377; <%= @booking_detail.flat.flat_cost %>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.flat.flat_cost %>
-  </div>
-  <div class="col-md-3 ">
-    <strong>GOVT. VALUE</strong>
-  </div>
-  <div class="col-md-3 ">
-    <%= @booking_detail.flat.govt_value %> Sq.Ft.
+    <strong>GOVT. VALUE : </strong> &#8377; <%= @booking_detail.flat.govt_value %>
   </div>
 </div>
 <hr/>
