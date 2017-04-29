@@ -32,7 +32,7 @@ class BookingDetailsController < ApplicationController
         @flat.update(:booking_status=> 1, :booking_date=> Time.current)
         @payment_detail = @booking_detail.payment_details.new(:payable_amount=>@booking_detail.token_amount,
                                             :payment_type=>@booking_detail.payment_type,
-                                            :payment_desc=>@booking_detail.payment_desc)
+                                            :payment_desc=>@booking_detail.payment_desc+' (Token Amount)')
         @payment_detail.save
         @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created. You have pay/save Token Amount' }
