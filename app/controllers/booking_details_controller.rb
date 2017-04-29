@@ -30,6 +30,11 @@ class BookingDetailsController < ApplicationController
       if @booking_detail.save
         @flat = Flat.find(@booking_detail.flat_id)
         @flat.update(:booking_status=> 1, :booking_date=> Time.current)
+        @payment_detail = @booking_detail.payment_details.new(:payable_amount=>@booking_detail.token_amount,
+                                            :payment_type=>@booking_detail.payment_type,
+                                            :payment_desc=>@booking_detail.payment_desc)
+        @payment_detail.save
+        @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created. You have pay/save Token Amount' }
         format.json { render :show, status: :created, location: @booking_detail }
       else
@@ -85,8 +90,8 @@ class BookingDetailsController < ApplicationController
 
   def search
     if params[:search_customer]
-      @booking_detail =  BookingDetail.find_by(:customer_name => params[:search_customer])
-      # Stock.where('trade_name = ? OR serial_no = ?', params[:search], params[:search])
+      #@booking_detail =  BookingDetail.find_by(:customer_name => params[:search_customer])
+      @booking_detail =  BookingDetail.where('customer_name = ? OR customer_contact = ?', params[:search_customer], params[:search_customer])
     end
 
     if @booking_detail
@@ -102,7 +107,7 @@ class BookingDetailsController < ApplicationController
 
   def autocomplete
 
-    @booking_detail = BookingDetail.where('customer_name LIKE ?', "%#{params[:term]}%")
+    @booking_detail = BookingDetail.where('customer_name LIKE ? OR customer_contact LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
 
     respond_to do |format|
       format.html
@@ -138,6 +143,7 @@ class BookingDetailsController < ApplicationController
                                              :agreement_cost, :registration_fees, :final_sale_deed_fees,
                                              :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
                                              :parking_charges, :maintenance_charges, :govt_charges,:lbt,
-                                             :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,:employee_name)
+                                             :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
+                                             :employee_name, :token_amount, :payment_type, :payment_desc)
     end
 end

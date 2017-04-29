@@ -84,7 +84,7 @@ $(function() {
             },
             "booking_detail[customer_pan]":{
                 required: true,
-                pattern: /[A-Za-z]{5}\d{4}[A-Za-z]{1}$/
+                pattern: /^[\w]{3}(p|P|c|C|h|H|f|F|a|A|t|T|b|B|l|L|j|J|g|G)[\w][\d]{4}[\w]$/
             },
             "booking_detail[customer_adhar]":{
                 required: true,

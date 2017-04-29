@@ -29,19 +29,22 @@
     </div>
     <%=f.error_span(:address) %>
   </div>
-  <div class="form-group">
+    <div class="form-group">
+      <%= f.label :site_type, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.select(:site_type, options_for_select([['Select type'],['Residential','Residential'],['Commercial','Commercial']],
+                                                    :disabled=> 'Select type'),
+                     {}, class: 'form-control') %>
+      </div>
+      <%=f.error_span(:site_type) %>
+    </div>
+
+    <div class="form-group">
     <%= f.label :type_of_structures, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :type_of_structures, :class => 'form-control' %>
     </div>
     <%=f.error_span(:type_of_structures) %>
-  </div>
-  <div class="form-group">
-      <%= f.label :site_type, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
-        <%= f.text_field :site_type, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:site_type) %>
   </div>
 
   <div class="form-group">

@@ -192,13 +192,36 @@
         </div>
         <%=f.error_span(:sanctioned_amount) %>
 
-        <%= f.label :employee_name, :class => 'control-label col-lg-2' %>
+        <%= f.label 'Employee code/Name', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
           <%= f.text_field :employee_name, :class => 'form-control',
                            value: 'NA' %>
         </div>
         <%=f.error_span(:employee_name) %>
       </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+      <%= f.label :token_amount, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :token_amount, :class => 'form-control'%>
+      </div>
+      <%=f.error_span(:token_amount) %>
+
+      <%= f.label 'Payment Type', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHECK','CHECK']],
+                                                        :disabled=> 'Payment type'),
+                     {}, class: 'form-control') %>
+      </div>
+      <%=f.error_span(:payment_type) %>
+    </div>
+    <div class="form-group">
+      <%= f.label 'Payment Description', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :payment_desc, :class => 'form-control'%>
+      </div>
+      <%=f.error_span(:payment_desc) %>
     </div>
 
   <div class="form-group">

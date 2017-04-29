@@ -91,3 +91,6 @@ form .error {
 #customer-search-box{
     color: #FFFFFF;
 }
+select.form-control{
+    font-size: small;
+}
