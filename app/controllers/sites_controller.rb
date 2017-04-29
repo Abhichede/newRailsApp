@@ -29,7 +29,7 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.save
-        CustomerMailer.welcome_email(User.find_by_email('Abhichede777@gmail.com')).deliver
+        CustomerMailer.welcome_email(User.first).deliver
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
       else
