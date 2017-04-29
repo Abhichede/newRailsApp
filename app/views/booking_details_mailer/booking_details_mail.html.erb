@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<h1><%= @booking_detail.customer_name %> have successfully booked a flat.</h1>
+
+<h3>Following are booking Details:</h3>
+
+<div class="row">
+  <h4 class="text-center">Customer Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER NAME:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.customer_name %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER ADDRESS:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.customer_address %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER CONTACT:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.customer_contact %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER PAN:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.customer_pan %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER ADHAR:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.customer_adhar %>
+  </div>
+</div>
+
+<div class="row">
+  <hr/>
+  <h4 class="text-center">Site Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>SITE (BUILDING) NAME:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.site.name.upcase %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>AREA :</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.area %> Sq.Ft.
+  </div>
+  <div class="col-md-3 ">
+    <strong>FLOOR :</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.floor %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>TYPE OF UNIT :</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.flat_type %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>FLAT NUMBER:</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.flat_number %>
+  </div>
+</div>
+<hr/>
+
+<div class="row">
+  <hr/>
+  <h4 class="text-center">Cost Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>FLAT COST</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.flat_cost %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>GOVT. VALUE</strong>
+  </div>
+  <div class="col-md-3 ">
+    <%= @booking_detail.flat.govt_value %> Sq.Ft.
+  </div>
+</div>
+<hr/>
+</body>
+</html>

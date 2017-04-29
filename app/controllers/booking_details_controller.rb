@@ -35,6 +35,10 @@ class BookingDetailsController < ApplicationController
                                             :payment_desc=>@booking_detail.payment_desc+' (Token Amount)')
         @payment_detail.save
         @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
+
+        #Booking Mailer
+        BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
+
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created. You have pay/save Token Amount' }
         format.json { render :show, status: :created, location: @booking_detail }
       else
