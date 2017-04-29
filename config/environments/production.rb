@@ -60,10 +60,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
+      :address              => "email-smtp.us-east-1.amazonaws.com",
       :port                 => 587,
-      :user_name            => 'uniquesoftdevelopers@gmail.com',
-      :password             => 'Abhichede777@',
+      :user_name            => 'AKIAI7IH6AT7G25SZMGQ',
+      :password             => 'AnyQts+BBrPfpeZZSUpF818zmj56UTiLqveYVcEHH6Vx',
       :authentication       => "plain",
       :enable_starttls_auto => true
   }
