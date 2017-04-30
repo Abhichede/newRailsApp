@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<h1><%= @booking_detail.customer_name %> paid an amount.</h1>
+
+<h3>Following are payment Details:</h3>
+
+<div class="row">
+  <h4 class="text-center">Customer Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>Amount Paid : </strong> &#8377; <%= @payment_detail.payable_amount %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>Payment Type : </strong> <%= @payment_detail.payment_type %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>Payment Description : </strong> <%= @payment_detail.payment_desc %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>Date & Time : </strong> <%= @payment_detail.created_at %>
+  </div>
+</div>
+
+</body>
+</html>

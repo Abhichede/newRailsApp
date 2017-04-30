@@ -78,6 +78,7 @@ class BookingDetailsController < ApplicationController
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
 
       if @payment_detail.save
+        BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
           format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
           format.json { render json: @booking_detail }
