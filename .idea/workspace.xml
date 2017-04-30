@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/booking_details_mailer/booking_details_mail.html.erb" afterPath="$PROJECT_DIR$/app/views/booking_details_mailer/booking_details_mail.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb" afterPath="$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -37,8 +34,8 @@
       <file leaf-file-name="payment_details_mail.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            <state relative-caret-position="148">
+              <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -99,8 +96,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="Abhijit &lt;abhichede777@gmail.com&gt;" />
         <option value="abhichede777 &lt;abhichede777@gmail.com&gt;" />
+        <option value="Abhijit &lt;abhichede777@gmail.com&gt;" />
         <option value="abhichede777" />
       </list>
     </option>
@@ -165,9 +162,9 @@
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/app/mailers/customer_mailer.rb" />
         <option value="$PROJECT_DIR$/app/views/booking_details_mailer/booking_details_mail.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb" />
         <option value="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" />
         <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb" />
       </list>
     </option>
   </component>
@@ -1183,7 +1180,7 @@
       <workItem from="1493358461065" duration="2250000" />
       <workItem from="1493367207031" duration="10195000" />
       <workItem from="1493473390605" duration="8074000" />
-      <workItem from="1493578879715" duration="768000" />
+      <workItem from="1493578879715" duration="948000" />
     </task>
     <task id="LOCAL-00001" summary="Very first Commit">
       <created>1491973444762</created>
@@ -1514,11 +1511,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493492507980</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="mailer designed for Payment details.">
+      <created>1493579692959</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1493579692959</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="260343000" />
+    <option name="totallyTimeSpent" value="260523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
@@ -1585,7 +1589,8 @@
     <MESSAGE value="All changes done." />
     <MESSAGE value="mailers added." />
     <MESSAGE value="mailer designed for booking details." />
-    <option name="LAST_COMMIT_MESSAGE" value="mailer designed for booking details." />
+    <MESSAGE value="mailer designed for Payment details." />
+    <option name="LAST_COMMIT_MESSAGE" value="mailer designed for Payment details." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1953,8 +1958,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/booking_details_mailer/payment_details_mail.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        <state relative-caret-position="148">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
