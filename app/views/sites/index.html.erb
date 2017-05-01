@@ -11,18 +11,23 @@
 
 <div class="row col-md-offset-1">
 <% @sites.each do |site| %>
-  <div class="card col col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
+  <div class="card card-cascade narrower col col-md-4 col-sm-5 col-xs-11 " style="margin: 1rem">
+    <div class="view overlay hm-white-slight  ">
+      <% if site.photo_path.blank? %>
+
+      <% else %>
+          <%= image_tag site.photo_path.medium.url %>
+      <% end  %>
+    </div>
     <div class="card-block">
       <h4 class="card-title"><strong><%= site.name.upcase %></strong></h4>
-      <hr />
-      <p class="card-text">
+      <span class="card-text">
         <strong>Addres: </strong> <%= site.address %> <br />
-      </p>
-      <hr />
+      </span>
       <%= link_to 'Visit', site_path(site), class: 'btn btn-warning btn-sm' %>
     </div>
     <hr />
-    <div class="card-data text-muted">
+    <div class="card-data text-muted text-center">
       Booked Flats <span class="badge black"> <%= site.flats.where(:booking_status=>1).count %></span>
     </div>
   </div>

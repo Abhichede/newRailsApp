@@ -100,8 +100,8 @@ class BookingDetailsController < ApplicationController
     end
 
     if @booking_detail
-      redirect_to booking_detail_path(@booking_detail)
-      #render partial: 'outwords/table_data'
+      #redirect_to booking_detail_path(@booking_detail)
+      render 'common/search_result'
     else
       respond_to do |format|
         format.html { redirect_to booking_details_path, alert: "Something went wrong or customer not available" }

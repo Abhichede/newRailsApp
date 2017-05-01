@@ -1,10 +1,15 @@
 <%- model_class = BookingDetail -%>
+
 <div class="page-header">
   <h3>Customers</h3>
 </div>
-
+<% if @booking_detail.blank? %>
+    <div class="row col-md-offset-1">
+      <h3>No customers found</h3>
+    </div>
+<% else %>
 <div class="row col-md-offset-1">
-  <% @booking_details.each do |booking_detail| %>
+  <% @booking_detail.each do |booking_detail| %>
       <div class="card col col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
         <div class="card-block">
           <h4 class="card-title"><strong><%= booking_detail.customer_name %></strong></h4>
@@ -22,3 +27,5 @@
       </div>
   <% end %>
 </div>
+
+<% end %>

@@ -29,6 +29,8 @@ gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'carrierwave'
+gem 'mini_magick'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

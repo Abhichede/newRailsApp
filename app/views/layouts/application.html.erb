@@ -8,7 +8,7 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="print">
 
 
 
@@ -73,7 +73,7 @@
           </ul>
               <div class="col-lg-6">
                 <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
-                             class: 'navbar-form navbar-right' do %>
+                             class: 'nav navbar-form navbar-right' do %>
                     <div class="input-group input-group-sm">
                       <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name/Mobile',
                                          class: 'form-control', id: 'customer-search-box' %>

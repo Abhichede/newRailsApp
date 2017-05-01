@@ -22,13 +22,6 @@
                     {controller: 'flats', action: 'edit',
                      :site_id => @flat.site_id}, :class => 'btn btn-default btn-sm' %>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-4">
-        <%= link_to 'Delete Flat',
-                    flat_path(@flat),
-                    :method => 'delete',
-                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                    :class => 'btn btn-danger btn-sm' %>
-      </div>
       <% if @flat.booking_status == 1 || @flat.booking_status %>
         <div class="col-md-4 col-sm-4 col-xs-4">
           <h5><span class="label label-primary">Flat Booked</span></h5>
@@ -41,6 +34,13 @@
                         :class => 'btn btn-primary btn-xs' %>
           </div>
       <% end %>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <% link_to 'Delete Flat',
+                   flat_path(@flat),
+                   :method => 'delete',
+                   :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                   :class => 'btn btn-danger btn-sm' %>
+      </div>
     </div>
   </div>
 </div>

@@ -94,3 +94,14 @@ form .error {
 select.form-control{
     font-size: small;
 }
+.card-image{
+    height: 5rem;
+}
+@media print {
+    div.page-header{
+        display: none;
+    }
+    div.row{
+        margin: 0;
+    }
+}

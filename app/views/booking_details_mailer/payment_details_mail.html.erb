@@ -11,10 +11,10 @@
 <h3>Following are payment Details:</h3>
 
 <div class="row">
-  <h4 class="text-center">Customer Details</h4>
+  <h4 class="text-center">Payment Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>Amount Paid : </strong> &#8377; <%= @payment_detail.payable_amount %>
+    <strong>Amount Paid : </strong> &#8377; <%= @payment_detail.payable_amount %>/-
   </div>
   <div class="col-md-3 ">
     <strong>Payment Type : </strong> <%= @payment_detail.payment_type %>
@@ -25,6 +25,7 @@
   <div class="col-md-3 ">
     <strong>Date & Time : </strong> <%= @payment_detail.created_at %>
   </div>
+  <hr/>
 </div>
 
 </body>
