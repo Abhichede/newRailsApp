@@ -53,13 +53,13 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
             <span class="fa fa-bars" style="color: #FFFFFF;"></span>
           </button>
-          <%= link_to 'HARAK PATIL', root_path, class: 'navbar-brand' %>
+          <a class="navbar-brand" href="/"><%= image_tag 'HARAK-PATIL.png' %></a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <% if user_signed_in? %>
           <ul class="nav navbar-nav">
             <li><%= link_to sites_path  do %>
-                  Sites
+                  SITES
               <% end %>
             </li>
             <li><% link_to booking_details_path  do %>

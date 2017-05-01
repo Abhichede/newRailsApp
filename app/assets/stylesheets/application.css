@@ -104,4 +104,7 @@ select.form-control{
     div.row{
         margin: 0;
     }
+    footer.footer{
+        display: none;
+    }
 }

@@ -39,7 +39,7 @@ class BookingDetailsController < ApplicationController
         #Booking Mailer
         BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
 
-        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created. You have pay/save Token Amount' }
+        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created.' }
         format.json { render :show, status: :created, location: @booking_detail }
       else
         format.html { render :new }
