@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped responsive">
   <thead>
     <tr>
       <td>Sr.No.</td>
@@ -38,13 +38,13 @@
         <td><%= payment_detail.payment_type %></td>
         <td><%= payment_detail.payment_desc %></td>
         <td><%= payment_detail.payable_amount %></td>
-        <td>
-          <%= link_to 'Delete',
+        <!-- <td>
+          <% link_to 'Delete',
                       {controller: 'payment_details', action: 'destroy', id: payment_detail.id},
                       :method => 'delete',
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-danger btn-sm'%>
-        </td>
+        </td> -->
       </tr>
     <% end %>
   </tbody>

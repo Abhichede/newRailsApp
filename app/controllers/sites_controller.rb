@@ -29,7 +29,7 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.save
-        CustomerMailer.welcome_email().deliver_later
+        #CustomerMailer.welcome_email().deliver_later
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
       else

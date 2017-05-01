@@ -73,7 +73,7 @@
           </ul>
               <div class="col-lg-6">
                 <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
-                             class: 'nav navbar-form navbar-right' do %>
+                             class: 'nav navbar-form navbar-right form-inline waves-effect waves-light' do %>
                     <div class="input-group input-group-sm">
                       <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name/Mobile',
                                          class: 'form-control', id: 'customer-search-box' %>
