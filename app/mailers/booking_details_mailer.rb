@@ -9,7 +9,7 @@ class BookingDetailsMailer < ApplicationMailer
     mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
   end
 
-  def dummy_mail()
+  def dummy_mail
     mail(to: 'abhichede777@gmail.com', subject: 'Dummy Mail')
   end
 end

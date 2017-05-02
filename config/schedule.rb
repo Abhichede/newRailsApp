@@ -14,7 +14,7 @@
 # end
 #
  every 10.minutes do
-   runner "BookingDetailsMailer.dummy_mail().deliver"
+   runner "BookingDetail.payment_schedule"
  end
 
 # Learn more: http://github.com/javan/whenever
