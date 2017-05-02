@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/booking_detail.rb" afterPath="$PROJECT_DIR$/app/models/booking_detail.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/schedule.rb" afterPath="$PROJECT_DIR$/config/schedule.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -55,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schedule.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="schedule.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/schedule.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
@@ -78,18 +76,18 @@
       <file leaf-file-name="booking_details_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/booking_details_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="637">
-              <caret line="41" column="100" lean-forward="false" selection-start-line="41" selection-start-column="100" selection-end-line="41" selection-end-column="100" />
+            <state relative-caret-position="417">
+              <caret line="54" column="54" lean-forward="false" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking_detail.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="booking_detail.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/booking_detail.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
-              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="22" />
+              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -202,7 +200,6 @@
         <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/index.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/sites_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/booking_details/show.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
@@ -212,8 +209,9 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/views/booking_details_mailer/dummy_mail.html.erb" />
         <option value="$PROJECT_DIR$/app/mailers/booking_details_mailer.rb" />
-        <option value="$PROJECT_DIR$/app/models/booking_detail.rb" />
         <option value="$PROJECT_DIR$/config/schedule.rb" />
+        <option value="$PROJECT_DIR$/app/models/booking_detail.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
       </list>
     </option>
   </component>
@@ -1366,14 +1364,7 @@
       <workItem from="1493617476592" duration="2570000" />
       <workItem from="1493628837891" duration="5593000" />
       <workItem from="1493658132165" duration="3895000" />
-      <workItem from="1493728670101" duration="10750000" />
-    </task>
-    <task id="LOCAL-00007" summary="added customer scaffold">
-      <created>1492200297455</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1492200297455</updated>
+      <workItem from="1493728670101" duration="11868000" />
     </task>
     <task id="LOCAL-00008" summary="pg gem installed for heroku deployment">
       <created>1492357712425</created>
@@ -1711,11 +1702,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493748683348</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Mailer notifications.">
+      <created>1493749377806</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1493749377838</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288531000" />
+    <option name="totallyTimeSpent" value="289649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
@@ -1785,7 +1783,8 @@
     <MESSAGE value="mailer designed for Payment details." />
     <MESSAGE value="site photo added, and print option to booking details as well as search method modified." />
     <MESSAGE value="print design changed." />
-    <option name="LAST_COMMIT_MESSAGE" value="print design changed." />
+    <MESSAGE value="Mailer notifications." />
+    <option name="LAST_COMMIT_MESSAGE" value="Mailer notifications." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2111,10 +2110,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/schedule.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/booking_details_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="41" column="100" lean-forward="false" selection-start-line="41" selection-start-column="100" selection-end-line="41" selection-end-column="100" />
+        <state relative-caret-position="417">
+          <caret line="54" column="54" lean-forward="false" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -2130,15 +2137,7 @@
     <entry file="file://$PROJECT_DIR$/app/models/booking_detail.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
-          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/schedule.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
           <folding />
         </state>
       </provider>
