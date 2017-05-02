@@ -8,4 +8,8 @@ class BookingDetailsMailer < ApplicationMailer
     @payment_detail = payment_details
     mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
   end
+
+  def dummy_mail()
+    mail(to: 'abhichede777@gmail.com', subject: 'Dummy Mail')
+  end
 end

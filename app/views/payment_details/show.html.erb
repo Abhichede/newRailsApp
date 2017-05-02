@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<table class="table table-striped responsive">
+<table class="table">
   <thead>
     <tr>
       <td>Sr.No.</td>
@@ -32,9 +32,13 @@
   <% count = 0 %>
   <tbody>
     <% @booking_detail.payment_details.each do |payment_detail| %>
-      <tr>
+      <% if payment_detail.payment_type == 'CHECK' %>
+        <tr style="background-color: #bb4422; color: #FFFFFF">
+      <% else %>
+        <tr>
+      <% end %>
         <td><%= count = count+1 %></td>
-        <td><%= payment_detail.created_at %></td>
+        <td><%= ((Time.current - payment_detail.created_at)/60)/60 %></td>
         <td><%= payment_detail.payment_type %></td>
         <td><%= payment_detail.payment_desc %></td>
         <td><%= payment_detail.payable_amount %></td>
@@ -52,6 +56,6 @@
 <hr/>
 <div class="row">
   <div class="col-md-6 pull-right">
-    Total Amount Paid : <%= @booking_detail.paid_amount %>
+   <strong>Total Amount Paid : <%= @booking_detail.paid_amount %></strong>
   </div>
 </div>

@@ -28,6 +28,7 @@ gem 'devise-bootstrap-views'
 gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'pg'
+gem 'whenever'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'mini_magick'
