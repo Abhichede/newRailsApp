@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/booking_details.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/booking_details.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/booking_details/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/booking_details/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payment_details/show.html.erb" afterPath="$PROJECT_DIR$/app/views/payment_details/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170424123305_add_mse_bcolumn_to_booking_details.rb" afterPath="$PROJECT_DIR$/db/migrate/20170424123305_add_mse_bcolumn_to_booking_details.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -1344,14 +1338,7 @@
       <workItem from="1493728670101" duration="13027000" />
       <workItem from="1493798609696" duration="729000" />
       <workItem from="1493801804617" duration="1089000" />
-      <workItem from="1493820243003" duration="348000" />
-    </task>
-    <task id="LOCAL-00010" summary="booking details page changed.">
-      <created>1492379123955</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1492379123955</updated>
+      <workItem from="1493820243003" duration="417000" />
     </task>
     <task id="LOCAL-00011" summary="some simple modifications done like database datatype changed from number to integer, and sites index changed for mobile version.">
       <created>1492424585691</created>
@@ -1689,11 +1676,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493750480652</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="search method edited.">
+      <created>1493820629957</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1493820629958</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292974000" />
+    <option name="totallyTimeSpent" value="293043000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
@@ -1739,7 +1733,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/swaraj-constructions" />
     </ignored-roots>
-    <MESSAGE value="Very first Commit" />
     <MESSAGE value="added scaffolds." />
     <MESSAGE value="added customer scaffold" />
     <MESSAGE value="pg gem installed for heroku deployment" />
@@ -1764,7 +1757,8 @@
     <MESSAGE value="site photo added, and print option to booking details as well as search method modified." />
     <MESSAGE value="print design changed." />
     <MESSAGE value="Mailer notifications." />
-    <option name="LAST_COMMIT_MESSAGE" value="Mailer notifications." />
+    <MESSAGE value="search method edited." />
+    <option name="LAST_COMMIT_MESSAGE" value="search method edited." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2040,6 +2034,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
