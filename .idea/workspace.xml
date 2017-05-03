@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-    </list>
+    <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -1362,7 +1360,7 @@
       <workItem from="1493728670101" duration="13027000" />
       <workItem from="1493798609696" duration="729000" />
       <workItem from="1493801804617" duration="1089000" />
-      <workItem from="1493820243003" duration="2143000" />
+      <workItem from="1493820243003" duration="2522000" />
     </task>
     <task id="LOCAL-00011" summary="some simple modifications done like database datatype changed from number to integer, and sites index changed for mobile version.">
       <created>1492424585691</created>
@@ -1711,7 +1709,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294769000" />
+    <option name="totallyTimeSpent" value="295148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1377" height="912" extended-state="6" />
