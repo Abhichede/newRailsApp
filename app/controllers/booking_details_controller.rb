@@ -112,7 +112,7 @@ class BookingDetailsController < ApplicationController
 
   def autocomplete
 
-    @booking_detail = BookingDetail.where('customer_name LIKE ? OR customer_contact LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
+    @booking_detail = BookingDetail.where('lower(customer_name) LIKE ? OR lower(customer_contact) LIKE ?', "%#{params[:term].downcase}%", "%#{params[:term].downcase}%")
 
     respond_to do |format|
       format.html
@@ -149,6 +149,6 @@ class BookingDetailsController < ApplicationController
                                              :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
                                              :parking_charges, :maintenance_charges, :govt_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
-                                             :employee_name, :token_amount, :payment_type, :payment_desc)
+                                             :employee_name, :token_amount, :payment_type, :payment_desc, :balance_amount)
     end
 end

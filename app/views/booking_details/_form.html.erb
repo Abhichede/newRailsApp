@@ -224,6 +224,8 @@
       <%=f.error_span(:payment_desc) %>
     </div>
 
+    <%= f.hidden_field :balance_amount, value: @flat.flat_cost %>
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>

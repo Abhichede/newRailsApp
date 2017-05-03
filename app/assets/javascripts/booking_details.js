@@ -59,6 +59,11 @@ $(function() {
        }
     });
 
+    $("#booking_detail_water_charges,#booking_detail_MSEB_charges,#booking_detail_parking_charges," +
+        "#booking_detail_maintenance_charges,#booking_detail_agreement_cost,#booking_detail_other_charges").on("change", function () {
+
+    });
+
 
 
 
