@@ -9,7 +9,7 @@ class BookingDetail < ApplicationRecord
 
   def self.get_all_charges(booking_detail)
 
-    flat_cost = (booking_detail.flat.flat_cost).to_i
+    flat_cost = booking_detail.flat.flat_cost.to_i
     vat = booking_detail.vat.to_i
     service_tax = booking_detail.service_tax.to_i
     stamp_duty = booking_detail.stamp_duty.to_i

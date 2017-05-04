@@ -81,7 +81,7 @@ class BookingDetailsController < ApplicationController
     end
     
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
-
+      @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) - @booking_detail.paid_amount.to_i )
       if @payment_detail.save
         BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
