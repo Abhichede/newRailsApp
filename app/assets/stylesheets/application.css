@@ -109,4 +109,7 @@ select.form-control{
     div.col-md-3{
         min-width: 50%;
     }
+    div.notifications{
+        display: none;
+    }
 }
