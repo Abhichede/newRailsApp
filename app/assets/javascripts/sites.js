@@ -2,7 +2,7 @@ $(function() {
 
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
-    $("form.flat").validate({
+    $("form.site").validate({
         debug: true,
         // Specify validation rules
         rules: {
