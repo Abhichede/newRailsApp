@@ -51,8 +51,13 @@ class BookingDetailsController < ApplicationController
   # PATCH/PUT /booking_details.js/1
   # PATCH/PUT /booking_details.js/1.json
   def update
+
+
     respond_to do |format|
       if @booking_detail.update(booking_detail_params)
+
+        @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) - @booking_detail.paid_amount.to_i )
+
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking_detail }
       else
@@ -145,10 +150,10 @@ class BookingDetailsController < ApplicationController
       params.require(:booking_detail).permit(:customer_name, :customer_address, :customer_contact,
                                              :customer_pan, :customer_adhar, :site_id, :flat_id,
                                              :booking_charges, :vat, :service_tax, :loan_possible,
-                                             :agreement_cost, :registration_fees, :final_sale_deed_fees,
+                                             :agreement_cost, :registration_fees,
                                              :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
-                                             :parking_charges, :maintenance_charges, :govt_charges,:lbt,
+                                             :parking_charges, :maintenance_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
-                                             :employee_name, :token_amount, :payment_type, :payment_desc, :balance_amount)
+                                             :employee_name, :token_amount, :payment_type, :payment_desc, :final_sale_deed)
     end
 end

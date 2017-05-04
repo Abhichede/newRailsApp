@@ -27,7 +27,7 @@
   </div>
   <hr/>
   <div class="col-md-3 ">
-    <strong>BALANCE AMOUNT : </strong> <%= @payment_detail.created_at %>
+    <strong>BALANCE AMOUNT : </strong> <%= @payment_detail.booking_detail.final_sale_deed.to_i - @payment_detail.booking_detail.paid_amount.to_i  %>
   </div>
   <hr/>
 
