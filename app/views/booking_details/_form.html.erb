@@ -62,9 +62,18 @@
                         :value=> site_id %>
         <%= f.hidden_field :flat_id,
                            :value=> flat_id %>
+    <%= f.hidden_field 'flat_area',
+                       :value=> @flat.area %>
 
-    <br/>
     <h4><strong>Booking Details</strong></h4>
+    <div class="form-group">
+      <%= f.label :agreement_cost, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :agreement_cost, :class => 'form-control', placeholder: :agreement_cost %>
+      </div>
+      <%=f.error_span(:agreement_cost) %>
+
+    </div>
    <hr/>
 
     <div class="form-group">
@@ -85,38 +94,35 @@
         <%= f.text_field :parking_charges, :class => 'form-control', placeholder: :parking_charges %>
       </div>
       <%=f.error_span(:parking_charges) %>
-      <%= f.label :maintenance_charges, :class => 'control-label col-lg-2' %>
+      <%= f.label 'Maintenance cost/SqFt.', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :maintenance_charges, :class => 'form-control', placeholder: :maintenance_charges %>
+        <input class="form-control" placeholder="Maintenance cost/Sq.Ft." type="text" id="maintenance_in_sqft">
       </div>
-      <%=f.error_span(:maintenance_charges) %>
     </div>
     <div class="form-group">
-      <%= f.label :agreement_cost, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-4">
-        <%= f.text_field :agreement_cost, :class => 'form-control', placeholder: :agreement_cost %>
-      </div>
-      <%=f.error_span(:agreement_cost) %>
       <%= f.label :other_charges, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
         <%= f.text_field :other_charges, :class => 'form-control', placeholder: :other_charges %>
       </div>
       <%=f.error_span(:other_charges) %>
+      <%= f.label 'Maintenance cost', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :maintenance_charges, :class => 'form-control', placeholder: 'Maintenance cost', readonly: true %>
+      </div>
+      <%=f.error_span(:maintenance_charges) %>
     </div>
 
     <hr/>
     <div class="form-group">
       <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :stamp_duty, :class => 'form-control',
-                         value: "#{((5.0/100)*@flat.govt_value.to_f)}", readonly: true %>
+        <%= f.text_field :stamp_duty, :class => 'form-control' %>
       </div>
       <%=f.error_span(:stamp_duty) %>
 
       <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :registration_fees, :class => 'form-control',
-                         value: "#{((1.0/100)*@flat.govt_value.to_f)}", readonly: true %>
+        <%= f.text_field :registration_fees, :class => 'form-control'%>
       </div>
       <%=f.error_span(:registration_fees) %>
     </div>
@@ -124,14 +130,12 @@
    <div class="form-group">
      <%= f.label :vat, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :vat, :class => 'form-control',
-                         value: "#{((1.0/100)*@flat.govt_value.to_f)}", readonly: true %>
+        <%= f.text_field :vat, :class => 'form-control' %>
       </div>
       <%=f.error_span(:vat) %>
      <%= f.label :service_tax, :class => 'control-label col-lg-2' %>
      <div class="col-lg-4">
-       <%= f.text_field :service_tax, :class => 'form-control',
-                        value: "#{((4.52/100)*@flat.govt_value.to_f)}", readonly: true %>
+       <%= f.text_field :service_tax, :class => 'form-control' %>
      </div>
      <%=f.error_span(:service_tax) %>
    </div>
@@ -139,8 +143,7 @@
    <div class="form-group">
      <%= f.label :lbt, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :lbt, :class => 'form-control',
-                         value: "#{((1.0/100)*@flat.govt_value.to_f)}", readonly: true %>
+        <%= f.text_field :lbt, :class => 'form-control'%>
       </div>
       <%=f.error_span(:lbt) %>
 
@@ -211,7 +214,7 @@
 
         <%= f.label 'Payment Type', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHECK','CHECK']],
+          <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHEQUE','CHECK']],
                                                           :disabled=> 'Payment type'),
                        {}, class: 'form-control') %>
         </div>
@@ -227,7 +230,7 @@
     <% end %>
 
     <% if @flat.booking_status == 0 || @flat.booking_status.blank? %>
-      <%= f.hidden_field :final_sale_deed, value: @flat.flat_cost %>
+      <%= f.hidden_field :final_sale_deed, value: "#{@flat.flat_cost}" %>
     <% end %>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

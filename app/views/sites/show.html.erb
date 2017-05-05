@@ -37,20 +37,56 @@
     </div>
   </div>
 </div>
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @site.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:no_of_units) %>:</strong></dt>
-  <dd><%= @site.no_of_units %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %>:</strong></dt>
-  <dd><%= @site.type_of_structures %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:site_type) %>:</strong></dt>
-  <dd><%= @site.site_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %>:</strong></dt>
-  <dd><%= @site.area_of_plot %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %>:</strong></dt>
-  <dd><%= @site.project_approved_by %></dd>
-</dl>
+<div class="row">
+  <div class="col-md-6">
+  <dl class="dl-horizontal">
+    <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+    <dd><%= @site.address %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:no_of_units) %>:</strong></dt>
+    <dd><%= @site.no_of_units %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %>:</strong></dt>
+    <dd><%= @site.type_of_structures %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:site_type) %>:</strong></dt>
+    <dd><%= @site.site_type %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %>:</strong></dt>
+    <dd><%= @site.area_of_plot %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %>:</strong></dt>
+    <dd><%= @site.project_approved_by %></dd>
+  </dl>
+  </div>
+  <div class="col-md-6 outstanding-table">
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Customer Name (Flat No.)</th>
+          <th>Total Amount</th>
+          <th>Received Amount</th>
+          <th>Outstanding amount</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% total_amount = 0
+         total_paid = 0 %>
+        <% @site.booking_details.each do |booking| %>
+          <tr>
+            <td><%= booking.customer_name %> (<%= booking.flat.flat_number %>)</td>
+            <td>&#8377; <%= booking.final_sale_deed %></td>
+              <% total_amount = total_amount + booking.final_sale_deed.to_i %>
+            <td>&#8377; <%= booking.paid_amount %></td>
+              <% total_paid = total_paid + booking.paid_amount.to_i %>
+            <td>&#8377; <%= booking.final_sale_deed.to_i - booking.paid_amount.to_i %></td>
+          </tr>
+        <% end %>
+      <tr >
+        <td><strong>Totals</strong></td>
+        <td><strong>&#8377; <%= total_amount %></strong></td>
+        <td><strong>&#8377; <%= total_paid %></strong></td>
+        <td><strong>&#8377; <%= total_amount - total_paid %></strong></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <hr/>
 <div class="jumbotron" style="margin-top: 0.5em">
   <h4 class="text-center">All Flats</h4>

@@ -21,11 +21,10 @@ class BookingDetail < ApplicationRecord
     parking_charges = booking_detail.parking_charges.to_i
     maintenance_charges = booking_detail.maintenance_charges.to_i
     other_charges = booking_detail.other_charges.to_i
-    agreement_cost = booking_detail.agreement_cost.to_i
 
-    all_charges = flat_cost + vat + service_tax + stamp_duty + registration_fees +
+    all_charges = vat + service_tax + stamp_duty + registration_fees +
         lbt + legal_charges + mseb_charges + water_charges + parking_charges +
-        maintenance_charges + other_charges + agreement_cost
+        maintenance_charges + other_charges + flat_cost
 
     return all_charges
 

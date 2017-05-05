@@ -56,7 +56,7 @@ class BookingDetailsController < ApplicationController
     respond_to do |format|
       if @booking_detail.update(booking_detail_params)
 
-        @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) - @booking_detail.paid_amount.to_i )
+        @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) )
 
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking_detail }
@@ -71,7 +71,8 @@ class BookingDetailsController < ApplicationController
 
     @booking_detail = BookingDetail.find(params[:booking_id])
     @payment_detail = PaymentDetail.new(:payable_amount=>params[:search], :payment_type=>params[:payment_type],
-                                        :payment_desc=>params[:check_desc], :booking_detail_id=>params[:booking_id])
+                                        :payment_desc=>params[:check_desc],:payment_date=>params[:payment_date],
+                                        :booking_detail_id=>params[:booking_id])
     if params[:search].blank?
         respond_to do |format|
           format.html { redirect_to @booking_detail, alert: "Blank Amount" }
@@ -81,7 +82,6 @@ class BookingDetailsController < ApplicationController
     end
     
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
-      @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) - @booking_detail.paid_amount.to_i )
       if @payment_detail.save
         BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
@@ -94,6 +94,25 @@ class BookingDetailsController < ApplicationController
           format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
         end
       end
+    end
+
+  end
+
+  def schedule_next_installment
+
+    @booking_detail = BookingDetail.find(params[:booking_id])
+    if @booking_detail.update(:schedule_date => params[:schedule_date],
+                              :schedule_desc => params[:schedule_desc])
+      SendEmailJob.set(wait: ((Time.parse(params[:schedule_date]) - Time.current)/60).hours).perform_later(@booking_detail)
+      respond_to do |format|
+        format.html { redirect_to @booking_detail, notice: "Next installment scheduled on #{params[:schedule_date]}." }
+        format.json { render json: @booking_detail }
+        end
+    else
+      respond_to do |format|
+        format.html { redirect_to @booking_detail, alert: "Something went wrong" }
+        format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+        end
     end
 
   end

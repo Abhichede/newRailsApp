@@ -32,6 +32,7 @@ gem 'whenever'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'delayed_job_active_record'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

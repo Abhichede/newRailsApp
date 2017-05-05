@@ -9,6 +9,11 @@ class BookingDetailsMailer < ApplicationMailer
     mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
   end
 
+  def schedule_next_installment_mail(booking_details)
+    @booking_detail = booking_details
+    mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
+  end
+
   def dummy_mail
     mail(to: 'abhichede777@gmail.com', subject: 'Dummy Mail')
   end

@@ -95,6 +95,9 @@ select.form-control{
 .card-image{
     height: 5rem;
 }
+div.outstanding-table{
+    overflow: auto;
+}
 @media print {
     div.page-header{
         display: none;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1><%= @booking_detail.customer_name %> Has committed to pay today as per your Schedule/Notification.</h1>
+
+<h3>Following are booking Details:</h3>
+
+<div class="row">
+  <h4 class="text-center">Customer Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER NAME: </strong> <%= @booking_detail.customer_name %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER ADDRESS: </strong> <%= @booking_detail.customer_address %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER CONTACT: </strong> <%= @booking_detail.customer_contact %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER PAN: </strong> <%= @booking_detail.customer_pan %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>CUSTOMER ADHAR: </strong> <%= @booking_detail.customer_adhar %>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <h4 class="text-center">Cost Details</h4>
+  <hr/>
+  <div class="col-md-3 ">
+    <strong>Total Amount : </strong>  &#8377; <%= @booking_detail.final_sale_deed %>
+  </div>
+  <div class="col-md-3 ">
+    <strong>Paid Amount : </strong> &#8377; <%= @booking_detail.paid_amount %>
+  </div>
+  <div class="col-md-3 " style="background-color: #853039; color: #FFFFFF">
+    <strong>Balance Amount : </strong> &#8377; <%= @booking_detail.final_sale_deed.to_i - @booking_detail.paid_amount.to_i %>
+  </div>
+</div>
+<hr/>
+</body>
+</html>

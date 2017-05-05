@@ -43,8 +43,32 @@ var search_customer_function = function () {
 
     });
 };
+var schedule_next_installment_function = function () {
+
+    $("#schedule-next-installment-form").on('ajax:before', function (event, data, status) {
+        show_spinner();
+    });
+
+    $("#schedule-next-installment-form").on('ajax:after', function (event, data, status) {
+        //hide_spinner();
+        console.log("After");
+    });
+
+    $('#schedule-next-installment-form').on('ajax:success', function (event, data, status) {
+        console.log("success");
+    });
+    $('#schedule-next-installment-form').on('ajax:error', function (event, xhr, status, error) {
+
+        console.log("Error");
+        show_spinner();
+
+    });
+};
 
 $(function() {
+
+    var pre_balance_amount = Number($("#booking_detail_final_sale_deed").val());
+    console.log('final '+ pre_balance_amount);
 
     $("#booking_detail_loan_possible").on("change", function () {
        var is_loan_possible = $("#booking_detail_loan_possible").val();
@@ -58,16 +82,34 @@ $(function() {
            $("#booking_detail_employee_name").attr('value', 'NA');
        }
     });
-    var pre_balance_amount = Number($("#booking_detail_balance_amount").val());
+    $("#booking_detail_agreement_cost").on("change keyup", function () {
+        var agreement_cost = Number($("#booking_detail_agreement_cost").val());
+
+        $("#booking_detail_stamp_duty").attr('value', (5/100)*agreement_cost);
+        $("#booking_detail_registration_fees").attr('value', (1/100)*agreement_cost);
+        $("#booking_detail_vat").attr('value', (1/100)*agreement_cost);
+        $("#booking_detail_service_tax").attr('value', (4.52/100)*agreement_cost);
+        $("#booking_detail_lbt").attr('value', (1/100)*agreement_cost);
+
+    });
+    $("#maintenance_in_sqft").on('focusout', function () {
+
+       var flat_area = Number($("#booking_detail_flat_area").val());
+       var maintenance_charges = Number($("#maintenance_in_sqft").val());
+        console.log('Maintenance '+ flat_area * maintenance_charges);
+        $("#booking_detail_maintenance_charges").attr('value', flat_area * maintenance_charges);
+
+    });
 
     $("#booking_detail_water_charges,#booking_detail_MSEB_charges,#booking_detail_parking_charges," +
-        "#booking_detail_maintenance_charges,#booking_detail_agreement_cost,#booking_detail_other_charges").on("change", function () {
+        "#booking_detail_other_charges,#booking_detail_stamp_duty,#booking_detail_maintenance_charges" +
+        ",#booking_detail_registration_fees,#booking_detail_vat,#booking_detail_service_tax,#booking_detail_lbt," +
+        "#booking_detail_legal_charges").on("change keyup", function () {
 
         var water_charges = Number($("#booking_detail_water_charges").val());
         var parking_charges = Number($("#booking_detail_parking_charges").val());
         var MSEB_charges = Number($("#booking_detail_MSEB_charges").val());
         var maintenance_charges = Number($("#booking_detail_maintenance_charges").val());
-        var agreement_cost = Number($("#booking_detail_agreement_cost").val());
         var other_charges = Number($("#booking_detail_other_charges").val());
 
         var stamp_duty = Number($("#booking_detail_stamp_duty").val());
@@ -78,7 +120,7 @@ $(function() {
         var legal_charges = Number($("#booking_detail_legal_charges").val());
 
         var balance_amount = water_charges + parking_charges + MSEB_charges + maintenance_charges +
-                agreement_cost + other_charges + stamp_duty + registration_fees + vat + service_tax +
+               other_charges + stamp_duty + registration_fees + vat + service_tax +
                 lbt + legal_charges;
 
 
