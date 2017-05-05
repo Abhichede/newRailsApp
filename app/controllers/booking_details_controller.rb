@@ -103,7 +103,7 @@ class BookingDetailsController < ApplicationController
     @booking_detail = BookingDetail.find(params[:booking_id])
     if @booking_detail.update(:schedule_date => params[:schedule_date],
                               :schedule_desc => params[:schedule_desc])
-      SendEmailJob.set(wait: ((Time.parse(params[:schedule_date]) - Time.current)/60).hours).perform_later(@booking_detail)
+      #SendEmailJob.set(wait: ((Time.parse(params[:schedule_date]) - Time.current)/60).hours).perform_later(@booking_detail)
       respond_to do |format|
         format.html { redirect_to @booking_detail, notice: "Next installment scheduled on #{params[:schedule_date]}." }
         format.json { render json: @booking_detail }
