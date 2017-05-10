@@ -42,9 +42,14 @@
     <div class="form-group">
     <%= f.label :type_of_structures, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
+      <% if @site %>
       <%= f.collection_check_boxes :type_of_structures, TypeOfStructure.all, :name, :name,multiple: true,
                                    checked: @site.type_of_structures.split(','),
                                    :class=> 'form-control', :include_hidden=> false %>
+      <% else  %>
+          <%= f.collection_check_boxes :type_of_structures, TypeOfStructure.all, :name, :name,multiple: true,
+                                       :class=> 'form-control', :include_hidden=> false %>
+      <% end %>
     </div>
     <%=f.error_span(:type_of_structures) %>
   </div>
