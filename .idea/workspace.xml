@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/app/views/sites/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="353">
-              <caret line="49" column="109" lean-forward="true" selection-start-line="49" selection-start-column="109" selection-end-line="49" selection-end-column="109" />
+              <caret line="49" column="84" lean-forward="false" selection-start-line="49" selection-start-column="84" selection-end-line="49" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -1224,14 +1224,7 @@
       <workItem from="1493962269162" duration="7706000" />
       <workItem from="1493984129687" duration="8966000" />
       <workItem from="1494089866792" duration="247000" />
-      <workItem from="1494422402026" duration="15074000" />
-    </task>
-    <task id="LOCAL-00023" summary="changed scripts from http to https.">
-      <created>1493048875406</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1493048875406</updated>
+      <workItem from="1494422402026" duration="15217000" />
     </task>
     <task id="LOCAL-00024" summary="changed scripts from http to https.">
       <created>1493098358526</created>
@@ -1569,15 +1562,21 @@
       <option name="project" value="LOCAL" />
       <updated>1494442831490</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="new Mailer credentials added.">
+      <created>1494443590744</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1494443590744</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="346032000" />
+    <option name="totallyTimeSpent" value="346175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-11" width="1381" height="912" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1588,7 +1587,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17866324" sideWeight="0.50413847" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1722365" sideWeight="0.49736643" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1722365" sideWeight="0.49736643" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2506427" sideWeight="0.49586156" order="9" side_tool="false" content_ui="tabs" />
@@ -1643,9 +1642,9 @@
     <MESSAGE value="final sale deed amount saved in database." />
     <MESSAGE value="Site validations" />
     <MESSAGE value="all changes are resolved." />
-    <MESSAGE value="new Mailer credentials added." />
     <MESSAGE value="dropdown lists added." />
-    <option name="LAST_COMMIT_MESSAGE" value="dropdown lists added." />
+    <MESSAGE value="new Mailer credentials added." />
+    <option name="LAST_COMMIT_MESSAGE" value="new Mailer credentials added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2030,7 +2029,7 @@
     <entry file="file://$PROJECT_DIR$/app/views/sites/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
-          <caret line="49" column="109" lean-forward="true" selection-start-line="49" selection-start-column="109" selection-end-line="49" selection-end-column="109" />
+          <caret line="49" column="84" lean-forward="false" selection-start-line="49" selection-start-column="84" selection-end-line="49" selection-end-column="84" />
           <folding />
         </state>
       </provider>
