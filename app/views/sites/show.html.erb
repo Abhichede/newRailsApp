@@ -28,7 +28,7 @@
                       edit_site_path(@site), :class => 'btn btn-info btn-sm' %>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4">
-          <% link_to 'delete site',
+          <%= link_to 'delete site',
                       site_path(@site),
                       :method => 'delete',
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
