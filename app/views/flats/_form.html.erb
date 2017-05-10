@@ -32,16 +32,38 @@
     <%=f.error_span(:area) %>
   </div>
 
+
+  <!-- ruby's black magic code to create array for wings according to number of wigs added in sites -->
+        <% wings_array = Array.new(10)
+            wings_array = [['Select Wing']]
+           @site = Site.find(params[:site_id])
+            letter = '@'
+            wings = @site.no_of_wings.to_i
+            number = 0
+           while number < wings do
+            child_array = [letter.next, letter.next]
+            wings_array.push(child_array)
+             number += 1
+             letter = letter.next
+          end
+        %>
+
+  <!-- end of logic -->
+
+
   <div class="form-group">
     <%= f.label :wing, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :wing, :class => 'form-control' %>
+      <%= f.select(:wing, options_for_select(wings_array,:disabled=> 'Select Wing', :selected=> @flat.wing),
+                   {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:wing) %>
 
     <%= f.label 'Location/Floor', :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :floor, :class => 'form-control' %>
+      <%= f.select(:floor , options_for_select([['Select Floor'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],
+                                              ['6','6'],['7','7'],['8','8'],['9','9'],['10','10']],:disabled=> 'Select Floor', :selected=> @flat.floor),
+                   {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:floor) %>
   </div>
@@ -76,7 +98,11 @@
   <div class="form-group">
     <%= f.label :flat_type, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :flat_type, :class => 'form-control' %>
+      <%
+        flat_types = ['SELECT FLAT TYPE']
+        flat_types += @site.type_of_structures.split(',') %>
+      <%= f.select(:wing, options_for_select(flat_types,:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
+                   {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:flat_type) %>
 

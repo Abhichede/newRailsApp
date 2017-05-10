@@ -1,0 +1,3 @@
+class TypeOfStructure < ApplicationRecord
+
+end
