@@ -32,7 +32,7 @@
   <% count = 0 %>
   <tbody>
     <% @booking_detail.payment_details.each do |payment_detail| %>
-      <% if payment_detail.payment_type == 'CHECK' %>
+      <% if payment_detail.payment_type == 'CHEQUE' %>
         <tr style="background-color: #bb4422; color: #FFFFFF">
       <% else %>
         <tr>
