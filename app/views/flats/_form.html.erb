@@ -101,7 +101,7 @@
       <%
         flat_types = ['SELECT FLAT TYPE']
         flat_types += @site.type_of_structures.split(',') %>
-      <%= f.select(:wing, options_for_select(flat_types,:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
+      <%= f.select(:flat_type, options_for_select(flat_types,:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
                    {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:flat_type) %>

@@ -71,8 +71,8 @@ ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
     overflow: auto;
 }
 form .error {
-    color: #ff130a;
-    font-weight: 200;
+    color: #c31209;
+    font-weight: 600;
     font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
 }
