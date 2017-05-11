@@ -4,7 +4,10 @@ class BookingDetail < ApplicationRecord
   has_many :payment_details
 
   def self.payment_schedule
-    BookingDetailsMailer.dummy_mail.deliver
+    @booking_detail = BookingDetail.where("schedule_date = #{Date.today}")
+    @booking_detail.each do |booking|
+      BookingDetailsMailer.schedule_next_installment_mail(booking).deliver
+    end
   end
 
   def self.get_all_charges(booking_detail)
