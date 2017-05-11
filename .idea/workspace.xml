@@ -15,8 +15,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/site/photo_path/5/medium_SmartBuildings.jpg" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/site/photo_path/5/thumb_SmartBuildings.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/booking_detail.rb" afterPath="$PROJECT_DIR$/app/models/booking_detail.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/schedule.rb" afterPath="$PROJECT_DIR$/config/schedule.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -54,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking_detail.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="booking_detail.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/booking_detail.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
@@ -74,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking_details_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="booking_details_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/booking_details_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="103" column="44" lean-forward="false" selection-start-line="103" selection-start-column="31" selection-end-line="103" selection-end-column="44" />
+            <state relative-caret-position="237">
+              <caret line="105" column="6" lean-forward="true" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -209,10 +208,10 @@
         <option value="$PROJECT_DIR$/app/views/flats/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/views/booking_details_mailer/schedule_next_installment_mail.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/sites/show.html.erb" />
         <option value="$PROJECT_DIR$/app/models/booking_detail.rb" />
         <option value="$PROJECT_DIR$/config/schedule.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
       </list>
     </option>
   </component>
@@ -1096,14 +1095,7 @@
       <workItem from="1493984129687" duration="8966000" />
       <workItem from="1494089866792" duration="247000" />
       <workItem from="1494422402026" duration="15609000" />
-      <workItem from="1494478409457" duration="3141000" />
-    </task>
-    <task id="LOCAL-00026" summary="Changes by customers are done.">
-      <created>1493231169072</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1493231169072</updated>
+      <workItem from="1494478409457" duration="3473000" />
     </task>
     <task id="LOCAL-00027" summary="mailer host added.">
       <created>1493232284437</created>
@@ -1441,14 +1433,22 @@
       <option name="project" value="LOCAL" />
       <updated>1494483200108</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Scheduler added">
+      <created>1494484432607</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1494484432607</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="349708000" />
+    <option name="totallyTimeSpent" value="350040000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-11" width="1381" height="912" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1458,7 +1458,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17866324" sideWeight="0.50413847" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1722365" sideWeight="0.49736643" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1722365" sideWeight="0.49736643" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2506427" sideWeight="0.49586156" order="9" side_tool="false" content_ui="tabs" />
@@ -1491,7 +1491,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/swaraj-constructions" />
     </ignored-roots>
-    <MESSAGE value="some simple modifications done like database datatype changed from number to integer, and sites index changed for mobile version." />
     <MESSAGE value="added on screen payment option." />
     <MESSAGE value="added validations." />
     <MESSAGE value="updaated additional customer info." />
@@ -1516,7 +1515,8 @@
     <MESSAGE value="all changes are resolved." />
     <MESSAGE value="dropdown lists added." />
     <MESSAGE value="new Mailer credentials added." />
-    <option name="LAST_COMMIT_MESSAGE" value="new Mailer credentials added." />
+    <MESSAGE value="Scheduler added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scheduler added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1847,14 +1847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/booking_details_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="103" column="44" lean-forward="false" selection-start-line="103" selection-start-column="31" selection-end-line="103" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1883,6 +1875,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="74" lean-forward="true" selection-start-line="8" selection-start-column="74" selection-end-line="8" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/booking_details_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="105" column="6" lean-forward="true" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="6" />
           <folding />
         </state>
       </provider>
