@@ -69,7 +69,7 @@
          total_paid = 0 %>
         <% @site.booking_details.each do |booking| %>
           <tr>
-            <td><%= booking.customer_name %> (<%= booking.flat.flat_number %>)</td>
+            <td><%= link_to booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
             <td>&#8377; <%= booking.final_sale_deed %></td>
               <% total_amount = total_amount + booking.final_sale_deed.to_i %>
             <td>&#8377; <%= booking.paid_amount %></td>

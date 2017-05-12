@@ -1,19 +1,19 @@
 $(function() {
 
-    $("#flat_govt_rate").on('change paste keyup', function () {
-        var flat_area = $("#flat_area").val();
+    $("#flat_govt_rate").on('change keyup paste', function () {
+        var flat_area = $("input#flat_area").val();
 
-        if(flat_area == null){
-            alert("Please enter flat area to calculate GOVT. Value");
+        if(flat_area == null || flat_area === 0 || flat_area === ''){
+            alert("Please enter flat area to calculate FLAT Value");
         }else{
             var flat_govt_rate = $("#flat_govt_rate").val();
             $("#flat_govt_value").val(flat_govt_rate * flat_area);
         }
     });
     $("#flat_flat_rate").on('change paste keyup', function () {
-        var flat_area = $("#flat_area").val();
+        var flat_area = $("input#flat_area").val();
 
-        if(flat_area == null){
+        if(flat_area == null || flat_area === 0 || flat_area === ''){
             alert("Please enter flat area to calculate GOVT. Value");
         }else{
             var flat_govt_rate = $("#flat_flat_rate").val();
