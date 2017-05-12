@@ -4,7 +4,7 @@ $(function() {
         var flat_area = $("input#flat_area").val();
 
         if(flat_area == null || flat_area === 0 || flat_area === ''){
-            alert("Please enter flat area to calculate FLAT Value");
+            alert("Please enter flat area to calculate GOVT. Value");
         }else{
             var flat_govt_rate = $("#flat_govt_rate").val();
             $("#flat_govt_value").val(flat_govt_rate * flat_area);
@@ -14,7 +14,7 @@ $(function() {
         var flat_area = $("input#flat_area").val();
 
         if(flat_area == null || flat_area === 0 || flat_area === ''){
-            alert("Please enter flat area to calculate GOVT. Value");
+            alert("Please enter flat area to calculate FLAT Value");
         }else{
             var flat_govt_rate = $("#flat_flat_rate").val();
             $("#flat_flat_cost").val(flat_govt_rate * flat_area);
