@@ -159,46 +159,52 @@ $(function() {
                 maxlength: 12
             },
             "booking_detail[vat]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[service_tax]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[agreement_cost]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[registration_fees]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[final_sale_deed_fees]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[stamp_duty]":{
-                required: true
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[MSEB_charges]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[water_charges]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[parking_charges]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[maintenance_charges]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[other_charges]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[token_amount]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[payment_desc]":{
                 required: true
@@ -214,7 +220,7 @@ $(function() {
             },
             "booking_detail[sanctioned_amount]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "booking_detail[loan_possible]":"required"
         },

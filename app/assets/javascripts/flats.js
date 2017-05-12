@@ -30,20 +30,24 @@ $(function() {
             "flat[flat_number]":"required",
             "flat[area]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "flat[floor]":"required",
             "flat[flat_cost]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
+            },
+            "flat[flat_rate]":{
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "flat[govt_rate]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "flat[govt_value]":{
                 required: true,
-                pattern: /^[0-9]*$/
+                pattern: /^([0-9]*[.])?[0-9]*$/
             },
             "flat[flat_type]":"required",
             "flat[wing]":"required",
@@ -56,6 +60,10 @@ $(function() {
                 pattern: "Please enter only number"
             },
             "flat[flat_cost]":{
+                required: "This is required filed, Please fill with this proper value",
+                pattern: "Please enter valid amount"
+            },
+            "flat[flat_rate]":{
                 required: "This is required filed, Please fill with this proper value",
                 pattern: "Please enter valid amount"
             },
