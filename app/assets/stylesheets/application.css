@@ -50,6 +50,13 @@ div.row.custom-row{
     }
 
 }
+
+@media only screen and (max-device-width: 400px) {
+    table.table-responsive{
+        width: 350px !important;
+        overflow: auto !important;
+    }
+}
 .badge{
     background-color: rgb(133, 108, 82);
 }

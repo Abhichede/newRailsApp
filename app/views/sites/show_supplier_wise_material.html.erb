@@ -1,0 +1,109 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-1">
+      <%= link_to site_path(@site) do %>
+          <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <h3>
+        <strong><%= @material.first.supplier.name %></strong>
+        <span class="pull-right"></span>
+      </h3>
+      <span class="label label-default"><%= @site.name %></span>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#paymentModal">Pay</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="overflow:auto;">
+  <table class="table table-stripped">
+    <thead>
+    <tr>
+
+      <th>Material Name</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Truck No</th>
+      <th>Challan No</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Amount</th>
+      <th>Supervisor</th>
+    </tr>
+    </thead>
+    <%
+      total_amount = 0
+    %>
+    <tbody>
+
+        <% @material.each do |material| %>
+            <tr>
+              <td><%= material.type_of_material %></td>
+              <td><%= material.date %></td>
+              <td><%= material.time %></td>
+              <td><%= material.truck_no %></td>
+              <td><%= material.challan_no %></td>
+              <td><%=  material.quantity.to_f %> <%= material.unit %></td>
+              <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
+              <td>&#8377; <%= material.amount.to_f %></td>
+              <td><%= material.supervisor_name %></td>
+            </tr>
+                  <% total_amount = total_amount + material.amount.to_f %>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="pull-right">
+  <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
+  <strong>Paid Amount: &#8377; <%= @material.first.supplier.paid_amount.to_f.round(2) %></strong>
+</div>
+
+
+<!-- ********************************************************************************************** -->
+
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag suppliers_update_supplier_payment_path, remote: true, method: :get, id: 'suppliers-payment_form'  do %>
+
+            <%= date_field_tag :schedule_date, params[:schedule_date],placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box' %>
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control currently_paying_amount', id: 'payable_amount' %>
+            <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
+                           class: 'form-control', id: 'payment_method' %>
+            <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
+                               class: 'form-control search-box', id: 'payment_desc' %>
+            <%= text_field_tag :paid_by, params[:paid_by],placeholder: 'Paid By',value: current_user.email ,
+                               class: 'form-control search-box', id: 'paid_by', readonly: true %>
+            <%= hidden_field_tag :payment_for, params[:payment_for], value: 'MATERIAL/SUPPLIER' %>
+            <%= hidden_field_tag :supplier_id, params[:supplier_id], value: @material.first.supplier.id %>
+            <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
+            <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount %>
+            </div>
+            <div class="modal-footer">
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                             id: 'schedule_next_installment') do %>
+                  Save
+              <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->

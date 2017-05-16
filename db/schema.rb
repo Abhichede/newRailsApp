@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510164629) do
+ActiveRecord::Schema.define(version: 20170516143201) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -81,6 +81,51 @@ ActiveRecord::Schema.define(version: 20170510164629) do
     t.string   "flat_rate"
   end
 
+  create_table "list_materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "material_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "material_name"
+    t.string   "material_unit"
+    t.boolean  "deleting_status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "date"
+    t.integer  "supplier_id"
+    t.integer  "site_id"
+    t.string   "type_of_material"
+    t.string   "quantity"
+    t.string   "unit"
+    t.string   "challan_no"
+    t.string   "truck_no"
+    t.string   "time"
+    t.string   "rate"
+    t.string   "amount"
+    t.string   "supervisor_name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "outgoing_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "payment_for"
+    t.string   "amount"
+    t.string   "payment_method"
+    t.string   "payment_description"
+    t.string   "site_id"
+    t.string   "paid_by"
+    t.string   "date"
+    t.boolean  "deleting_status",     default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
   create_table "payment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "payable_amount"
     t.string   "payment_type"
@@ -104,6 +149,32 @@ ActiveRecord::Schema.define(version: 20170510164629) do
     t.string   "photo_path"
     t.string   "site_type"
     t.string   "no_of_wings"
+  end
+
+  create_table "supplier_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "supplier_id"
+    t.integer  "material_id"
+    t.integer  "site_id"
+    t.string   "amount"
+    t.string   "payment_method"
+    t.string   "payment_desc"
+    t.string   "payment_date"
+    t.string   "paid_by"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "suppliers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "email"
+    t.string   "contact_number"
+    t.string   "contact_person"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "deleting_status"
+    t.string   "total_amount"
+    t.string   "paid_amount"
   end
 
   create_table "type_of_structures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

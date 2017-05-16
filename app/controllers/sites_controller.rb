@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :show_site_material, :show_supplier_wise_material]
 
   # GET /sites
   # GET /sites.json
@@ -39,6 +39,13 @@ class SitesController < ApplicationController
     end
   end
 
+  def show_site_material
+    @material = @site.materials.where(:type_of_material => params[:type_of_material])
+  end
+
+  def show_supplier_wise_material
+    @material = @site.materials.where(:supplier_id => params[:supplier])
+  end
   # PATCH/PUT /sites/1
   # PATCH/PUT /sites/1.json
   def update
