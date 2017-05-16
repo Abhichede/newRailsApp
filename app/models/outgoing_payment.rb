@@ -1,0 +1,2 @@
+class OutgoingPayment < ApplicationRecord
+end

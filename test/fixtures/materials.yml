@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  name_of_supplier: MyString
+  supplier_id: 1
+  site_id: 1
+  type_of_material: MyString
+  quantity: MyString
+  unit: MyString
+  challan_no: MyString
+  truck_no: MyString
+  time: MyString
+  rate: MyString
+  amount: MyString
+  supervisor_name: MyString
+
+two:
+  date: MyString
+  name_of_supplier: MyString
+  supplier_id: 1
+  site_id: 1
+  type_of_material: MyString
+  quantity: MyString
+  unit: MyString
+  challan_no: MyString
+  truck_no: MyString
+  time: MyString
+  rate: MyString
+  amount: MyString
+  supervisor_name: MyString

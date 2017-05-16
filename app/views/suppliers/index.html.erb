@@ -1,0 +1,32 @@
+<%- model_class = Supplier -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped" style="overflow: auto">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:contact_number) %></th>
+      <th><%= model_class.human_attribute_name(:contact_person) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @suppliers.each do |supplier| %>
+      <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+        <tr>
+          <td><%= link_to supplier.name, supplier_path(supplier) %></td>
+          <td><%= supplier.address %></td>
+          <td><%= supplier.email %></td>
+          <td><%= supplier.contact_number %></td>
+          <td><%= supplier.contact_person %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_supplier_path,
+            :class => 'btn btn-primary btn-sm' %>

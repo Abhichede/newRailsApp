@@ -1,0 +1,44 @@
+<%- model_class = Material -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:time) %></th>
+      <th><%= model_class.human_attribute_name(:supplier_id) %></th>
+      <th><%= model_class.human_attribute_name(:site_id) %></th>
+      <th><%= model_class.human_attribute_name(:type_of_material) %></th>
+      <th><%= model_class.human_attribute_name(:challan_no) %></th>
+      <th><%= model_class.human_attribute_name(:truck_no) %></th>
+      <th><%= model_class.human_attribute_name(:quantity) %></th>
+      <th><%= model_class.human_attribute_name(:rate) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:supervisor_name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @materials.each do |material| %>
+      <tr>
+        <td><%= link_to material.id, material_path(material) %></td>
+        <td><%= material.date %></td>
+        <td><%= material.time %></td>
+        <td><%= material.supplier.name %></td>
+        <td><%= material.site.name %></td>
+        <td><%= material.type_of_material %></td>
+        <td><%= material.challan_no %></td>
+        <td><%= material.truck_no %></td>
+        <td><%= material.quantity %> <%= material.unit %></td>
+        <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
+        <td>&#8377; <%= material.amount %></td>
+        <td><%= material.supervisor_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_material_path,
+            :class => 'btn btn-primary' %>

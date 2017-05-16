@@ -1,0 +1,153 @@
+<%= form_for @material, :html => { :class => "form-horizontal material" } do |f| %>
+
+  <% if @material.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@material.errors.count, "error") %> prohibited this material from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @material.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.date_field :date, :class => 'form-control',required: true, value: @material.date %>
+    </div>
+    <%=f.error_span(:date) %>
+
+    <%= f.label :time, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.time_field :time, :class => 'form-control', required: true, value: @material.time %>
+    </div>
+    <%=f.error_span(:time) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :site_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%
+        site_names = ['Select Site']
+        Site.all.each do |site|
+          site_names.push([site.name,site.id])
+        end %>
+      <% if !@material.site.blank? %>
+        <%= f.select(:site_id, options_for_select(site_names,:disabled=> 'Select Site', selected: @material.site.name),
+                   {}, class: 'form-control') %>
+      <% else %>
+        <%= f.select(:site_id, options_for_select(site_names,:disabled=> 'Select Site', selected: 'Select Site'),
+                     {}, class: 'form-control') %>
+      <% end %>
+    </div>
+    <%=f.error_span(:site_id) %>
+
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-3">
+      <%
+        supplier_names = ['Select Supplier']
+        Supplier.all.each do |supplier|
+          if supplier.deleting_status === "false" || supplier.deleting_status.blank?
+            supplier_names.push([supplier.name,supplier.id])
+          end
+        end %>
+      <% if !@material.supplier.blank? %>
+        <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.name),
+                   {}, class: 'form-control') %>
+      <% else %>
+          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
+                       {}, class: 'form-control') %>
+      <% end %>
+    </div><span class="col-lg-1"><%= link_to 'Add New', new_supplier_path, class: 'label label-default' %></span>
+    <%=f.error_span(:supplier_id) %>
+
+  </div>
+  <div class="form-group">
+    <%= f.label :type_of_material, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-3">
+      <%
+        material_names = ['Select Material']
+        MaterialList.all.each do |material|
+          material_names.push([material.material_name])
+        end %>
+      <% if !@material.type_of_material.blank? %>
+        <%= f.select(:type_of_material, options_for_select(material_names,:disabled=> 'Select Material', selected: @material.type_of_material),
+                   {}, class: 'form-control') %>
+      <% else %>
+          <%= f.select(:type_of_material, options_for_select(material_names,:disabled=> 'Select Material', selected:'Select Material'),
+                       {}, class: 'form-control') %>
+      <% end %>
+    </div><span class="col-lg-1"><%= link_to 'Add New', new_material_path, class: 'label label-default' %></span>
+    <%=f.error_span(:type_of_material) %>
+
+    <%= f.label :quantity, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 input-group">
+      <%= f.text_field :quantity, :class => 'form-control', required: true %>
+    <span class="input-group-addon">
+      <%
+        material_unit = ['Unit']
+        MaterialList.all.each do |material|
+          if !material.material_unit.blank?
+            material_unit.push([material.material_unit])
+          end
+        end %>
+      <% if !@material.unit.blank? %>
+        <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => @material.unit),
+                   {}, class: 'selectpicker') %>
+      <% else %>
+        <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => 'Unit'),
+                     {}, class: 'selectpicker') %>
+      <% end %>
+    </span>
+      <%=f.error_span(:quantity) %>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <%= f.label :challan_no, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :challan_no, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:challan_no) %>
+
+    <%= f.label :truck_no, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :truck_no, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:truck_no) %>
+
+  </div>
+  <div class="form-group">
+    <%= f.label :rate, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :rate, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:rate) %>
+
+    <%= f.label :amount, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :amount, :class => 'form-control', required: true, readonly: true %>
+    </div>
+    <%=f.error_span(:amount) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :supervisor_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :supervisor_name, :class => 'form-control', :value => current_user.email, required: true %>
+    </div>
+    <%=f.error_span(:supervisor_name) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                materials_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

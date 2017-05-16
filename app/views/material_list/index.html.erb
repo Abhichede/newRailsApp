@@ -1,0 +1,30 @@
+<div class="row" style="padding: 0.5rem; background-color: #e1e1e1; color: #2E2F30">
+  <%= form_tag material_list_add_path, method: :get, id: ''  do %>
+
+     <div class="col-md-4"><strong>Material Name</strong> <%= text_field_tag :material_name, params[:material_name],placeholder: 'Material Name',
+                         class: 'form-control', id: '' %></div>
+      <div class="col-md-4"><strong>Material Unit</strong> <%= text_field_tag :material_unit, params[:material_unit],placeholder: 'Material Unit',
+                         class: 'form-control', id: '' %></div>
+      <%= hidden_field_tag :deleting_status, params[:deleting_status], :value => false  %>
+
+      <%= submit_tag 'ADD', class: 'btn btn-default'  %>
+  <% end %>
+</div>
+<hr/>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Material Name</th>
+      <th>Material Unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @material_list.each do |material| %>
+      <tr>
+        <td><%= material.material_name %></td>
+        <td><%= material.material_unit %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
