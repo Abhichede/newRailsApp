@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'type_of_structures/index'
+
+  get 'type_of_structures/add'
+
   resources :materials
   get 'material_list/index'
 

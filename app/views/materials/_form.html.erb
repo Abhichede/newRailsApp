@@ -81,7 +81,7 @@
           <%= f.select(:type_of_material, options_for_select(material_names,:disabled=> 'Select Material', selected:'Select Material'),
                        {}, class: 'form-control') %>
       <% end %>
-    </div><span class="col-lg-1"><%= link_to 'Add New', new_material_path, class: 'label label-default' %></span>
+    </div><span class="col-lg-1"><%= link_to 'Add New', material_list_index_path, class: 'label label-default' %></span>
     <%=f.error_span(:type_of_material) %>
 
     <%= f.label :quantity, :class => 'control-label col-lg-2' %>

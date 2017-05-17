@@ -41,7 +41,7 @@
 
     <div class="form-group">
     <%= f.label :type_of_structures, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-8">
       <% if @site.type_of_structures.blank? %>
       <%= f.collection_check_boxes :type_of_structures, TypeOfStructure.all, :name, :name,multiple: true,
                                    :class=> 'form-control', :include_hidden=> false %>
@@ -51,6 +51,9 @@
                                        :class=> 'form-control', :include_hidden=> false %>
       <% end %>
     </div>
+      <span class="col-lg-1">
+        <%= link_to 'Add New', type_of_structures_index_path, class: 'label label-default' %>
+      </span>
     <%=f.error_span(:type_of_structures) %>
   </div>
 
