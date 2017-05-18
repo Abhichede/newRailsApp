@@ -30,7 +30,7 @@
                     :class => 'btn btn-default btn-sm' %>
       </div>
       <div class="">
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <% link_to t('.destroy', :default => t("helpers.links.destroy")),
                     booking_detail_path(@booking_detail),
                     :method => 'delete',
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },

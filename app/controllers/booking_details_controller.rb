@@ -37,7 +37,7 @@ class BookingDetailsController < ApplicationController
         @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
 
         #Booking Mailer
-        BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
+        #BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
 
         format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created.' }
         format.json { render :show, status: :created, location: @booking_detail }
@@ -83,7 +83,7 @@ class BookingDetailsController < ApplicationController
     
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
       if @payment_detail.save
-        BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+        #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
           format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
           format.json { render json: @booking_detail }
@@ -103,7 +103,7 @@ class BookingDetailsController < ApplicationController
     @booking_detail = BookingDetail.find(params[:booking_id])
     if @booking_detail.update(:schedule_date => params[:schedule_date],
                               :schedule_desc => params[:schedule_desc])
-      SendEmailJob.set(wait: ((Time.parse(params[:schedule_date]) - Time.current)/60).hours).perform_later(@booking_detail)
+      #SendEmailJob.set(wait: ((Time.parse(params[:schedule_date]) - Time.current)/60).hours).perform_later(@booking_detail)
       respond_to do |format|
         format.html { redirect_to @booking_detail, notice: "Next installment scheduled on #{params[:schedule_date]}." }
         format.json { render json: @booking_detail }
