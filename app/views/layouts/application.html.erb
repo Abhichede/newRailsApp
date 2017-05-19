@@ -66,8 +66,8 @@
                   MATERIALS
               <% end %>
             </li>
-            <li><% link_to flats_path  do %>
-                  Flats
+            <li><%= link_to suppliers_path  do %>
+                  SUPPLIERS
               <% end %>
             </li>
           </ul>
@@ -86,9 +86,16 @@
                 <% end %>
               </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+              <li>
+                <span>
+
+                </span>
+                <%= link_to  destroy_user_session_path, method: :delete do %>
+                    <%= current_user.user_name %> ( Log-out <i class="fa fa-sign-out"></i>)
+                <% end %>
+              </li>
           </ul>
-          <% end %>
+        <% end %>
         </div>
       </div>
     </div>

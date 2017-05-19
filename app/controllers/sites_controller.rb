@@ -45,6 +45,7 @@ class SitesController < ApplicationController
 
   def show_supplier_wise_material
     @material = @site.materials.where(:supplier_id => params[:supplier])
+    @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @material.first.supplier.name)
   end
   # PATCH/PUT /sites/1
   # PATCH/PUT /sites/1.json

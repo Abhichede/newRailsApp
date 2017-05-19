@@ -17,6 +17,10 @@
         <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#paymentModal">Pay</button>
       </div>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
+      </div>
     </div>
   </div>
 </div>
@@ -76,20 +80,20 @@
         <h4 class="modal-title w-100">Supplier's Payment</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag suppliers_update_supplier_payment_path, remote: true, method: :get, id: 'suppliers-payment_form'  do %>
+        <%= form_tag update_supplier_payment_path, method: :get, id: 'suppliers-payment_form'  do %>
 
-            <%= date_field_tag :schedule_date, params[:schedule_date],placeholder: 'Select Date',
-                               class: 'form-control search-box', id: 'search-box' %>
+            <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box', required: true %>
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
-                               class: 'form-control currently_paying_amount', id: 'payable_amount' %>
+                               class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
-                           class: 'form-control', id: 'payment_method' %>
+                           class: 'form-control', id: 'payment_method', required: true %>
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
-                               class: 'form-control search-box', id: 'payment_desc' %>
-            <%= text_field_tag :paid_by, params[:paid_by],placeholder: 'Paid By',value: current_user.email ,
+                               class: 'form-control search-box', id: 'payment_desc', required: true %>
+            <%= text_field_tag :paid_by, params[:paid_by],placeholder: 'Paid By',value: current_user.user_name ,
                                class: 'form-control search-box', id: 'paid_by', readonly: true %>
             <%= hidden_field_tag :payment_for, params[:payment_for], value: 'MATERIAL/SUPPLIER' %>
-            <%= hidden_field_tag :supplier_id, params[:supplier_id], value: @material.first.supplier.id %>
+            <%= hidden_field_tag :id, params[:id], value: @material.first.supplier.id %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
             <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount %>
             </div>
@@ -103,6 +107,52 @@
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
         </div>
         </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+
+<!-- Modal -->
+<div class="modal fade" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto">
+          <table class="table-responsive table table-stripped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Pay. Method</th>
+                <th>Desc.</th>
+                <th>Paid By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @outgoing_payment.each do |payments| %>
+                <tr>
+                  <td><%= payments.date %></td>
+                  <td>&#8377; <%= payments.amount %></td>
+                  <td><%= payments.payment_method %></td>
+                  <td><%= payments.payment_description %></td>
+                  <td><%= payments.paid_by %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
   </div>
 </div>

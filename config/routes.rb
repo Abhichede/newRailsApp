@@ -18,11 +18,11 @@ Rails.application.routes.draw do
   resources :sites
   resource :payment_details
   resource :material_list
-  devise_for :users
+  devise_for :users, :controllers => {registrations: 'registrations'}
   root 'sites#index'
   get 'show_site_material', to: 'sites#show_site_material'
   get 'show_supplier_wise_material', to: 'sites#show_supplier_wise_material'
-  get 'suppliers/update_supplier_payment'
+  get 'update_supplier_payment', to: 'suppliers#update_supplier_payment'
   get 'show_payment_details', to: 'payment_details#show'
   get 'destroy_payment', to: 'payment_details#show'
   get 'update_paid_amount', to: 'booking_details#update_paid_amount'

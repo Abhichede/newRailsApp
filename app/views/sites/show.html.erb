@@ -20,7 +20,15 @@
     <div class="col-md-6">
         <div class="col-md-4 col-sm-4 col-xs-4">
           <% if @site.flats.count != @site.no_of_units %>
-              <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id }, :class => 'btn btn-success btn-sm' %>
+              <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
+                  <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
+                          :class => 'btn btn-success btn-sm' %>
+                  <%= link_to 'Add SHOP', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
+                              :class => 'btn btn-success btn-sm' %>
+              <% else %>
+                  <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
+                              :class => 'btn btn-success btn-sm' %>
+              <% end %>
           <% end %>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4">

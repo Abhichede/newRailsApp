@@ -329,12 +329,12 @@
               <%= form_tag update_paid_amount_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
                       <%= hidden_field_tag :booking_id, params[:id], value: @booking_detail.id %>
                       <%= text_field_tag :search, params[:search],placeholder: 'Payable Amount',
-                                         class: 'form-control search-box', id: 'search-box' %>
+                                         class: 'form-control search-box', id: 'search-box', required: true %>
                       <%= select_tag :payment_type, options_for_select([['Payment Type'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Type'),
-                                         class: 'form-control search-box', id: 'payment_type' %>
+                                         class: 'form-control search-box', id: 'payment_type', required: true %>
                       <%= text_field_tag :check_desc, params[:check_desc],placeholder: 'Payment Description',
-                                         class: 'form-control search-box', id: 'check_desc' %>
-                      <%= date_field_tag :payment_date, params[:payment_date], class: 'form-control', id: 'payment_date' %>
+                                         class: 'form-control search-box', id: 'check_desc', required: true %>
+                      <%= date_field_tag :payment_date, params[:payment_date], class: 'form-control', id: 'payment_date', required: true %>
         </div>
         <div class="modal-footer">
             <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',

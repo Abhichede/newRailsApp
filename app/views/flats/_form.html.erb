@@ -101,8 +101,13 @@
       <%
         flat_types = ['SELECT FLAT TYPE']
         flat_types += @site.type_of_structures.split(',') %>
+      <% if params[:flat_type] === "SHOP" %>
+          <%= f.select(:flat_type, options_for_select([['SHOP', 'SHOP']],:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
+                       {}, class: 'form-control') %>
+      <% else %>
       <%= f.select(:flat_type, options_for_select(flat_types,:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
                    {}, class: 'form-control') %>
+      <% end %>
     </div>
     <%=f.error_span(:flat_type) %>
 

@@ -121,26 +121,30 @@
     <%=f.error_span(:truck_no) %>
 
   </div>
-  <div class="form-group">
-    <%= f.label :rate, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= f.text_field :rate, :class => 'form-control', required: true %>
-    </div>
-    <%=f.error_span(:rate) %>
+  <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
+      <div class="form-group">
+        <%= f.label :rate, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :rate, :class => 'form-control', required: true %>
+        </div>
+        <%=f.error_span(:rate) %>
 
-    <%= f.label :amount, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= f.text_field :amount, :class => 'form-control', required: true, readonly: true %>
+        <%= f.label :amount, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :amount, :class => 'form-control', required: true, readonly: true %>
+        </div>
+        <%=f.error_span(:amount) %>
+      </div>
+  <% end %>
+  <% if current_user.role === 'SUPERVISOR' %>
+    <div class="form-group">
+      <%= f.label :supervisor_name, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :supervisor_name, :class => 'form-control', :value => current_user.user_name,readonly: true, required: true %>
+      </div>
+      <%=f.error_span(:supervisor_name) %>
     </div>
-    <%=f.error_span(:amount) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :supervisor_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= f.text_field :supervisor_name, :class => 'form-control', :value => current_user.email, required: true %>
-    </div>
-    <%=f.error_span(:supervisor_name) %>
-  </div>
+  <% end %>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">

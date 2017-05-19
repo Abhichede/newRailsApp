@@ -2,6 +2,7 @@ class Site < ApplicationRecord
   has_many :flats
   has_many :booking_details
   has_many :materials
+  has_many :outgoing_payments
 
   before_save do
     self.type_of_structures.gsub!(/[\[\]\"]/, "") if attribute_present?("type_of_structures")

@@ -103,6 +103,7 @@ select.form-control{
     height: 5rem;
 }
 div.outstanding-table{
+    height: 13rem;
     overflow: auto;
 }
 @media print {

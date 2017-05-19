@@ -1,27 +1,175 @@
 <%- model_class = Supplier -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to suppliers_path do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <h4><strong><%= @supplier.name.upcase %></strong></h4>
+      </div>
+      <div class="col-md-6">
+        <strong>Total Amount: &#8377; <%= @supplier.total_amount %></strong><br/>
+        <strong>Paid Amount: &#8377; <%= @supplier.paid_amount %></strong>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_supplier_path(@supplier), :class => 'btn btn-default btn-sm' %>
+      </div>
+      <div class="col-md-2 col-sm-6 col-xs-6">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <% link_to t('.destroy', :default => t("helpers.links.destroy")),
+                   supplier_path(@supplier),
+                   :method => 'delete',
+                   :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                   :class => 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+      <dd><%= @supplier.address %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+      <dd><%= @supplier.email %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
+      <dd><%= @supplier.contact_number %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:contact_person) %>:</strong></dt>
+      <dd><%= @supplier.contact_person %></dd>
+    </dl>
+  </div>
+  <div class="col-md-8 outstanding-table">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Site Name</th>
+        <th>Total Amount</th>
+        <th>Paid Amount</th>
+        <th>Balance Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @sites.each do |site| %>
+          <tr>
+            <td><%= site.name.upcase %></td>
+            <%
+              total_amount = 0
+              paid_amount = 0
+            %>
+            <%
+              @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_to: @supplier.name)
+
+              @outgoing_payment.each do |outgoing_payment|
+                paid_amount += outgoing_payment.amount.to_f
+              end
+            %>
+            <% @site_wise = Material.where(:site_id => site, :supplier_id => @supplier) %>
+            <% @site_wise.each do |site_wise| %>
+                  <% total_amount += site_wise.amount.to_f %>
+            <% end %>
+            <td>&#8377; <%= total_amount %></td>
+            <td>&#8377; <%= paid_amount %></td>
+            <td>&#8377; <%= total_amount - paid_amount %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr/>
+<div style="overflow: auto">
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th>Site Name</th>
+      <th>Material Name</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Truck No</th>
+      <th>Challan No</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Amount</th>
+      <th>Supervisor</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @material.each do |material| %>
+        <tr>
+          <td><%= material.site.name.upcase %></td>
+          <td><%= material.type_of_material %></td>
+          <td><%= material.date %></td>
+          <td><%= material.time %></td>
+          <td><%= material.truck_no %></td>
+          <td><%= material.challan_no %></td>
+          <td><%=  material.quantity.to_f %> <%= material.unit %></td>
+          <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
+          <td>&#8377; <%= material.amount.to_f %></td>
+          <td><%= material.supervisor_name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @supplier.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @supplier.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @supplier.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
-  <dd><%= @supplier.contact_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contact_person) %>:</strong></dt>
-  <dd><%= @supplier.contact_person %></dd>
-</dl>
+<!-- ********************************************************************************************** -->
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              suppliers_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_supplier_path(@supplier), :class => 'btn btn-default' %>
-<% link_to t('.destroy', :default => t("helpers.links.destroy")),
-              supplier_path(@supplier),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<!-- Modal -->
+<div class="modal fade" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto">
+          <table class="table-responsive table table-stripped">
+            <thead>
+            <tr>
+              <th>Date</th>
+              <th>Site</th>
+              <th>Amount</th>
+              <th>Pay. Method</th>
+              <th>Desc.</th>
+              <th>Paid By</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @outgoing_payment = OutgoingPayment.where(:payment_to => @supplier.name) %>
+            <% @outgoing_payment.each do |payments| %>
+                <tr>
+                  <td><%= payments.date %></td>
+                  <td><%= payments.site.name %></td>
+                  <td>&#8377; <%= payments.amount %></td>
+                  <td><%= payments.payment_method %></td>
+                  <td><%= payments.payment_description %></td>
+                  <td><%= payments.paid_by %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="pull-right"><strong>Total paid Amount: &#8377; <%= @supplier.paid_amount %></strong> </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->

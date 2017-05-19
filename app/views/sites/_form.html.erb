@@ -32,7 +32,8 @@
     <div class="form-group">
       <%= f.label :site_type, :class => 'control-label col-lg-2' %>
       <div class="col-lg-10">
-        <%= f.select(:site_type, options_for_select([['Select type'],['Residential','Residential'],['Commercial','Commercial']],
+        <%= f.select(:site_type, options_for_select([['Select type'],['Residential','Residential'],
+                                                     ['Commercial','Commercial'], ['Residential+Commercial','Residential+Commercial']],
                                                     :disabled=> 'Select type', :selected=> @site.site_type),
                      {}, class: 'form-control') %>
       </div>

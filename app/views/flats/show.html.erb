@@ -8,7 +8,7 @@
         <% end %>
       </div>
       <div class="col-md-6">
-        <h4><strong><%= Site.find(@flat.site_id).name.upcase %></strong></h4>
+        <h4><strong><%= @flat.site.name.upcase %></strong></h4>
         <h4>
           <div class="label label-success">
             Flat No: <%= @flat.flat_number %>

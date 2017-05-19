@@ -1,32 +1,29 @@
 <%- model_class = Supplier -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h3><%= 'Suppliers'.upcase %>
+    <span class="pull-right">
+      <%= link_to 'Add Supplier',
+                  new_supplier_path,
+                  :class => 'btn btn-primary btn-sm' %>
+    </span>
+  </h3>
 </div>
-<table class="table table-striped" style="overflow: auto">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:contact_number) %></th>
-      <th><%= model_class.human_attribute_name(:contact_person) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @suppliers.each do |supplier| %>
-      <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-        <tr>
-          <td><%= link_to supplier.name, supplier_path(supplier) %></td>
-          <td><%= supplier.address %></td>
-          <td><%= supplier.email %></td>
-          <td><%= supplier.contact_number %></td>
-          <td><%= supplier.contact_person %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_supplier_path,
-            :class => 'btn btn-primary btn-sm' %>
+<div class="row col-md-offset-1">
+  <% @suppliers.each do |supplier| %>
+      <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+          <div class="card col col-md-3 col-sm-5 col-xs-11 text-center" style="margin: 1rem">
+            <div class="card-block">
+              <h4 class="card-title"><strong><%= supplier.name %></strong></h4>
+              <hr />
+              <p class="card-text">
+                <strong>Addres: </strong> <%= supplier.address %> <br />
+                <strong>Contact: </strong> <%= supplier.contact_number %> <br />
+              </p>
+              <hr />
+              <%= link_to 'View', supplier_path(supplier), class: 'btn btn-warning btn-sm' %>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+</div>

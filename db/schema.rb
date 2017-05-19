@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516143201) do
+ActiveRecord::Schema.define(version: 20170518180711) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170516143201) do
     t.boolean  "deleting_status",     default: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "payment_to",          default: "NA"
   end
 
   create_table "payment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -196,6 +197,8 @@ ActiveRecord::Schema.define(version: 20170516143201) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "user_name"
+    t.string   "role"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
