@@ -14,9 +14,9 @@
   <div class="card card-cascade narrower col col-md-4 col-sm-5 col-xs-11 " style="margin: 1rem">
     <div class=""> <!--  style="margin-top: 15px; height: 16.25rem; margin-bottom: 40px; -->
       <% if site.photo_path.blank? %>
-          <%= image_tag 'Default-Home.jpg' %>
+          <%= image_tag 'Default-Home.jpg', class: 'img-responsive' %>
       <% else %>
-          <%= image_tag site.photo_path.url %>
+          <%= image_tag site.photo_path.url, class: 'img-responsive' %>
       <% end  %>
     </div>
     <div class="card-block" style="">
