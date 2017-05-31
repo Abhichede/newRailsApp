@@ -16,7 +16,11 @@
   <% end %>
 <div class="container">
   <div class="form-group">
-    <%= f.label :flat_number, :class => 'control-label col-lg-2' %>
+    <% if params[:flat_type] === 'SHOP' %>
+        <label class="control-label col-lg-2">Shop Number</label>
+    <% else %>
+        <%= f.label :flat_number, :class => 'control-label col-lg-2' %>
+    <% end %>
     <div class="col-lg-4">
       <%= f.text_field :flat_number, :class => 'form-control' %>
     </div>
@@ -36,7 +40,7 @@
   <!-- ruby's black magic code to create array for wings according to number of wigs added in sites -->
         <% wings_array = Array.new(10)
             wings_array = [['Select Wing']]
-           @site = Site.find(params[:site_id])
+
             letter = '@'
             wings = @site.no_of_wings.to_i
             number = 0
@@ -69,13 +73,22 @@
   </div>
 
   <div class="form-group">
-    <%= f.label 'Flat rate/sqft.', :class => 'control-label col-lg-2' %>
+    <% if params[:flat_type] === 'SHOP' %>
+        <label class="control-label col-lg-2">Shop rate/sqft.</label>
+    <% else %>
+        <%= f.label 'Flat rate/sqft.', :class => 'control-label col-lg-2' %>
+    <% end %>
     <div class="col-lg-4">
       <%= f.text_field :flat_rate, :class => 'form-control' %>
     </div>
     <%=f.error_span(:flat_rate) %>
 
-    <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
+    <% if params[:flat_type] === 'SHOP' %>
+        <label class="control-label col-lg-2">Shop Cost.</label>
+    <% else %>
+        <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
+    <% end %>
+
     <div class="col-lg-4">
       <%= f.text_field :flat_cost, :class => 'form-control', readonly: true %>
     </div>
@@ -113,7 +126,7 @@
 
     <%= f.label :amenities, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_area :amenities, :class => 'form-control' %>
+      <%= f.text_area :amenities, :class => 'form-control', value: 'NA' %>
     </div>
     <%=f.error_span(:amenities) %>
   </div>
@@ -123,7 +136,7 @@
 </div>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 site_path(params[:site_id]), :class => 'btn btn-default' %>
     </div>

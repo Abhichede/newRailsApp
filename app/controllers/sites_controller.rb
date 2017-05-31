@@ -4,7 +4,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = Site.order('created_at DESC')
   end
 
   # GET /sites/1
@@ -45,7 +45,8 @@ class SitesController < ApplicationController
 
   def show_supplier_wise_material
     @material = @site.materials.where(:supplier_id => params[:supplier])
-    @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @material.first.supplier.name)
+    @supplier = Supplier.find(params[:supplier])
+    @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
   end
   # PATCH/PUT /sites/1
   # PATCH/PUT /sites/1.json

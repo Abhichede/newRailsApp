@@ -4,6 +4,9 @@ class Site < ApplicationRecord
   has_many :materials
   has_many :outgoing_payments
 
+  validates :name, uniqueness: true
+  validates :type_of_structures, presence: true
+
   before_save do
     self.type_of_structures.gsub!(/[\[\]\"]/, "") if attribute_present?("type_of_structures")
   end

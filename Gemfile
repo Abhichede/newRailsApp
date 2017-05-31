@@ -33,6 +33,7 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'delayed_job_active_record'
+gem 'bootstrap-multiselect-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

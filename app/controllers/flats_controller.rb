@@ -15,25 +15,39 @@ class FlatsController < ApplicationController
   # GET /flats/new
   def new
     @flat = Flat.new
+    @site = Site.find(params[:site_id])
   end
 
   # GET /flats/1/edit
   def edit
+    @site = Site.find(params[:site_id])
   end
 
   # POST /flats
   # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
-
+    @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number])
+    flat_type = 'FLAT'
+    if flat_params[:flat_type] === 'SHOP'
+      flat_type = 'SHOP'
+    end
     respond_to do |format|
-      if @flat.save
-        format.html { redirect_to @flat, notice: 'Flat was successfully created.' }
-        format.json { render :show, status: :created, location: @flat }
+
+      if !@flats.blank?
+        format.html { redirect_to controller: 'flats', action: 'new', site_id: flat_params[:site_id],
+                                  flat_type: flat_type, alert: 'Flat number already available' }
+        format.json { render json: @flat.errors, status: 'Flat number already available' }
       else
-        format.html { render :new }
-        format.json { render json: @flat.errors, status: :unprocessable_entity }
+        if @flat.save
+          format.html { redirect_to @flat, notice: 'Flat was successfully Saved.' }
+          format.json { render :show, status: :created, location: @flat }
+        else
+          format.html { render :new }
+          format.json { render json: @flat.errors, status: :unprocessable_entity }
+        end
       end
+
     end
   end
 
@@ -42,7 +56,7 @@ class FlatsController < ApplicationController
   def update
     respond_to do |format|
       if @flat.update(flat_params)
-        format.html { redirect_to @flat, notice: 'Flat was successfully updated.' }
+        format.html { redirect_to @flat, notice: 'Flat was successfully Saved.' }
         format.json { render :show, status: :ok, location: @flat }
       else
         format.html { render :edit }

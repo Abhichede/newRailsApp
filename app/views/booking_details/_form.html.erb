@@ -25,13 +25,15 @@
    <div class="form-group">
      <%= f.label :customer_name, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_name, :class => 'form-control', placeholder: :customer_name %>
+        <%= f.text_field :customer_name, :class => 'form-control',required: true,
+                         placeholder: :customer_name %>
       </div>
       <%=f.error_span(:customer_name) %>
 
      <%= f.label :customer_address, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_address, :class => 'form-control', placeholder: :customer_address %>
+        <%= f.text_field :customer_address, :class => 'form-control', required: true,
+                         placeholder: :customer_address %>
       </div>
       <%=f.error_span(:customer_address) %>
    </div>
@@ -39,20 +41,23 @@
    <div class="form-group">
      <%= f.label :customer_contact, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_contact, :class => 'form-control', placeholder: :customer_contact %>
+        <%= f.text_field :customer_contact, :class => 'form-control', required: true,
+                         placeholder: :customer_contact %>
       </div>
       <%=f.error_span(:customer_contact) %>
 
      <%= f.label :customer_pan, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_pan, :class => 'form-control', placeholder: :customer_pan %>
+        <%= f.text_field :customer_pan, :class => 'form-control', required: true,
+                         placeholder: :customer_pan %>
       </div>
       <%=f.error_span(:customer_pan) %>
    </div>
    <div class="form-group">
      <%= f.label :customer_adhar, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_adhar, :class => 'form-control', placeholder: :customer_adhar %>
+        <%= f.text_field :customer_adhar, :class => 'form-control', required: true,
+                         placeholder: :customer_adhar %>
       </div>
       <%=f.error_span(:customer_adhar) %>
    </div>
@@ -69,40 +74,51 @@
     <div class="form-group">
       <%= f.label :agreement_cost, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :agreement_cost, :class => 'form-control', placeholder: :agreement_cost %>
+        <%= f.text_field :agreement_cost, :class => 'form-control', required: true,
+                         placeholder: :agreement_cost %>
       </div>
+
       <%=f.error_span(:agreement_cost) %>
 
+    </div>
+    <div class="col-lg-4">
+      <h5 class="agg-number"></h5>
     </div>
    <hr/>
 
     <div class="form-group">
       <%= f.label :water_charges, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :water_charges, :class => 'form-control', placeholder: :water_charges %>
+        <%= f.text_field :water_charges, :class => 'form-control', required: true,
+                         placeholder: :water_charges %>
       </div>
       <%=f.error_span(:water_charges) %>
-      <%= f.label :MSEB_charges, :class => 'control-label col-lg-2' %>
+      <label class="control-label col-lg-2" for="booking_detail_MSEB Charges">
+        MSEB Charges
+      </label>
       <div class="col-lg-4">
-        <%= f.text_field :MSEB_charges, :class => 'form-control', placeholder: :MSEB_charges %>
+        <%= f.text_field :MSEB_charges, :class => 'form-control', required: true,
+                         placeholder: 'MSEB Charges' %>
       </div>
       <%=f.error_span(:MSEB_charges) %>
     </div>
     <div class="form-group">
       <%= f.label :parking_charges, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :parking_charges, :class => 'form-control', placeholder: :parking_charges %>
+        <%= f.text_field :parking_charges, :class => 'form-control', required: true,
+                         placeholder: :parking_charges %>
       </div>
       <%=f.error_span(:parking_charges) %>
       <%= f.label 'Maintenance cost/SqFt.', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <input class="form-control" placeholder="Maintenance cost/Sq.Ft." type="text" id="maintenance_in_sqft">
+        <input class="form-control" placeholder="Maintenance cost/Sq.Ft." type="text" id="maintenance_in_sqft" required>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :other_charges, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :other_charges, :class => 'form-control', placeholder: :other_charges %>
+        <%= f.text_field :other_charges, :class => 'form-control', required: true,
+                         placeholder: :other_charges %>
       </div>
       <%=f.error_span(:other_charges) %>
       <%= f.label 'Maintenance cost', :class => 'control-label col-lg-2' %>
@@ -116,34 +132,34 @@
     <div class="form-group">
       <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :stamp_duty, :class => 'form-control' %>
+        <%= f.text_field :stamp_duty, :class => 'form-control', required: true  %>
       </div>
       <%=f.error_span(:stamp_duty) %>
 
       <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :registration_fees, :class => 'form-control'%>
+        <%= f.text_field :registration_fees, :class => 'form-control', required: true%>
       </div>
       <%=f.error_span(:registration_fees) %>
     </div>
 
    <div class="form-group">
-     <%= f.label :vat, :class => 'control-label col-lg-2' %>
+     <label class="control-label col-lg-2" for="booking_detail_LBT">VAT</label>
       <div class="col-lg-4">
-        <%= f.text_field :vat, :class => 'form-control' %>
+        <%= f.text_field :vat, :class => 'form-control', required: true %>
       </div>
       <%=f.error_span(:vat) %>
      <%= f.label :service_tax, :class => 'control-label col-lg-2' %>
      <div class="col-lg-4">
-       <%= f.text_field :service_tax, :class => 'form-control' %>
+       <%= f.text_field :service_tax, :class => 'form-control', required: true %>
      </div>
      <%=f.error_span(:service_tax) %>
    </div>
 
    <div class="form-group">
-     <%= f.label :lbt, :class => 'control-label col-lg-2' %>
+     <label class="control-label col-lg-2" for="booking_detail_LBT">LBT</label>
       <div class="col-lg-4">
-        <%= f.text_field :lbt, :class => 'form-control'%>
+        <%= f.text_field :lbt, :class => 'form-control', required: true %>
       </div>
       <%=f.error_span(:lbt) %>
 
@@ -208,7 +224,7 @@
       <div class="form-group">
         <%= f.label :token_amount, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :token_amount, :class => 'form-control'%>
+          <%= f.text_field :token_amount, :class => 'form-control', required: true%>
         </div>
         <%=f.error_span(:token_amount) %>
 
@@ -216,16 +232,22 @@
         <div class="col-lg-4">
           <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHEQUE','CHECK']],
                                                           :disabled=> 'Payment type'),
-                       {}, class: 'form-control') %>
+                       {}, class: 'form-control', required: true) %>
         </div>
         <%=f.error_span(:payment_type) %>
       </div>
       <div class="form-group">
         <%= f.label 'Payment Description', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :payment_desc, :class => 'form-control'%>
+          <%= f.text_field :payment_desc, :class => 'form-control', required: true%>
         </div>
         <%=f.error_span(:payment_desc) %>
+
+        <%= f.label 'Booking Date', :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.date_field_tag :booking_date, :class => 'form-control', required: true%>
+        </div>
+        <%=f.error_span(:booking_date) %>
       </div>
     <% end %>
 
@@ -234,7 +256,7 @@
     <% end %>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 flat_path(params[:flat_id]), :class => 'btn btn-default' %>
     </div>

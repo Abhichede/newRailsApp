@@ -18,19 +18,23 @@
       </div>
     </div>
     <div class="col-md-6">
-        <div class="col-md-4 col-sm-4 col-xs-4">
           <% if @site.flats.count != @site.no_of_units %>
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
+              <div class="col-md-4 col-sm-4 col-xs-4">
                   <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                           :class => 'btn btn-success btn-sm' %>
-                  <%= link_to 'Add SHOP', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                  <%= link_to 'Add Shop', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
                               :class => 'btn btn-success btn-sm' %>
+              </div>
               <% else %>
+              <div class="col-md-4 col-sm-4 col-xs-4">
                   <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                               :class => 'btn btn-success btn-sm' %>
+              </div>
               <% end %>
           <% end %>
-        </div>
         <div class="col-md-4 col-sm-4 col-xs-4">
           <%= link_to 'Edit Site',
                       edit_site_path(@site), :class => 'btn btn-info btn-sm' %>
@@ -63,7 +67,7 @@
   </dl>
   </div>
   <div class="col-md-6 outstanding-table">
-    <table class="table table-stripped">
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Customer Name (Flat No.)</th>
@@ -132,9 +136,8 @@
   <div class="jumbotron tab-pane" id="2a" style="margin-top: 0.5em">
     <h4 class="">Material
       <span class="pull-right">
-        <%= link_to new_material_path,class: 'btn btn-default btn-sm' do %>
-          <i class="fa fa-plus"></i>
-        <% end %>
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i> </button>
       </span>
     </h4>
     <hr />
@@ -153,16 +156,17 @@
       </div>
     </div>
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-      <% if @site.materials.count == 0 %>
-          <h5><strong>No Material For This Site</strong></h5>
-      <% else %>
+
           <% MaterialList.all.each do |material| %>
-              <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
-                           :type_of_material=>material.material_name},
-                          class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                          style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>
+            <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
+
+              <% else %>
+                <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
+                             :type_of_material=>material.material_name},
+                            class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                            style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>
+            <% end %>
           <% end %>
-      <% end %>
     </div>
   </div>
   <div class="jumbotron tab-pane" id="3a" style="margin-top: 0.5em">
@@ -184,3 +188,45 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="newMaterialModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Fill Payment details</h4>
+      </div>
+
+    <div class="modal-body">
+        <%= form_tag material_list_add_path, method: :get, id: ''  do %>
+
+            <div><strong>Material Name</strong>
+              <%= text_field_tag :material_name, params[:material_name],placeholder: 'Material Name',
+                                                                                    class: 'form-control', required:true, id: '' %>
+            </div>
+            <div><strong>Material Unit</strong>
+              <%= text_field_tag :material_unit, params[:material_unit],placeholder: 'Material Unit',
+                                                                                    class: 'form-control', required:true, id: '' %>
+            </div>
+              <%= hidden_field_tag :deleting_status, params[:deleting_status], :value => false  %>
+              <%= hidden_field_tag :site, params[:site], :value => @site.id  %>
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag 'ADD', class: 'btn btn-primary btn-sm'  %>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      <% end %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

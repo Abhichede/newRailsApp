@@ -25,25 +25,33 @@ class BookingDetailsController < ApplicationController
   # POST /booking_details.js.json
   def create
     @booking_detail = BookingDetail.new(booking_detail_params)
+    @flat = Flat.find(booking_detail_params[:flat_id])
+    if @flat.booking_status == 1 || @flat.booking_status
+      respond_to do |format|
+          format.html { redirect_to @flat, notice: 'Already booked.' }
+          format.json { render :show, status: 'already Booked', location: @flat }
+        end
+     else
+      respond_to do |format|
+        if @booking_detail.save
 
-    respond_to do |format|
-      if @booking_detail.save
-        @flat = Flat.find(@booking_detail.flat_id)
-        @flat.update(:booking_status=> 1, :booking_date=> Time.current)
-        @payment_detail = @booking_detail.payment_details.new(:payable_amount=>@booking_detail.token_amount,
-                                            :payment_type=>@booking_detail.payment_type,
-                                            :payment_desc=>@booking_detail.payment_desc+' (Token Amount)')
-        @payment_detail.save
-        @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
+          @flat.update(:booking_status=> 1, :booking_date=> booking_detail_params[:booking_date])
+          @payment_detail = @booking_detail.payment_details.new(:payment_date => booking_detail_params[:booking_date],
+                                                                :payable_amount=>@booking_detail.token_amount,
+                                              :payment_type=>@booking_detail.payment_type,
+                                              :payment_desc=>@booking_detail.payment_desc+' (Token Amount)')
+          @payment_detail.save
+          @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
 
-        #Booking Mailer
-        #BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
+          #Booking Mailer
+          #BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
 
-        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully created.' }
-        format.json { render :show, status: :created, location: @booking_detail }
-      else
-        format.html { render :new }
-        format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+          format.html { redirect_to @booking_detail, notice: 'Booked successfully.' }
+          format.json { render :show, status: :created, location: @booking_detail }
+        else
+          format.html { render :new }
+          format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -58,7 +66,7 @@ class BookingDetailsController < ApplicationController
 
         @booking_detail.update(:final_sale_deed=> BookingDetail.get_all_charges(@booking_detail) )
 
-        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully updated.' }
+        format.html { redirect_to @booking_detail, notice: 'Booking detail was successfully Saved.' }
         format.json { render :show, status: :ok, location: @booking_detail }
       else
         format.html { render :edit }
@@ -173,6 +181,7 @@ class BookingDetailsController < ApplicationController
                                              :stamp_duty, :other_charges, :MSEB_charges, :water_charges,
                                              :parking_charges, :maintenance_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
-                                             :employee_name, :token_amount, :payment_type, :payment_desc, :final_sale_deed)
+                                             :employee_name, :token_amount, :payment_type, :payment_desc, :booking_date,
+                                             :final_sale_deed)
     end
 end

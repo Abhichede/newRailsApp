@@ -14,6 +14,7 @@
  *= require jquery-ui
  * require bootstrap-material-design
  *= require font-awesome
+ *= require bootstrap-multiselect
  * require bootstrap-material-design-rails
  *= require_tree .
  *= require_self
@@ -33,7 +34,7 @@ ul.nav.navbar-nav>li>a, div.navbar-header>a.navbar-brand{
     background-color: #E0E0E0;
 }
 a>div.flats-well:hover{
-    box-shadow: #4DB6AC 5px !important;
+    box-shadow: #204c42 5px !important;
 }
 a>div.flats-well{
     color: #FFFFFF;
@@ -58,20 +59,20 @@ div.row.custom-row{
     }
 }
 .badge{
-    background-color: rgb(133, 108, 82);
+    background-color: rgb(38, 6, 7);
 }
 ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
-    background-color: #00806e;
+    background-color: rgba(0, 110, 99, 0.86);
     color: #FFFFFF;
 }
 .navbar-static-top, .btn-primary{
-    background-color: #006352 !important;
+    background-color: #424242 !important;
 }
 .btn-warning{
     background-color: #d64e27 !important;
 }
 .btn-success, .label-success{
-    background-color: #3e7d3e !important;
+    background-color: #006e63 !important;
 }
 .card-text{
     height: 9rem;
@@ -94,7 +95,7 @@ form .error {
 }
 
 #customer-search-box{
-    color: #FFFFFF;
+    color: #000000;
 }
 select.form-control{
     font-size: small;

@@ -13,10 +13,10 @@ class MaterialListController < ApplicationController
 
     respond_to do |format|
       if @material_list.save
-        format.html { redirect_to material_list_index_path, notice: 'Material was successfully added.' }
-        format.json { render :index, status: :created, location: @material_list }
+        format.html { redirect_to site_path(params[:site]), notice: 'Material was successfully added.' }
+        format.json { render :show, status: :created, location: @material_list }
       else
-        format.html { render :index }
+        format.html { redirect_to site_path(params[:site]) }
         format.json { render json: @material_list.errors, status: :unprocessable_entity }
       end
     end

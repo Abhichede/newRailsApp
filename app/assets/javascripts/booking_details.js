@@ -312,4 +312,14 @@ $(function() {
             form.submit();
         }
     });
+
+    $('#booking_detail_agreement_cost').on('change keyup paste', function () {
+        var entered_number = $('#booking_detail_agreement_cost').val();
+
+        var string_number = numberWithCommas(entered_number);
+        $('.agg-number').attr('value', string_number);
+    })
 });
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

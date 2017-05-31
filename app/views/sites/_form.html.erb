@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.multiselect').multiselect();
+    });
+</script>
 <%= form_for @site, :html => { :class => "form-horizontal site" } do |f| %>
 
   <% if @site.errors.any? %>
@@ -17,85 +22,83 @@
 
   <div class="form-group">
     <%= f.label :name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:name) %>
+
   </div>
   <div class="form-group">
     <%= f.label :address, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :address, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:address) %>
   </div>
     <div class="form-group">
       <%= f.label :site_type, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <%= f.select(:site_type, options_for_select([['Select type'],['Residential','Residential'],
                                                      ['Commercial','Commercial'], ['Residential+Commercial','Residential+Commercial']],
                                                     :disabled=> 'Select type', :selected=> @site.site_type),
                      {}, class: 'form-control') %>
       </div>
-      <%=f.error_span(:site_type) %>
     </div>
 
     <div class="form-group">
     <%= f.label :type_of_structures, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-8">
-      <% if @site.type_of_structures.blank? %>
-      <%= f.collection_check_boxes :type_of_structures, TypeOfStructure.all, :name, :name,multiple: true,
-                                   :class=> 'form-control', :include_hidden=> false %>
-      <% else  %>
-          <%= f.collection_check_boxes :type_of_structures, TypeOfStructure.all, :name, :name,multiple: true,
-                                       checked: @site.type_of_structures.split(','),
-                                       :class=> 'form-control', :include_hidden=> false %>
-      <% end %>
-    </div>
+      <div class="col-lg-3">
+        <% if @site.type_of_structures.blank? %>
+            <%= f.select :type_of_structures,
+                         options_from_collection_for_select(TypeOfStructure.all, :name, :name),
+                         {include_hidden: false},
+                         {class: 'multiselect', multiple: true, required: true} %>
+        <% else  %>
+            <% flat_types = @site.type_of_structures.split(',') %>
+            <%= f.select :type_of_structures,
+                         options_from_collection_for_select(TypeOfStructure.all, :name, :name, flat_types),
+                         {include_hidden: false},
+                         {class: 'multiselect', multiple: true, required: true} %> Make sure you have selected correct fields
+        <% end %>
+
+
+      </div>
       <span class="col-lg-1">
         <%= link_to 'Add New', type_of_structures_index_path, class: 'label label-default' %>
       </span>
-    <%=f.error_span(:type_of_structures) %>
-  </div>
+    </div>
 
     <div class="form-group">
       <%= f.label :no_of_wings, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <%= f.select(:no_of_wings, options_for_select([['Select'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],
                                                        ['6','6'],['7','7'],['8','8'],['9','9'],['10','10']],
                                                              :disabled=> 'Select', :selected=> @site.no_of_wings),
                      {}, class: 'form-control') %>
       </div>
-      <%=f.error_span(:no_of_wings) %>
     </div>
 
   <div class="form-group">
     <%= f.label :no_of_units, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :no_of_units, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:no_of_units) %>
   </div>
   <div class="form-group">
     <%= f.label :area_of_plot, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :area_of_plot, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:area_of_plot) %>
   </div>
   <div class="form-group">
     <%= f.label :project_approved_by, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :project_approved_by, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:project_approved_by) %>
   </div>
     <div class="form-group">
       <%= f.label 'Site Photo', :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <%= f.file_field :photo_path, :class => 'form-control' %>
       </div>
-      <%=f.error_span(:photo_path) %>
     </div>
 
 

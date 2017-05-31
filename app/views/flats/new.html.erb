@@ -1,5 +1,9 @@
 <%- model_class = Flat -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+  <% if params[:flat_type] === 'SHOP' %>
+      <h1>Add New Shop</h1>
+  <% else %>
+      <h1>Add New Flat</h1>
+  <% end %>
 </div>
 <%= render :partial => 'form' %>

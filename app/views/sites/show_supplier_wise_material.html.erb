@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-3">
       <h3>
-        <strong><%= @material.first.supplier.name %></strong>
+        <strong><%= @supplier.name %></strong>
         <span class="pull-right"></span>
       </h3>
       <span class="label label-default"><%= @site.name %></span>
@@ -64,7 +64,7 @@
 </div>
 <div class="pull-right">
   <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
-  <strong>Paid Amount: &#8377; <%= @material.first.supplier.paid_amount.to_f.round(2) %></strong>
+  <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong>
 </div>
 
 
@@ -93,7 +93,7 @@
             <%= text_field_tag :paid_by, params[:paid_by],placeholder: 'Paid By',value: current_user.user_name ,
                                class: 'form-control search-box', id: 'paid_by', readonly: true %>
             <%= hidden_field_tag :payment_for, params[:payment_for], value: 'MATERIAL/SUPPLIER' %>
-            <%= hidden_field_tag :id, params[:id], value: @material.first.supplier.id %>
+            <%= hidden_field_tag :id, params[:id], value: @supplier.id %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
             <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount %>
             </div>
