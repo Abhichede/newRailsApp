@@ -7,7 +7,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/site/photo_path/1/thumb_buildings-001.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -35,17 +34,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="application.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="160" column="17" lean-forward="false" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
+            <state relative-caret-position="295">
+              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
@@ -206,8 +205,8 @@
         <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/type_of_structures_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/sites/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
       </list>
     </option>
   </component>
@@ -1430,14 +1429,7 @@
       <workItem from="1496114044939" duration="19752000" />
       <workItem from="1496207776449" duration="17861000" />
       <workItem from="1496294387822" duration="7424000" />
-      <workItem from="1496332048093" duration="5863000" />
-    </task>
-    <task id="LOCAL-00044" summary="mailers added.">
-      <created>1493489678063</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1493489678063</updated>
+      <workItem from="1496332048093" duration="6069000" />
     </task>
     <task id="LOCAL-00045" summary="mailers added.">
       <created>1493489752161</created>
@@ -1775,11 +1767,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496337489582</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="suppliers,materials,list of material added.">
+      <created>1496338986294</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1496338986294</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493845000" />
+    <option name="totallyTimeSpent" value="494051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-11" width="1381" height="912" extended-state="6" />
@@ -2203,14 +2202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="160" column="17" lean-forward="false" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/sites/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
@@ -2223,6 +2214,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
           <caret line="119" column="53" lean-forward="false" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding />
         </state>
       </provider>
