@@ -5,10 +5,10 @@ class TypeOfStructuresController < ApplicationController
 
   def add
     @type_of_structure = TypeOfStructure.new(:name => params[:name].upcase )
-
+    session[:return_to] ||= request.referer
     respond_to do |format|
       if @type_of_structure.save
-        format.html { redirect_to type_of_structures_index_path, notice: 'Structure type added successfully.' }
+        format.html { redirect_to session[:return_to] ||= request.referer, notice: 'Structure type added successfully.' }
         format.json { render :index, status: :created, location: @type_of_structure }
       else
         format.html { render :index }

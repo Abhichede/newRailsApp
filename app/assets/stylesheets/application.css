@@ -51,8 +51,18 @@ div.row.custom-row{
     }
 
 }
+@media (min-width: 768px){
+    .form-horizontal .control-label {
+        text-align: left !important;
+        margin-bottom: 0;
+        padding-top: 7px;
+    }
+    .dl-horizontal dt{
+        text-align: left !important;
+    }
+}
 
-@media only screen and (max-device-width: 400px) {
+    @media only screen and (max-device-width: 400px) {
     table.table-responsive{
         width: 350px !important;
         overflow: auto !important;
@@ -62,17 +72,41 @@ div.row.custom-row{
     background-color: rgb(38, 6, 7);
 }
 ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
-    background-color: rgba(0, 110, 99, 0.86);
+    background-color: rgba(108, 108, 108, 0.86);
     color: #FFFFFF;
 }
-.navbar-static-top, .btn-primary{
+.navbar-static-top{
     background-color: #424242 !important;
 }
+.btn-default{
+    background-color: #FFFFFF !important;
+    color: #8e8e93 !important;
+    border-color: #d5d4d8 !important;
+}
+.btn-primary{
+    background-color: #478fcb !important;
+    color: #FFFFFF !important;
+    border-color: #478fcb !important;
+}
 .btn-warning{
-    background-color: #d64e27 !important;
+    background-color: #ce812b !important;
+    color: #FFFFFF !important;
+    border-color: #CE812B !important;
 }
 .btn-success, .label-success{
-    background-color: #006e63 !important;
+    background-color: #507863 !important;
+    color: #FFFFFF !important;
+    border-color: #507863 !important;
+}
+.btn-info{
+    background-color: #46b8da !important;
+    color: #FFFFFF !important;
+    border-color: #46b8da !important;
+}
+.btn-danger{
+    background-color: #b32925 !important;
+    color: #FFFFFF !important;
+    border-color: #b32925 !important;
 }
 .card-text{
     height: 9rem;

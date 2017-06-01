@@ -44,8 +44,8 @@
     </div>
 
     <div class="form-group">
-    <%= f.label :type_of_structures, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-3 col-sm-8 col-xs-8">
+    <%= f.label :type_of_structures, :class => 'control-label col-lg-2 col-md-2 col-sm-12 col-xs-12' %>
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <% if @site.type_of_structures.blank? %>
             <%= f.select :type_of_structures,
                          options_from_collection_for_select(TypeOfStructure.all, :name, :name),
@@ -61,8 +61,8 @@
 
 
       </div>
-      <span class="col-lg-1 col-sm-4 col-xs-4">
-        <%= link_to 'Add New', type_of_structures_index_path, class: 'label label-default' %>
+      <span class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
+        <a class="label label-default" data-toggle="modal" data-target="#typeOfStructure">Add New</a>
       </span>
     </div>
 
@@ -116,3 +116,31 @@
   </div>
 
 <% end %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="typeOfStructure" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag type_of_structures_add_path, method: :get, id: ''  do %>
+
+        <strong>Type of structure</strong>
+        <%= text_field_tag :name, params[:name],placeholder: 'Type Of Structure',
+                           class: 'form-control', id: '' %>
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag 'ADD', class: 'btn btn-primary btn-sm'  %>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
