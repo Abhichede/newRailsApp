@@ -114,6 +114,14 @@
         $("#customer-search-box").autocomplete({
             source: '<%= autocomplete_booking_details_path(:json) %>'
         });
+
+        $(document).ready(function() {
+            $(function () {
+                $('.notifications').delay(500).fadeIn('normal', function () {
+                    $(this).delay(2500).fadeOut();
+                });
+            });
+        });
     </script>
   </body>
 </html>

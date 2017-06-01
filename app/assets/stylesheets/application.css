@@ -150,6 +150,17 @@ a{
     text-decoration: none !important;
 }
 
+
+/***************************Bootstrap flash****************************/
+.notifications{
+    max-width: 35%;
+    left: 73%;
+    top: 10px;
+    float: right;
+    position: fixed;
+    z-index: 999;
+}
+/************************************************************************/
 /* ************************** print methods *******************************/
 @media print {
     div.page-header{
