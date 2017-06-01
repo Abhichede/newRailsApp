@@ -178,7 +178,7 @@
       <% else %>
           <% Supplier.all.each do |supplier| %>
               <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-                <%= link_to supplier.name, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                <%= link_to supplier.name.upcase, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                      :supplier=>supplier.id},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                             style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>

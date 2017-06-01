@@ -16,6 +16,7 @@ class MaterialsController < ApplicationController
   def new
     @material = Material.new
     @site = Site.find(params[:site_id])
+    @supplier = Supplier.new
   end
 
   # GET /materials/1/edit
@@ -28,12 +29,11 @@ class MaterialsController < ApplicationController
     @material = Material.new(material_params)
     @supplier = Supplier.find(material_params[:supplier_id])
     suppliers_total_amount = @supplier.total_amount.to_f
-
+    session[:return_to] ||= request.referer
     respond_to do |format|
       if @material.save
         @supplier.update(:total_amount => (material_params[:amount].to_f + suppliers_total_amount))
-        format.html { redirect_to controller: 'sites', action: 'show_site_material',id: material_params[:site_id],
-                                  type_of_material: material_params[:type_of_material],
+        format.html { redirect_to session[:return_to] ||= request.referer,
                                   notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :created, location: @material }
       else

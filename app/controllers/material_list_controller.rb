@@ -10,10 +10,10 @@ class MaterialListController < ApplicationController
     @material_list = MaterialList.new(:material_name => params[:material_name].upcase,
                                       :material_unit => params[:material_unit].upcase,
                                       :deleting_status=>params[:deleting_status] )
-
+    session[:return_to] ||= request.referer
     respond_to do |format|
       if @material_list.save
-        format.html { redirect_to site_path(params[:site]), notice: 'Material was successfully added.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Material was successfully added.' }
         format.json { render :show, status: :created, location: @material_list }
       else
         format.html { redirect_to site_path(params[:site]) }

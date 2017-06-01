@@ -107,6 +107,16 @@ div.outstanding-table{
     height: 13rem;
     overflow: auto;
 }
+.btn{
+    text-transform: uppercase;
+    font-weight: 500;
+    min-width: 1rem !important;
+}
+a{
+    text-decoration: none !important;
+}
+
+/* ************************** print methods *******************************/
 @media print {
     div.page-header{
         display: none;
@@ -125,3 +135,4 @@ div.outstanding-table{
         display: none;
     }
 }
+/******************************************************************************/

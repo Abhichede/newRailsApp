@@ -27,11 +27,13 @@
     <%=f.error_span(:flat_number) %>
 
     <%= f.label :area, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4 input-group">
+    <div class="col-lg-4">
+      <div class="input-group">
       <%= f.text_field :area, :class => 'form-control'%>
-      <span class="input-group-addon">
+        <span class="input-group-addon">
         Sq.Ft.
       </span>
+      </div>
     </div>
     <%=f.error_span(:area) %>
   </div>

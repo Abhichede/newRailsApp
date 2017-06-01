@@ -27,6 +27,7 @@ class FlatsController < ApplicationController
   # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
+    session[:return_to] ||= request.referer
     @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number])
     flat_type = 'FLAT'
     if flat_params[:flat_type] === 'SHOP'
@@ -35,8 +36,7 @@ class FlatsController < ApplicationController
     respond_to do |format|
 
       if !@flats.blank?
-        format.html { redirect_to controller: 'flats', action: 'new', site_id: flat_params[:site_id],
-                                  flat_type: flat_type, alert: 'Flat number already available' }
+        format.html { redirect_to session[:return_to] ||= request.referer, alert: 'Flat number already available' }
         format.json { render json: @flat.errors, status: 'Flat number already available' }
       else
         if @flat.save

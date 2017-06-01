@@ -31,13 +31,13 @@
   <div class="form-group">
       <%= f.hidden_field :site_id, value: params[:site_id], readonly: true, :class => 'form-control', required: true %>
 
-    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
+    <div class="col-lg-3 col-sm-8 col-xs-8">
       <%
         supplier_names = ['Select Supplier']
         Supplier.all.each do |supplier|
           if supplier.deleting_status === "false" || supplier.deleting_status.blank?
-            supplier_names.push([supplier.name,supplier.id])
+            supplier_names.push([supplier.name.upcase,supplier.id])
           end
         end %>
       <% if !@material.supplier.blank? %>
@@ -47,6 +47,10 @@
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
                        {}, class: 'form-control') %>
       <% end %>
+    </div>
+    <div class="col-lg-1 col-sm-4 col-xs-4">
+      <a class="label label-default" data-toggle="modal" data-target="#addNewSupplier">Add New</a>
+
     </div>
      <%=f.error_span(:supplier_id) %>
 
@@ -59,24 +63,26 @@
     <%=f.error_span(:type_of_material) %>
 
     <%= f.label :quantity, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4 input-group">
-      <%= f.text_field :quantity, :class => 'form-control', required: true %>
-      <span class="input-group-addon">
-        <%
-          material_unit = ['Unit']
-          MaterialList.all.each do |material|
-            if !material.material_unit.blank?
-              material_unit.push([material.material_unit])
-            end
-          end %>
-        <% if !@material.unit.blank? %>
-          <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => @material.unit),
-                     {}, class: 'selectpicker') %>
-        <% else %>
-          <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => 'Unit'),
+    <div class="col-lg-4">
+      <div class="input-group">
+        <%= f.text_field :quantity, :class => 'form-control', required: true %>
+        <span class="input-group-addon">
+          <%
+            material_unit = ['Unit']
+            MaterialList.all.each do |material|
+              if !material.material_unit.blank?
+                material_unit.push([material.material_unit])
+              end
+            end %>
+          <% if !@material.unit.blank? %>
+            <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => @material.unit),
                        {}, class: 'selectpicker') %>
-        <% end %>
-      </span>
+          <% else %>
+            <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => 'Unit'),
+                         {}, class: 'selectpicker') %>
+          <% end %>
+        </span>
+      </div>
       <%=f.error_span(:quantity) %>
     </div>
 
@@ -130,3 +136,86 @@
 
 <% end %>
 
+<!-- Modal -->
+<div class="modal fade" id="addNewSupplier" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @supplier, :html => { :class => "form-horizontal supplier" } do |f| %>
+
+            <% if @supplier.errors.any? %>
+                <div id="error_expl" class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><%= pluralize(@supplier.errors.count, "error") %> prohibited this supplier from being saved:</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul>
+                      <% @supplier.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :name, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-6">
+                <%= f.text_field :name, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:name) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-6">
+                <%= f.text_field :address, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:address) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-6">
+                <%= f.text_field :email, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:email) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :contact_number, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-6">
+                <%= f.text_field :contact_number, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:contact_number) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :contact_person, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-6">
+                <%= f.text_field :contact_person, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:contact_person) %>
+            </div>
+            <%= f.hidden_field :deleting_status, value: 'false' %>
+            <%= f.hidden_field :total_amount, value: '0' %>
+            <%= f.hidden_field :paid_amount, value: '0' %>
+            <%= f.hidden_field :type_of_material, value: params[:type_of_material] %>
+            <%= f.hidden_field :site_id, value: params[:site_id] %>
+
+            <div class="modal-footer">
+              <div class="col-lg-offset-2 col-lg-6">
+                <%= f.submit 'Save', :class => 'btn btn-primary' %>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->

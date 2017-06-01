@@ -28,11 +28,10 @@ class SuppliersController < ApplicationController
   # POST /suppliers.json
   def create
     @supplier = Supplier.new(supplier_params)
-
+    session[:return_to] ||= request.referer
     respond_to do |format|
       if @supplier.save
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
-        format.json { render :show, status: :created, location: @supplier }
+        format.html { redirect_to session.delete(:return_to),notice: 'Supplier was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @supplier.errors, status: :unprocessable_entity }

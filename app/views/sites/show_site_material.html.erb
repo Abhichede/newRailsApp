@@ -1,20 +1,24 @@
 <div class="page-header">
   <div class="row">
-    <div class="col-md-1">
-      <%= link_to site_path(@site) do %>
-          <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
-      <% end %>
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to site_path(@site) do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <h4>
+          <strong><%= params[:type_of_material] %></strong>
+          <span class="pull-right"></span>
+        </h4>
+        <h4><span class="label label-primary"><%= @site.name.upcase %></span></h4>
+      </div>
     </div>
-    <div class="col-md-4">
-      <h3>
-        <strong><%= params[:type_of_material] %></strong>
-        <span class="pull-right"></span>
-      </h3>
-      <span class="label label-default"><%= @site.name %></span>
-    </div>
-    <div class="col-md-7">
-      <%= link_to "Add #{params[:type_of_material].capitalize}", {:controller => "materials", :action => "new", :site_id => params[:id],:type_of_material => params[:type_of_material] },
-                  :class => 'btn btn-primary btn-sm' %>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <%= link_to "Add #{params[:type_of_material].capitalize}", {:controller => "materials", :action => "new", :site_id => params[:id],:type_of_material => params[:type_of_material] },
+                    :class => 'btn btn-primary btn-sm' %>
+      </div>
     </div>
   </div>
 </div>

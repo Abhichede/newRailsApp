@@ -1,26 +1,28 @@
 <div class="page-header">
   <div class="row">
-    <div class="col-md-1">
-      <%= link_to site_path(@site) do %>
-          <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
-      <% end %>
-    </div>
-    <div class="col-md-3">
-      <h3>
-        <strong><%= @supplier.name %></strong>
-        <span class="pull-right"></span>
-      </h3>
-      <span class="label label-default"><%= @site.name %></span>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-2 col-sm-6 col-xs-6">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#paymentModal">Pay</button>
+    <div class="col-md-4">
+      <div class="col-md-2">
+        <%= link_to site_path(@site) do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+        <% end %>
       </div>
-      <div class="col-md-2 col-sm-6 col-xs-6">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
+      <div class="col-md-6">
+        <h4>
+          <strong><%= @supplier.name.upcase %></strong>
+          <span class="pull-right"></span>
+        </h4>
+        <h4><span class="label label-default"><%= @site.name.upcase %></span></h4>
       </div>
+    </div>
+    <div class="col-md-8">
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          <button class="btn btn-danger btn-sm" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#paymentModal">Pay</button>
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
+        </div>
     </div>
   </div>
 </div>

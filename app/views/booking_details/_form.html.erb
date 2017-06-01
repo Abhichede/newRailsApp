@@ -245,7 +245,7 @@
 
         <%= f.label 'Booking Date', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.date_field_tag :booking_date, :class => 'form-control', required: true%>
+          <%= f.date_field :booking_date, :class => 'form-control', required: true%>
         </div>
         <%=f.error_span(:booking_date) %>
       </div>
