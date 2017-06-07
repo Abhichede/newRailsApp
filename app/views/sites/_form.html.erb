@@ -110,7 +110,7 @@
                   site_path(@site), :class => 'btn btn-default' %>
       <% else %>
           <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                      sites_path, :class => 'btn btn-default' %>
+                      :back, :class => 'btn btn-default' %>
       <% end %>
     </div>
   </div>

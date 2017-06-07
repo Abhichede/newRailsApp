@@ -28,6 +28,7 @@ class SuppliersController < ApplicationController
   # POST /suppliers.json
   def create
     @supplier = Supplier.new(supplier_params)
+    session.delete(:return_to)
     session[:return_to] ||= request.referer
     respond_to do |format|
       if @supplier.save
@@ -76,7 +77,7 @@ class SuppliersController < ApplicationController
         respond_to do |format|
           format.html { redirect_to controller: 'sites', action: 'show_supplier_wise_material',id: params[:site_id],
                                     supplier: @supplier.id, alert: "Something went wrong." }
-          format.json { render json: @supplierl.errors, status: :unprocessable_entity }
+          format.json { render json: @supplier.errors, status: :unprocessable_entity }
         end
       end
 
@@ -84,7 +85,7 @@ class SuppliersController < ApplicationController
       respond_to do |format|
         format.html { redirect_to controller: 'sites', action: 'show_supplier_wise_material',id: params[:site_id],
                                   supplier: @supplier.id, alert: "You can't pay this amount." }
-        format.json { render json: @supplierl.errors, status: :unprocessable_entity }
+        format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
     end
 

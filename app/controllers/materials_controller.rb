@@ -17,10 +17,13 @@ class MaterialsController < ApplicationController
     @material = Material.new
     @site = Site.find(params[:site_id])
     @supplier = Supplier.new
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
   end
 
   # GET /materials/1/edit
   def edit
+    @supplier = Supplier.new
   end
 
   # POST /materials
@@ -29,15 +32,16 @@ class MaterialsController < ApplicationController
     @material = Material.new(material_params)
     @supplier = Supplier.find(material_params[:supplier_id])
     suppliers_total_amount = @supplier.total_amount.to_f
-    session[:return_to] ||= request.referer
+
     respond_to do |format|
       if @material.save
         @supplier.update(:total_amount => (material_params[:amount].to_f + suppliers_total_amount))
-        format.html { redirect_to session[:return_to] ||= request.referer,
+        format.html { redirect_to session.delete(:return_to),
                                   notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :created, location: @material }
       else
-        format.html { render :new }
+        format.html { redirect_to session.delete(:return_to),
+                                  alert: 'This challan was used before / something went erong.'  }
         format.json { render json: @material.errors, status: :unprocessable_entity }
       end
     end

@@ -1,33 +1,33 @@
 <%- model_class = BookingDetail -%>
 <div class="page-header">
   <div class="row">
-    <div class="col-md-6">
-      <div class="col-md-2">
-        <%= link_to flat_path(@booking_detail.flat) do %>
+    <div class="col-md-4">
+      <div class="col-md-4">
+        <%= link_to :back do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <h4><strong><%= 'Booking Details'.upcase %></strong></h4>
         <span class="label label-primary"><%= @booking_detail.site.name.upcase %></span>
         <span class="label label-info"><%= @booking_detail.flat.flat_number %></span>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="col-md-2 col-sm-6 col-xs-6">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+    <div class="col-md-8">
+      <div class="col-md-2 col-sm-6 col-xs-5">
+        <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#myModal">Pay</button>
       </div>
-      <div class="col-md-4 col-sm-6 col-xs-6">
+      <div class="col-md-3 col-sm-6 col-xs-7">
         <%= link_to 'Payment details',
                     {controller: 'payment_details', action: 'show', :booking_id=>@booking_detail.id},
-                    class: 'btn btn-primary btn-sm' %>
+                    class: 'btn btn-primary btn-sm btn-block' %>
       </div>
-      <div class="col-md-2 col-sm-6 col-xs-6">
+      <div class="col-md-2 col-sm-6 col-xs-5">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
                     {controller: 'booking_details', action: 'edit', :flat_id=> @booking_detail.flat,
                      :site_id=> @booking_detail.site},
-                    :class => 'btn btn-default btn-sm' %>
+                    :class => 'btn btn-primary btn-sm btn-block' %>
       </div>
       <div class="">
         <% link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -36,16 +36,13 @@
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                     :class => 'btn btn-danger btn-sm' %>
       </div>
-      <div class="col-md-2 col-sm-6 col-xs-6">
-        <%= link_to 'Print','#', :onclick=>'window.print();return false;', :class => 'btn btn-info btn-sm' %>
+      <div class="col-md-2 col-sm-6 col-xs-7">
+        <%= link_to 'Print','#', :onclick=>'window.print();return false;', :class => 'btn btn-primary btn-sm btn-block' %>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6"></div>
-    <div class="col-md-2 col-sm-6 col-xs-6">
-      <button class="btn btn-danger btn-sm" id="payment-btn-on-booking"
-              data-toggle="modal" data-target="#scheduleModal">Schedule</button>
+      <div class="col-md-2 col-sm-6 col-xs-5">
+        <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#scheduleModal">Schedule</button>
+      </div>
     </div>
   </div>
 </div>

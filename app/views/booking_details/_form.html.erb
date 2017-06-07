@@ -2,6 +2,7 @@
    site_id = params[:site_id]
 
   @flat = Flat.find(flat_id)
+
 %>
 <%= form_for @booking_detail, :html => { :class => "form-horizontal booking_detail" } do |f| %>
 
@@ -24,10 +25,19 @@
   <hr />
    <div class="form-group">
      <%= f.label :customer_name, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-4">
-        <%= f.text_field :customer_name, :class => 'form-control',required: true,
-                         placeholder: :customer_name %>
-      </div>
+     <div class="col-md-4">
+       <div class="input-group">
+         <div class="input-group-btn">
+          <select class="btn">
+            <option>MR.</option>
+            <option>MS.</option>
+            <option>MRS.</option>
+          </select>
+         </div>
+         <%= f.text_field :customer_name, :class => 'form-control',required: true,
+                          placeholder: :customer_name %>
+       </div>
+     </div>
       <%=f.error_span(:customer_name) %>
 
      <%= f.label :customer_address, :class => 'control-label col-lg-2' %>
@@ -257,8 +267,7 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                flat_path(params[:flat_id]), :class => 'btn btn-default' %>
+      <%= link_to 'Cancel', :back, :class => 'btn btn-default' %>
     </div>
   </div>
 

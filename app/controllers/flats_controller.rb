@@ -27,6 +27,7 @@ class FlatsController < ApplicationController
   # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
+    session.delete(:return_to)
     session[:return_to] ||= request.referer
     @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number])
     flat_type = 'FLAT'

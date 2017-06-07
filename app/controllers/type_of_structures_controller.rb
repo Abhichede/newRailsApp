@@ -5,6 +5,7 @@ class TypeOfStructuresController < ApplicationController
 
   def add
     @type_of_structure = TypeOfStructure.new(:name => params[:name].upcase )
+    session.delete(:return_to)
     session[:return_to] ||= request.referer
     respond_to do |format|
       if @type_of_structure.save

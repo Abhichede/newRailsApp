@@ -140,7 +140,7 @@
     <div class="col-lg-offset-2 col-lg-10">
       <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                site_path(params[:site_id]), :class => 'btn btn-default' %>
+                :back, :class => 'btn btn-default' %>
     </div>
   </div>
 

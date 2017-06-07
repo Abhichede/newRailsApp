@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :departmental_labours
   get 'type_of_structures/index'
 
   get 'type_of_structures/add'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'registrations'}
   root 'sites#index'
   get 'show_site_material', to: 'sites#show_site_material'
+  get 'show_departmental_labours', to: 'sites#show_departmental_labours'
   get 'show_supplier_wise_material', to: 'sites#show_supplier_wise_material'
   get 'update_supplier_payment', to: 'suppliers#update_supplier_payment'
   get 'show_payment_details', to: 'payment_details#show'

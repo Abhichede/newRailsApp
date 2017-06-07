@@ -10,6 +10,7 @@ class MaterialListController < ApplicationController
     @material_list = MaterialList.new(:material_name => params[:material_name].upcase,
                                       :material_unit => params[:material_unit].upcase,
                                       :deleting_status=>params[:deleting_status] )
+    session.delete(:return_to)
     session[:return_to] ||= request.referer
     respond_to do |format|
       if @material_list.save

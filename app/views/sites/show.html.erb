@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="col-md-2">
-        <%= link_to sites_path do %>
+        <%= link_to :back do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
@@ -20,26 +20,26 @@
     <div class="col-md-6">
           <% if @site.flats.count != @site.no_of_units %>
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
-              <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="col-md-4 col-sm-6 col-xs-6">
                   <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
-                          :class => 'btn btn-success btn-sm' %>
+                          :class => 'btn btn-success btn-sm btn-block' %>
               </div>
-              <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="col-md-4 col-sm-6 col-xs-6">
                   <%= link_to 'Add Shop', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
-                              :class => 'btn btn-success btn-sm' %>
+                              :class => 'btn btn-success btn-sm btn-block' %>
               </div>
               <% else %>
-              <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="col-md-4 col-sm-6 col-xs-6">
                   <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
-                              :class => 'btn btn-success btn-sm' %>
+                              :class => 'btn btn-success btn-sm btn-block' %>
               </div>
               <% end %>
           <% end %>
-        <div class="col-md-4 col-sm-4 col-xs-4">
+        <div class="col-md-4 col-sm-6 col-xs-6">
           <%= link_to 'Edit Site',
-                      edit_site_path(@site), :class => 'btn btn-info btn-sm' %>
+                      edit_site_path(@site), :class => 'btn btn-info btn-sm btn-block' %>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-4">
+        <div class="col-md-4 col-sm-6 col-xs-6">
           <% link_to 'delete site',
                       site_path(@site),
                       :method => 'delete',
@@ -102,16 +102,18 @@
 <hr/>
 <ul  class="nav nav-pills">
   <li class="active">
-    <a  href="#1a" data-toggle="tab">Flats</a>
+    <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
   </li>
-  <li><a href="#2a" data-toggle="tab">Material</a>
+  <li><a href="#material_jumbo" data-toggle="tab">Material</a>
   </li>
-  <li><a href="#3a" data-toggle="tab">Suppliers</a>
+  <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
+  </li>
+  <li><a href="#labour_jumbo" data-toggle="tab">Labour</a>
   </li>
 
 </ul>
 <div class="tab-content clearfix">
-  <div class="jumbotron tab-pane active" id="1a" style="margin-top: 0.5em">
+  <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
     <h4 class="text-center">All Flats</h4>
     <hr />
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
@@ -133,7 +135,7 @@
       <% end %>
     </div>
   </div>
-  <div class="jumbotron tab-pane" id="2a" style="margin-top: 0.5em">
+  <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
     <h4 class="">Material
       <span class="pull-right">
         <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
@@ -169,7 +171,7 @@
           <% end %>
     </div>
   </div>
-  <div class="jumbotron tab-pane" id="3a" style="margin-top: 0.5em">
+  <div class="jumbotron tab-pane" id="supplier_jumbo" style="margin-top: 0.5em">
     <h4 class="text-center">Suppliers</h4>
     <hr />
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
@@ -178,13 +180,34 @@
       <% else %>
           <% Supplier.all.each do |supplier| %>
               <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-                <%= link_to supplier.name.upcase, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                      :supplier=>supplier.id},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                             style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>
                 <% end %>
             <% end %>
       <% end %>
+    </div>
+  </div>
+
+  <div class="jumbotron tab-pane" id="labour_jumbo" style="margin-top: 0.5em">
+    <h4 class="text-center">Labour</h4>
+    <hr />
+    <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">
+      <ul  class="nav nav-pills">
+        <li class="active">
+          <a href="#contractor_labour" data-toggle="tab">Contractor</a>
+        </li>
+        <li>
+          <%= link_to 'Departmental', show_departmental_labours_path %>
+        </li>
+      </ul>
+
+      <div class="tab-content clearfix">
+        <div class="jumbotron" id="contractor_labour" style="margin-top: 0.5em">
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

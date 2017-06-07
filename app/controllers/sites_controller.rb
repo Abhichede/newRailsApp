@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
-  before_action :set_site, only: [:show, :edit, :update, :destroy, :show_site_material, :show_supplier_wise_material]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :show_site_material,
+                                  :show_supplier_wise_material,:show_departmental_labours]
 
   # GET /sites
   # GET /sites.json
@@ -48,6 +49,11 @@ class SitesController < ApplicationController
     @supplier = Supplier.find(params[:supplier])
     @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
   end
+
+  def show_departmental_labours
+    @departmental_labour = @site.departmental_labours.all
+  end
+
   # PATCH/PUT /sites/1
   # PATCH/PUT /sites/1.json
   def update

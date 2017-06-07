@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="col-md-2">
-        <%= link_to site_path(@site) do %>
+        <%= link_to :back do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
@@ -15,12 +15,12 @@
       </div>
     </div>
     <div class="col-md-8">
-        <div class="col-md-2 col-sm-6 col-xs-6">
-          <button class="btn btn-danger btn-sm" id="payment-btn-on-booking"
+        <div class="col-md-2 col-sm-6 col-xs-5">
+          <button class="btn btn-danger btn-sm btn-block" id="payment-btn-on-booking"
                   data-toggle="modal" data-target="#paymentModal">Pay</button>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6">
-          <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+        <div class="col-md-2 col-sm-6 col-xs-7">
+          <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
                   data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
         </div>
     </div>

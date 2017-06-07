@@ -11,7 +11,7 @@
 
 <div class="row col-md-offset-1">
 <% @sites.each do |site| %>
-  <div class="card card-cascade narrower col col-md-4 col-sm-5 col-xs-11 " style="margin: 1rem">
+  <div class="card card-cascade narrower col col-md-3 col-sm-5 col-xs-11 " style="margin: 1rem">
     <div class=""> <!--  style="margin-top: 15px; height: 16.25rem; margin-bottom: 40px; -->
       <% if site.photo_path.blank? %>
           <%= image_tag 'Default-Home.jpg', class: 'img-responsive' %>
