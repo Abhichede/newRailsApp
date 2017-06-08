@@ -31,5 +31,7 @@ Rails.application.routes.draw do
   get 'search_booking_details', to: 'booking_details#search'
   get 'schedule_next_installment', to: 'booking_details#schedule_next_installment'
 
+  get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

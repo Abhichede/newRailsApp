@@ -1,0 +1,197 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to site_path(@site) do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <h4>
+          <strong>Departmental Labours</strong>
+          <span class="pull-right"></span>
+        </h4>
+        <h4><span class="label label-primary"><%= @site.name.upcase %></span></h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#addNewDepartmentalLabour">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="overflow: auto">
+  <table class="table table-bordered table-responsive">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Type of work</th>
+      <th>Total Amount</th>
+      <th>Paid Amount</th>
+      <th>Remaining Amount</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @departmental_labours.blank? %>
+        <tr>
+          <td colspan="9" class="text-center"><strong style="color: red">No Departmental Labour Available.</strong></td>
+        </tr>
+    <% else %>
+        <% @departmental_labours.each do |departmental_labour| %>
+            <tr>
+              <td><%= departmental_labour.date %></td>
+              <td><%= departmental_labour.type_of_work %></td>
+              <td>&#8377; <%= departmental_labour.amount %></td>
+              <td>&#8377; <%= departmental_labour.paid_amount %></td>
+              <td>&#8377; <%= departmental_labour.amount.to_i - departmental_labour.paid_amount.to_i %></td>
+              <td>
+                <a href="#departmentalLabourPaymentModal" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
+                   data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
+                  Pay
+                </a>
+              </td>
+              <td><%= link_to 'Payment Details', '#', class: 'btn btn-primary' %></td>
+            </tr>
+
+            <!-- ************************* Script ****************************** -->
+              <script type="text/javascript">
+        $('#pay-btn-<%= departmental_labour.id %>').on('click', function () {
+
+
+            console.log("Clicked");
+            //get data-id attribute of the clicked element
+            var deptLabourId = $(this).data('dl-id');
+            var totalPayableAmount = $(this).data('total-amount');
+
+            console.log(deptLabourId);
+            console.log(totalPayableAmount);
+
+            //populate the textbox
+            $("#departmentalLabourPaymentModal").find('input[name="id"]').val(deptLabourId);
+            $("#departmentalLabourPaymentModal").find('input[name="max_payable_amount"]').val(totalPayableAmount);
+        });
+    </script>
+            <!-- ************************** end ******************************** -->
+
+        <% end %>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addNewDepartmentalLabour" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @departmental_labour, :html => { :class => "form-horizontal departmental_labour" } do |f| %>
+
+            <% if @departmental_labour.errors.any? %>
+                <div id="error_expl" class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><%= pluralize(@departmental_labour.errors.count, "error") %> prohibited this departmental_labour from being saved:</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul>
+                      <% @departmental_labour.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :date, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-10">
+                <%= f.date_field :date, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:date) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :type_of_work, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-10">
+                <%= f.text_field :type_of_work, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:type_of_work) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :amount, :class => 'control-label col-lg-2' %>
+              <div class="col-lg-10">
+                <%= f.text_field :amount, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:amount) %>
+            </div>
+            <%= f.hidden_field :paid_amount, value: '0' %>
+            <%= f.hidden_field :site_id, value: params[:id] %>
+
+            <div class="modal-footer">
+              <div class="col-lg-offset-2 col-lg-6">
+                <%= f.submit 'Save', :class => 'btn btn-primary btn-sm' %>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            </div>
+
+        <% end %>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+
+<!-- Modal -->
+<div class="modal fade" id="departmentalLabourPaymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag update_departmental_labour_payment_path, method: :get, id: 'departmental_labours-payment_form'  do %>
+
+            <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box', required: true %>
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
+            <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
+                           class: 'form-control', id: 'payment_method', required: true %>
+            <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
+                               class: 'form-control search-box', id: 'payment_desc', required: true %>
+            <%= text_field_tag :payment_to, params[:payment_to],placeholder: 'Payment To',
+                               class: 'form-control search-box', id: 'payment_to', required: true %>
+            <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
+            <%= hidden_field_tag :payment_for, params[:payment_for], value: 'DEPARTMENTAL_LABOURS' %>
+            <%= hidden_field_tag :id, params[:id] %>
+            <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
+            <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount]%>
+            </div>
+            <div class="modal-footer">
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm') do %>
+                  Save
+              <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->

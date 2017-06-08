@@ -3,18 +3,18 @@
   <div class="row">
     <div class="col-md-6">
       <div class="col-md-2">
-        <%= link_to :back do %>
+        <%= link_to sites_path do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
       <div class="col-md-6">
         <h4><strong><%= @site.name.upcase %></strong></h4>
-        <h4>
-          <div class="label label-success">
+        <h5>
+          <div class="label label-primary">
                 Available Flats
           </div>
-          <span class="label label-danger"><%= "#{@site.no_of_units - @site.flats.where(:booking_status=>1).count}" %></span>
-        </h4>
+          <span class="label label-default label-sm"><%= "#{@site.no_of_units - @site.flats.where(:booking_status=>1).count}" %></span>
+        </h5>
       </div>
     </div>
     <div class="col-md-6">
@@ -52,18 +52,18 @@
 <div class="row">
   <div class="col-md-6">
   <dl class="dl-horizontal">
-    <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-    <dd><%= @site.address %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:no_of_units) %>:</strong></dt>
-    <dd><%= @site.no_of_units %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %>:</strong></dt>
-    <dd><%= @site.type_of_structures %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:site_type) %>:</strong></dt>
-    <dd><%= @site.site_type %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %>:</strong></dt>
-    <dd><%= @site.area_of_plot %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %>:</strong></dt>
-    <dd><%= @site.project_approved_by %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:address) %></strong></dt>
+   <dd><strong>:</strong>  <%= @site.address %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:no_of_units) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.no_of_units %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.type_of_structures %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:site_type) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.site_type %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.area_of_plot %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.project_approved_by %></dd>
   </dl>
   </div>
   <div class="col-md-6 outstanding-table">
@@ -81,7 +81,7 @@
          total_paid = 0 %>
         <% @site.booking_details.each do |booking| %>
           <tr>
-            <td><%= link_to booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
+            <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
             <td>&#8377; <%= booking.final_sale_deed %></td>
               <% total_amount = total_amount + booking.final_sale_deed.to_i %>
             <td>&#8377; <%= booking.paid_amount %></td>
@@ -100,7 +100,7 @@
   </div>
 </div>
 <hr/>
-<ul  class="nav nav-pills">
+<ul  class="nav nav-pills" style="margin-top: 2rem;">
   <li class="active">
     <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
   </li>
@@ -127,7 +127,7 @@
                   <% if flat.booking_status %>
                     <span class="label label-danger pull-right">Booked</span>
                   <% else %>
-                      <span class="label label-primary pull-right">Available</span>
+                      <span class="label label-default pull-right">Available</span>
                   <% end %>
                 </div>
               <% end %>
@@ -166,7 +166,7 @@
                 <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
                              :type_of_material=>material.material_name},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                            style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>
+                            style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
             <% end %>
           <% end %>
     </div>
@@ -183,7 +183,7 @@
                 <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                      :supplier=>supplier.id},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                            style: 'margin: 1rem; background-color: #006352; color: #FFF !important;' %>
+                            style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
                 <% end %>
             <% end %>
       <% end %>
@@ -199,7 +199,7 @@
           <a href="#contractor_labour" data-toggle="tab">Contractor</a>
         </li>
         <li>
-          <%= link_to 'Departmental', show_departmental_labours_path %>
+          <%= link_to 'Departmental', {controller: 'sites', action: 'show_departmental_labours', id: @site.id} %>
         </li>
       </ul>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607092825) do
+ActiveRecord::Schema.define(version: 20170607112628) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20170607092825) do
     t.string   "lbt"
     t.string   "stamp_duty"
     t.string   "other_charges"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "paid_amount"
     t.string   "MSEB_charges"
     t.string   "water_charges"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170607092825) do
     t.string   "schedule_date"
     t.string   "schedule_desc"
     t.string   "booking_date"
+    t.string   "gender",              default: "MR."
   end
 
   create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

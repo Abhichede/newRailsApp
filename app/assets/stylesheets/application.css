@@ -20,6 +20,7 @@
  *= require_self
  */
 
+
 body{
     background-color: #F5F5F5 !important;
 }
@@ -34,11 +35,11 @@ ul.nav.navbar-nav>li>a, div.navbar-header>a.navbar-brand{
     background-color: #E0E0E0;
 }
 a>div.flats-well:hover{
-    box-shadow: #204c42 5px !important;
+    background-color: #00897b !important;
 }
 a>div.flats-well{
     color: #FFFFFF;
-    background-color: #006352 !important;
+    background-color: #00897b !important;
 }
 div.row.custom-row{
     margin-top: 0.5rem;
@@ -72,42 +73,13 @@ div.row.custom-row{
     background-color: rgb(38, 6, 7);
 }
 ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
-    background-color: rgba(108, 108, 108, 0.86);
+    background-color: rgba(44, 121, 127, 0.86);
     color: #FFFFFF;
 }
 .navbar-static-top{
-    background-color: #424242 !important;
+    background-color: #006064 !important;
 }
-.btn-default{
-    background-color: #FFFFFF !important;
-    color: #8e8e93 !important;
-    border-color: #d5d4d8 !important;
-}
-.btn-primary{
-    background-color: #478fcb !important;
-    color: #FFFFFF !important;
-    border-color: #478fcb !important;
-}
-.btn-warning{
-    background-color: #ce812b !important;
-    color: #FFFFFF !important;
-    border-color: #CE812B !important;
-}
-.btn-success, .label-success{
-    background-color: #507863 !important;
-    color: #FFFFFF !important;
-    border-color: #507863 !important;
-}
-.btn-info{
-    background-color: #46b8da !important;
-    color: #FFFFFF !important;
-    border-color: #46b8da !important;
-}
-.btn-danger{
-    background-color: #b32925 !important;
-    color: #FFFFFF !important;
-    border-color: #b32925 !important;
-}
+
 .card-text{
     height: 9rem;
     overflow: auto;
@@ -143,8 +115,48 @@ div.outstanding-table{
 }
 .btn{
     text-transform: uppercase;
-    font-weight: 500;
-    margin: 0.2rem;
+    font-weight: 800;
+    background-color: #0097A7 !important;
+    border-color: #0097A7 !important;
+    color: #FFFFFF !important;
+    border-radius: 3px;
+}
+.btn:hover{
+    background-color: #006064 !important;
+    border-color: #006064 !important;
+}
+.btn-warning{
+    background-color: #ce812b !important;
+    border-color: #ce812b !important;
+}
+.btn-default{
+    background-color: #FFFFFF !important;
+    border-color: #CCCCCC !important;
+    color: #555 !important;
+}
+.label-default{
+    background-color: #FFFFFF !important;
+    border: solid 1px #0097A7;
+    color: #000000 !important;
+}
+.label-primary{
+    background: #0097A7;
+}
+.label{
+    border: solid 1px #0097A7;
+}
+.label-danger{
+    border: solid 1px #d9534f !important;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+    background-color: #0097A7;
+}
+.nav-pills>li>a{
+    font-weight: 600;
+}
+.nav-pills>li>a:hover{
+    background-color: #0097A7;
+    color: #FFFFFF;;
 }
 a{
     text-decoration: none !important;

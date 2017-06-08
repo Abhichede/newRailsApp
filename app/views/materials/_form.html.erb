@@ -133,8 +133,8 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">
       <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Material">
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                :back, :class => 'btn btn-default' %>
+      <%= link_to 'Cancel',{controller: 'sites', action: 'show_site_material', id: params[:site_id], type_of_material: params[:type_of_material]},
+                  :class => 'btn btn-default' %>
     </div>
   </div>
 

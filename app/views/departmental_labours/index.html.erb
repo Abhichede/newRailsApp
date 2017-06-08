@@ -1,0 +1,44 @@
+<%- model_class = DepartmentalLabour -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:type_of_work) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:paid_amount) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departmental_labours.each do |departmental_labour| %>
+      <tr>
+        <td><%= link_to departmental_labour.id, departmental_labour_path(departmental_labour) %></td>
+        <td><%= departmental_labour.date %></td>
+        <td><%= departmental_labour.type_of_work %></td>
+        <td><%= departmental_labour.amount %></td>
+        <td><%= departmental_labour.paid_amount %></td>
+        <td><%=l departmental_labour.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      departmental_labour_path(departmental_labour), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_departmental_labour_path(departmental_labour), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      departmental_labour_path(departmental_labour),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_departmental_labour_path,
+            :class => 'btn btn-primary' %>

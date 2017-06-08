@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-md-4">
       <div class="col-md-4">
-        <%= link_to :back do %>
+        <%= link_to flat_path(@booking_detail.flat_id) do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
         <% end %>
       </div>
       <div class="col-md-8">
         <h4><strong><%= 'Booking Details'.upcase %></strong></h4>
         <span class="label label-primary"><%= @booking_detail.site.name.upcase %></span>
-        <span class="label label-info"><%= @booking_detail.flat.flat_number %></span>
+        <span class="label label-default"><%= @booking_detail.flat.flat_number %></span>
       </div>
     </div>
     <div class="col-md-8">
@@ -51,31 +51,31 @@
   <h4 class="text-center">Customer Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>CUSTOMER NAME:</strong>
+    <strong>CUSTOMER NAME </strong>
   </div>
   <div class="col-md-3 ">
-    <%= @booking_detail.customer_name %>
+    <%= @booking_detail.gender %> <%= @booking_detail.customer_name %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER ADDRESS:</strong>
+    <strong>CUSTOMER ADDRESS </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.customer_address %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER CONTACT:</strong>
+    <strong>CUSTOMER CONTACT </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.customer_contact %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER PAN:</strong>
+    <strong>CUSTOMER PAN </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.customer_pan %>
   </div>
   <div class="col-md-3 ">
-    <strong>CUSTOMER ADHAR:</strong>
+    <strong>CUSTOMER ADHAR </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.customer_adhar %>
@@ -86,31 +86,31 @@
   <h4 class="text-center">Site Details</h4>
   <hr/>
   <div class="col-md-3 ">
-    <strong>SITE (BUILDING) NAME:</strong>
+    <strong>SITE (BUILDING) NAME </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.site.name.upcase %>
   </div>
   <div class="col-md-3 ">
-    <strong>AREA :</strong>
+    <strong>AREA  </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.flat.area %> Sq.Ft.
   </div>
   <div class="col-md-3 ">
-    <strong>FLOOR :</strong>
+    <strong>FLOOR  </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.flat.floor %>
   </div>
   <div class="col-md-3 ">
-    <strong>TYPE OF UNIT :</strong>
+    <strong>TYPE OF UNIT  </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.flat.flat_type %>
   </div>
   <div class="col-md-3 ">
-    <strong>FLAT NUMBER:</strong>
+    <strong>FLAT NUMBER </strong>
   </div>
   <div class="col-md-3 ">
     <%= @booking_detail.flat.flat_number %>
@@ -121,21 +121,21 @@
   <hr/>
   <h4 class="text-center">Cost Details</h4>
   <hr/>
-  <div style="background-color: #999999">
+  <div style="background-color:  #999999">
     <div class="col-md-3 col-lg-3 ">
-      <strong>GOVT. VALUE:</strong>
+      <strong>GOVT. VALUE </strong>
     </div>
     <div class="col-md-3 col-lg-3">
       &#8377; <%= (@booking_detail.flat.govt_value).to_i %>
     </div>
     <div class="col-md-3 col-lg-3">
-      <strong>ACTUAL AGREEMENT COST:</strong>
+      <strong>ACTUAL AGREEMENT COST </strong>
     </div>
     <div class="col-md-3 col-lg-3">
       &#8377; <%= @booking_detail.agreement_cost.to_i %>
     </div>
     <div class="col-md-3 col-lg-3">
-      <strong>FLAT COST:</strong>
+      <strong>FLAT COST </strong>
     </div>
     <div class="col-md-9 col-lg-9">
       &#8377; <%= @booking_detail.flat.flat_cost %>
@@ -143,37 +143,37 @@
   </div>
   <hr/>
   <div class="col-md-3 ">
-    <strong>VAT :</strong>
+    <strong>VAT  </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.vat.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>SERVICE TAX:</strong>
+    <strong>SERVICE TAX </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.service_tax.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>STAMP DUTY:</strong>
+    <strong>STAMP DUTY </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.stamp_duty.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>REGISTRATION FEES:</strong>
+    <strong>REGISTRATION FEES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.registration_fees.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>LBT:</strong>
+    <strong>LBT </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.lbt.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>LEGAL CHARGES:</strong>
+    <strong>LEGAL CHARGES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.legal_charges.to_i %>
@@ -182,32 +182,32 @@
 <hr/>
 <div class="row">
   <div class="col-md-3 ">
-    <strong>MSEB CHARGES:</strong>
+    <strong>MSEB CHARGES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.MSEB_charges.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>WATER CHARGES :</strong>
+    <strong>WATER CHARGES  </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.water_charges.to_i %>
   </div>
 
   <div class="col-md-3 ">
-    <strong>ALLOTTED PARKING CHARGES:</strong>
+    <strong>ALLOTTED PARKING CHARGES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.parking_charges.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>MAINTENANCE CHARGES:</strong>
+    <strong>MAINTENANCE CHARGES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.maintenance_charges.to_i %>
   </div>
   <div class="col-md-3 ">
-    <strong>OTHER CHARGES:</strong>
+    <strong>OTHER CHARGES </strong>
   </div>
   <div class="col-md-3 ">
     &#8377; <%= @booking_detail.other_charges.to_i %>
@@ -218,33 +218,33 @@
 <hr/>
 <div class="row">
   <div class="col-md-3 ">
-    <strong>LOAN POSSIBLE:</strong>
+    <strong>LOAN POSSIBLE </strong>
   </div>
     <% if @booking_detail.loan_possible %>
       <div class="col-md-8 ">
       <%= 'yes'.upcase %>
       </div>
         <div class="col-md-3 ">
-          <strong>NAME OF BANK:</strong>
+          <strong>NAME OF BANK </strong>
         </div>
         <div class="col-md-3 ">
           <%= @booking_detail.name_of_bank %>
         </div>
         <div class="col-md-3 ">
-          <strong>BRANCH :</strong>
+          <strong>BRANCH  </strong>
         </div>
         <div class="col-md-3 ">
           <%= @booking_detail.branch_of_bank %>
         </div>
 
         <div class="col-md-3 ">
-          <strong>SANCTIONED AMOUNT :</strong>
+          <strong>SANCTIONED AMOUNT  </strong>
         </div>
         <div class="col-md-3 ">
           &#8377; <%= @booking_detail.sanctioned_amount %>
         </div>
         <div class="col-md-3 ">
-          <strong>EMPLOYEE CODE/NAME:</strong>
+          <strong>EMPLOYEE CODE/NAME </strong>
         </div>
         <div class="col-md-3 ">
           <%= @booking_detail.employee_name %>
@@ -256,10 +256,10 @@
     <% end %>
 </div>
 <hr/>
-<div class="row" style="background-color: #999999;">
+<div class="row" style="background-color:  #999999;">
   <div class="">
     <div class="col-md-3 ">
-      <strong>FINAL SELL DEED :</strong>
+      <strong>FINAL SELL DEED  </strong>
     </div>
     <div class="col-md-3 ">
       &#8377; <%= final_cost = @booking_detail.final_sale_deed.to_i %>
@@ -269,7 +269,7 @@
 <div class="row" style="background-color: #3d6b85; color: #FFFFFF;">
   <div class="">
     <div class="col-md-3">
-      <strong>Token Amount:</strong>
+      <strong>Token Amount </strong>
     </div>
     <div class="col-md-3">
       &#8377; <%= @booking_detail.token_amount.to_i %>
@@ -279,7 +279,7 @@
 <div class="row" style="background-color: #aeaeae;">
   <div class="">
     <div class="col-md-3">
-      <strong>Paid Amount:</strong>
+      <strong>Paid Amount </strong>
     </div>
     <% paid_amount = @booking_detail.paid_amount.to_i %>
     <div class="col-md-3">
@@ -293,7 +293,7 @@
 </div>
 <div class="row" style="background-color: #3d6b85; color: #FFFFFF;">
   <div class="col-md-3 ">
-    <strong>Balance Amount:</strong>
+    <strong>Balance Amount </strong>
   </div>
   <div class="col-md-3 " style="font-weight: 800; color: white;">
     <% if paid_amount.blank? %>

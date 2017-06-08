@@ -51,7 +51,8 @@ class SitesController < ApplicationController
   end
 
   def show_departmental_labours
-    @departmental_labour = @site.departmental_labours.all
+    @departmental_labour = DepartmentalLabour.new
+    @departmental_labours = @site.departmental_labours.all
   end
 
   # PATCH/PUT /sites/1

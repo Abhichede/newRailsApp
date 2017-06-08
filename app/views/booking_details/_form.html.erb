@@ -28,11 +28,8 @@
      <div class="col-md-4">
        <div class="input-group">
          <div class="input-group-btn">
-          <select class="btn">
-            <option>MR.</option>
-            <option>MS.</option>
-            <option>MRS.</option>
-          </select>
+           <%= f.select(:gender, options_for_select([['Select','Select'],['MR.','MR.'],['MS.','MS.'],['MRS.','MRS.']],:disabled=> 'Select', :selected => @booking_detail.gender),
+                        {}, class: 'btn', required: true) %>
          </div>
          <%= f.text_field :customer_name, :class => 'form-control',required: true,
                           placeholder: :customer_name %>
@@ -240,7 +237,7 @@
 
         <%= f.label 'Payment Type', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHEQUE','CHECK']],
+          <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHEQUE','CHEQUE']],
                                                           :disabled=> 'Payment type'),
                        {}, class: 'form-control', required: true) %>
         </div>

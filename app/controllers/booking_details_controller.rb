@@ -182,6 +182,6 @@ class BookingDetailsController < ApplicationController
                                              :parking_charges, :maintenance_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
                                              :employee_name, :token_amount, :payment_type, :payment_desc, :booking_date,
-                                             :final_sale_deed)
+                                             :final_sale_deed, :gender)
     end
 end

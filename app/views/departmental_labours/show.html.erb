@@ -1,0 +1,25 @@
+<%- model_class = DepartmentalLabour -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @departmental_labour.date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type_of_work) %>:</strong></dt>
+  <dd><%= @departmental_labour.type_of_work %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
+  <dd><%= @departmental_labour.amount %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:paid_amount) %>:</strong></dt>
+  <dd><%= @departmental_labour.paid_amount %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              departmental_labours_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_departmental_labour_path(@departmental_labour), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              departmental_labour_path(@departmental_labour),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
