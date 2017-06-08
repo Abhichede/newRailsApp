@@ -126,8 +126,8 @@ div.outstanding-table{
     border-color: #006064 !important;
 }
 .btn-warning{
-    background-color: #00BFA5 !important;
-    border-color: #00BFA5 !important;
+    background-color: #006064 !important;
+    border-color: #006064 !important;
 }
 .btn-default{
     background-color: #FFFFFF !important;
@@ -162,6 +162,12 @@ div.outstanding-table{
 .nav-pills>li>a:hover{
     background-color: #0097A7;
     color: #FFFFFF;;
+}
+.panel-primary>.panel-heading{
+    background-color: #0097A7;
+}
+.panel-primary{
+    padding: 0;
 }
 a{
     text-decoration: none !important;

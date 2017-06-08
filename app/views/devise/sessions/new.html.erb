@@ -1,14 +1,17 @@
-<div class="panel panel-primary  devise-bs col-md-4 col-md-offset-4">
-  <div class="panel-heading text-center">
-    <h4><%= t('.sign_in', default: 'Sign in') %></h4>
-  </div>
+
+<div class="text-center col-md-offset-4 col-md-4 col-sm-12" style="margin-top: 5rem">
+  <%= image_tag 'HPC.png', class: 'responsive' %>
+  <h4><%= t('.sign_in', default: 'Sign in') %></h4>
+</div>
+<div class="panel panel-primary col-md-4 col-sm-8 col-sm-offset-2 col-md-offset-4">
+
   <div class="panel-body">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f| %>
       <div class="form-group">
-        <%= f.label :email %>
+        <%= f.label 'Username or email address' %>
         <div class="md-form input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          <%= f.email_field :email, autofocus: true, class: 'form-control ' %>
         </div>
       </div>
       <div class="form-group">
@@ -25,7 +28,7 @@
           <% end %>
         </div>
       <% end %>
-      <%= f.submit  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary' %>
+      <%= f.submit  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary col-md-12 col-sm-12 col-xs-12' %>
     <% end %>
   </div>
 </div>

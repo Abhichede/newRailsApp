@@ -44,7 +44,7 @@
     <![endif]-->
   </head>
   <body>
-
+  <% if user_signed_in? %>
     <div class="navbar navbar-static-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -54,7 +54,7 @@
           <a class="navbar-brand" href="/"><%= image_tag 'HARAK-PATIL.png', class: 'responsive' %></a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <% if user_signed_in? %>
+
           <ul class="nav navbar-nav">
             <li><%= link_to sites_path  do %>
                   SITES
