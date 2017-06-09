@@ -68,23 +68,21 @@
                   SUPPLIERS
               <% end %>
             </li>
-            <li class="nav navbar-form navbar-right ">
-              <div>
-                <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
-                             class: 'form-inline' do %>
-                    <div class="input-group input-group-sm">
-                      <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name/Mobile',
-                                         class: 'form-control', id: 'customer-search-box' %>
-                      <span class="input-group-btn">
+          </ul>
+          <div class="nav navbar-form navbar-left">
+            <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
+                         class: 'form-inline' do %>
+                <div class="input-group input-group-sm">
+                  <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name/Mobile',
+                                     class: 'form-control', id: 'customer-search-box' %>
+                  <span class="input-group-btn">
                       <%= button_tag(type: :submit, class: 'btn btn-success btn-sm', id: 'add-stock-btn') do %>
                         <i class="fa fa-search"></i>
                       <% end %>
                     </span>
-                    </div>
-                <% end %>
-              </div>
-            </li>
-          </ul>
+                </div>
+            <% end %>
+          </div>
           <ul class="nav navbar-nav navbar-right">
               <li>
                 <%= link_to  destroy_user_session_path, method: :delete do %>
