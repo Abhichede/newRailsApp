@@ -9,4 +9,26 @@ $(function() {
              "if supplier owes extra payment then check for other sites.");
      }
  });
+
+    $("form.supplier").validate({
+        debug: true,
+        // Specify validation rules
+        rules: {
+            "supplier[contact_number]":{
+                required: true,
+                pattern: /[0-9]{10}$/,
+                minlength: 1,
+                maxlength: 10
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            "supplier[contact_number]": "Please enter 10 digit mobile number"
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 });
