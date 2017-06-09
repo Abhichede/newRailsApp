@@ -131,6 +131,9 @@ div.outstanding-table{
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+.btn-block{
+    margin-top: .5rem !important;
+}
 .btn:hover{
     background-color: #006064 !important;
     border-color: #006064 !important;
