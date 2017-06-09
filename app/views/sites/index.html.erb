@@ -9,27 +9,27 @@
   </h3>
 </div>
 
-<div class="row col-md-offset-1">
+<div class="row">
 <% @sites.each do |site| %>
-  <div class="card card-cascade narrower col col-md-3 col-sm-5 col-xs-11 " style="margin: 1rem">
-    <div class=""> <!--  style="margin-top: 15px; height: 16.25rem; margin-bottom: 40px; -->
-      <% if site.photo_path.blank? %>
-          <%= image_tag 'Default-Home.jpg', class: 'img-responsive' %>
-      <% else %>
-          <%= image_tag site.photo_path.url, class: 'img-responsive' %>
-      <% end  %>
-    </div>
-    <div class="card-block" style="">
+ <div class="col-lg-4 col-md-4 col-sm-6 site-card" style="margin-top: 2rem; margin-bottom: 2rem;">
+  <div class="card" style="width: 30rem;">
+    <% if site.photo_path.blank? %>
+        <%= image_tag 'Default-Home.jpg', class: 'img-responsive' %>
+    <% else %>
+        <%= image_tag site.photo_path.url, class: 'img-responsive' %>
+    <% end  %>
+    <div class="card-block text-center" style="padding: 2rem; overflow: hidden; height: 7rem">
       <h4 class="card-title"><strong><%= site.name.upcase %></strong></h4>
-      <span class="card-text">
-        <strong>Addres: </strong> <%= site.address %> <br />
-      </span>
-      <%= link_to 'Visit', site_path(site), class: 'btn btn-warning btn-sm' %>
+      <br/>
     </div>
-    <hr />
+    <div class="card-footer" style="padding: 1rem">
+      <%= link_to 'Visit', site_path(site), class: 'btn btn-warning btn-sm btn-block' %>
+    </div>
     <div class="card-data text-muted text-center">
       Booked Flats <span class="badge"> <%= site.flats.where(:booking_status=>1).count %></span>
     </div>
   </div>
+ </div>
 <% end %>
 </div>
+

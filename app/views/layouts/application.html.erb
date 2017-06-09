@@ -45,7 +45,7 @@
   </head>
   <body>
   <% if user_signed_in? %>
-    <div class="navbar navbar-static-top">
+    <nav class="navbar navbar-static-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -53,7 +53,7 @@
           </button>
           <a class="navbar-brand" href="/"><%= image_tag 'HARAK-PATIL.png', class: 'responsive' %></a>
         </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <div class="collapse navbar-collapse navbar-responsive-collapse">
 
           <ul class="nav navbar-nav">
             <li><%= link_to sites_path  do %>
@@ -68,10 +68,10 @@
                   SUPPLIERS
               <% end %>
             </li>
-          </ul>
-              <div class="col-lg-6">
+            <li class="nav navbar-form navbar-right ">
+              <div>
                 <%= form_tag search_booking_details_path, remote: true, method: :get, id: 'customer_search_form',
-                             class: 'nav navbar-form navbar-right form-inline waves-effect waves-light' do %>
+                             class: 'form-inline' do %>
                     <div class="input-group input-group-sm">
                       <%= text_field_tag :search_customer, params[:search_customer],placeholder: 'Customer name/Mobile',
                                          class: 'form-control', id: 'customer-search-box' %>
@@ -83,22 +83,22 @@
                     </div>
                 <% end %>
               </div>
+            </li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
               <li>
-                <span>
-
-                </span>
                 <%= link_to  destroy_user_session_path, method: :delete do %>
                     SIGN OUT
                 <% end %>
               </li>
           </ul>
-        <% end %>
         </div>
       </div>
-    </div>
+    </nav>
+  <% end %>
 
     <div class="container">
+
       <div class="notifications top-left">
         <%= bootstrap_flash %>
       </div>
