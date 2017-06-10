@@ -55,29 +55,24 @@
                   Pay
                 </a>
               </td>
-              <td><%= link_to 'Payment Details', '#', class: 'btn btn-primary' %></td>
+              <td>
+                <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details', id: departmental_labour.id}, method: :get, remote: true, class: "btn btn-primary dept_lab_pay_det-#{departmental_labour.id}" %>
+              </td>
             </tr>
 
             <!-- ************************* Script ****************************** -->
-              <script type="text/javascript">
-        $('#pay-btn-<%= departmental_labour.id %>').on('click', function () {
-
-
-            console.log("Clicked");
-            //get data-id attribute of the clicked element
-            var deptLabourId = $(this).data('dl-id');
-            var totalPayableAmount = $(this).data('total-amount');
-
-            console.log(deptLabourId);
-            console.log(totalPayableAmount);
-
-            //populate the textbox
-            $("#departmentalLabourPaymentModal").find('input[name="id"]').val(deptLabourId);
-            $("#departmentalLabourPaymentModal").find('input[name="max_payable_amount"]').val(totalPayableAmount);
-        });
-    </script>
+            <script type="text/javascript">
+                $('#pay-btn-<%= departmental_labour.id %>').on('click', function () {
+                    //get data-id attribute of the clicked element
+                    var deptLabourId = $(this).data('dl-id');
+                    var totalPayableAmount = $(this).data('total-amount');
+                    //populate the textbox
+                    $("#departmentalLabourPaymentModal").find('input[name="id"]').val(deptLabourId);
+                    $("#departmentalLabourPaymentModal").find('input[name="payment_for"]').val("DEPARTMENTAL_LABOURS-"+deptLabourId);
+                    $("#departmentalLabourPaymentModal").find('input[name="max_payable_amount"]').val(totalPayableAmount);
+                });
+            </script>
             <!-- ************************** end ******************************** -->
-
         <% end %>
     <% end %>
 
@@ -169,7 +164,7 @@
             <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
                                class: 'form-control search-box', id: 'search-box', required: true %>
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
-                               class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
+                               class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
                            class: 'form-control', id: 'payment_method', required: true %>
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
@@ -177,7 +172,7 @@
             <%= text_field_tag :payment_to, params[:payment_to],placeholder: 'Payment To',
                                class: 'form-control search-box', id: 'payment_to', required: true %>
             <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
-            <%= hidden_field_tag :payment_for, params[:payment_for], value: 'DEPARTMENTAL_LABOURS' %>
+            <%= hidden_field_tag :payment_for, params[:payment_for] %>
             <%= hidden_field_tag :id, params[:id] %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
             <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount]%>
@@ -191,6 +186,44 @@
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
         </div>
         </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+<!-- Modal -->
+<div class="modal fade" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto">
+          <table class="table-responsive table table-stripped">
+            <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Pay. Method</th>
+              <th>Desc.</th>
+              <th>Paid By</th>
+              <th>Payment to</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
   </div>
 </div>

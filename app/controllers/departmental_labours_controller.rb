@@ -73,19 +73,19 @@ class DepartmentalLaboursController < ApplicationController
                                               :date => params[:payment_date], :payment_to => params[:payment_to])
 
       if @outgoing_payment.save
-        @departmental_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))
+        @single_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))
 
         #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
           format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
-                                    notice: "Rs.#{params[:amount]} Amount paid." }
-          format.json { render json: @departmental_labour }
+                                    notice: "Rs. #{params[:amount]} Amount paid." }
+          format.json { render json: @single_labour }
         end
       else
         respond_to do |format|
           format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
                                     alert: "Something went wrong." }
-          format.json { render json: @departmental_labour.errors, status: :unprocessable_entity }
+          format.json { render json: @single_labour.errors, status: :unprocessable_entity }
         end
       end
 
@@ -93,10 +93,27 @@ class DepartmentalLaboursController < ApplicationController
       respond_to do |format|
         format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
                                   alert: "You can't pay this amount." }
-        format.json { render json: @departmental_labour.errors, status: :unprocessable_entity }
+        format.json { render json: @single_labour.errors, status: :unprocessable_entity }
       end
     end
 
+  end
+
+  def departmental_labour_payment_details
+    @dept_lab = DepartmentalLabour.find(params[:id])
+    #@dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id)
+
+    if @dept_lab.blank?
+      format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: @dept_lab.site_id }
+      format.json { render json: @dept_lab }
+      format.js
+    else
+      respond_to do |format|
+        format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: @dept_lab.site_id }
+        format.json { render json: @dept_lab }
+        format.js
+      end
+    end
   end
 
   private

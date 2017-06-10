@@ -28,8 +28,11 @@
      <div class="col-md-4">
        <div class="input-group">
          <div class="input-group-btn">
-           <%= f.select(:gender, options_for_select([['Select','Select'],['MR.','MR.'],['MS.','MS.'],['MRS.','MRS.']],:disabled=> 'Select', :selected => @booking_detail.gender),
-                        {}, class: 'btn', required: true) %>
+
+             <%= f.select(:gender, options_for_select([['Select'],['Mr.','Mr.'],['Ms.','Ms.'], ['Mrs.','Mrs.']],
+                                                      :disabled=> 'Select', :selected=> @booking_detail.gender),
+                          {}, class: 'btn btn-default') %>
+
          </div>
          <%= f.text_field :customer_name, :class => 'form-control',required: true,
                           placeholder: :customer_name %>
@@ -118,7 +121,7 @@
       <%=f.error_span(:parking_charges) %>
       <%= f.label 'Maintenance cost/SqFt.', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <input class="form-control" placeholder="Maintenance cost/Sq.Ft." type="text" id="maintenance_in_sqft" required>
+        <input class="form-control" placeholder="Maintenance cost/Sq.Ft." type="text" id="maintenance_in_sqft" >
       </div>
     </div>
     <div class="form-group">
@@ -181,20 +184,19 @@
     <div class="form-group">
       <%= f.label :loan_possible, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <% if @booking_detail.loan_possible %>
-            <%= f.select(:loan_possible, options_for_select([['Loan Possible ?'],['Yes',1],['No',0]],
+            <%= f.select(:loan_possible, options_for_select([['Loan Possible ?'],['Yes','Yes'],['No','No']],
                                                             :disabled=> 'Loan Possible ?', :selected=> @booking_detail.loan_possible),
                          {}, class: 'form-control') %>
-        <% else %>
-            <%= f.select(:loan_possible, options_for_select([['Loan Possible ?'],['Yes',1],['No',0]],
-                                                            :disabled=> 'Loan Possible ?', :selected=> 'Loan Possible ?'),
-                         {}, class: 'form-control') %>
-        <% end %>
+
       </div>
       <%=f.error_span(:loan_possible) %>
     </div>
 
-    <div class="hidden" id="loan-possible-div">
+    <% if @booking_detail.loan_possible === "Yes" %>
+        <div id="loan-possible-div">
+    <% else %>
+        <div class="hidden" id="loan-possible-div">
+    <% end %>
       <div class="form-group">
         <%= f.label :name_of_bank, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
@@ -225,7 +227,11 @@
         </div>
         <%=f.error_span(:employee_name) %>
       </div>
-    </div>
+    <% if @booking_detail.loan_possible === "Yes" %>
+        </div>
+    <% else %>
+        </div>
+    <% end %>
     <hr/>
     <% if @flat.booking_status == 0 || @flat.booking_status.blank? %>
       <div class="form-group">
@@ -239,7 +245,7 @@
         <div class="col-lg-4">
           <%= f.select(:payment_type, options_for_select([['Payment type'],['CASH','CASH'],['CHEQUE','CHEQUE']],
                                                           :disabled=> 'Payment type'),
-                       {}, class: 'form-control', required: true) %>
+                       {}, class: 'form-control') %>
         </div>
         <%=f.error_span(:payment_type) %>
       </div>

@@ -94,7 +94,7 @@ ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
 }
 form .error {
     color: #c31209;
-    font-weight: 600;
+    font-weight: 400;
     font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
 }
@@ -123,13 +123,10 @@ div.outstanding-table{
 }
 .btn{
     text-transform: uppercase;
-    font-weight: 800;
     background-color: #0097A7 !important;
     border-color: #0097A7 !important;
     color: #FFFFFF !important;
     border-radius: 3px;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 .btn-block{
     margin-top: .5rem !important;
