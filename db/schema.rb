@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610041204) do
+ActiveRecord::Schema.define(version: 20170622085210) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -48,6 +48,38 @@ ActiveRecord::Schema.define(version: 20170610041204) do
     t.string   "schedule_desc"
     t.string   "booking_date"
     t.string   "gender",              default: "MR."
+  end
+
+  create_table "contract_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.boolean  "deleting_status", default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "contract_unit"
+  end
+
+  create_table "contractors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "contact_number"
+    t.string   "address"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "total_amount"
+    t.string   "paid_amount"
+  end
+
+  create_table "contractual_labours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "date"
+    t.string   "contract_name"
+    t.integer  "contractor_id"
+    t.string   "quantity"
+    t.string   "unit"
+    t.string   "rate"
+    t.string   "amount"
+    t.string   "created_by"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "site_id"
   end
 
   create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -93,6 +125,17 @@ ActiveRecord::Schema.define(version: 20170610041204) do
     t.string   "flat_rate"
   end
 
+  create_table "investors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "contact_number"
+    t.string   "email"
+    t.boolean  "deleting_status"
+    t.string   "created_by"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "list_materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "unit"
@@ -121,8 +164,23 @@ ActiveRecord::Schema.define(version: 20170610041204) do
     t.string   "rate"
     t.string   "amount"
     t.string   "supervisor_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "description",      default: "NA"
+    t.string   "challan_item",     default: "NA"
+  end
+
+  create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "date"
+    t.string   "description"
+    t.string   "amount"
+    t.string   "payment_to"
+    t.string   "payment_method"
+    t.string   "payment_desc"
+    t.string   "paid_by"
+    t.boolean  "deleting_status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "outgoing_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -152,7 +210,7 @@ ActiveRecord::Schema.define(version: 20170610041204) do
   create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.text     "address",             limit: 65535
-    t.integer  "no_of_units"
+    t.integer  "no_of_flats"
     t.string   "type_of_structures"
     t.string   "unit_number"
     t.string   "area_of_plot"
@@ -162,6 +220,7 @@ ActiveRecord::Schema.define(version: 20170610041204) do
     t.string   "photo_path"
     t.string   "site_type"
     t.string   "no_of_wings"
+    t.string   "no_of_shops"
   end
 
   create_table "supplier_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -65,6 +65,8 @@ class DepartmentalLaboursController < ApplicationController
   def update_departmental_labour_payment
     @single_labour = DepartmentalLabour.find(params[:id])
     paid_amount = @single_labour.paid_amount.to_f
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
 
     if (@single_labour.amount.to_f - @single_labour.paid_amount.to_f) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
 
@@ -77,42 +79,40 @@ class DepartmentalLaboursController < ApplicationController
 
         #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
-          format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
-                                    notice: "Rs. #{params[:amount]} Amount paid." }
+          format.html { redirect_to session.delete(:return_to),notice: "Rs. #{params[:amount]} Amount paid." }
           format.json { render json: @single_labour }
         end
       else
         respond_to do |format|
-          format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
-                                    alert: "Something went wrong." }
+          format.html { redirect_to session.delete(:return_to), alert: "Something went wrong." }
           format.json { render json: @single_labour.errors, status: :unprocessable_entity }
         end
       end
 
     else
       respond_to do |format|
-        format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: params[:site_id],
-                                  alert: "You can't pay this amount." }
+        format.html { redirect_to session.delete(:return_to),
+                                  alert: "You can't pay this amount, Amount should not be greater than balance amount" }
         format.json { render json: @single_labour.errors, status: :unprocessable_entity }
       end
     end
 
   end
 
+  def show_departmental_labours
+    @departmental_labour = DepartmentalLabour.new
+    @site = Site.find(params[:id])
+    @departmental_labours = @site.departmental_labours.all
+  end
+
   def departmental_labour_payment_details
     @dept_lab = DepartmentalLabour.find(params[:id])
-    #@dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id)
-
-    if @dept_lab.blank?
-      format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: @dept_lab.site_id }
-      format.json { render json: @dept_lab }
-      format.js
+    @dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id)
+    @site = Site.find(@dept_lab.site_id)
+    if @dept_lab_outgoing_payment.blank?
+      render status: :not_found
     else
-      respond_to do |format|
-        format.html { redirect_to controller: 'sites', action: 'show_departmental_labours',id: @dept_lab.site_id }
-        format.json { render json: @dept_lab }
-        format.js
-      end
+
     end
   end
 

@@ -1,0 +1,186 @@
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to site_path(@site) do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <h4>
+          <strong><%= params[:contract_name] %></strong>
+          <span class="pull-right"></span>
+        </h4>
+        <h4><span class="label label-primary"><%= @site.name.upcase %></span></h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <%= link_to "Add #{params[:contract_name].capitalize}", {:controller => "contractual_labours", :action => "new", :site_id => params[:id],:contract_name => params[:contract_name] },
+                    :class => 'btn btn-primary btn-sm' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="overflow: auto">
+  <table class="table table-bordered table-responsive">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Contractor</th>
+      <th>Rate</th>
+      <th>Quantity / Unit</th>
+      <th>Total Amount</th>
+      <th>Paid Amount</th>
+      <th>Remaining Amount</th>
+      <th>Payment Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% if @contractual_labours.blank? %>
+        <tr>
+          <td colspan="5" class="text-center"><strong><%= params[:contract_name] %> was not supplied on this site.</strong></td>
+        </tr>
+    <% else %>
+        <%
+          total_amount = 0.0
+          total_quantity = 0.0
+          total_paid = 0.0
+        %>
+        <% @contractual_labours.each do |labour| %>
+            <tr>
+              <td><%= labour.date %></td>
+              <td><%= labour.contractor.name %></td>
+              <td>&#8377; <%= labour.rate.to_f.round(2) %></td>
+              <td><%= labour.quantity.to_f.round(2) %> / <%= labour.unit %></td>
+              <td>&#8377; <%= labour.amount.to_f.round(2) %></td>
+              <td>&#8377; <%= contr_paid_amt = labour.contractor.paid_amount.to_f.round(2) %></td>
+              <td>&#8377; <%= (labour.amount.to_f.round(2) - contr_paid_amt) %></td>
+              <td>
+                <span>
+                  <a href="#contractualLabourPaymentModal" class="btn btn-primary" id="pay-btn-<%= labour.id %>" data-toggle="modal"
+                     data-dl-id="<%= labour.id %>" data-dl-contractor_id="<%= labour.contractor.id %>" data-total-amount="<%= labour.amount %>">
+                  Pay
+                </a>
+                  <%= link_to 'Payment Details',{controller: 'contractual_labours', action: 'contractual_labour_payment_details',
+                                                 id: labour.id}, method: :get, remote: true,
+                              class: "btn btn-primary contr_lab_pay_det-#{labour.id}" %>
+                </span>
+              </td>
+            </tr>
+            <%
+              total_quantity = total_quantity + labour.quantity.to_f
+              total_amount = total_amount + labour.amount.to_f
+              total_paid = total_paid + contr_paid_amt
+            %>
+
+            <!-- ************************* Script ****************************** -->
+            <script type="text/javascript">
+                $('#pay-btn-<%= labour.id %>').on('click', function () {
+                    //get data-id attribute of the clicked element
+                    var deptLabourId = $(this).data('dl-id');
+                    var deptLabourContrId = $(this).data('dl-contractor_id');
+                    var totalPayableAmount = $(this).data('total-amount');
+                    //populate the textbox
+                    $("#contractualLabourPaymentModal").find('input[name="id"]').val(deptLabourId);
+                    $("#contractualLabourPaymentModal").find('input[name="contractor_id"]').val(deptLabourContrId);
+                    $("#contractualLabourPaymentModal").find('input[name="max_payable_amount"]').val(totalPayableAmount);
+                });
+            </script>
+            <!-- ************************** end ******************************** -->
+        <% end %>
+        <tr>
+          <td colspan="3"><strong>Totals</strong></td>
+          <td colspan="1">
+          <strong><%= total_quantity.round(2) %> <%= @contractual_labours.first.unit %></strong></td>
+          <td colspan="1"><strong>&#8377; <%= total_amount.round(2) %></strong></td>
+          <td colspan="1"><strong>&#8377; <%= total_paid.round(2) %></strong></td>
+          <td colspan="1"><strong>&#8377; <%= total_amount.round(2) - total_paid.round(2) %></strong></td>
+        </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+<div class="pull-right">
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="contractualLabourPaymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Contractor Payment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag update_contractual_labour_payment_path, method: :get, id: 'contractual_labours-payment_form'  do %>
+
+            <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box', required: true %>
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
+            <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
+                           class: 'form-control', id: 'payment_method', required: true %>
+            <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
+                               class: 'form-control search-box', id: 'payment_desc', required: true %>
+            <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
+            <%= hidden_field_tag :payment_for, params[:payment_for], value: 'CONTRACTOR' %>
+            <%= hidden_field_tag :id, params[:id] %>
+            <%= hidden_field_tag :contractor_id, params[:contractor_id] %>
+            <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
+            <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount] %>
+            </div>
+            <div class="modal-footer">
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: 'dept_pay_btn') do %>
+                  Save
+              <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+<!-- ********************************************************************************************** -->
+<!-- Modal -->
+<div class="modal fade-scale" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Payment Details</h4>
+      </div>
+      <div class="modal-body" style="height: 80% !important; overflow: auto!important;">
+        <div style="overflow: auto !important; height: 90% !important;">
+          <table class="table table-responsive table-bordered">
+            <thead class="thead-default">
+            <tr class="table-row">
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Pay. Method</th>
+              <th>Desc.</th>
+              <th>Paid By</th>
+              <th>Payment to</th>
+            </tr>
+            </thead>
+            <tbody id="contr-pay_det_tbody">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->

@@ -1,0 +1,63 @@
+<%= form_for @investor, :html => { :class => "form-horizontal investor" } do |f| %>
+
+  <% if @investor.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@investor.errors.count, "error") %> prohibited this investor from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @investor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-md-6">
+      <%= f.text_field :name, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, :class => 'control-label col-lg-2' %>
+    <div class="col-md-6">
+      <%= f.text_field :address, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:address) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact_number, :class => 'control-label col-lg-2' %>
+    <div class="col-md-6">
+      <%= f.phone_field :contact_number, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:contact_number) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-md-6">
+      <%= f.email_field :email, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:email) %>
+  </div>
+      <%= f.hidden_field :deleting_status, :value => 0 %>
+  <div class="form-group">
+    <%= f.label :created_by, :class => 'control-label col-lg-2' %>
+    <div class="col-md-6">
+      <%= f.text_field :created_by, :class => 'form-control', readonly: true, value: current_user.user_name %>
+    </div>
+    <%=f.error_span(:created_by) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                investors_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

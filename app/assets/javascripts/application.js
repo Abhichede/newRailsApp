@@ -25,7 +25,7 @@ $(document).ready(function () {
     update_paid_amount_function();
     search_customer_function();
     schedule_next_installment_function();
-    //dept_lab_pay_det();
+    department_labour_payment_details();
 
     var hide_spinner = function () {
         $("#spinner").hide();

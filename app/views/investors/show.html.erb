@@ -1,0 +1,29 @@
+<%- model_class = Investor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @investor.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @investor.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
+  <dd><%= @investor.contact_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @investor.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:deleting_status) %>:</strong></dt>
+  <dd><%= @investor.deleting_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:created_by) %>:</strong></dt>
+  <dd><%= @investor.created_by %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              investors_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_investor_path(@investor), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              investor_path(@investor),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

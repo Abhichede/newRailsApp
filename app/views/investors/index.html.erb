@@ -1,0 +1,33 @@
+<%- model_class = Investor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-bordered table-responsive table-hover">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:contact_number) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @investors.each do |investor| %>
+      <tr>
+        <td><%= investor.name %></td>
+        <td><%= investor.address %></td>
+        <td><%= investor.contact_number %></td>
+        <td><%= investor.email %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      investor_path(investor), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_investor_path,
+            :class => 'btn btn-primary' %>

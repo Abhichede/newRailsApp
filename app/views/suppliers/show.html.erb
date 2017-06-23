@@ -16,13 +16,17 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="col-md-4 col-sm-6 col-xs-6">
-        <button class="btn btn-danger btn-sm" id="payment-btn-on-booking"
+      <div class="col-md-4">
+        <button class="btn btn-danger btn-sm btn-block" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-4">
+      <div class="col-md-4">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_supplier_path(@supplier), :class => 'btn btn-info btn-sm' %>
+                    edit_supplier_path(@supplier), :class => 'btn btn-info btn-sm btn-block' %>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-danger btn-sm btn-block" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#outstandingsModal">Outstandings</button>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <% link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -47,44 +51,7 @@
       <dd><%= @supplier.contact_person %></dd>
     </dl>
   </div>
-  <div class="col-md-8 outstanding-table">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Site Name</th>
-        <th>Total Amount</th>
-        <th>Paid Amount</th>
-        <th>Balance Amount</th>
-      </tr>
-      </thead>
-      <tbody>
 
-      <% @sites.each do |site| %>
-          <tr>
-            <td><%= site.name.upcase %></td>
-            <%
-              total_amount = 0
-              paid_amount = 0
-            %>
-            <%
-              @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_to: @supplier.name)
-
-              @outgoing_payment.each do |outgoing_payment|
-                paid_amount += outgoing_payment.amount.to_f
-              end
-            %>
-            <% @site_wise = Material.where(:site_id => site, :supplier_id => @supplier) %>
-            <% @site_wise.each do |site_wise| %>
-                  <% total_amount += site_wise.amount.to_f %>
-            <% end %>
-            <td>&#8377; <%= total_amount %></td>
-            <td>&#8377; <%= paid_amount %></td>
-            <td>&#8377; <%= total_amount - paid_amount %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
 </div>
 <hr/>
 <div style="overflow: auto">
@@ -126,7 +93,7 @@
 <!-- ********************************************************************************************** -->
 
 <!-- Modal -->
-<div class="modal fade" id="paymentDetailsModal" role="dialog">
+<div class="modal fade-scale" id="paymentDetailsModal" role="dialog">
   <div class="modal-dialog " role="document">
 
     <!-- Modal content-->
@@ -166,6 +133,65 @@
       </div>
       <div class="modal-footer">
 
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="outstandingsModal" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Site Name</th>
+                <th>Total Amount</th>
+                <th>Paid Amount</th>
+                <th>Balance Amount</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <% @sites.each do |site| %>
+                  <tr>
+                    <td><%= site.name.upcase %></td>
+                    <%
+                      total_amount = 0
+                      paid_amount = 0
+                    %>
+                    <%
+                      @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_to: @supplier.name)
+
+                      @outgoing_payment.each do |outgoing_payment|
+                        paid_amount += outgoing_payment.amount.to_f
+                      end
+                    %>
+                    <% @site_wise = Material.where(:site_id => site, :supplier_id => @supplier) %>
+                    <% @site_wise.each do |site_wise| %>
+                        <% total_amount += site_wise.amount.to_f %>
+                    <% end %>
+                    <td>&#8377; <%= total_amount %></td>
+                    <td>&#8377; <%= paid_amount %></td>
+                    <td>&#8377; <%= total_amount - paid_amount %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>

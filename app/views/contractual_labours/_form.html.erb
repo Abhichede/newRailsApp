@@ -1,0 +1,157 @@
+<%= form_for @contractual_labour, :html => { :class => "form-horizontal contractual_labour" } do |f| %>
+
+  <% if @contractual_labour.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@contractual_labour.errors.count, "error") %> prohibited this contractual_labour from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @contractual_labour.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.date_field :date, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:date) %>
+
+    <%= f.label :contract_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.text_field :contract_name, :class => 'form-control', value: params[:contract_name], readonly: true %>
+    </div>
+    <%=f.error_span(:contract_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contractor_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
+    <div class="col-lg-3 col-sm-8 col-xs-8">
+      <%
+        contractor_names = Array.new
+        contractor_names.push(['Select Contractor'])
+        Contractor.all.each do |contractor|
+            contractor_names.push([contractor.name.upcase,contractor.id])
+        end %>
+      <% if !@contractual_labour.contractor.blank? %>
+          <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: @contractual_labour.contractor.name),
+                       {}, class: 'form-control') %>
+      <% else %>
+          <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: 'Select Contractor'),
+                       {}, class: 'form-control') %>
+      <% end %>
+    </div>
+    <div class="col-lg-1 col-sm-4 col-xs-4">
+      <a class="label label-default" data-toggle="modal" data-target="#addNewContractor">Add New</a>
+
+    </div>
+    <%=f.error_span(:contractor_id) %>
+
+    <%= f.label :quantity, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
+    <div class="col-lg-4 col-md-4">
+      <div class="input-group">
+        <%= f.text_field :quantity, :class => 'form-control', required: true %>
+        <span class="input-group-addon">
+          <%= @contract_list.first.contract_unit %>
+          <%= f.hidden_field :unit, value: @contract_list.first.contract_unit %>
+        </span>
+      </div>
+      <%=f.error_span(:quantity) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :rate, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.text_field :rate, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:rate) %>
+
+    <%= f.label :amount, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.text_field :amount, :class => 'form-control', required: true, readonly: true %>
+    </div>
+    <%=f.error_span(:amount) %>
+
+    <%= f.hidden_field :created_by, :value => current_user.user_name %>
+    <%= f.hidden_field :site_id, :value => params[:site_id] %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4 col-md-4">
+      <%= f.submit 'Save', :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', {controller: 'contractual_labours', action: 'show_contractual_labours', id: params[:site_id], contract_name: params[:contract_name]},
+                  :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="addNewContractor" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">New Contractor</h4>
+      </div>
+      <div class="modal-body">
+          <%= form_for @contractor, :html => { :class => "form-horizontal contractor" } do |f| %>
+
+              <% if @contractor.errors.any? %>
+                  <div id="error_expl" class="panel panel-danger">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><%= pluralize(@contractor.errors.count, "error") %> prohibited this contractor from being saved:</h3>
+                    </div>
+                    <div class="panel-body">
+                      <ul>
+                        <% @contractor.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+              <% end %>
+
+              <div class="form-group">
+                <%= f.label :name, :class => 'control-label col-lg-2 ' %>
+                <div class="col-lg-8">
+                  <%= f.text_field :name, :class => 'form-control', required: true %>
+                </div>
+                <%=f.error_span(:name) %>
+              </div>
+              <div class="form-group">
+                <%= f.label :contact_number, :class => 'control-label  col-lg-2' %>
+                <div class="col-lg-8">
+                  <%= f.text_field :contact_number, :class => 'form-control', required: true  %>
+                </div>
+                <%=f.error_span(:contact_number) %>
+              </div>
+              <div class="form-group">
+                <%= f.label :address, :class => 'control-label  col-lg-2' %>
+                <div class="col-lg-8">
+                  <%= f.text_field :address, :class => 'form-control', required: true %>
+                </div>
+                <%=f.error_span(:address) %>
+              </div>
+
+              <div class="modal-footer">
+                <div class="col-lg-offset-2 col-lg-6">
+                  <%= f.submit 'Save', :class => 'btn btn-primary btn-sm' %>
+                  <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+
+        <% end %>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
+

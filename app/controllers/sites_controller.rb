@@ -12,6 +12,9 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
     @flats = Flat.all
+    @materials = @site.materials.all
+    @outgoing_payment = @site.outgoing_payments.all
+    @contract_list = ContractList.new
   end
 
   # GET /sites/new
@@ -50,11 +53,6 @@ class SitesController < ApplicationController
     @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
   end
 
-  def show_departmental_labours
-    @departmental_labour = DepartmentalLabour.new
-    @departmental_labours = @site.departmental_labours.all
-  end
-
   # PATCH/PUT /sites/1
   # PATCH/PUT /sites/1.json
   def update
@@ -87,7 +85,7 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:name, :address, :no_of_units, :site_type,
+      params.require(:site).permit(:name, :address, :no_of_flats, :no_of_shops, :site_type,
                                    :project_approved_by, :area_of_plot, :photo_path, :no_of_wings, :type_of_structures=> [])
     end
 end

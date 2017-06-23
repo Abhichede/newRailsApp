@@ -52,6 +52,14 @@
     </div>
      <%=f.error_span(:supplier_id) %>
 
+    <% if params[:type_of_material] === 'OTHER ORDINARY' %>
+      <%= f.label :description, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+            <%= f.text_field :description, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:description) %>
+    <% end %>
+
   </div>
   <div class="form-group">
     <%= f.label :type_of_material, :class => 'control-label col-lg-2' %>
@@ -70,21 +78,9 @@
     <div class="col-lg-4">
       <div class="input-group">
         <%= f.text_field :quantity, :class => 'form-control', required: true %>
-        <span class="input-group-btn">
-          <%
-            material_unit = ['Unit']
-            MaterialList.all.each do |material|
-              if !material.material_unit.blank?
-                material_unit.push([material.material_unit])
-              end
-            end %>
-          <% if !@material.unit.blank? %>
-            <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => @material.unit),
-                       {}, class: 'btn', required: true) %>
-          <% else %>
-            <%= f.select(:unit, options_for_select(material_unit,:disabled=> 'Unit', :selected => 'Unit'),
-                         {}, class: 'btn', required: true) %>
-          <% end %>
+        <span class="input-group-addon">
+          <%= @material_list.material_unit %>
+          <%= f.hidden_field :unit, value: @material_list.material_unit %>
         </span>
       </div>
       <%=f.error_span(:quantity) %>
@@ -93,8 +89,25 @@
   </div>
   <div class="form-group">
     <%= f.label :challan_no, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= f.text_field :challan_no, :class => 'form-control', required: true %>
+    <div class="col-md-4">
+      <div class="input-group">
+        <%= f.text_field :challan_no, :class => 'form-control', required: true %>
+        <div class="input-group-btn">
+          <%
+              counter = 1
+            challan_no_array = Array.new
+              challan_no_array.push('Item No.')
+
+            while counter < 21 do
+              child_array = [counter, counter]
+              challan_no_array.push(child_array)
+              counter += 1
+            end
+          %>
+          <%= f.select(:challan_item, options_for_select(challan_no_array, :disabled=> 'Item No.', selected: 'Item No.'),
+                       {}, class: 'btn btn-default') %>
+        </div>
+      </div>
     </div>
     <%=f.error_span(:challan_no) %>
 
@@ -141,13 +154,13 @@
 <% end %>
 
 <!-- Modal -->
-<div class="modal fade" id="addNewSupplier" role="dialog">
+<div class="modal fade-scale" id="addNewSupplier" role="dialog">
   <div class="modal-dialog " role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+        <h4 class="modal-title w-100">New Supplier</h4>
       </div>
       <div class="modal-body">
         <%= form_for @supplier, :html => { :class => "form-horizontal supplier" } do |f| %>
@@ -216,7 +229,7 @@
 
             <div class="modal-footer">
               <div class="col-lg-offset-2 col-lg-6">
-                <%= f.submit 'Save', :class => 'btn btn-primary' %>
+                <%= f.submit 'Save', :class => 'btn btn-primary btn-sm' %>
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
               </div>
             </div>

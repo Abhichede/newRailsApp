@@ -52,9 +52,12 @@
                          {include_hidden: false},
                          {class: 'multiselect', multiple: true, required: true} %>
         <% else  %>
-            <% flat_types = @site.type_of_structures.split(',') %>
+
+            <% @flat_types = @site.type_of_structures.split(', ') %>
+
             <%= f.select :type_of_structures,
-                         options_from_collection_for_select(TypeOfStructure.all, :name, :name, flat_types),
+                         options_from_collection_for_select(TypeOfStructure.all, :name, :name,
+                                                            {:selected => @flat_types.map{|x| x } } ),
                          {include_hidden: false},
                          {class: 'multiselect', multiple: true, required: true} %> Make sure you have selected correct fields
         <% end %>
@@ -77,9 +80,15 @@
     </div>
 
   <div class="form-group">
-    <%= f.label :no_of_units, :class => 'control-label col-lg-2' %>
+    <%= f.label :no_of_flats, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :no_of_units, :class => 'form-control' %>
+      <%= f.text_field :no_of_flats, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :no_of_shops, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :no_of_shops, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">

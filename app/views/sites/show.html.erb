@@ -2,39 +2,54 @@
 <div class="page-header">
   <div class="row">
     <div class="col-md-6">
-      <div class="col-md-2">
+      <div class="col-md-1">
         <%= link_to sites_path do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-10">
         <h4><strong><%= @site.name.upcase %></strong></h4>
         <h5>
           <div class="label label-primary">
                 Available Flats
           </div>
-          <span class="label label-default label-sm"><%= "#{@site.no_of_units - @site.flats.where(:booking_status=>1).count}" %></span>
+          <span class="label label-default label-sm">
+            <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
+                @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
+          </span>
+          &nbsp;&nbsp;
+          <div class="label label-primary">
+            Available Shops
+          </div>
+          <span class="label label-default label-sm">
+            <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
+          </span>
+
         </h5>
       </div>
     </div>
     <div class="col-md-6">
-          <% if @site.flats.count != @site.no_of_units %>
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
-              <div class="col-md-4 col-sm-6 col-xs-6">
-                  <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
-                          :class => 'btn btn-success btn-sm btn-block' %>
-              </div>
-              <div class="col-md-4 col-sm-6 col-xs-6">
-                  <%= link_to 'Add Shop', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats %>
+                  <div class="col-md-4 col-sm-6 col-xs-6">
+                      <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                               :class => 'btn btn-success btn-sm btn-block' %>
-              </div>
+                  </div>
+                <% end %>
+                <% if @site.flats.where(:flat_type => 'SHOP').count <= @site.no_of_shops.to_i %>
+                  <div class="col-md-4 col-sm-6 col-xs-6">
+                      <%= link_to 'Add Shop', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
+                                  :class => 'btn btn-success btn-sm btn-block' %>
+                  </div>
+                <% end %>
               <% else %>
-              <div class="col-md-4 col-sm-6 col-xs-6">
-                  <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
-                              :class => 'btn btn-success btn-sm btn-block' %>
-              </div>
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats %>
+                  <div class="col-md-4 col-sm-6 col-xs-6">
+                      <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
+                                  :class => 'btn btn-success btn-sm btn-block' %>
+                  </div>
+                <% end %>
               <% end %>
-          <% end %>
         <div class="col-md-4 col-sm-6 col-xs-6">
           <%= link_to 'Edit Site',
                       edit_site_path(@site), :class => 'btn btn-info btn-sm btn-block' %>
@@ -54,8 +69,10 @@
   <dl class="dl-horizontal">
     <dt><strong><%= model_class.human_attribute_name(:address) %></strong></dt>
    <dd><strong>:</strong>  <%= @site.address %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:no_of_units) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.no_of_units %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:no_of_flats) %> </strong></dt>
+   <dd><strong>:</strong>  <%= @site.no_of_flats %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:no_of_shops) %> </strong></dt>
+    <dd><strong>:</strong>  <%= @site.no_of_shops %></dd>
     <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %> </strong></dt>
    <dd><strong>:</strong>  <%= @site.type_of_structures %></dd>
     <dt><strong><%= model_class.human_attribute_name(:site_type) %> </strong></dt>
@@ -66,37 +83,16 @@
    <dd><strong>:</strong>  <%= @site.project_approved_by %></dd>
   </dl>
   </div>
-  <div class="col-md-6 outstanding-table">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Customer Name (Flat No.)</th>
-          <th>Total Amount</th>
-          <th>Received Amount</th>
-          <th>Outstanding amount</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% total_amount = 0
-         total_paid = 0 %>
-        <% @site.booking_details.each do |booking| %>
-          <tr>
-            <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
-            <td>&#8377; <%= booking.final_sale_deed %></td>
-              <% total_amount = total_amount + booking.final_sale_deed.to_i %>
-            <td>&#8377; <%= booking.paid_amount %></td>
-              <% total_paid = total_paid + booking.paid_amount.to_i %>
-            <td>&#8377; <%= booking.final_sale_deed.to_i - booking.paid_amount.to_i %></td>
-          </tr>
-        <% end %>
-      <tr >
-        <td><strong>Totals</strong></td>
-        <td><strong>&#8377; <%= total_amount %></strong></td>
-        <td><strong>&#8377; <%= total_paid %></strong></td>
-        <td><strong>&#8377; <%= total_amount - total_paid %></strong></td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="panel panel-default col-md-6">
+    <div class="panel-heading"><strong>Outstandings</strong></div>
+    <div class="panel-body">
+      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+              data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
+      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+              data-toggle="modal" data-target="#suppliersOutstanding">Supplier</button>
+      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+              data-toggle="modal" data-target="#">Labour</button>
+    </div>
   </div>
 </div>
 <hr/>
@@ -104,6 +100,11 @@
   <li class="active">
     <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
   </li>
+  <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
+    <li>
+      <a  href="#shops_jumbo" data-toggle="tab">Shops</a>
+    </li>
+  <% end %>
   <li><a href="#material_jumbo" data-toggle="tab">Material</a>
   </li>
   <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
@@ -114,49 +115,67 @@
 </ul>
 <div class="tab-content clearfix">
   <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
-    <h4 class="text-center">All Flats</h4>
-    <hr />
-    <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-      <% if @site.flats.count == 0 %>
-          <h5><strong>No flats added, Click 'ADD FLAT' above to add flats</strong></h5>
+      <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
+          <h5><strong>No flats were added, Click 'ADD FLAT' above to add flats</strong></h5>
       <% else %>
-          <% @site.flats.each do |flat| %>
-              <%= link_to flat_path(flat) do %>
-                <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
-                  <%= flat.flat_number %>
-                  <% if flat.booking_status %>
-                    <span class="label label-danger pull-right">Booked</span>
-                  <% else %>
-                      <span class="label label-default pull-right">Available</span>
-                  <% end %>
+          <%
+            no_of_wings = @site.no_of_wings.to_i
+            letter = '@'
+          %>
+          <% while no_of_wings != 0 %>
+              <div class="row">
+                <h4 class="text-center"><strong>Wing <%= letter.next %></strong></h4>
+                <hr>
+                <div class="col-md-offset-2">
+                <% @site.flats.where(:wing => letter.next).where.not(:flat_type => 'SHOP').each do |flat| %>
+                    <%= link_to flat_path(flat) do %>
+                      <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
+                        <%= flat.flat_number %>
+                        <% if flat.booking_status %>
+                          <span class="label label-danger pull-right">Booked</span>
+                        <% else %>
+                            <span class="label label-default pull-right">Available</span>
+                        <% end %>
+                      </div>
+                    <% end %>
+                <% end %>
+
+                <%
+                  letter = letter.next
+                  no_of_wings = no_of_wings - 1
+                %>
                 </div>
-              <% end %>
+              </div>
           <% end %>
       <% end %>
-    </div>
   </div>
-  <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
-    <h4 class="">Material
-      <span class="pull-right">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i> </button>
-      </span>
-    </h4>
-    <hr />
-    <div class="row">
-      <% total_material_amount = 0
-         if @site.materials.count != 0
-           @site.materials.all.each do |material|
-             total_material_amount += material.amount.to_i
-           end
-         end
-      %>
-      <div class="col-md-6 pull-right col-md-offset-6">
-        <strong>
-          Total Material Amount: &#8377; <%= total_material_amount %>
-        </strong>
+  <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
+    <div class="jumbotron tab-pane" id="shops_jumbo" style="margin-top: 0.5em">
+      <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+        <% if @site.flats.where(:flat_type => 'SHOP').count == 0 %>
+            <h5><strong>No Shops were added, Click 'ADD SHOP' above to add shops</strong></h5>
+        <% else %>
+            <% @site.flats.where(:flat_type => 'SHOP').each do |flat| %>
+                <%= link_to flat_path(flat) do %>
+                    <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
+                      <%= flat.flat_number %>
+                      <% if flat.booking_status %>
+                          <span class="label label-danger pull-right">Booked</span>
+                      <% else %>
+                          <span class="label label-default pull-right">Available</span>
+                      <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
       </div>
     </div>
+  <% end %>
+  <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
+      <span class="pull-right">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+      </span>
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
 
           <% MaterialList.all.each do |material| %>
@@ -172,8 +191,6 @@
     </div>
   </div>
   <div class="jumbotron tab-pane" id="supplier_jumbo" style="margin-top: 0.5em">
-    <h4 class="text-center">Suppliers</h4>
-    <hr />
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
       <% if Supplier.all.count == 0 %>
           <h5><strong>No Material For This Site</strong></h5>
@@ -191,24 +208,37 @@
   </div>
 
   <div class="jumbotron tab-pane" id="labour_jumbo" style="margin-top: 0.5em">
-    <h4 class="text-center">Labour</h4>
-    <hr />
     <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">
       <ul  class="nav nav-pills">
         <li class="active">
           <a href="#contractor_labour" data-toggle="tab">Contractor</a>
         </li>
         <li>
-          <%= link_to 'Departmental', {controller: 'sites', action: 'show_departmental_labours', id: @site.id} %>
+          <%= link_to 'Departmental', {controller: 'departmental_labours', action: 'show_departmental_labours', id: @site.id} %>
         </li>
       </ul>
-
-      <div class="tab-content clearfix">
-        <div class="jumbotron" id="contractor_labour" style="margin-top: 0.5em">
-        </div>
-      </div>
-
     </div>
+
+      <div class="jumbotron tab-pane" id="contractor_labour" style="margin-top: 0.5em">
+          <span class="pull-right">
+            <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#newContractModal"><i class="fa fa-plus"></i></button>
+          </span>
+
+          <div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+
+            <% ContractList.all.each do |contract| %>
+                <% if contract.name.nil? || contract.name === '' || contract.name.blank? %>
+
+                <% else %>
+                    <%= link_to contract.name, {controller: 'contractual_labours', action: 'show_contractual_labours', :id => @site,
+                                                         :contract_name=>contract.name},
+                                class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                                style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
   </div>
 </div>
 
@@ -218,14 +248,15 @@
 
 
 
+
 <!-- Modal -->
-<div class="modal fade" id="newMaterialModal" role="dialog">
+<div class="modal fade-scale" id="newMaterialModal" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100">Fill Payment details</h4>
+        <h4 class="modal-title w-100">New Material</h4>
       </div>
 
     <div class="modal-body">
@@ -248,6 +279,163 @@
       <% end %>
       </div>
 
+    </div>
+
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade-scale" id="newContractModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Contracts</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_tag contract_list_add_path, method: :get  do %>
+
+            <div><strong>Contract Name</strong>
+              <%= text_field_tag :name, params[:name],placeholder: 'Contract Name',
+                                 class: 'form-control', required:true %>
+            </div>
+            <div><strong>Unit</strong>
+              <%= text_field_tag :contract_unit, params[:contract_unit],placeholder: 'Unit',
+                                 class: 'form-control', required:true%>
+            </div>
+            <%= hidden_field_tag :deleting_status, params[:deleting_status], :value => false  %>
+            </div>
+            <div class="modal-footer">
+              <%= submit_tag 'ADD', class: 'btn btn-primary btn-sm'  %>
+              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        <% end %>
+        </div>
+
+        </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="bookingCustomerOutstanding" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Outstanding</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th>Customer Name (Flat No.)</th>
+            <th>Total Amount</th>
+            <th>Received Amount</th>
+            <th>Outstanding amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% total_amount = 0
+             total_paid = 0 %>
+          <% @site.booking_details.each do |booking| %>
+              <tr>
+                <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
+                <td>&#8377; <%= booking.final_sale_deed %></td>
+                <% total_amount = total_amount + booking.final_sale_deed.to_i %>
+                <td>&#8377; <%= booking.paid_amount %></td>
+                <% total_paid = total_paid + booking.paid_amount.to_i %>
+                <td>&#8377; <%= booking.final_sale_deed.to_i - booking.paid_amount.to_i %></td>
+              </tr>
+          <% end %>
+          <tr >
+            <td><strong>Totals</strong></td>
+            <td><strong>&#8377; <%= total_amount %></strong></td>
+            <td><strong>&#8377; <%= total_paid %></strong></td>
+            <td><strong>&#8377; <%= total_amount - total_paid %></strong></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="suppliersOutstanding" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Outstanding</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th>Material Name</th>
+            <th>Total Amount</th>
+            <th>Paid Amount</th>
+            <th>Remaining amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% total_amount = 0
+             total_paid = 0 %>
+          <% if Supplier.all.count == 0 %>
+              <h5><strong>No Material For This Site</strong></h5>
+          <% else %>
+              <% Supplier.all.each do |supplier| %>
+                <% amount = 0
+                   paid = 0 %>
+                <tr>
+                  <td><% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+                        <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                                                               :supplier=>supplier.id} %>
+                  </td>
+                      <%
+                        @materials.where(:supplier_id => supplier.id).each do |material|
+                          amount += material.amount.to_i
+                        end
+                        total_amount += amount
+                      %>
+                      <%
+                        @outgoing_payment.where(:payment_to => supplier.name, :payment_for => 'MATERIAL/SUPPLIER').each do |outgoing_payment|
+                          paid += outgoing_payment.amount.to_i
+                        end
+                        total_paid = paid
+                      %>
+                  <td>&#8377; <%= amount %></td>
+                  <%  %>
+                  <td>&#8377; <%= paid %></td>
+                  <%  %>
+                  <td>&#8377; <%= amount - paid %></td>
+                </tr>
+                  <% end %>
+              <% end %>
+          <% end %>
+          <tr >
+            <td><strong>Totals</strong></td>
+            <td><strong>&#8377; <%= total_amount %></strong></td>
+            <td><strong>&#8377; <%= total_paid %></strong></td>
+            <td><strong>&#8377; <%=  total_amount - total_paid %></strong></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
     </div>
 
   </div>

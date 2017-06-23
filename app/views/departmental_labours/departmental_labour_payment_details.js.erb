@@ -1,23 +1,23 @@
-$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:before', function () {
-    show_spinner();
-    console.log("Ajax Before ")
-});
 
-$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:after', function () {
-    hide_spinner();
-    console.log("Ajax after ")
-});
-
-$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:success', function () {
-  <%  @dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+@dept_lab.id.to_s,
-                                                                        :site_id => @dept_lab.site_id) %>
-
-
-    <%  @dept_lab_outgoing_payment.each do | details|  %>
-        console.log(<%= details.paid_by.to_s %>);
+$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:success', function (event, data, status) {
+    console.log("success");
+    $("#pay_det_tbody").replaceWith('<tbody id="pay_det_tbody"></tbody>')
+    <% @dept_lab_outgoing_payment.each do |dept| %>
+      $("#pay_det_tbody").append('<tr>' +
+          '<td><%= dept.date %></td>'+
+          '<td><%= dept.amount %></td>'+
+          '<td><%= dept.payment_method %></td>'+
+          '<td><%= dept.payment_description %></td>'+
+          '<td><%= dept.paid_by %></td>'+
+          '<td><%= dept.payment_to %></td>'+
+          ' </tr>');
     <% end %>
+
+    $("#paymentDetailsModal").modal('show');
 });
-$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:error', function () {
-    show_spinner();
-    console.log("Ajax Error ")
+$(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:error', function (event, data, status) {
+    console.log("error");
+    $("#pay_det_tbody").replaceWith('<tbody id="pay_det_tbody"><tr><td colspan="6" class="text-center">'+
+        'No record</td></tr></tbody>');
+    $("#paymentDetailsModal").modal('show');
 });

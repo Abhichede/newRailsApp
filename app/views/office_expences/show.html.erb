@@ -1,0 +1,33 @@
+<%- model_class = OfficeExpence -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @office_expence.date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @office_expence.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
+  <dd><%= @office_expence.amount %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment_to) %>:</strong></dt>
+  <dd><%= @office_expence.payment_to %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment_method) %>:</strong></dt>
+  <dd><%= @office_expence.payment_method %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment_desc) %>:</strong></dt>
+  <dd><%= @office_expence.payment_desc %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:paid_by) %>:</strong></dt>
+  <dd><%= @office_expence.paid_by %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:deleting_status) %>:</strong></dt>
+  <dd><%= @office_expence.deleting_status %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              office_expences_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_office_expence_path(@office_expence), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              office_expence_path(@office_expence),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

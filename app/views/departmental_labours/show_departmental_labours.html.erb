@@ -25,7 +25,7 @@
 </div>
 <div style="overflow: auto">
   <table class="table table-bordered table-responsive">
-    <thead>
+    <thead class="thead-default">
     <tr>
       <th>Date</th>
       <th>Type of work</th>
@@ -50,13 +50,15 @@
               <td>&#8377; <%= departmental_labour.paid_amount %></td>
               <td>&#8377; <%= departmental_labour.amount.to_i - departmental_labour.paid_amount.to_i %></td>
               <td>
-                <a href="#departmentalLabourPaymentModal" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
+                <a href="#departmentalLabourPaymentModal" class="btn btn-primary" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
                    data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
                   Pay
                 </a>
               </td>
               <td>
-                <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details', id: departmental_labour.id}, method: :get, remote: true, class: "btn btn-primary dept_lab_pay_det-#{departmental_labour.id}" %>
+                <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
+                                               id: departmental_labour.id}, method: :get, remote: true,
+                            class: "btn btn-primary dept_lab_pay_det-#{departmental_labour.id}" %>
               </td>
             </tr>
 
@@ -81,7 +83,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addNewDepartmentalLabour" role="dialog">
+<div class="modal fade-scale" id="addNewDepartmentalLabour" role="dialog">
   <div class="modal-dialog " role="document">
 
     <!-- Modal content-->
@@ -150,7 +152,7 @@
 <!-- ********************************************************************************************** -->
 
 <!-- Modal -->
-<div class="modal fade" id="departmentalLabourPaymentModal" role="dialog">
+<div class="modal fade-scale" id="departmentalLabourPaymentModal" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
 
     <!-- Modal content-->
@@ -178,7 +180,7 @@
             <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount]%>
             </div>
             <div class="modal-footer">
-              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm') do %>
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: 'dept_pay_btn') do %>
                   Save
               <% end %>
         <% end %>
@@ -192,19 +194,19 @@
 <!-- ********************************************************************************************** -->
 <!-- ********************************************************************************************** -->
 <!-- Modal -->
-<div class="modal fade" id="paymentDetailsModal" role="dialog">
-  <div class="modal-dialog " role="document">
+<div class="modal fade-scale" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title w-100">Payment Details</h4>
       </div>
-      <div class="modal-body">
-        <div style="overflow: auto">
-          <table class="table-responsive table table-stripped">
-            <thead>
-            <tr>
+      <div class="modal-body" style="height: 80% !important; overflow: auto!important;">
+        <div style="overflow: auto !important; height: 90% !important;">
+          <table class="table table-responsive table-bordered">
+            <thead class="thead-default">
+            <tr class="table-row">
               <th>Date</th>
               <th>Amount</th>
               <th>Pay. Method</th>
@@ -213,14 +215,13 @@
               <th>Payment to</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="pay_det_tbody">
 
             </tbody>
           </table>
         </div>
       </div>
       <div class="modal-footer">
-
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>

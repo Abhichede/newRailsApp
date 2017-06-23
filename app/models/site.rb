@@ -4,6 +4,8 @@ class Site < ApplicationRecord
   has_many :materials
   has_many :outgoing_payments
   has_many :departmental_labours
+  has_many :contractual_labours
+  has_many :contractors
 
   validates :name, uniqueness: true
   validates :type_of_structures, presence: true

@@ -1,0 +1,34 @@
+<%- model_class = OfficeExpence -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:payment_to) %></th>
+      <th><%= model_class.human_attribute_name(:payment_method) %></th>
+      <th><%= model_class.human_attribute_name(:payment_desc) %></th>
+      <th><%= model_class.human_attribute_name(:paid_by) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @office_expences.each do |office_expence| %>
+      <tr>
+        <td><%= office_expence.date %></td>
+        <td><%= office_expence.description %></td>
+        <td><%= office_expence.amount %></td>
+        <td><%= office_expence.payment_to %></td>
+        <td><%= office_expence.payment_method %></td>
+        <td><%= office_expence.payment_desc %></td>
+        <td><%= office_expence.paid_by %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_office_expence_path,
+            :class => 'btn btn-primary' %>

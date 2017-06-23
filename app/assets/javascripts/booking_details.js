@@ -69,12 +69,23 @@ $(function() {
 
     var pre_balance_amount = Number($("#booking_detail_final_sale_deed").val());
     console.log('final '+ pre_balance_amount);
+    var is_loan_possible = $("#booking_detail_loan_possible").val();
+
+    if(is_loan_possible === 'Yes'){
+        $("#loan-possible-div").attr('class', ' ');
+    }else if(is_loan_possible === 'No'){
+        $("#loan-possible-div").attr('class', 'hidden');
+        $("#booking_detail_name_of_bank").attr('value', 'NA');
+        $("#booking_detail_branch_of_bank").attr('value', 'NA');
+        $("#booking_detail_sanctioned_amount").attr('value', '0');
+        $("#booking_detail_employee_name").attr('value', 'NA');
+    }
 
     $("#booking_detail_loan_possible").on("change", function () {
        var is_loan_possible = $("#booking_detail_loan_possible").val();
-       if(is_loan_possible == '1'){
+       if(is_loan_possible == 'Yes'){
            $("#loan-possible-div").attr('class', ' ');
-       }else if(is_loan_possible == '0'){
+       }else if(is_loan_possible == 'No'){
            $("#loan-possible-div").attr('class', 'hidden');
            $("#booking_detail_name_of_bank").attr('value', 'NA');
            $("#booking_detail_branch_of_bank").attr('value', 'NA');
@@ -89,7 +100,7 @@ $(function() {
         $("#booking_detail_registration_fees").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_vat").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_service_tax").attr('value', (4.52/100)*agreement_cost);
-        $("#booking_detail_lbt").attr('value', (1/100)*agreement_cost);
+        $("#booking_detail_lbt").attr('value', 0);
 
     });
     $("#maintenance_in_sqft").on('focusout', function () {
@@ -151,7 +162,7 @@ $(function() {
             },
             "booking_detail[customer_pan]":{
                 required: true,
-                pattern: /^[\w]{3}(p|P|c|C|h|H|f|F|a|A|t|T|b|B|l|L|j|J|g|G)[\w][\d]{4}[\w]$/
+                pattern: /^[A-Z]{3}(P|C|H|F|A|T|B|L|J|G)[\w][\d]{4}[A-Z]$/
             },
             "booking_detail[customer_adhar]":{
                 required: true,

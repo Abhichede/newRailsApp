@@ -47,6 +47,16 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+#production:
+ #   <<: *default
+  #  database: newRailsApp_production
+#
+
 production:
-    <<: *default
-    database: newRailsApp_production
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  username: root
+  password: root
+  database: rails_cloudsql_database
+  socket: /cloudsql/myapplication-c17e7:us-central1:rails-cloudsql-instance

@@ -66,8 +66,12 @@
    <div class="form-group">
      <%= f.label :customer_adhar, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
-        <%= f.text_field :customer_adhar, :class => 'form-control', required: true,
-                         placeholder: :customer_adhar %>
+      <% if @booking_detail.new_record? %>
+            <%= f.text_field :customer_adhar, :class => 'form-control', required: true,
+                             value: '000000000000' %>
+        <% else %>
+            <%= f.text_field :customer_adhar, :class => 'form-control', required: true %>
+        <% end %>
       </div>
       <%=f.error_span(:customer_adhar) %>
    </div>
@@ -192,11 +196,7 @@
       <%=f.error_span(:loan_possible) %>
     </div>
 
-    <% if @booking_detail.loan_possible === "Yes" %>
-        <div id="loan-possible-div">
-    <% else %>
-        <div class="hidden" id="loan-possible-div">
-    <% end %>
+    <div class="hidden" id="loan-possible-div">
       <div class="form-group">
         <%= f.label :name_of_bank, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
@@ -227,11 +227,7 @@
         </div>
         <%=f.error_span(:employee_name) %>
       </div>
-    <% if @booking_detail.loan_possible === "Yes" %>
-        </div>
-    <% else %>
-        </div>
-    <% end %>
+    </div>
     <hr/>
     <% if @flat.booking_status == 0 || @flat.booking_status.blank? %>
       <div class="form-group">
@@ -250,7 +246,7 @@
         <%=f.error_span(:payment_type) %>
       </div>
       <div class="form-group">
-        <%= f.label 'Payment Description', :class => 'control-label col-lg-2' %>
+        <label class="control-label col-lg-2" for="booking_detail_description">Description / Cheque no.</label>
         <div class="col-lg-4">
           <%= f.text_field :payment_desc, :class => 'form-control', required: true%>
         </div>

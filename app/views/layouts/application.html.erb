@@ -60,12 +60,16 @@
                   SITES
               <% end %>
             </li>
-            <li><%= link_to materials_path  do %>
-                  MATERIALS
-              <% end %>
-            </li>
             <li><%= link_to suppliers_path  do %>
                   SUPPLIERS
+              <% end %>
+            </li>
+            <li><%= link_to office_expences_path  do %>
+                  OFFICE EXPENCE
+              <% end %>
+            </li>
+            <li><%= link_to investors_path  do %>
+                  INVESTORS
               <% end %>
             </li>
           </ul>
@@ -84,11 +88,19 @@
             <% end %>
           </div>
           <ul class="nav navbar-nav navbar-right">
-              <li>
-                <%= link_to  destroy_user_session_path, method: :delete do %>
-                    SIGN OUT
-                <% end %>
-              </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.user_name %>
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'EDIT INFO', edit_user_registration_path %></li>
+                <li>
+                  <%= link_to  destroy_user_session_path, method: :delete do %>
+                      SIGN OUT
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+
           </ul>
         </div>
       </div>
@@ -106,7 +118,7 @@
 
     <hr />
     <footer class="text-center footer">
-      <p>&copy; Linker-IT Solutions 2017</p>
+      <p>&copy; Harak patil Constructions 2017 | Powered By - Linker IT Solutions PVT. LTD.</p>
     </footer>
     <script>
         $("#customer-search-box").autocomplete({

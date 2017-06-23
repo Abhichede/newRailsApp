@@ -30,6 +30,9 @@ ul.nav.navbar-nav>li>a, div.navbar-header>a.navbar-brand{
 }
 
 
+.table{
+    overflow: auto !important;
+}
 
 .card{
     background-color: #E0E0E0;
@@ -85,9 +88,29 @@ ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
     background-color: rgba(44, 121, 127, 0.86);
     color: #FFFFFF;
 }
+.dropdown-menu{
+    -webkit-box-shadow: none;
+    background-color: #006064;
+    border: none !important;
+}
+ul.nav.navbar-nav.navbar-right>li.open>a{
+    background-color: rgba(44, 121, 127, 0.86) !important;
+}
+.nav>li>a:focus{
+    background-color: rgba(44, 121, 127, 0.86) !important;
+}
+ul.nav.navbar-nav.navbar-right>li.open>ul.dropdown-menu>li>a{
+    color: #FFFFFF !important;
+    background-color: #006064;
+}
+ul.nav.navbar-nav.navbar-right>li.open>ul.dropdown-menu>li>a:hover{
+    background-color: rgba(44, 121, 127, 0.86) !important;
+}
 .navbar-static-top{
     background-color: #006064 !important;
 }
+
+
 
 .card{
     border-radius: .5rem;
@@ -116,10 +139,6 @@ select.form-control{
 }
 .card-image{
     height: 5rem;
-}
-div.outstanding-table{
-    height: 13rem;
-    overflow: auto;
 }
 .btn{
     text-transform: uppercase;
@@ -207,6 +226,9 @@ a{
     .navbar-left, .navbar-right {
         float: none !important;
     }
+    .dropdown-menu{
+        position: relative;
+    }
 
     .navbar-toggle {
         display: block;
@@ -243,4 +265,26 @@ a{
     .collapse.in {
         display: block !important;
     }
+}
+
+.fade-scale {
+    transform: scale(0);
+    opacity: 0;
+    -webkit-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.fade-scale.in {
+    opacity: 1;
+    transform: scale(1);
+}
+.modal-dialog{
+    height: 80% !important;
+    padding-top:10%;
+    overflow-y: initial !important
+}
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }

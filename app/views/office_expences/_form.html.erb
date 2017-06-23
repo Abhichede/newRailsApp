@@ -1,0 +1,79 @@
+<%= form_for @office_expence, :html => { :class => "form-horizontal office_expence" } do |f| %>
+
+  <% if @office_expence.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@office_expence.errors.count, "error") %> prohibited this office_expence from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @office_expence.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.date_field :date, :class => 'form-control', reqiured: true %>
+    </div>
+    <%=f.error_span(:date) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :description, :class => 'form-control', reqiured: true  %>
+    </div>
+    <%=f.error_span(:description) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :amount, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :amount, :class => 'form-control', reqiured: true  %>
+    </div>
+    <%=f.error_span(:amount) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_to, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :payment_to, :class => 'form-control', reqiured: true  %>
+    </div>
+    <%=f.error_span(:payment_to) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_method, :class => 'control-label col-lg-2', reqiured: true  %>
+    <div class="col-lg-6">
+      <%= f.select(:payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],
+                                                     :disabled=> 'Payment Method', selected: 'Payment Method'),
+                   {}, class: 'form-control') %>
+    </div>
+    <%=f.error_span(:payment_method) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_desc, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :payment_desc, :class => 'form-control', reqiured: true  %>
+    </div>
+    <%=f.error_span(:payment_desc) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paid_by, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :paid_by, :class => 'form-control', value: current_user.user_name, readonly: true %>
+    </div>
+    <%=f.error_span(:paid_by) %>
+  </div>
+    <%= f.hidden_field :deleting_status, value: 0 %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit 'Save', :class => 'btn btn-primary btn-sm' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                office_expences_path, :class => 'btn btn-default btn-sm' %>
+    </div>
+  </div>
+
+<% end %>

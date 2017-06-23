@@ -17,6 +17,7 @@ class MaterialsController < ApplicationController
     @material = Material.new
     @site = Site.find(params[:site_id])
     @supplier = Supplier.new
+    @material_list = MaterialList.find_by(:material_name => params[:type_of_material])
     session.delete(:return_to)
     session[:return_to] ||= request.referer
   end
@@ -30,6 +31,9 @@ class MaterialsController < ApplicationController
   # POST /materials.json
   def create
     @material = Material.new(material_params)
+    if !material_params[:challan_item].blank?
+      @material.challan_no = material_params[:challan_no] + "-" + material_params[:challan_item]
+    end
     @supplier = Supplier.find(material_params[:supplier_id])
     suppliers_total_amount = @supplier.total_amount.to_f
 
@@ -88,6 +92,6 @@ class MaterialsController < ApplicationController
     def material_params
       params.require(:material).permit(:date, :supplier_id, :site_id, :type_of_material,
                                        :quantity, :unit, :challan_no, :truck_no, :time, :rate,
-                                       :amount, :supervisor_name)
+                                       :amount, :supervisor_name,:challan_item, :description)
     end
 end

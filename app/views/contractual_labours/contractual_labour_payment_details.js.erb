@@ -1,0 +1,23 @@
+
+$(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:success', function (event, data, status) {
+    console.log("success");
+    $("#contr-pay_det_tbody").replaceWith('<tbody id="contr-pay_det_tbody"></tbody>')
+    <% @contr_lab_outgoing_payment.each do |dept| %>
+    $("#contr-pay_det_tbody").append('<tr>' +
+        '<td><%= dept.date %></td>'+
+        '<td><%= dept.amount %></td>'+
+        '<td><%= dept.payment_method %></td>'+
+        '<td><%= dept.payment_description %></td>'+
+        '<td><%= dept.paid_by %></td>'+
+        '<td><%= dept.payment_to %></td>'+
+        ' </tr>');
+    <% end %>
+
+    $("#paymentDetailsModal").modal('show');
+});
+$(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:error', function (event, data, status) {
+    console.log("error");
+    $("#contr-pay_det_tbody").replaceWith('<tbody id="contr-pay_det_tbody"><tr><td colspan="6" class="text-center">'+
+        'No record</td></tr></tbody>');
+    $("#paymentDetailsModal").modal('show');
+});
