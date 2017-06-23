@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb" afterPath="$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb" afterPath="$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -64,11 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="20170616162805_change_columns_from_contractual_labours.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="20170616162805_change_columns_from_contractual_labours.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="40">
-              <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+              <caret line="2" column="75" lean-forward="false" selection-start-line="2" selection-start-column="75" selection-end-line="2" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20170616162355_add_and_change_columns_from_contractual_labours.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="3" column="64" lean-forward="false" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -179,7 +190,6 @@
         <option value="$PROJECT_DIR$/db/migrate/20170616130748_create_contract_lists.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20170616154205_create_contractual_labours.rb" />
         <option value="$PROJECT_DIR$/app/controllers/sites_controller.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb" />
         <option value="$PROJECT_DIR$/app/models/site.rb" />
         <option value="$PROJECT_DIR$/app/models/contractor.rb" />
         <option value="$PROJECT_DIR$/app/views/contractual_labours/new.html.erb" />
@@ -209,6 +219,7 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/office_expences/index.html.erb" />
         <option value="$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb" />
       </list>
     </option>
   </component>
@@ -1159,14 +1170,7 @@
       <workItem from="1498033173241" duration="142000" />
       <workItem from="1498121271299" duration="2845000" />
       <workItem from="1498210956678" duration="1312000" />
-      <workItem from="1498222633560" duration="129000" />
-    </task>
-    <task id="LOCAL-00058" summary="Mailer notifications.">
-      <created>1493750480652</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1493750480652</updated>
+      <workItem from="1498222633560" duration="457000" />
     </task>
     <task id="LOCAL-00059" summary="search method edited.">
       <created>1493820629957</created>
@@ -1504,11 +1508,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498214237962</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="new modules added.">
+      <created>1498222814306</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1498222814307</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="702252000" />
+    <option name="totallyTimeSpent" value="702580000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-11" width="1381" height="912" extended-state="6" />
@@ -1653,13 +1664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
           <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1981,7 +1985,15 @@
     <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
-          <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <caret line="2" column="75" lean-forward="false" selection-start-line="2" selection-start-column="75" selection-end-line="2" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20170616162355_add_and_change_columns_from_contractual_labours.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="64" lean-forward="false" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
           <folding />
         </state>
       </provider>
