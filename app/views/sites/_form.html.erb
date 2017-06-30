@@ -113,7 +113,7 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit 'Create', :class => 'btn btn-primary' %>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
       <% if @site.id != nil %>
         <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   site_path(@site), :class => 'btn btn-default' %>

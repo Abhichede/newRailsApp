@@ -1,11 +1,37 @@
 <%- model_class = Investor -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to investors_path do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <h4><strong><%= @investor.name.upcase %></strong></h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_investor_path(@investor), :class => 'btn btn-primary btn-block btn-sm' %>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newInvestmentModal">Add Investment</button>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <% link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    investor_path(@investor),
+                    :method => 'delete',
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-danger btn-sm btn-block' %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @investor.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd><%= @investor.address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
@@ -18,12 +44,165 @@
   <dd><%= @investor.created_by %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              investors_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_investor_path(@investor), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              investor_path(@investor),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Capital Amount</th>
+    <th>Interest Rate</th>
+    <th>Last Month Interest</th>
+    <th>Current Month Interest</th>
+    <th>Total Payable Amount</th>
+    <th>Last Paid Date</th>
+    <th>Created By</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="investorTableBody">
+  <% @investor.investments.each do |investment| %>
+      <tr>
+        <td><%= investment.investment_date %></td>
+        <td>&#8377; <%= investment.investment_amount %> </td>
+        <td><%= investment.interest_rate %> %</td>
+        <td>&#8377; <%= investment.last_month_interest %> </td>
+        <td>&#8377; <%= investment.current_month_interest %> </td>
+        <td>&#8377; <%= investment.total_payable_amount %> </td>
+        <td><%= investment.last_return_date %></td>
+        <td><%= investment.created_by %></td>
+        <td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= investment.id %>"
+                    data-toggle="modal" data-inv-id="<%= investment.id %>"
+                    data-target="#newInvestmentReturnModal">Return</button></td>
+        <td><button class="btn btn-primary" id="investment_retunr_details">Details</button></td>
+      </tr>
+
+      <!-- ************************* Script ****************************** -->
+      <script type="text/javascript">
+          $('#investment_return-<%= investment.id %>').on('click', function () {
+              //get data-id attribute of the clicked element
+              var investmentId = $(this).data('inv-id');
+              //populate the textbox
+              $("#investment_id").val(investmentId);
+          });
+      </script>
+      <!-- ************************** end ******************************** -->
+  <% end %>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="newInvestmentModal" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">New Investment</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for @investment, :html => { :class => "form-horizontal investment", remote: true } do |f| %>
+
+            <% if @investment.errors.any? %>
+                <div id="error_expl" class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><%= pluralize(@investment.errors.count, "error") %> prohibited this departmental_labour from being saved:</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul>
+                      <% @investment.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :investment_date, :class => 'control-label col-lg-3' %>
+              <div class="col-lg-6">
+                <%= f.date_field :investment_date, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:investment_date) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :investment_amount, :class => 'control-label col-lg-3' %>
+              <div class="col-lg-6">
+                <%= f.text_field :investment_amount, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:investment_amount) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :interest_rate, :class => 'control-label col-lg-3' %>
+              <div class="col-lg-6">
+                <%= f.text_field :interest_rate, :class => 'form-control' %>
+              </div>
+              <%=f.error_span(:interest_rate) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :create_by, :class => 'control-label col-lg-3' %>
+              <div class="col-lg-6">
+                <%= f.text_field :created_by, :class => 'form-control', readonly: true, value: current_user.user_name %>
+              </div>
+              <%=f.error_span(:created_by) %>
+            </div>
+            <%= f.hidden_field :investor_id, value: @investor.id %>
+            <%= f.hidden_field :last_month_interest, value: '0' %>
+            <%= f.hidden_field :current_month_interest, value: '0' %>
+            <%= f.hidden_field :total_payable_amount, value: '0' %>
+            <%= f.hidden_field :last_return_date, value: 'Nil' %>
+
+            <div class="form-group">
+              <div class="col-lg-offset-2 col-lg-10">
+
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        <% end %>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="newInvestmentReturnModal" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">New Investment</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_tag investment_returns_path, method: :post, id: 'investment_return_form', remote: true  do %>
+
+            <%= date_field_tag :date, params[:date],placeholder: 'Select Date',
+                               class: 'form-control', required: true %>
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control', required: true %>
+            <%= text_field_tag :description, params[:description],placeholder: 'Payment Description',
+                               class: 'form-control', required: true %>
+            <%= hidden_field_tag :investment_id, params[:investment_id] %>
+            </div>
+            <div class="modal-footer">
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: '') do %>
+                  Save
+              <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+
+  </div>
+</div>
+
+
+

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :flats
   resources :sites
   resource :payment_details
+  resource :investments
   resource :material_list
   devise_for :users, :controllers => {registrations: 'registrations'}
   root 'sites#index'
@@ -41,6 +42,8 @@ Rails.application.routes.draw do
   get 'show_contractual_labours', to: 'contractual_labours#show_contractual_labours'
   get 'update_contractual_labour_payment', to: 'contractual_labours#update_contractual_labour_payment'
   get 'contractual_labour_payment_details', to: 'contractual_labours#contractual_labour_payment_details'
+
+  post 'investment_returns', to: 'investors#investment_return'
 
   get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
   get 'departmental_labour_payment_details', to: 'departmental_labours#departmental_labour_payment_details'

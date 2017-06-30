@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622085210) do
+ActiveRecord::Schema.define(version: 20170629095236) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -123,6 +123,39 @@ ActiveRecord::Schema.define(version: 20170622085210) do
     t.string   "wing"
     t.string   "amenities"
     t.string   "flat_rate"
+  end
+
+  create_table "investment_return_meta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "investment_id"
+    t.string   "meta_key"
+    t.string   "meta"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "investment_returns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "date"
+    t.integer  "investment_id"
+    t.string   "amount"
+    t.string   "description",   default: "NA"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "investments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "investor_id"
+    t.string   "investment_date"
+    t.string   "investment_amount"
+    t.string   "interest_rate"
+    t.string   "created_by"
+    t.string   "deleting_status",        default: "0"
+    t.string   "returned_amount",        default: "0"
+    t.string   "last_return_date",       default: ""
+    t.string   "last_month_interest",    default: ""
+    t.string   "current_month_interest", default: ""
+    t.string   "total_payable_amount",   default: ""
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "investors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

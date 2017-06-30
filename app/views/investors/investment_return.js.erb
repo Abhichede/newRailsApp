@@ -1,0 +1,22 @@
+
+$("form#investment_return_form").on('ajax:before', function (event, data, status) {
+    console.log("Before");
+});
+$("form#investment_return_form").on('ajax:after', function (event, data, status) {
+    console.log("After");
+});
+$("form#investment_return_form").on('ajax:success', function (event, data, status) {
+    console.log("success");
+    $(this).trigger('reset');
+    $("#newInvestmentReturnModal").modal('hide');
+
+    $.notify(
+        "Investment returns was successfully added, see details for more information",
+        {style: 'bootstrap', className: 'success'}
+    );
+
+
+});
+$("form#investment_return_form").on('ajax:error', function (event, data, status) {
+    console.log("error");
+});

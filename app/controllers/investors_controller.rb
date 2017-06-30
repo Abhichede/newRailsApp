@@ -10,6 +10,8 @@ class InvestorsController < ApplicationController
   # GET /investors/1
   # GET /investors/1.json
   def show
+    @investment = Investment.new
+    @investment_return = InvestmentReturn.new
   end
 
   # GET /investors/new
@@ -51,6 +53,20 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def investment_return
+    @investment_return = InvestmentReturn.new(investment_return_params)
+
+    respond_to do |format|
+      if @investment_return.save
+        format.html {}
+        format.js {}
+      else
+        format.html {}
+        format.js {}
+      end
+    end
+  end
+
   # DELETE /investors/1
   # DELETE /investors/1.json
   def destroy
@@ -62,6 +78,7 @@ class InvestorsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_investor
       @investor = Investor.find(params[:id])
@@ -70,5 +87,9 @@ class InvestorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def investor_params
       params.require(:investor).permit(:name, :address, :contact_number, :email, :deleting_status, :created_by)
+    end
+
+    def investment_return_params
+      params.permit(:date, :investment_id, :amount, :description)
     end
 end

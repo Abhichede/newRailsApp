@@ -1,0 +1,23 @@
+
+$("form.investment").on('ajax:success', function (event, data, status) {
+    console.log("success");
+    $(this).trigger('reset');
+    $("#newInvestmentModal").modal('hide');
+
+    var newRow = '<tr>' +
+        '<td><%= @investment.investment_date %></td>'+
+        '<td>&#8377; <%= @investment.investment_amount %> </td>'+
+        '<td><%= @investment.interest_rate %> %</td>'+
+        '<td>&#8377; <%= @investment.last_month_interest %> </td>'+
+        '<td>&#8377; <%= @investment.current_month_interest %> </td>'+
+        '<td>&#8377; <%= @investment.total_payable_amount %> </td>'+
+        '<td><%= @investment.last_return_date %></td> ' +
+        '<td><%= @investment.created_by %></td> ' +
+        '</tr>';
+
+        $("#investorTableBody").append(newRow).hide().fadeIn('slow');
+
+});
+$("form.investment").on('ajax:error', function (event, data, status) {
+    console.log("error");
+});
