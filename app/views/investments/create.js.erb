@@ -14,8 +14,8 @@ $("form.investment").on('ajax:success', function (event, data, status) {
         '<td><%= @investment.last_return_date %></td> ' +
         '<td><%= @investment.created_by %></td> ' +
         '<td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= @investment.id %>" '+
-              'data-toggle="modal" data-inv-id="<%= @investment.id %>" data-target="#newInvestmentReturnModal">Return</button></td> '+
-        '<td><button class="btn btn-primary btn-sm btn-block" id="investment_return_details-<%= @investment.id %>">Details</button></td>'+
+              'data-toggle="modal" data-inv-id="<%= @investment.id %>" data-target="#newInvestmentReturnModal" disabled>Return</button></td> '+
+        '<td><button class="btn btn-primary btn-sm btn-block" id="investment_return_details-<%= @investment.id %>" disabled>Details</button></td>'+
         '</tr>';
 
 
