@@ -34,7 +34,7 @@ class SitesController < ApplicationController
     respond_to do |format|
       if @site.save
         #CustomerMailer.welcome_email().deliver_later
-        format.html { redirect_to @site, notice: 'Site was successfully Saved.' }
+        format.html { redirect_to @site, notice: 'Site was successfully Created.'}
         format.json { render :show, status: :created, location: @site }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update(site_params)
-        format.html { redirect_to @site, notice: 'Site was successfully Saved.' }
+        format.html { redirect_to @site, notice: 'Site was successfully Updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
         format.html { render :edit }

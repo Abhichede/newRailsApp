@@ -12,11 +12,21 @@ class InvestmentsController < ApplicationController
 
     respond_to do |format|
       if @investment.save
-        format.html
-        format.js
+        interest = investment_params[:investment_amount].to_f * (investment_params[:interest_rate].to_f / 100)
+        @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => @investment.id,
+                                                            :month => Time.parse(investment_params[:investment_date]).month,
+                                                            :interest_rate => investment_params[:interest_rate],
+                                                            :interest => interest, :pending_interest => interest)
+        if @investment_monthly.save
+          format.html
+          format.js
+        else
+          format.html
+          format.js {@investment.errors}
+        end
       else
         format.html
-        format.js
+        format.js {@investment.errors}
       end
     end
 

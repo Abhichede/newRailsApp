@@ -59,7 +59,7 @@
                          options_from_collection_for_select(TypeOfStructure.all, :name, :name,
                                                             {:selected => @flat_types.map{|x| x } } ),
                          {include_hidden: false},
-                         {class: 'multiselect', multiple: true, required: true} %> Make sure you have selected correct fields
+                         {class: 'multiselect', multiple: true, required: true} %>
         <% end %>
 
 

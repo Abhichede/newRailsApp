@@ -65,7 +65,7 @@
               <% end %>
             </li>
             <li><%= link_to office_expences_path  do %>
-                  OFFICE EXPENCE
+                  OFFICE EXPENSE
               <% end %>
             </li>
             <li><%= link_to investors_path  do %>
@@ -110,7 +110,7 @@
     <div class="container">
 
       <div class="notifications top-left">
-        <%= bootstrap_flash %>
+        <%= render 'layouts/messages' %>
       </div>
 
       <%= yield %>

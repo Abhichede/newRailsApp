@@ -1,0 +1,14 @@
+<% flash.each do |key, value| %>
+    <% if key === 'alert'
+          key = 'error'
+       elsif key === 'notice'
+          key = 'success'
+       end
+    %>
+    <script>
+      $.notify('<%= value  %>',
+
+          {style: 'bootstrap', className: '<%= key %>', position: 'top right'}
+      );
+    </script>
+<% end %>

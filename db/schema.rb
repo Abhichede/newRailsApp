@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629095236) do
+ActiveRecord::Schema.define(version: 20170702165243) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -125,6 +125,19 @@ ActiveRecord::Schema.define(version: 20170629095236) do
     t.string   "flat_rate"
   end
 
+  create_table "investment_monthly_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "investment_id"
+    t.string   "interest_rate"
+    t.string   "interest"
+    t.string   "paid_interest",                   default: "0"
+    t.string   "paid_date",                       default: "nil"
+    t.string   "paid_by",                         default: "NA"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "month"
+    t.decimal  "pending_interest", precision: 10, default: 0
+  end
+
   create_table "investment_return_meta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "investment_id"
     t.string   "meta_key"
@@ -137,9 +150,12 @@ ActiveRecord::Schema.define(version: 20170629095236) do
     t.string   "date"
     t.integer  "investment_id"
     t.string   "amount"
-    t.string   "description",   default: "NA"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "description",     default: "NA"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "payment_method",  default: "NA"
+    t.string   "paid_by"
+    t.boolean  "deleting_status", default: false
   end
 
   create_table "investments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

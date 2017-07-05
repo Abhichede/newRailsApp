@@ -1,6 +1,6 @@
 <%- model_class = OfficeExpence -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => 'Office Expenses' %></h1>
 </div>
 <table class="table table-bordered table-responsive">
   <thead>
@@ -18,7 +18,7 @@
     <% @office_expences.each do |office_expence| %>
       <tr>
         <td><%= office_expence.date %></td>
-        <td><%= office_expence.description %></td>
+        <td><%= link_to office_expence.description, office_expence_path(office_expence) %></td>
         <td><%= office_expence.amount %></td>
         <td><%= office_expence.payment_to %></td>
         <td><%= office_expence.payment_method %></td>

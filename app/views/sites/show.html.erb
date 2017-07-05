@@ -7,26 +7,6 @@
             <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
         <% end %>
       </div>
-      <div class="col-md-10">
-        <h4><strong><%= @site.name.upcase %></strong></h4>
-        <h5>
-          <div class="label label-primary">
-                Available Flats
-          </div>
-          <span class="label label-default label-sm">
-            <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
-                @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
-          </span>
-          &nbsp;&nbsp;
-          <div class="label label-primary">
-            Available Shops
-          </div>
-          <span class="label label-default label-sm">
-            <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
-          </span>
-
-        </h5>
-      </div>
     </div>
     <div class="col-md-6">
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
@@ -66,35 +46,62 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-  <dl class="dl-horizontal">
-    <dt><strong><%= model_class.human_attribute_name(:address) %></strong></dt>
-   <dd><strong>:</strong>  <%= @site.address %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:no_of_flats) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.no_of_flats %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:no_of_shops) %> </strong></dt>
-    <dd><strong>:</strong>  <%= @site.no_of_shops %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.type_of_structures %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:site_type) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.site_type %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.area_of_plot %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %> </strong></dt>
-   <dd><strong>:</strong>  <%= @site.project_approved_by %></dd>
-  </dl>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h4><strong><%= @site.name.upcase %></strong></h4>
+          <h5>
+            <div class="label label-primary">
+              Available Flats
+            </div>
+            <span class="label label-default label-sm">
+            <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
+                @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
+          </span>
+            &nbsp;&nbsp;
+            <div class="label label-primary">
+              Available Shops
+            </div>
+            <span class="label label-default label-sm">
+            <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
+          </span>
+          </h5>
+      </div>
+      <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt><strong><%= model_class.human_attribute_name(:address) %></strong></dt>
+              <dd><strong>:</strong>  <%= @site.address %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:no_of_flats) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.no_of_flats %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:no_of_shops) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.no_of_shops %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.type_of_structures %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:site_type) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.site_type %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.area_of_plot %></dd>
+              <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %> </strong></dt>
+              <dd><strong>:</strong>  <%= @site.project_approved_by %></dd>
+            </dl>
+      </div>
+    </div>
   </div>
-  <div class="panel panel-default col-md-6">
-    <div class="panel-heading"><strong>Outstandings</strong></div>
-    <div class="panel-body">
-      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-              data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
-      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-              data-toggle="modal" data-target="#suppliersOutstanding">Supplier</button>
-      <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-              data-toggle="modal" data-target="#">Labour</button>
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Outstandings</strong></div>
+      <div class="panel-body">
+        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
+        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#suppliersOutstanding">Supplier</button>
+        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#">Labour</button>
+      </div>
     </div>
   </div>
 </div>
+
 <hr/>
 <ul  class="nav nav-pills" style="margin-top: 2rem;">
   <li class="active">

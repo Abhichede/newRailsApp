@@ -19,4 +19,8 @@ $("form#investment_return_form").on('ajax:success', function (event, data, statu
 });
 $("form#investment_return_form").on('ajax:error', function (event, data, status) {
     console.log("error");
+    $.notify(
+        "Something went wrong while saving investment return",
+        {style: 'bootstrap', className: 'error'}
+    );
 });

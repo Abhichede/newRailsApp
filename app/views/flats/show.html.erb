@@ -7,19 +7,6 @@
             <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
         <% end %>
       </div>
-      <div class="col-md-6">
-        <h4><strong><%= @flat.site.name.upcase %></strong></h4>
-        <h5>
-          <div class="label label-primary">
-            Flat No: <%= @flat.flat_number %>
-          </div>
-          <% if @flat.booking_status == 1 || @flat.booking_status %>
-
-              <span class="label label-danger">Booked</span>
-
-          <% end %>
-        </h5>
-      </div>
     </div>
     <div class="col-md-6">
       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -51,24 +38,48 @@
   </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:area) %> </strong></dt>
-   <dd><strong>:</strong> <%= @flat.area %> sq.ft.</dd>
-  <dt><strong><%= model_class.human_attribute_name(:floor) %> </strong></dt>
-   <dd><strong>:</strong> <%= @flat.floor %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:flat_cost) %> </strong></dt>
-   <dd><strong>:</strong> &#8377; <%= @flat.flat_cost %> </dd>
-  <dt><strong><%= model_class.human_attribute_name(:govt_rate) %> </strong></dt>
-   <dd><strong>:</strong> &#8377; <%= @flat.govt_rate %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:govt_value) %> </strong></dt>
-   <dd><strong>:</strong> &#8377; <%= @flat.govt_value %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:flat_type) %> </strong></dt>
-   <dd><strong>:</strong> <%= @flat.flat_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:wing) %> </strong></dt>
-   <dd><strong>:</strong> <%= @flat.wing %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:amenities) %> </strong></dt>
-   <dd><strong>:</strong> <%= @flat.amenities %></dd>
-</dl>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h4><strong><%= @flat.site.name.upcase %></strong></h4>
+          <h5>
+            <div class="label label-primary">
+              Flat No: <%= @flat.flat_number %>
+            </div>
+            <% if @flat.booking_status == 1 || @flat.booking_status %>
+
+                <span class="label label-danger">Booked</span>
+
+            <% end %>
+          </h5>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt><strong><%= model_class.human_attribute_name(:area) %> </strong></dt>
+          <dd><strong>:</strong> <%= @flat.area %> sq.ft.</dd>
+          <dt><strong><%= model_class.human_attribute_name(:floor) %> </strong></dt>
+          <dd><strong>:</strong> <%= @flat.floor %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:flat_cost) %> </strong></dt>
+          <dd><strong>:</strong> &#8377; <%= @flat.flat_cost %> </dd>
+          <dt><strong><%= model_class.human_attribute_name(:govt_rate) %> </strong></dt>
+          <dd><strong>:</strong> &#8377; <%= @flat.govt_rate %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:govt_value) %> </strong></dt>
+          <dd><strong>:</strong> &#8377; <%= @flat.govt_value %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:flat_type) %> </strong></dt>
+          <dd><strong>:</strong> <%= @flat.flat_type %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:wing) %> </strong></dt>
+          <dd><strong>:</strong> <%= @flat.wing %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:amenities) %> </strong></dt>
+          <dd><strong>:</strong> <%= @flat.amenities %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>
 
 
 

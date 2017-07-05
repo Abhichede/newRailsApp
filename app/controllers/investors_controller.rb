@@ -12,6 +12,8 @@ class InvestorsController < ApplicationController
   def show
     @investment = Investment.new
     @investment_return = InvestmentReturn.new
+
+
   end
 
   # GET /investors/new
@@ -55,9 +57,61 @@ class InvestorsController < ApplicationController
 
   def investment_return
     @investment_return = InvestmentReturn.new(investment_return_params)
+    @investment = Investment.find(investment_return_params[:investment_id])
+    total_pending_interest = 0
+    paying_amount = investment_return_params[:amount].to_f
+    @investment.investment_monthly_interests.where(' pending_interest > ? ', 0).each do |pending|
+      total_pending_interest += pending.pending_interest
+    end
 
     respond_to do |format|
       if @investment_return.save
+        if total_pending_interest > 0
+          if total_pending_interest <= paying_amount
+            paying_amount -= total_pending_interest
+
+            @investment.investment_monthly_interests.where(' pending_interest > ? ', 0).each do |pending|
+              current_pending = pending.pending_interest
+              if current_pending <= total_pending_interest
+                total_pending_interest -= current_pending
+                pending.update(:paid_interest => (pending.paid_interest.to_f + current_pending),
+                               :paid_date => investment_return_params[:date],
+                               :paid_by => investment_return_params[:paid_by],
+                               :pending_interest => pending.pending_interest - current_pending)
+
+              end
+            end
+            paying_amount = @investment.investment_amount.to_f - paying_amount
+            @investment.update(:investment_amount => paying_amount, :total_payable_amount => paying_amount,
+                               :last_paid_date => investment_return_params[:date])
+          else
+
+            @investment.investment_monthly_interests.where(' pending_interest > ? ', 0).each do |pending|
+              current_pending = pending.pending_interest
+              total_pending_interest = total_pending_interest - paying_amount
+              if current_pending <= paying_amount
+                paying_amount -= current_pending
+                pending.update(:paid_interest => (pending.paid_interest.to_f + current_pending),
+                               :paid_date => investment_return_params[:date],
+                               :paid_by => investment_return_params[:paid_by],
+                               :pending_interest => pending.pending_interest - current_pending)
+
+              else
+                pending.update(:paid_interest => (pending.paid_interest.to_f + paying_amount),
+                               :paid_date => investment_return_params[:date],
+                               :paid_by => investment_return_params[:paid_by],
+                               :pending_interest => pending.pending_interest - paying_amount)
+
+                break
+
+              end
+
+            end
+            @investment.update(:total_payable_amount => total_pending_interest + @investment.investment_amount.to_f,
+                               :last_return_date => investment_return_params[:date])
+          end
+
+        end
         format.html {}
         format.js {}
       else
@@ -90,6 +144,6 @@ class InvestorsController < ApplicationController
     end
 
     def investment_return_params
-      params.permit(:date, :investment_id, :amount, :description)
+      params.permit(:date, :investment_id, :amount, :description, :payment_method, :deleting_status, :paid_by)
     end
 end

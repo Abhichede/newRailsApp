@@ -23,7 +23,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-   process resize: [320, 260]
+    process resize_to_fill: [420, 280]
   #
   # def scale(width, height)
   #   # do something
@@ -45,12 +45,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # Create different versions of your uploaded files:
-   version :thumb do
-     process resize_to_fit: [50, 50]
-   end
-  version :medium do
-    process :resize => [320, 260]
-  end
+  # version :thumb do
+  #   process resize_to_fit: [50, 50]
+  # end
+  # version :medium do
+  #  process :resize_to_fit => [320, 260]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -60,8 +60,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+   def filename
+     "site.jpg" if original_filename
+   end
 
 end

@@ -16,7 +16,9 @@
     </div>
     <div class="col-md-6">
       <div class="col-md-4 col-sm-4 col-xs-4">
-        <%= link_to "Add #{params[:contract_name].capitalize}", {:controller => "contractual_labours", :action => "new", :site_id => params[:id],:contract_name => params[:contract_name] },
+        <%= link_to "Add #{params[:contract_name].capitalize}",
+                    {:controller => "contractual_labours", :action => "new",
+                     :site_id => params[:id],:contract_name => params[:contract_name] },
                     :class => 'btn btn-primary btn-sm' %>
       </div>
     </div>

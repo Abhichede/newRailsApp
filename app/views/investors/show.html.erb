@@ -71,8 +71,8 @@
         <td><%= investment.created_by %></td>
         <td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= investment.id %>"
                     data-toggle="modal" data-inv-id="<%= investment.id %>"
-                    data-target="#newInvestmentReturnModal" disabled>Return</button></td>
-        <td><button class="btn btn-primary" id="investment_retunr_details" disabled>Details</button></td>
+                    data-target="#newInvestmentReturnModal">Return</button></td>
+        <td><button class="btn btn-primary btn-sm btn-block" id="investment_return_details">Details</button></td>
       </tr>
 
       <!-- ************************* Script ****************************** -->
@@ -81,7 +81,7 @@
               //get data-id attribute of the clicked element
               var investmentId = $(this).data('inv-id');
               //populate the textbox
-              $("#investment_id").val(investmentId);
+              $("#investment_id").val(<%= investment.id %>);
           });
       </script>
       <!-- ************************** end ******************************** -->
@@ -186,9 +186,13 @@
                                class: 'form-control', required: true %>
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
                                class: 'form-control', required: true %>
+            <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
+                           class: 'form-control', id: 'payment_method', required: true %>
             <%= text_field_tag :description, params[:description],placeholder: 'Payment Description',
                                class: 'form-control', required: true %>
             <%= hidden_field_tag :investment_id, params[:investment_id] %>
+            <%= hidden_field_tag :paid_by, params[:paid_by], value: current_user.user_name %>
+            <%= hidden_field_tag :deleting_status, params[:deleting_status], value: false %>
             </div>
             <div class="modal-footer">
               <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: '') do %>

@@ -59,23 +59,8 @@ div.row.custom-row{
     }
 
 }
-@media (width: 412px){
-    .site-card{
-        margin-left: 3rem;
-    }
-}
-@media (max-width: 375px){
-    .site-card{
-        margin-left: 2.5rem;
-    }
-}
-@media (width: 414px){
-    .site-card{
-        margin-left: 3rem;
-    }
-}
 
-    @media only screen and (max-device-width: 400px) {
+@media only screen and (max-device-width: 400px) {
     table.table-responsive{
         width: 350px !important;
         overflow: auto !important;
@@ -190,9 +175,11 @@ select.form-control{
 }
 .panel-primary>.panel-heading{
     background-color: #0097A7;
+    border-color: #0097A7 !important;
 }
 .panel-primary{
     padding: 0;
+    border-color: #0097A7 !important;
 }
 a{
     text-decoration: none !important;
