@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get 'contractual_labour_payment_details', to: 'contractual_labours#contractual_labour_payment_details'
 
   post 'investment_returns', to: 'investors#investment_return'
+  get 'investment_details', to: 'investments#investment_details'
 
   get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
   get 'departmental_labour_payment_details', to: 'departmental_labours#departmental_labour_payment_details'

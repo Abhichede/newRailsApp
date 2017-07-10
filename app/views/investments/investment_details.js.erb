@@ -1,0 +1,29 @@
+
+$("a#investment_details-<%= @investment.id %>").on('ajax:success', function (event, data, status) {
+    console.log("success");
+
+    $("#inv-mon-det_tbody").replaceWith('<tbody id="inv-mon-det_tbody"></tbody>')
+    <% @inv_monthly_interest.each do |inv_mon| %>
+    $("#inv-mon-det_tbody").append('<tr>' +
+        '<td><%= inv_mon.month %></td>'+
+        '<td><%= inv_mon.interest %></td>'+
+        '<td><%= inv_mon.paid_interest %></td>'+
+        '<td><%= inv_mon.paid_date %></td>'+
+        '<td><%= inv_mon.pending_interest %></td>'+
+        '<td><%= inv_mon.paid_by %></td>'+
+        ' </tr>');
+    <% end %>
+
+    $("#investmentDetailsModal").modal('show');
+
+});
+$("a#investment_details-<%= @investment.id %>").on('ajax:error', function (event, data, status) {
+    console.log("error");
+    $("#inv-mon-det_tbody").replaceWith('<tbody id="inv-mon-det_tbody"></tbody>')
+
+    $("#inv-mon-det_tbody").append('<tr>' +
+        '<td colspan="6">No Data Found.</td>'+
+        ' </tr>');
+    
+    $("#investmentDetailsModal").modal('show');
+});

@@ -32,6 +32,18 @@ class InvestmentsController < ApplicationController
 
   end
 
+  def investment_details
+    @investment = Investment.find(params[:id])
+    @inv_monthly_interest = InvestmentMonthlyInterest.where(:investment_id => @investment.id)
+
+    if @inv_monthly_interest.blank?
+      render status: :not_found
+      puts 'error: Not found'
+    else
+
+    end
+  end
+
   def update
   end
 

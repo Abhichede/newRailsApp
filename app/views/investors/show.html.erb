@@ -71,8 +71,10 @@
         <td><%= investment.created_by %></td>
         <td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= investment.id %>"
                     data-toggle="modal" data-inv-id="<%= investment.id %>"
-                    data-target="#newInvestmentReturnModal" disabled>Return</button></td>
-        <td><button class="btn btn-primary btn-sm btn-block" id="investment_return_details" disabled>Details</button></td>
+                    data-target="#newInvestmentReturnModal" >Return</button></td>
+        <td><%= link_to 'Details',{controller: 'investments', action: 'investment_details',
+                                           id: investment.id}, method: :get, remote: true,
+                        class: "btn btn-primary", id: "investment_details-#{investment.id}" %></td>
       </tr>
 
       <!-- ************************* Script ****************************** -->
@@ -81,7 +83,7 @@
               //get data-id attribute of the clicked element
               var investmentId = $(this).data('inv-id');
               //populate the textbox
-              $("#investment_id").val(<%= investment.id %>);
+              $("#investment_id").val(investmentId);
           });
       </script>
       <!-- ************************** end ******************************** -->
@@ -205,6 +207,40 @@
 
         </div>
 
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="investmentDetailsModal" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Investment Details</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-responsive table-bordered">
+          <thead class="thead-default">
+          <tr class="table-row">
+            <th>Month</th>
+            <th>Interest</th>
+            <th>Paid Interest</th>
+            <th>Paid Date</th>
+            <th>Pending Interest</th>
+            <th>Paid By</th>
+          </tr>
+          </thead>
+          <tbody id="inv-mon-det_tbody">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
