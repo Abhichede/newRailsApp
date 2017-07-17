@@ -67,46 +67,25 @@
 
     <%= f.label 'Location/Floor', :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.select(:floor , options_for_select([['Select Floor'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],
+      <%= f.select(:floor , options_for_select([['Select Floor'],['G','G'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],
                                               ['6','6'],['7','7'],['8','8'],['9','9'],['10','10']],:disabled=> 'Select Floor', :selected=> @flat.floor),
                    {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:floor) %>
   </div>
 
-  <div class="form-group">
-    <% if params[:flat_type] === 'SHOP' %>
-        <label class="control-label col-lg-2">Shop rate/sqft.</label>
-    <% else %>
-        <%= f.label 'Flat rate/sqft.', :class => 'control-label col-lg-2' %>
-    <% end %>
-    <div class="col-lg-4">
-      <%= f.text_field :flat_rate, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:flat_rate) %>
 
-    <% if params[:flat_type] === 'SHOP' %>
-        <label class="control-label col-lg-2">Shop Cost.</label>
-    <% else %>
-        <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
-    <% end %>
-
-    <div class="col-lg-4">
-      <%= f.text_field :flat_cost, :class => 'form-control', readonly: true %>
-    </div>
-    <%=f.error_span(:flat_cost) %>
-  </div>
 
   <div class="form-group">
     <%= f.label 'Govt rate/sqft', :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :govt_rate, :class => 'form-control' %>
+      <%= f.text_field :govt_rate, :class => 'form-control', readonly: true %>
     </div>
     <%=f.error_span(:govt_rate) %>
 
     <%= f.label :govt_value, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :govt_value, :class => 'form-control', readonly: true %>
+      <%= f.text_field :govt_value, :class => 'form-control' %>
     </div>
     <%=f.error_span(:govt_value) %>
   </div>
@@ -115,7 +94,7 @@
     <div class="col-lg-4">
       <%
         flat_types = ['SELECT FLAT TYPE']
-        flat_types += @site.type_of_structures.split(',') %>
+        flat_types += @site.type_of_structures.split(', ') %>
       <% if params[:flat_type] === "SHOP" %>
           <%= f.select(:flat_type, options_for_select([['SHOP', 'SHOP']],:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
                        {}, class: 'form-control') %>

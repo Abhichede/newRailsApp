@@ -67,9 +67,30 @@ var schedule_next_installment_function = function () {
 
 $(function() {
 
-    var pre_balance_amount = Number($("#booking_detail_final_sale_deed").val());
-    console.log('final '+ pre_balance_amount);
+
     var is_loan_possible = $("#booking_detail_loan_possible").val();
+    var is_gst = true;
+
+    if($("#booking_detail_is_gst_true").is(':checked')){
+        is_gst = true;
+        $("#non-gst-taxes").attr('class', 'hidden');
+        $("#gst-taxes").attr('class', ' ');
+    }else {
+        is_gst = false;
+        $("#non-gst-taxes").attr('class', ' ');
+        $("#gst-taxes").attr('class', 'hidden');
+    }
+
+    $("#booking_detail_is_gst_true").on('click', function () {
+        is_gst = true;
+        $("#non-gst-taxes").attr('class', 'hidden');
+        $("#gst-taxes").attr('class', ' ');
+    });
+    $("#booking_detail_is_gst_false").on('click', function () {
+        is_gst = false;
+        $("#non-gst-taxes").attr('class', ' ');
+        $("#gst-taxes").attr('class', 'hidden');
+    });
 
     if(is_loan_possible === 'Yes'){
         $("#loan-possible-div").attr('class', ' ');
@@ -101,6 +122,9 @@ $(function() {
         $("#booking_detail_vat").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_service_tax").attr('value', (4.52/100)*agreement_cost);
         $("#booking_detail_lbt").attr('value', 0);
+        var gst_rate = Number($("#booking_detail_gst_rate").val());
+
+        $("#booking_detail_gst_cost").attr('value', (gst_rate/100)*agreement_cost);
 
     });
     $("#maintenance_in_sqft").on('focusout', function () {
@@ -115,7 +139,8 @@ $(function() {
     $("#booking_detail_water_charges,#booking_detail_MSEB_charges,#booking_detail_parking_charges," +
         "#booking_detail_other_charges,#booking_detail_stamp_duty,#booking_detail_maintenance_charges" +
         ",#booking_detail_registration_fees,#booking_detail_vat,#booking_detail_service_tax,#booking_detail_lbt," +
-        "#booking_detail_legal_charges").on("change keyup", function () {
+        "#booking_detail_legal_charges,#booking_detail_flat_cost, #booking_detail_gst_rate, " +
+        "#booking_detail_is_gst_false, #booking_detail_is_gst_true").on("change keyup", function () {
 
         var water_charges = Number($("#booking_detail_water_charges").val());
         var parking_charges = Number($("#booking_detail_parking_charges").val());
@@ -123,21 +148,33 @@ $(function() {
         var maintenance_charges = Number($("#booking_detail_maintenance_charges").val());
         var other_charges = Number($("#booking_detail_other_charges").val());
 
-        var stamp_duty = Number($("#booking_detail_stamp_duty").val());
-        var registration_fees = Number($("#booking_detail_registration_fees").val());
-        var vat = Number($("#booking_detail_vat").val());
-        var service_tax = Number($("#booking_detail_service_tax").val());
-        var lbt = Number($("#booking_detail_lbt").val());
-        var legal_charges = Number($("#booking_detail_legal_charges").val());
+        var pre_balance_amount = Number($("#booking_detail_flat_cost").val());
+        var agreement_cost = Number($("#booking_detail_agreement_cost").val());
 
-        var balance_amount = water_charges + parking_charges + MSEB_charges + maintenance_charges +
-               other_charges + stamp_duty + registration_fees + vat + service_tax +
-                lbt + legal_charges;
+        if($("#booking_detail_is_gst_true").is(':checked')){
+            var gst_rate = $("#booking_detail_gst_rate").val();
+            $("#booking_detail_gst_cost").attr('value', (gst_rate/100)*agreement_cost);
 
+            var gst_cost = Number($("#booking_detail_gst_cost").val());
 
+           var balance_amount = pre_balance_amount + water_charges + MSEB_charges + parking_charges + maintenance_charges +
+                    other_charges + gst_cost;
 
+            $("#booking_detail_final_sale_deed").attr('value', balance_amount);
 
-        $("#booking_detail_final_sale_deed").attr('value', pre_balance_amount + balance_amount);
+        }else{
+            var vat = Number($("#booking_detail_vat").val());
+            var service_tax = Number($("#booking_detail_service_tax").val());
+            var lbt = Number($("#booking_detail_lbt").val());
+            var stamp_duty = Number($("#booking_detail_stamp_duty").val());
+            var registration_fees = Number($("#booking_detail_registration_fees").val());
+            var legal_charges = Number($("#booking_detail_legal_charges").val());
+
+           var balance_amount = pre_balance_amount + water_charges + MSEB_charges + parking_charges + maintenance_charges +
+                other_charges + stamp_duty + registration_fees + legal_charges + vat + service_tax + lbt;
+
+            $("#booking_detail_final_sale_deed").attr('value', balance_amount);
+        }
     });
 
     // Initialize form validation on the registration form.
@@ -157,8 +194,7 @@ $(function() {
                 maxlength: 10
             },
             "booking_detail[customer_address]":{
-                required: true,
-                pattern: /^(\w*\s*[\#\-\,\/\.\(\)\&]*)+\s[0-9]{6}$/
+                required: true
             },
             "booking_detail[customer_pan]":{
                 required: true,
@@ -240,8 +276,7 @@ $(function() {
             "booking_detail[customer_name]": "Please enter customer Name",
             "booking_detail[customer_contact]": "Please enter 10 digit mobile number",
             "booking_detail[customer_address]": {
-                required: "Please enter customer address",
-                pattern: "Invalid Address, Make sure you entered correct 6 digit PIN"
+                required: "Please enter customer address"
             },
             "booking_detail[customer_pan]":{
                 required: "Please enter customer PAN",
@@ -326,10 +361,22 @@ $(function() {
 
     $('#booking_detail_agreement_cost').on('change keyup paste', function () {
         var entered_number = $('#booking_detail_agreement_cost').val();
-
         var string_number = numberWithCommas(entered_number);
-        $('.agg-number').attr('value', string_number);
-    })
+        console.log(string_number);
+    });
+    var balance_amount = Number($("#customer-balance-amount").text());
+    $("#customer-payable-amount").on('focusout', function () {
+       var payable_amount = Number($("#customer-payable-amount").val());
+        console.log(balance_amount);
+       if(payable_amount > balance_amount || payable_amount == 0 ){
+           $.notify("amount must be less than balance amount and greater than 0",
+               {className: "error"});
+           $("#save-paid-amount").attr('disabled', true);
+       }else{
+           $("#save-paid-amount").attr('disabled', false);
+       }
+
+    });
 });
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

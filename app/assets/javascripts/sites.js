@@ -56,18 +56,18 @@ $(function() {
     var no_of_shops = $("#site_no_of_shops").val();
     if ($("#site_site_type").val() === 'Residential'){
         $("#site_no_of_shops").attr('value', 0);
-        $("#site_no_of_shops").attr('disabled', true);
+        $("#site_no_of_shops").attr('readonly', true);
     }else{
         $("#site_no_of_shops").attr('value', no_of_shops);
-        $("#site_no_of_shops").attr('disabled', false);
+        $("#site_no_of_shops").attr('readonly', false);
     }
     $("#site_site_type").on('change focusout', function () {
         if ($(this).val() === 'Residential'){
             $("#site_no_of_shops").attr('value', 0);
-            $("#site_no_of_shops").attr('disabled', true);
+            $("#site_no_of_shops").attr('readonly', true);
         }else{
             $("#site_no_of_shops").attr('value', no_of_shops);
-            $("#site_no_of_shops").attr('disabled', false);
+            $("#site_no_of_shops").attr('readonly', false);
         }
     })
 });

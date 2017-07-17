@@ -20,12 +20,21 @@
                         :class=> 'btn btn-primary btn-sm btn-block' %>
           </div>
       <% else %>
-          <div class="col-md-4 col-sm-4 col-xs-4">
-            <%= link_to 'Book Flat',
-                        {controller: 'booking_details', action: 'new', :flat_id=> @flat,
-                         :site_id=> @flat.site_id},
-                        :class => 'btn btn-primary btn-sm btn-block' %>
-          </div>
+          <% if @flat.flat_type === 'SHOP' || @flat.flat_type === ' SHOP' %>
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <%= link_to 'Book SHOP',
+                            {controller: 'booking_details', action: 'new', :flat_id=> @flat,
+                             :site_id=> @flat.site_id},
+                            :class => 'btn btn-primary btn-sm btn-block' %>
+              </div>
+          <% else %>
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <%= link_to 'Book Flat',
+                            {controller: 'booking_details', action: 'new', :flat_id=> @flat,
+                             :site_id=> @flat.site_id},
+                            :class => 'btn btn-primary btn-sm btn-block' %>
+              </div>
+          <% end %>
       <% end %>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <% link_to 'Delete Flat',
@@ -44,8 +53,14 @@
       <div class="panel-heading">
           <h4><strong><%= @flat.site.name.upcase %></strong></h4>
           <h5>
+
             <div class="label label-primary">
-              Flat No: <%= @flat.flat_number %>
+              <% if @flat.flat_type === 'SHOP' || @flat.flat_type === ' SHOP' %>
+                  Shop No: <%= @flat.flat_number %>
+              <% else %>
+                  Flat No: <%= @flat.flat_number %>
+              <% end %>
+
             </div>
             <% if @flat.booking_status == 1 || @flat.booking_status %>
 
@@ -60,10 +75,15 @@
           <dd><strong>:</strong> <%= @flat.area %> sq.ft.</dd>
           <dt><strong><%= model_class.human_attribute_name(:floor) %> </strong></dt>
           <dd><strong>:</strong> <%= @flat.floor %></dd>
-          <dt><strong><%= model_class.human_attribute_name(:flat_cost) %> </strong></dt>
+          <dt> <% if @flat.flat_type === 'SHOP' || @flat.flat_type === ' SHOP' %>
+                <strong>Shop cost</strong>
+          <% else %>
+              <strong><%= model_class.human_attribute_name(:flat_cost) %> </strong>
+          <% end %>
+          </dt>
           <dd><strong>:</strong> &#8377; <%= @flat.flat_cost %> </dd>
           <dt><strong><%= model_class.human_attribute_name(:govt_rate) %> </strong></dt>
-          <dd><strong>:</strong> &#8377; <%= @flat.govt_rate %></dd>
+          <dd><strong>:</strong> &#8377; <%= @flat.govt_rate.to_f.round(2) %></dd>
           <dt><strong><%= model_class.human_attribute_name(:govt_value) %> </strong></dt>
           <dd><strong>:</strong> &#8377; <%= @flat.govt_value %></dd>
           <dt><strong><%= model_class.human_attribute_name(:flat_type) %> </strong></dt>

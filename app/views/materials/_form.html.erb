@@ -14,7 +14,39 @@
       </div>
     </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
+    <div class="col-lg-3 col-sm-8 col-xs-8">
+      <%
+        supplier_names = ['Select Supplier']
+        Supplier.all.each do |supplier|
+          if supplier.deleting_status === "false" || supplier.deleting_status.blank?
+            supplier_names.push([supplier.name.upcase,supplier.id])
+          end
+        end %>
+      <% if !@material.supplier.blank? %>
+          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.name),
+                       {}, class: 'form-control') %>
+      <% else %>
+          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
+                       {}, class: 'form-control') %>
+      <% end %>
+    </div>
+    <div class="col-lg-1 col-sm-4 col-xs-4">
+      <a class="label label-default" data-toggle="modal" data-target="#addNewSupplier">Add New</a>
 
+    </div>
+    <%=f.error_span(:supplier_id) %>
+
+    <% if params[:type_of_material] === 'OTHER ORDINARY' %>
+        <%= f.label :description, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :description, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:description) %>
+    <% end %>
+
+  </div>
   <div class="form-group">
     <%= f.label :date, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
@@ -28,39 +60,7 @@
     </div>
     <%=f.error_span(:time) %>
   </div>
-  <div class="form-group">
-    <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
-    <div class="col-lg-3 col-sm-8 col-xs-8">
-      <%
-        supplier_names = ['Select Supplier']
-        Supplier.all.each do |supplier|
-          if supplier.deleting_status === "false" || supplier.deleting_status.blank?
-            supplier_names.push([supplier.name.upcase,supplier.id])
-          end
-        end %>
-      <% if !@material.supplier.blank? %>
-        <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.name),
-                   {}, class: 'form-control') %>
-      <% else %>
-          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
-                       {}, class: 'form-control') %>
-      <% end %>
-    </div>
-    <div class="col-lg-1 col-sm-4 col-xs-4">
-      <a class="label label-default" data-toggle="modal" data-target="#addNewSupplier">Add New</a>
 
-    </div>
-     <%=f.error_span(:supplier_id) %>
-
-    <% if params[:type_of_material] === 'OTHER ORDINARY' %>
-      <%= f.label :description, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-4">
-            <%= f.text_field :description, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:description) %>
-    <% end %>
-
-  </div>
   <div class="form-group">
     <%= f.label :type_of_material, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
@@ -119,6 +119,29 @@
 
   </div>
   <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
+      <div class="form-group">
+        <%= f.label :bill_no, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :bill_no, :class => 'form-control', required: true %>
+        </div>
+        <%=f.error_span(:bill_no) %>
+      </div>
+      <div class="form-group">
+        <%= f.label 'Taxation', :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.radio_button :is_gst, false,  class: 'radio-inline' %> NON GST
+          <%= f.radio_button :is_gst, true, :checked => true, class: 'radio-inline' %> GST
+        </div>
+        <div class="" id="gst-rate">
+        <%= f.label :gst_rate, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['6%','6'],['12%','12'],['18%','18'],['28%','28']],
+                                                     :disabled=> 'GST Rate', :selected=> @material.gst_rate),
+                       {}, class: 'form-control') %>
+        </div>
+        <%=f.error_span(:gst_rate) %>
+        </div>
+      </div>
       <div class="form-group">
         <%= f.label :rate, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">

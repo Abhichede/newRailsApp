@@ -29,26 +29,44 @@ class FlatsController < ApplicationController
     @flat = Flat.new(flat_params)
     session.delete(:return_to)
     session[:return_to] ||= request.referer
-    @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number])
     flat_type = 'FLAT'
     if flat_params[:flat_type] === 'SHOP'
       flat_type = 'SHOP'
-    end
-    respond_to do |format|
+      @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number], :flat_type => 'SHOP')
+      respond_to do |format|
 
-      if !@flats.blank?
-        format.html { redirect_to session[:return_to] ||= request.referer, alert: 'Flat number already available' }
-        format.json { render json: @flat.errors, status: 'Flat number already available' }
-      else
-        if @flat.save
-          format.html { redirect_to @flat, notice: 'Flat was successfully Saved.' }
-          format.json { render :show, status: :created, location: @flat }
+        if !@flats.blank?
+          format.html { redirect_to session[:return_to] ||= request.referer, alert: 'Shop number already available' }
+          format.json { render json: @flat.errors, status: 'Shop number already available' }
         else
-          format.html { render :new }
-          format.json { render json: @flat.errors, status: :unprocessable_entity }
+          if @flat.save
+            format.html { redirect_to @flat, notice: 'Shop was successfully Saved.' }
+            format.json { render :show, status: :created, location: @flat }
+          else
+            format.html { render :new }
+            format.json { render json: @flat.errors, status: :unprocessable_entity }
+          end
         end
-      end
 
+      end
+    else
+      @flats = Flat.where("site_id = ? AND flat_number = ? AND flat_type != ?", flat_params[:site_id], flat_params[:flat_number], 'SHOP')
+      respond_to do |format|
+
+        if !@flats.blank?
+          format.html { redirect_to session[:return_to] ||= request.referer, alert: 'Flat number already available' }
+          format.json { render json: @flat.errors, status: 'Flat number already available' }
+        else
+          if @flat.save
+            format.html { redirect_to @flat, notice: 'Flat was successfully Saved.' }
+            format.json { render :show, status: :created, location: @flat }
+          else
+            format.html { render :new }
+            format.json { render json: @flat.errors, status: :unprocessable_entity }
+          end
+        end
+
+      end
     end
   end
 

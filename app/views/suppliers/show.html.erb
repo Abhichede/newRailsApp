@@ -4,15 +4,16 @@
     <div class="col-md-6">
       <div class="col-md-2">
         <%= link_to :back do %>
-            <i class="glyphicon glyphicon-arrow-left btn btn-warning btn-sm"></i>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <h4><strong><%= @supplier.name.upcase %></strong></h4>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <strong>Total Amount: &#8377; <%= @supplier.total_amount %></strong><br/>
-        <strong>Paid Amount: &#8377; <%= @supplier.paid_amount %></strong>
+        <strong>Paid Amount: &#8377; <%= @supplier.paid_amount %></strong><br/>
+        <strong>Balance Amount: &#8377; <%= @supplier.total_amount.to_f - @supplier.paid_amount.to_f %></strong>
       </div>
     </div>
     <div class="col-md-6">

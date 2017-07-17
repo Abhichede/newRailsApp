@@ -32,15 +32,21 @@
         <th>Truck No</th>
         <th>Challan No</th>
         <th>Quantity</th>
-        <th>Rate</th>
-        <th>Amount</th>
+        <% if current_user.role != 'SUPERVISOR' %>
+          <th>Bill No</th>
+          <th>Rate</th>
+          <th>GST Rate</th>
+          <th>GST</th>
+          <th>Amount</th>
+        <% end %>
         <th>Supervisor</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
     <% if @material.blank? %>
       <tr>
-        <td colspan="9" class="text-center"><strong><%= params[:type_of_material] %> was not supplied on this site.</strong></td>
+        <td colspan="10" class="text-center"><strong><%= params[:type_of_material] %> was not supplied on this site.</strong></td>
       </tr>
     <% else %>
         <%
@@ -55,24 +61,67 @@
           <td><%= material.truck_no %></td>
           <td><%= material.challan_no %></td>
           <td><%= material.quantity.to_f %> <%= material.unit %></td>
-          <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
-          <td>&#8377; <%= material.amount.to_f %></td>
+          <% if current_user.role != 'SUPERVISOR' %>
+            <td><%= material.bill_no %></td>
+            <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
+            <td><%= material.gst_rate %> %</td>
+            <td>&#8377; <%= material.gst_cost.to_f %></td>
+            <td>&#8377; <%= material.amount.to_f %></td>
+          <% end %>
           <td><%= material.supervisor_name %></td>
+          <td><a href="#" class="btn btn-primary btn-sm">Add Rate</a></td>
         </tr>
               <%
                 total_quantity = total_quantity + material.quantity.to_f
                 total_amount = total_amount + material.amount.to_f
               %>
       <% end %>
-        <tr><td colspan="6">
-          <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>
-          <td colspan="9"><strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong></td>
-        </tr>
+        <% if current_user.role != 'SUPERVISOR' %>
+          <tr><td colspan="6">
+            <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>
+            <td colspan="9"><strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong></td>
+          </tr>
+        <% end %>
     <% end %>
 
     </tbody>
   </table>
 </div>
-<div class="pull-right">
 
+
+<!-- Modal -->
+<div class="modal fade-scale" id="editMaterialRatesModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Fill Payment details</h4>
+      </div>
+
+          <div class="modal-body">
+            <%= form_tag edit_bookings_payment_details_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
+                <%= hidden_field_tag :id, params[:id] %>
+                <%= hidden_field_tag :booking_id, params[:booking_id] %>
+                <%= text_field_tag :payable_amount, params[:payable_amount],placeholder: 'Payable Amount',
+                                   class: 'form-control search-box', id: 'edit-customer-payable-amount', required: true %>
+                <%= select_tag :payment_type, options_for_select([['Payment Type'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Type'),
+                               class: 'form-control search-box', id: 'payment_type', required: true %>
+                <%= text_field_tag :check_desc, params[:check_desc],placeholder: 'Payment Description',
+                                   class: 'form-control search-box', id: 'check_desc', required: true %>
+                <%= date_field_tag :payment_date, params[:payment_date], class: 'form-control', id: 'payment_date', required: true %>
+                </div>
+                <div class="modal-footer">
+                  <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                                 id: 'save-paid-amount') do %>
+                      Save
+                  <% end %>
+            <% end %>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+
+    </div>
+
+  </div>
 </div>
+

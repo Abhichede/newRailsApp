@@ -36,10 +36,19 @@ class MaterialsController < ApplicationController
     end
     @supplier = Supplier.find(material_params[:supplier_id])
     suppliers_total_amount = @supplier.total_amount.to_f
-
+    total_cost = material_params[:amount].to_f
+    gst_cost = 0
+    if material_params[:is_gst]
+      gst_rate = material_params[:gst_rate].to_i
+      material_amount = material_params[:amount].to_f
+      total_cost = material_amount + (material_amount * gst_rate / 100)
+      gst_cost = material_amount * gst_rate / 100
+    end
     respond_to do |format|
       if @material.save
-        @supplier.update(:total_amount => (material_params[:amount].to_f + suppliers_total_amount))
+        @updating_material = Material.where(:challan_no => material_params[:challan_no])
+        @updating_material.update(:gst_cost => gst_cost, :amount => total_cost)
+        @supplier.update(:total_amount => (total_cost + suppliers_total_amount))
         format.html { redirect_to session.delete(:return_to),
                                   notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :created, location: @material }
@@ -51,18 +60,32 @@ class MaterialsController < ApplicationController
     end
   end
 
+  def update_material_rates
+
+  end
+
   # PATCH/PUT /materials/1
   # PATCH/PUT /materials/1.json
   def update
     previous_amount = @material.amount.to_f
     @supplier = Supplier.find(@material.supplier)
     suppliers_total = @supplier.total_amount.to_f
+    total_cost = material_params[:amount].to_f
+
+    gst_cost = 0
+    if material_params[:is_gst]
+      gst_rate = material_params[:gst_rate].to_i
+      material_amount = material_params[:amount].to_f
+      total_cost = material_amount + (material_amount * gst_rate / 100)
+      gst_cost = material_amount * gst_rate / 100
+    end
     respond_to do |format|
       if @material.update(material_params)
         if material_params[:amount].to_f != previous_amount
           new_suppliers_total = suppliers_total - previous_amount
           @supplier.update(:total_amount => (material_params[:amount].to_f + new_suppliers_total ))
         end
+        @updating_material.update(:gst_cost => gst_cost, :amount => total_cost)
         format.html { redirect_to @material, notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :ok, location: @material }
       else
@@ -92,6 +115,6 @@ class MaterialsController < ApplicationController
     def material_params
       params.require(:material).permit(:date, :supplier_id, :site_id, :type_of_material,
                                        :quantity, :unit, :challan_no, :truck_no, :time, :rate,
-                                       :amount, :supervisor_name,:challan_item, :description)
+                                       :amount, :supervisor_name,:challan_item, :description,:bill_no, :is_gst, :gst_rate)
     end
 end

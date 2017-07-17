@@ -8,9 +8,10 @@
         <% end %>
       </div>
     </div>
+    <% if current_user.role != 'SUPERVISOR' %>
     <div class="col-md-6">
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
-                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats %>
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats.to_i %>
                   <div class="col-md-4 col-sm-6 col-xs-6">
                       <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                               :class => 'btn btn-success btn-sm btn-block' %>
@@ -23,7 +24,7 @@
                   </div>
                 <% end %>
               <% else %>
-                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats %>
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats.to_i %>
                   <div class="col-md-4 col-sm-6 col-xs-6">
                       <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                                   :class => 'btn btn-success btn-sm btn-block' %>
@@ -42,8 +43,10 @@
                       :class => 'btn btn-danger btn-sm' %>
         </div>
     </div>
+    <% end %>
   </div>
 </div>
+<% if current_user.role != 'SUPERVISOR' %>
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
@@ -101,88 +104,100 @@
     </div>
   </div>
 </div>
-
 <hr/>
+<% end %>
+
+
 <ul  class="nav nav-pills" style="margin-top: 2rem;">
-  <li class="active">
-    <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
-  </li>
-  <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
-    <li>
-      <a  href="#shops_jumbo" data-toggle="tab">Shops</a>
+  <% if current_user.role === 'SUPERVISOR' %>
+    <li><a href="#material_jumbo" data-toggle="tab">Material</a>
+    </li>
+    <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
+    </li>
+  <% else %>
+    <li class="active">
+      <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
+    </li>
+    <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
+      <li>
+        <a  href="#shops_jumbo" data-toggle="tab">Shops</a>
+      </li>
+    <% end %>
+    <li><a href="#material_jumbo" data-toggle="tab">Material</a>
+    </li>
+    <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
+    </li>
+    <li><a href="#labour_jumbo" data-toggle="tab">Labour</a>
     </li>
   <% end %>
-  <li><a href="#material_jumbo" data-toggle="tab">Material</a>
-  </li>
-  <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
-  </li>
-  <li><a href="#labour_jumbo" data-toggle="tab">Labour</a>
-  </li>
-
 </ul>
 <div class="tab-content clearfix">
-  <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
-      <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
-          <h5><strong>No flats were added, Click 'ADD FLAT' above to add flats</strong></h5>
-      <% else %>
-          <%
-            no_of_wings = @site.no_of_wings.to_i
-            letter = '@'
-          %>
-          <% while no_of_wings != 0 %>
-              <div class="row">
-                <h4 class="text-center"><strong>Wing <%= letter.next %></strong></h4>
-                <hr>
-                <div class="col-md-offset-2">
-                <% @site.flats.where(:wing => letter.next).where.not(:flat_type => 'SHOP').each do |flat| %>
-                    <%= link_to flat_path(flat) do %>
+  <% if current_user.role != 'SUPERVISOR' %>
+    <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
+        <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
+            <h5><strong>No flats were added, Click 'ADD FLAT' above to add flats</strong></h5>
+        <% else %>
+            <%
+              no_of_wings = @site.no_of_wings.to_i
+              letter = '@'
+            %>
+            <% while no_of_wings != 0 %>
+                <div class="row">
+                  <h4 class="text-center"><strong>Wing <%= letter.next %></strong></h4>
+                  <hr>
+                  <div class="col-md-offset-2">
+                  <% @site.flats.where(:wing => letter.next).where.not(:flat_type => 'SHOP').each do |flat| %>
+                      <%= link_to flat_path(flat) do %>
+                        <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
+                          <%= flat.flat_number %>
+                          <% if flat.booking_status %>
+                            <span class="label label-danger pull-right">Booked</span>
+                          <% else %>
+                              <span class="label label-default pull-right">Available</span>
+                          <% end %>
+                        </div>
+                      <% end %>
+                  <% end %>
+
+                  <%
+                    letter = letter.next
+                    no_of_wings = no_of_wings - 1
+                  %>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+    <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
+      <div class="jumbotron tab-pane" id="shops_jumbo" style="margin-top: 0.5em">
+        <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+          <% if @site.flats.where(:flat_type => 'SHOP').count == 0 %>
+              <h5><strong>No Shops were added, Click 'ADD SHOP' above to add shops</strong></h5>
+          <% else %>
+              <% @site.flats.where(:flat_type => 'SHOP').each do |flat| %>
+                  <%= link_to flat_path(flat) do %>
                       <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
                         <%= flat.flat_number %>
                         <% if flat.booking_status %>
-                          <span class="label label-danger pull-right">Booked</span>
+                            <span class="label label-danger pull-right">Booked</span>
                         <% else %>
                             <span class="label label-default pull-right">Available</span>
                         <% end %>
                       </div>
-                    <% end %>
-                <% end %>
-
-                <%
-                  letter = letter.next
-                  no_of_wings = no_of_wings - 1
-                %>
-                </div>
-              </div>
+                  <% end %>
+              <% end %>
           <% end %>
-      <% end %>
-  </div>
-  <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
-    <div class="jumbotron tab-pane" id="shops_jumbo" style="margin-top: 0.5em">
-      <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-        <% if @site.flats.where(:flat_type => 'SHOP').count == 0 %>
-            <h5><strong>No Shops were added, Click 'ADD SHOP' above to add shops</strong></h5>
-        <% else %>
-            <% @site.flats.where(:flat_type => 'SHOP').each do |flat| %>
-                <%= link_to flat_path(flat) do %>
-                    <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
-                      <%= flat.flat_number %>
-                      <% if flat.booking_status %>
-                          <span class="label label-danger pull-right">Booked</span>
-                      <% else %>
-                          <span class="label label-default pull-right">Available</span>
-                      <% end %>
-                    </div>
-                <% end %>
-            <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-  <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
+  <div class="jumbotron tab-pane active" id="material_jumbo" style="margin-top: 0.5em">
+    <% if current_user.role != 'SUPERVISOR' %>
       <span class="pull-right">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+          <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
       </span>
+    <% end %>
     <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
 
           <% MaterialList.all.each do |material| %>
@@ -213,7 +228,7 @@
       <% end %>
     </div>
   </div>
-
+<% if current_user.role != 'SUPERVISOR' %>
   <div class="jumbotron tab-pane" id="labour_jumbo" style="margin-top: 0.5em">
     <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">
       <ul  class="nav nav-pills">
@@ -250,12 +265,6 @@
 </div>
 
 
-
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade-scale" id="newMaterialModal" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
@@ -290,6 +299,8 @@
 
   </div>
 </div>
+
+
 <!-- Modal -->
 <div class="modal fade-scale" id="newContractModal" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
@@ -447,4 +458,4 @@
 
   </div>
 </div>
-
+<% end %>

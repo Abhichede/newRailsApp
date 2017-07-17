@@ -106,6 +106,45 @@ class BookingDetailsController < ApplicationController
 
   end
 
+  def edit_bookings_payment_details
+
+    @booking_detail = BookingDetail.find(params[:booking_id])
+    @payment_detail = PaymentDetail.find(params[:id])
+
+    previous_amount = @payment_detail.payable_amount.to_f
+    total_paid_amount = @booking_detail.paid_amount.to_f
+    new_editing_amount = (total_paid_amount - previous_amount) + params[:payable_amount].to_f
+
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    if params[:payable_amount].blank?
+      respond_to do |format|
+        format.html { redirect_to session[:return_to] ||= request.referer, alert: "Blank Amount" }
+        format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+
+    if @booking_detail.update(:paid_amount => new_editing_amount )
+      if @payment_detail.update(:payable_amount => params[:payable_amount], :payment_type => params[:payment_type],
+                                :payment_desc => params[:check_desc], :payment_date => params[:payment_date])
+        #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+        respond_to do |format|
+          format.html { redirect_to session[:return_to] ||= request.referer,
+                                    notice: "Rs.#{params[:payable_amount]} Amount paid." }
+          format.json { render json: @booking_detail }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to session[:return_to] ||= request.referer, alert: "Something went wrong" }
+          format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+  end
+
   def schedule_next_installment
 
     @booking_detail = BookingDetail.find(params[:booking_id])
@@ -182,6 +221,6 @@ class BookingDetailsController < ApplicationController
                                              :parking_charges, :maintenance_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
                                              :employee_name, :token_amount, :payment_type, :payment_desc, :booking_date,
-                                             :final_sale_deed, :gender)
+                                             :final_sale_deed, :gender, :flat_cost, :is_gst, :gst_rate, :gst_cost)
     end
 end

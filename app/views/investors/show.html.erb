@@ -71,10 +71,10 @@
         <td><%= investment.created_by %></td>
         <td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= investment.id %>"
                     data-toggle="modal" data-inv-id="<%= investment.id %>"
-                    data-target="#newInvestmentReturnModal" >Return</button></td>
+                    data-target="#newInvestmentReturnModal" disabled>Return</button></td>
         <td><%= link_to 'Details',{controller: 'investments', action: 'investment_details',
                                            id: investment.id}, method: :get, remote: true,
-                        class: "btn btn-primary", id: "investment_details-#{investment.id}" %></td>
+                        class: "btn btn-primary", id: "investment_details-#{investment.id}", disabled: true %></td>
       </tr>
 
       <!-- ************************* Script ****************************** -->

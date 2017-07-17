@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'show_payment_details', to: 'payment_details#show'
   get 'destroy_payment', to: 'payment_details#show'
   get 'update_paid_amount', to: 'booking_details#update_paid_amount'
+  get 'edit_bookings_payment_details', to: 'booking_details#edit_bookings_payment_details'
   get 'search_booking_details', to: 'booking_details#search'
   get 'schedule_next_installment', to: 'booking_details#schedule_next_installment'
   get 'show_contractual_labours', to: 'contractual_labours#show_contractual_labours'
@@ -45,6 +46,8 @@ Rails.application.routes.draw do
 
   post 'investment_returns', to: 'investors#investment_return'
   get 'investment_details', to: 'investments#investment_details'
+
+  get 'update_material_rate', to: 'materials#update_material_rates'
 
   get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
   get 'departmental_labour_payment_details', to: 'departmental_labours#departmental_labour_payment_details'

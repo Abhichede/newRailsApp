@@ -1,11 +1,13 @@
 <%- model_class = Site -%>
 <div class="page-header">
   <h3><%= 'All Sites'.upcase %>
+    <% if current_user.role != 'SUPERVISOR' %>
     <span class="pull-right">
       <%= link_to 'Add Site',
                   new_site_path,
                   :class => 'btn btn-primary btn-sm' %>
     </span>
+    <% end %>
   </h3>
 </div>
 

@@ -27,6 +27,7 @@
       <td>Payment Type</td>
       <td>Description</td>
       <td>Amount</td>
+      <td>Action</td>
     </tr>
   </thead>
   <% count = 0 %>
@@ -34,7 +35,9 @@
     <% @booking_detail.payment_details.each do |payment_detail| %>
       <% if payment_detail.payment_type == 'CHEQUE' %>
         <tr style="background-color: #bb4422; color: #FFFFFF">
-      <% else %>
+      <% elsif payment_detail.payable_amount.to_i < 0 %>
+        <tr style="background-color: #000000; color: #FFFFFF">
+      <% else%>
         <tr>
       <% end %>
         <td><%= count = count+1 %></td>
@@ -46,6 +49,14 @@
         <td><%= payment_detail.payment_type %></td>
         <td><%= payment_detail.payment_desc %></td>
         <td><%= payment_detail.payable_amount %></td>
+        <td>
+          <a href="#editPaymentModal" class="btn btn-primary" id="pay-btn-<%= payment_detail.id %>" data-toggle="modal"
+                data-dl-id="<%= payment_detail.id %>" data-payable-amount="<%= payment_detail.payable_amount %>"
+                data-dl-type="<%= payment_detail.payment_type %>" data-dl-date="<%= payment_detail.payment_date %>"
+                data-dl-desc="<%= payment_detail.payment_desc %>">
+          Edit
+        </a>
+        </td>
         <!-- <td>
           <% link_to 'Delete',
                       {controller: 'payment_details', action: 'destroy', id: payment_detail.id},
@@ -54,6 +65,26 @@
                       :class => 'btn btn-danger btn-sm'%>
         </td> -->
       </tr>
+
+
+      <!-- ************************* Script ****************************** -->
+      <script type="text/javascript">
+          $('#pay-btn-<%= payment_detail.id %>').on('click', function () {
+              //get data-id attribute of the clicked element
+              var payment_id = $(this).data('dl-id');
+              var payable_amount = $(this).data('payable-amount');
+              var payment_type = $(this).data('dl-type');
+              var payment_date = $(this).data('dl-date');
+              var payment_desc = $(this).data('dl-desc');
+              //populate the textbox
+              $("#editPaymentModal").find('input[name="id"]').val(payment_id);
+              $("#editPaymentModal").find('input#edit-customer-payable-amount').val(payable_amount);
+              $("#editPaymentModal").find('select#payment_type').val(payment_type);
+              $("#editPaymentModal").find('input#check_desc').val(payment_desc);
+              $("#editPaymentModal").find('input#payment_date').val(payment_date);
+          });
+      </script>
+      <!-- ************************** end ******************************** -->
     <% end %>
   </tbody>
 </table>
@@ -61,5 +92,50 @@
 <div class="row">
   <div class="col-md-6 pull-right">
    <strong>Total Amount Paid : <%= @booking_detail.paid_amount %></strong>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="editPaymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Fill Payment details</h4>
+      </div>
+      <% if (@booking_detail.final_sale_deed.to_f - @booking_detail.paid_amount.to_f) <= 0 %>
+          <div class="modal-body">
+            <h4>The full Amount was PAID</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+          </div>
+      <% else %>
+          <div class="modal-body">
+
+            <%= form_tag edit_bookings_payment_details_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
+                <%= hidden_field_tag :id, params[:id] %>
+                <%= hidden_field_tag :booking_id, params[:booking_id] %>
+                <%= text_field_tag :payable_amount, params[:payable_amount],placeholder: 'Payable Amount',
+                                   class: 'form-control search-box', id: 'edit-customer-payable-amount', required: true %>
+                <%= select_tag :payment_type, options_for_select([['Payment Type'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Type'),
+                               class: 'form-control search-box', id: 'payment_type', required: true %>
+                <%= text_field_tag :check_desc, params[:check_desc],placeholder: 'Payment Description',
+                                   class: 'form-control search-box', id: 'check_desc', required: true %>
+                <%= date_field_tag :payment_date, params[:payment_date], class: 'form-control', id: 'payment_date', required: true %>
+                </div>
+                <div class="modal-footer">
+                  <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                                 id: 'save-paid-amount') do %>
+                      Save
+                  <% end %>
+            <% end %>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

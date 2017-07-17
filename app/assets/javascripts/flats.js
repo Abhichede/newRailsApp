@@ -1,23 +1,23 @@
 $(function() {
 
-    $("#flat_govt_rate").on('change keyup paste', function () {
+    $("#flat_govt_value").on('change keyup paste', function () {
         var flat_area = $("input#flat_area").val();
 
         if(flat_area == null || flat_area === 0 || flat_area === ''){
             alert("Please enter flat area to calculate GOVT. Value");
         }else{
-            var flat_govt_rate = $("#flat_govt_rate").val();
-            $("#flat_govt_value").val(flat_govt_rate * flat_area);
+            var flat_govt_value = $("#flat_govt_value").val();
+            $("#flat_govt_rate").val(flat_govt_value / flat_area);
         }
     });
-    $("#flat_flat_rate").on('change paste keyup', function () {
+    $("#flat_flat_cost").on('change paste keyup', function () {
         var flat_area = $("input#flat_area").val();
 
         if(flat_area == null || flat_area === 0 || flat_area === ''){
             alert("Please enter flat area to calculate FLAT Value");
         }else{
-            var flat_govt_rate = $("#flat_flat_rate").val();
-            $("#flat_flat_cost").val(flat_govt_rate * flat_area);
+            var flat_govt_cost = $("#flat_flat_cost").val();
+            $("#flat_flat_rate").val(flat_govt_cost / flat_area);
         }
     });
 

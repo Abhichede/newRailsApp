@@ -54,7 +54,14 @@
           <a class="navbar-brand" href="/"><%= image_tag 'HARAK-PATIL.png', class: 'responsive' %></a>
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
-
+        <% if current_user.role === 'SUPERVISOR' %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to sites_path  do %>
+                  SITES
+              <% end %>
+            </li>
+          </ul>
+        <% else %>
           <ul class="nav navbar-nav">
             <li><%= link_to sites_path  do %>
                   SITES
@@ -87,6 +94,7 @@
                 </div>
             <% end %>
           </div>
+        <% end %>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.user_name %>
@@ -118,7 +126,7 @@
 
     <hr />
     <footer class="text-center footer">
-      <p class="pull-right"><span>&copy; Harak patil Constructions 2017 </span>|<span> Powered By: Linker IT Solutions PVT. LTD.</span></p>
+      <p><span>&copy; Harak patil Constructions 2017 </span>|<span> Powered By: Linker IT Solutions PVT. LTD.</span></p>
     </footer>
     <script>
         $("#customer-search-box").autocomplete({

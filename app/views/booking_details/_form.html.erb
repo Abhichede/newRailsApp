@@ -89,14 +89,27 @@
       <%= f.label :agreement_cost, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
         <%= f.text_field :agreement_cost, :class => 'form-control', required: true,
-                         placeholder: :agreement_cost %>
+                         placeholder: :agreement_cost, title: 'Aggreement cost' %>
       </div>
 
       <%=f.error_span(:agreement_cost) %>
 
+      <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :flat_cost, :class => 'form-control', required: true,
+                         placeholder: :flat_cost %>
+      </div>
+
+      <%=f.error_span(:flat_cost) %>
+
+
     </div>
-    <div class="col-lg-4">
-      <h5 class="agg-number"></h5>
+    <div class="form-group">
+      <%= f.label 'Taxation', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.radio_button :is_gst, false,  class: 'radio-inline' %> NON GST
+        <%= f.radio_button :is_gst, true, :checked => true, class: 'radio-inline' %> GST
+      </div>
     </div>
    <hr/>
 
@@ -143,47 +156,65 @@
     </div>
 
     <hr/>
-    <div class="form-group">
-      <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-4">
-        <%= f.text_field :stamp_duty, :class => 'form-control', required: true  %>
-      </div>
-      <%=f.error_span(:stamp_duty) %>
+    <div id="gst-taxes" class="">
+      <div class="form-group">
+        <%= f.label :gst_rate, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.select(:gst_rate, options_for_select([['GST Rate'],['6%','6'],['12%','12'],['18%','18'],['28%','28']],
+                                                          :disabled=> 'GST Rate', :selected=> @booking_detail.gst_rate),
+                       {}, class: 'form-control') %>
+        </div>
+        <%=f.error_span(:gst_rate) %>
 
-      <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-4">
-        <%= f.text_field :registration_fees, :class => 'form-control', required: true%>
+        <%= f.label :gst_cost, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :gst_cost, :class => 'form-control', readonly: true%>
+        </div>
+        <%=f.error_span(:gst_cost) %>
       </div>
-      <%=f.error_span(:registration_fees) %>
     </div>
+    <div id="non-gst-taxes" class="hidden">
+      <div class="form-group">
+        <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :stamp_duty, :class => 'form-control', required: true  %>
+        </div>
+        <%=f.error_span(:stamp_duty) %>
 
-   <div class="form-group">
-     <label class="control-label col-lg-2" for="booking_detail_LBT">VAT</label>
-      <div class="col-lg-4">
-        <%= f.text_field :vat, :class => 'form-control', required: true %>
+        <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-4">
+          <%= f.text_field :registration_fees, :class => 'form-control', required: true%>
+        </div>
+        <%=f.error_span(:registration_fees) %>
       </div>
-      <%=f.error_span(:vat) %>
-     <%= f.label :service_tax, :class => 'control-label col-lg-2' %>
-     <div class="col-lg-4">
-       <%= f.text_field :service_tax, :class => 'form-control', required: true %>
-     </div>
-     <%=f.error_span(:service_tax) %>
-   </div>
+       <div class="form-group">
+         <label class="control-label col-lg-2" for="booking_detail_LBT">VAT</label>
+          <div class="col-lg-4">
+            <%= f.text_field :vat, :class => 'form-control', required: true %>
+          </div>
+          <%=f.error_span(:vat) %>
+         <%= f.label :service_tax, :class => 'control-label col-lg-2' %>
+         <div class="col-lg-4">
+           <%= f.text_field :service_tax, :class => 'form-control', required: true %>
+         </div>
+         <%=f.error_span(:service_tax) %>
+       </div>
 
-   <div class="form-group">
-     <label class="control-label col-lg-2" for="booking_detail_LBT">LBT</label>
-      <div class="col-lg-4">
-        <%= f.text_field :lbt, :class => 'form-control', required: true %>
-      </div>
-      <%=f.error_span(:lbt) %>
+       <div class="form-group">
+         <label class="control-label col-lg-2" for="booking_detail_LBT">LBT</label>
+          <div class="col-lg-4">
+            <%= f.text_field :lbt, :class => 'form-control', required: true %>
+          </div>
+          <%=f.error_span(:lbt) %>
 
-     <%= f.label :legal_charges, :class => 'control-label col-lg-2' %>
-     <div class="col-lg-4">
-       <%= f.text_field :legal_charges, :class => 'form-control',
-                        value: '11000', readonly: true %>
-     </div>
-     <%=f.error_span(:legal_charges) %>
-   </div>
+         <%= f.label :legal_charges, :class => 'control-label col-lg-2' %>
+         <div class="col-lg-4">
+           <%= f.text_field :legal_charges, :class => 'form-control',
+                            value: '11000', readonly: true %>
+         </div>
+         <%=f.error_span(:legal_charges) %>
+       </div>
+    </div>
     <hr/>
     <div class="form-group">
       <%= f.label :loan_possible, :class => 'control-label col-lg-2' %>
@@ -200,30 +231,26 @@
       <div class="form-group">
         <%= f.label :name_of_bank, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :name_of_bank, :class => 'form-control',
-                           value: 'NA' %>
+          <%= f.text_field :name_of_bank, :class => 'form-control' %>
         </div>
         <%=f.error_span(:name_of_bank) %>
 
         <%= f.label 'Branch', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :branch_of_bank, :class => 'form-control',
-                           value: 'NA' %>
+          <%= f.text_field :branch_of_bank, :class => 'form-control' %>
         </div>
         <%=f.error_span(:branch_of_bank) %>
       </div>
       <div class="form-group">
         <%= f.label :sanctioned_amount, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :sanctioned_amount, :class => 'form-control',
-                           value: '0' %>
+          <%= f.text_field :sanctioned_amount, :class => 'form-control' %>
         </div>
         <%=f.error_span(:sanctioned_amount) %>
 
         <%= f.label 'Employee code/Name', :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :employee_name, :class => 'form-control',
-                           value: 'NA' %>
+          <%= f.text_field :employee_name, :class => 'form-control' %>
         </div>
         <%=f.error_span(:employee_name) %>
       </div>
@@ -260,9 +287,9 @@
       </div>
     <% end %>
 
-    <% if @flat.booking_status == 0 || @flat.booking_status.blank? %>
-      <%= f.hidden_field :final_sale_deed, value: "#{@flat.flat_cost}" %>
-    <% end %>
+
+      <%= f.hidden_field :final_sale_deed %>
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">

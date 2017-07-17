@@ -114,7 +114,11 @@
       <%= @booking_detail.flat.flat_type %>
     </div>
     <div class="col-md-3 ">
-      <strong>FLAT NUMBER </strong>
+      <% if @booking_detail.flat.flat_type === 'SHOP' || @booking_detail.flat.flat_type === ' SHOP' %>
+          <strong>SHOP NUMBER </strong>
+      <% else %>
+          <strong>FLAT NUMBER </strong>
+      <% end %>
     </div>
     <div class="col-md-3 ">
       <%= @booking_detail.flat.flat_number %>
@@ -140,48 +144,75 @@
       &#8377; <%= @booking_detail.agreement_cost.to_i %>
     </div>
     <div class="col-md-3 col-lg-3">
-      <strong>FLAT COST </strong>
+      <% if @booking_detail.flat.flat_type === 'SHOP' || @booking_detail.flat.flat_type === ' SHOP' %>
+          <strong>SHOP COST </strong>
+      <% else %>
+          <strong>FLAT COST </strong>
+      <% end %>
     </div>
     <div class="col-md-9 col-lg-9">
-      &#8377; <%= @booking_detail.flat.flat_cost %>
+      <% if @booking_detail.flat.flat_cost.nil? || @booking_detail.flat.flat_cost.to_i == 0 %>
+          &#8377; <%= @booking_detail.flat_cost %>
+      <% else %>
+          &#8377; <%= @booking_detail.flat.flat_cost %>
+      <% end %>
     </div>
     <hr/>
-    <div class="col-md-3 ">
-      <strong>VAT  </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.vat.to_i %>
-    </div>
-    <div class="col-md-3 ">
-      <strong>SERVICE TAX </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.service_tax.to_i %>
-    </div>
-    <div class="col-md-3 ">
-      <strong>STAMP DUTY </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.stamp_duty.to_i %>
-    </div>
-    <div class="col-md-3 ">
-      <strong>REGISTRATION FEES </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.registration_fees.to_i %>
-    </div>
-    <div class="col-md-3 ">
-      <strong>LBT </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.lbt.to_i %>
-    </div>
-    <div class="col-md-3 ">
-      <strong>LEGAL CHARGES </strong>
-    </div>
-    <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.legal_charges.to_i %>
-    </div>
+    <% if !@booking_detail.is_gst %>
+      <div class="non-gst-taxes">
+        <div class="col-md-3 ">
+          <strong>VAT  </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.vat.to_i %>
+        </div>
+        <div class="col-md-3 ">
+          <strong>SERVICE TAX </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.service_tax.to_i %>
+        </div>
+        <div class="col-md-3 ">
+          <strong>STAMP DUTY </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.stamp_duty.to_i %>
+        </div>
+        <div class="col-md-3 ">
+          <strong>REGISTRATION FEES </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.registration_fees.to_i %>
+        </div>
+        <div class="col-md-3 ">
+          <strong>LBT </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.lbt.to_i %>
+        </div>
+        <div class="col-md-3 ">
+          <strong>LEGAL CHARGES </strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.legal_charges.to_i %>
+        </div>
+      </div>
+    <% else %>
+      <div class="gst-taxes">
+        <div class="col-md-3 ">
+          <strong>GST RATE </strong>
+        </div>
+        <div class="col-md-3 ">
+          <%= @booking_detail.gst_rate %> %
+        </div>
+        <div class="col-md-3 ">
+          <strong>GST</strong>
+        </div>
+        <div class="col-md-3 ">
+          &#8377; <%= @booking_detail.gst_cost.to_i %>
+        </div>
+      </div>
+    <% end %>
       <hr/>
     <div class="col-md-3 ">
       <strong>MSEB CHARGES </strong>
@@ -303,11 +334,11 @@
       <div class="col-md-3 ">
         <strong>Balance Amount </strong>
       </div>
-      <div class="col-md-3 " >
+      <div class="col-md-3 ">
         <% if paid_amount.blank? %>
-            &#8377; <strong><%= final_cost  %></strong>
+            &#8377; <strong id="customer-balance-amount"><%= final_cost  %></strong>
         <% else %>
-            &#8377; <strong><%= final_cost - paid_amount %></strong>
+            &#8377; <strong id="customer-balance-amount"><%= final_cost - paid_amount %></strong>
         <% end %>
       </div>
     </div>
@@ -335,7 +366,7 @@
               <%= form_tag update_paid_amount_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
                       <%= hidden_field_tag :booking_id, params[:id], value: @booking_detail.id %>
                       <%= text_field_tag :search, params[:search],placeholder: 'Payable Amount',
-                                         class: 'form-control search-box', id: 'search-box', required: true %>
+                                         class: 'form-control search-box', id: 'customer-payable-amount', required: true %>
                       <%= select_tag :payment_type, options_for_select([['Payment Type'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Type'),
                                          class: 'form-control search-box', id: 'payment_type', required: true %>
                       <%= text_field_tag :check_desc, params[:check_desc],placeholder: 'Payment Description',
