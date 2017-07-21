@@ -153,12 +153,15 @@ $(function() {
 
         if($("#booking_detail_is_gst_true").is(':checked')){
             var gst_rate = $("#booking_detail_gst_rate").val();
+            var stamp_duty = Number($("#booking_detail_stamp_duty").val());
+            var registration_fees = Number($("#booking_detail_registration_fees").val());
+            var legal_charges = Number($("#booking_detail_legal_charges").val());
             $("#booking_detail_gst_cost").attr('value', (gst_rate/100)*agreement_cost);
 
             var gst_cost = Number($("#booking_detail_gst_cost").val());
 
            var balance_amount = pre_balance_amount + water_charges + MSEB_charges + parking_charges + maintenance_charges +
-                    other_charges + gst_cost;
+                    other_charges + stamp_duty + registration_fees + legal_charges + gst_cost;
 
             $("#booking_detail_final_sale_deed").attr('value', balance_amount);
 
@@ -175,6 +178,41 @@ $(function() {
 
             $("#booking_detail_final_sale_deed").attr('value', balance_amount);
         }
+    });
+
+    $("#booking_detail_token_amount").on('focusout', function () {
+        var final_sale_deed = Number($("#booking_detail_final_sale_deed").val());
+        var token_amount_entered = Number($(this).val());
+
+        if(token_amount_entered > final_sale_deed || token_amount_entered <= 0){
+            $.notify('Token should be less than final sell deed', {className: 'error'});
+            $("#booking_detail_final_sale_deed").focus();
+            $("#booking-save-btn").attr('disabled', true);
+        }else{
+            $("#booking-save-btn").attr('disabled', false);
+        }
+
+    });
+
+    var previous_payable_amount = 0;
+
+    $("#edit-customer-payable-amount").on('click', function () {
+       previous_payable_amount = Number($(this).val());
+    });
+
+    $("#edit-customer-payable-amount").on('focusout', function () {
+       var payment_balance_amount =  Number($("#pay-balance-amount").text()) + previous_payable_amount;
+       var entered_amount = Number($(this).val());
+
+       console.log('Balance amount '+ payment_balance_amount);
+
+       if(entered_amount > payment_balance_amount || entered_amount == 0){
+           $.notify('Amount should not be greater than balance amount, \n or amount should not be 0', {className: 'error'});
+
+           $("#save-paid-amount").attr('disabled', true);
+       }else{
+           $("#save-paid-amount").attr('disabled', false);
+       }
     });
 
     // Initialize form validation on the registration form.

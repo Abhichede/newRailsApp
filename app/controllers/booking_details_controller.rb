@@ -28,7 +28,7 @@ class BookingDetailsController < ApplicationController
     @flat = Flat.find(booking_detail_params[:flat_id])
     if @flat.booking_status == 1 || @flat.booking_status
       respond_to do |format|
-          format.html { redirect_to @flat, notice: 'Already booked.' }
+          format.html { redirect_to @flat, alert: 'Already booked.' }
           format.json { render :show, status: 'already Booked', location: @flat }
         end
      else

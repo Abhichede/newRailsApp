@@ -12,7 +12,7 @@ class BookingDetail < ApplicationRecord
 
   def self.get_all_charges(booking_detail)
 
-    flat_cost = booking_detail.flat.flat_cost.to_i
+    flat_cost = booking_detail.flat.flat_cost.to_i + booking_detail.flat_cost.to_f
     vat = booking_detail.vat.to_i
     service_tax = booking_detail.service_tax.to_i
     stamp_duty = booking_detail.stamp_duty.to_i
@@ -24,12 +24,21 @@ class BookingDetail < ApplicationRecord
     parking_charges = booking_detail.parking_charges.to_i
     maintenance_charges = booking_detail.maintenance_charges.to_i
     other_charges = booking_detail.other_charges.to_i
+    is_gst = booking_detail.is_gst
+    gst_cost = booking_detail.gst_cost.to_f
 
-    all_charges = vat + service_tax + stamp_duty + registration_fees +
-        lbt + legal_charges + mseb_charges + water_charges + parking_charges +
+    if is_gst
+    all_charges = gst_cost+ stamp_duty + registration_fees+ legal_charges + mseb_charges + water_charges + parking_charges +
         maintenance_charges + other_charges + flat_cost
 
     return all_charges
+    else
+      all_charges = vat + service_tax + stamp_duty + registration_fees +
+          lbt + legal_charges + mseb_charges + water_charges + parking_charges +
+          maintenance_charges + other_charges + flat_cost
+
+      return all_charges
+    end
 
   end
 end

@@ -172,30 +172,14 @@
         <div class="col-md-3 ">
           &#8377; <%= @booking_detail.service_tax.to_i %>
         </div>
-        <div class="col-md-3 ">
-          <strong>STAMP DUTY </strong>
-        </div>
-        <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.stamp_duty.to_i %>
-        </div>
-        <div class="col-md-3 ">
-          <strong>REGISTRATION FEES </strong>
-        </div>
-        <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.registration_fees.to_i %>
-        </div>
+
         <div class="col-md-3 ">
           <strong>LBT </strong>
         </div>
         <div class="col-md-3 ">
           &#8377; <%= @booking_detail.lbt.to_i %>
         </div>
-        <div class="col-md-3 ">
-          <strong>LEGAL CHARGES </strong>
-        </div>
-        <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.legal_charges.to_i %>
-        </div>
+
       </div>
     <% else %>
       <div class="gst-taxes">
@@ -213,6 +197,25 @@
         </div>
       </div>
     <% end %>
+
+    <div class="col-md-3 ">
+      <strong>STAMP DUTY </strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= @booking_detail.stamp_duty.to_i %>
+    </div>
+    <div class="col-md-3 ">
+      <strong>REGISTRATION FEES </strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= @booking_detail.registration_fees.to_i %>
+    </div>
+    <div class="col-md-3 ">
+      <strong>LEGAL CHARGES </strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= @booking_detail.legal_charges.to_i %>
+    </div>
       <hr/>
     <div class="col-md-3 ">
       <strong>MSEB CHARGES </strong>

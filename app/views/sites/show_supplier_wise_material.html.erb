@@ -66,7 +66,8 @@
 </div>
 <div class="pull-right">
   <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
-  <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong>
+  <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong><br/>
+  <strong>Balance Amount: &#8377; <%= total_amount.round(2) - @supplier.paid_amount.to_f.round(2) %></strong>
 </div>
 
 

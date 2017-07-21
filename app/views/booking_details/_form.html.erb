@@ -93,8 +93,12 @@
       </div>
 
       <%=f.error_span(:agreement_cost) %>
+      <% if @flat.flat_type === 'SHOP' %>
+          <%= f.label 'Shop Cost', :class => 'control-label col-lg-2' %>
+      <% else %>
+          <%= f.label 'Flat Cost', :class => 'control-label col-lg-2' %>
+      <% end %>
 
-      <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
         <%= f.text_field :flat_cost, :class => 'form-control', required: true,
                          placeholder: :flat_cost %>
@@ -107,8 +111,13 @@
     <div class="form-group">
       <%= f.label 'Taxation', :class => 'control-label col-lg-2' %>
       <div class="col-lg-10">
-        <%= f.radio_button :is_gst, false,  class: 'radio-inline' %> NON GST
-        <%= f.radio_button :is_gst, true, :checked => true, class: 'radio-inline' %> GST
+        <% if @booking_detail.is_gst %>
+          <%= f.radio_button :is_gst, false,  class: 'radio-inline' %> NON GST
+          <%= f.radio_button :is_gst, true, :checked => true, class: 'radio-inline' %> GST
+        <% else %>
+          <%= f.radio_button :is_gst, false, :checked => true,  class: 'radio-inline' %> NON GST
+          <%= f.radio_button :is_gst, true, class: 'radio-inline' %> GST
+        <% end %>
       </div>
     </div>
    <hr/>
@@ -174,19 +183,6 @@
       </div>
     </div>
     <div id="non-gst-taxes" class="hidden">
-      <div class="form-group">
-        <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-4">
-          <%= f.text_field :stamp_duty, :class => 'form-control', required: true  %>
-        </div>
-        <%=f.error_span(:stamp_duty) %>
-
-        <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-4">
-          <%= f.text_field :registration_fees, :class => 'form-control', required: true%>
-        </div>
-        <%=f.error_span(:registration_fees) %>
-      </div>
        <div class="form-group">
          <label class="control-label col-lg-2" for="booking_detail_LBT">VAT</label>
           <div class="col-lg-4">
@@ -206,14 +202,28 @@
             <%= f.text_field :lbt, :class => 'form-control', required: true %>
           </div>
           <%=f.error_span(:lbt) %>
-
-         <%= f.label :legal_charges, :class => 'control-label col-lg-2' %>
-         <div class="col-lg-4">
-           <%= f.text_field :legal_charges, :class => 'form-control',
-                            value: '11000', readonly: true %>
-         </div>
-         <%=f.error_span(:legal_charges) %>
        </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :stamp_duty, :class => 'form-control', required: true  %>
+      </div>
+      <%=f.error_span(:stamp_duty) %>
+
+      <%= f.label :registration_fees, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :registration_fees, :class => 'form-control', required: true%>
+      </div>
+      <%=f.error_span(:registration_fees) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :legal_charges, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :legal_charges, :class => 'form-control',
+                         value: '11000', readonly: true %>
+      </div>
+      <%=f.error_span(:legal_charges) %>
     </div>
     <hr/>
     <div class="form-group">
@@ -256,6 +266,17 @@
       </div>
     </div>
     <hr/>
+    <div class="form-group">
+      <%= f.label 'Final sell deed', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :final_sale_deed, :class => 'form-control', readonly: true %>
+      </div>
+      <%=f.error_span(:final_sale_deed) %>
+
+      <div class="col-md-4"  id="token-error">
+
+      </div>
+    </div>
     <% if @flat.booking_status == 0 || @flat.booking_status.blank? %>
       <div class="form-group">
         <%= f.label :token_amount, :class => 'control-label col-lg-2' %>
@@ -287,12 +308,9 @@
       </div>
     <% end %>
 
-
-      <%= f.hidden_field :final_sale_deed %>
-
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
+      <input type="submit" name="commit" value="Save" class="btn btn-primary" id="booking-save-btn" data-disable-with="Create Flat">
       <%= link_to 'Cancel', :back, :class => 'btn btn-default' %>
     </div>
   </div>

@@ -32,7 +32,7 @@
   </thead>
   <% count = 0 %>
   <tbody>
-    <% @booking_detail.payment_details.each do |payment_detail| %>
+    <% @booking_detail.payment_details.order("#{:payment_date} DESC").each do |payment_detail| %>
       <% if payment_detail.payment_type == 'CHEQUE' %>
         <tr style="background-color: #bb4422; color: #FFFFFF">
       <% elsif payment_detail.payable_amount.to_i < 0 %>
@@ -91,7 +91,8 @@
 <hr/>
 <div class="row">
   <div class="col-md-6 pull-right">
-   <strong>Total Amount Paid : <%= @booking_detail.paid_amount %></strong>
+   <strong>Total Amount Paid : <%= @booking_detail.paid_amount %></strong><br/>
+    <strong>Balance Amount : <span id="pay-balance-amount"><%= @booking_detail.final_sale_deed.to_f - @booking_detail.paid_amount.to_f %></span> </strong>
   </div>
 </div>
 
@@ -105,14 +106,6 @@
       <div class="modal-header">
         <h4 class="modal-title w-100">Fill Payment details</h4>
       </div>
-      <% if (@booking_detail.final_sale_deed.to_f - @booking_detail.paid_amount.to_f) <= 0 %>
-          <div class="modal-body">
-            <h4>The full Amount was PAID</h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-          </div>
-      <% else %>
           <div class="modal-body">
 
             <%= form_tag edit_bookings_payment_details_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
@@ -134,7 +127,6 @@
             <% end %>
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
             </div>
-      <% end %>
     </div>
 
   </div>

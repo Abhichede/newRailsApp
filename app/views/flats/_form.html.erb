@@ -15,30 +15,6 @@
     </div>
   <% end %>
 <div class="container">
-  <div class="form-group">
-    <% if params[:flat_type] === 'SHOP' %>
-        <label class="control-label col-lg-2">Shop Number</label>
-    <% else %>
-        <%= f.label :flat_number, :class => 'control-label col-lg-2' %>
-    <% end %>
-    <div class="col-lg-4">
-      <%= f.text_field :flat_number, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:flat_number) %>
-
-    <%= f.label :area, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <div class="input-group">
-      <%= f.text_field :area, :class => 'form-control'%>
-        <span class="input-group-addon">
-        Sq.Ft.
-      </span>
-      </div>
-    </div>
-    <%=f.error_span(:area) %>
-  </div>
-
-
   <!-- ruby's black magic code to create array for wings according to number of wigs added in sites -->
         <% wings_array = Array.new(10)
             wings_array = [['Select Wing']]
@@ -74,20 +50,43 @@
     <%=f.error_span(:floor) %>
   </div>
 
+  <div class="form-group">
+    <% if params[:flat_type] === 'SHOP' || @flat.flat_type === 'SHOP' %>
+        <label class="control-label col-lg-2">Shop Number</label>
+    <% else %>
+        <%= f.label :flat_number, :class => 'control-label col-lg-2' %>
+    <% end %>
+    <div class="col-lg-4">
+      <%= f.text_field :flat_number, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:flat_number) %>
+
+    <%= f.label :area, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <div class="input-group">
+        <%= f.text_field :area, :class => 'form-control'%>
+        <span class="input-group-addon">
+        Sq.Ft.
+      </span>
+      </div>
+    </div>
+    <%=f.error_span(:area) %>
+  </div>
+
 
 
   <div class="form-group">
-    <%= f.label 'Govt rate/sqft', :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= f.text_field :govt_rate, :class => 'form-control', readonly: true %>
-    </div>
-    <%=f.error_span(:govt_rate) %>
-
     <%= f.label :govt_value, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.text_field :govt_value, :class => 'form-control' %>
     </div>
     <%=f.error_span(:govt_value) %>
+
+    <%= f.label 'Govt rate/sqft', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :govt_rate, :class => 'form-control', readonly: true %>
+    </div>
+    <%=f.error_span(:govt_rate) %>
   </div>
   <div class="form-group">
     <%= f.label :flat_type, :class => 'control-label col-lg-2' %>
@@ -95,7 +94,7 @@
       <%
         flat_types = ['SELECT FLAT TYPE']
         flat_types += @site.type_of_structures.split(', ') %>
-      <% if params[:flat_type] === "SHOP" %>
+      <% if params[:flat_type] === "SHOP" || @flat.flat_type === 'SHOP' %>
           <%= f.select(:flat_type, options_for_select([['SHOP', 'SHOP']],:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
                        {}, class: 'form-control') %>
       <% else %>
@@ -117,7 +116,7 @@
 </div>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Flat">
+      <input type="submit" name="commit" value="Save" class="btn btn-primary", id="flat-save-btn" data-disable-with="Create Flat">
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 :back, :class => 'btn btn-default' %>
     </div>

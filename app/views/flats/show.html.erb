@@ -75,13 +75,6 @@
           <dd><strong>:</strong> <%= @flat.area %> sq.ft.</dd>
           <dt><strong><%= model_class.human_attribute_name(:floor) %> </strong></dt>
           <dd><strong>:</strong> <%= @flat.floor %></dd>
-          <dt> <% if @flat.flat_type === 'SHOP' || @flat.flat_type === ' SHOP' %>
-                <strong>Shop cost</strong>
-          <% else %>
-              <strong><%= model_class.human_attribute_name(:flat_cost) %> </strong>
-          <% end %>
-          </dt>
-          <dd><strong>:</strong> &#8377; <%= @flat.flat_cost %> </dd>
           <dt><strong><%= model_class.human_attribute_name(:govt_rate) %> </strong></dt>
           <dd><strong>:</strong> &#8377; <%= @flat.govt_rate.to_f.round(2) %></dd>
           <dt><strong><%= model_class.human_attribute_name(:govt_value) %> </strong></dt>

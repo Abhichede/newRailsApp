@@ -21,13 +21,28 @@ $(function() {
         }
     });
 
+    $("#flat_flat_number, #flat_wing").on('focusout', function () {
+       var wing_number = $("#flat_wing").val();
+        // console.log(wing_number);
+       if($("#flat_flat_number").val().indexOf(wing_number)){
+           $.notify('Flat number should contain exact selected wing number', {className: 'error'});
+
+           $("#flat-save-btn").attr('disabled', true)
+       }else{
+           $("#flat-save-btn").attr('disabled', false)
+       }
+    });
+
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     $("form.flat").validate({
         debug: true,
         // Specify validation rules
         rules: {
-            "flat[flat_number]":"required",
+            "flat[flat_number]":{
+                required: true,
+                pattern: /^([A-Z]{1})?[-][0-9]{1,4}$/
+            },
             "flat[area]":{
                 required: true,
                 pattern: /^([0-9]*[.])?[0-9]*$/
@@ -55,6 +70,10 @@ $(function() {
         },
         // Specify validation error messages
         messages: {
+            "flat[flat_number]":{
+                required: "This is required Filed",
+                pattern: "Please enter in format (wing-number). eg A-101"
+            },
             "flat[area]":{
                 required: "This is required Filed, please enter value, don't put 'sqft'",
                 pattern: "Please enter only number"
