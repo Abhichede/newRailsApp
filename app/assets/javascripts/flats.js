@@ -24,12 +24,16 @@ $(function() {
     $("#flat_flat_number, #flat_wing").on('focusout', function () {
        var wing_number = $("#flat_wing").val();
         // console.log(wing_number);
-       if($("#flat_flat_number").val().indexOf(wing_number)){
-           $.notify('Flat number should contain exact selected wing number', {className: 'error'});
+       if($("#flat_flat_number").val() === ''){
 
-           $("#flat-save-btn").attr('disabled', true)
-       }else{
-           $("#flat-save-btn").attr('disabled', false)
+       } else {
+           if ($("#flat_flat_number").val().indexOf(wing_number)) {
+               $.notify('Flat number should contain exact selected wing number', {className: 'error'});
+               $("label[for=flat_wing][class=error]").text('Flat number should contain exact selected wing number');
+               $("#flat-save-btn").attr('disabled', true)
+           } else {
+               $("#flat-save-btn").attr('disabled', false)
+           }
        }
     });
 

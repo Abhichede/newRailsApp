@@ -48,9 +48,9 @@ class SitesController < ApplicationController
   end
 
   def show_supplier_wise_material
-    @material = @site.materials.where(:supplier_id => params[:supplier])
+    # @material = @site.materials.where(:supplier_id => params[:supplier])
     @supplier = Supplier.find(params[:supplier])
-    @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
+    # @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
   end
 
   # PATCH/PUT /sites/1

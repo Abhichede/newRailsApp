@@ -68,6 +68,7 @@
       <th>Quantity</th>
       <th>Rate</th>
       <th>Amount</th>
+      <th>GST</th>
       <th>Supervisor</th>
     </tr>
     </thead>
@@ -84,6 +85,7 @@
           <td><%=  material.quantity.to_f %> <%= material.unit %></td>
           <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
           <td>&#8377; <%= material.amount.to_f %></td>
+          <td>&#8377; <%= material.gst_cost.to_f %></td>
           <td><%= material.supervisor_name %></td>
         </tr>
     <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702165243) do
+ActiveRecord::Schema.define(version: 20170722032502) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 20170702165243) do
     t.string   "schedule_desc"
     t.string   "booking_date"
     t.string   "gender",              default: "MR."
+    t.string   "flat_cost",           default: "0"
+    t.boolean  "is_gst",              default: false
+    t.integer  "gst_rate",            default: 0
+    t.string   "gst_cost",            default: "0"
   end
 
   create_table "contract_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -110,10 +114,10 @@ ActiveRecord::Schema.define(version: 20170702165243) do
   create_table "flats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "area"
     t.string   "floor"
-    t.string   "flat_cost"
+    t.string   "flat_cost",      default: "0"
     t.integer  "site_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "flat_number"
     t.boolean  "booking_status"
     t.date     "booking_date"
@@ -122,7 +126,7 @@ ActiveRecord::Schema.define(version: 20170702165243) do
     t.string   "flat_type"
     t.string   "wing"
     t.string   "amenities"
-    t.string   "flat_rate"
+    t.string   "flat_rate",      default: "0"
   end
 
   create_table "investment_monthly_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -213,10 +217,17 @@ ActiveRecord::Schema.define(version: 20170702165243) do
     t.string   "rate"
     t.string   "amount"
     t.string   "supervisor_name"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "description",      default: "NA"
     t.string   "challan_item",     default: "NA"
+    t.boolean  "is_rate_added",    default: false
+    t.string   "rate_added_by",    default: "NA"
+    t.string   "bill_no",          default: "NA"
+    t.boolean  "is_gst",           default: false
+    t.integer  "gst_rate",         default: 0
+    t.string   "gst_cost",         default: "0"
+    t.datetime "rate_added_at",    default: '2017-07-22 03:31:05'
   end
 
   create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

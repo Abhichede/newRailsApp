@@ -71,4 +71,22 @@ $(function() {
             form.submit();
         }
     });
+
+    /* material add rate form */
+
+    $("#addRateSiteMaterial").on('shown.bs.modal', function () {
+       var quantity = $("form#add-material-rate-form > input#quantity").val();
+
+       $("#new_material_rate").on('change keyup paste', function () {
+           var gst_rate = Number($("#material_gst_rate").val());
+            $("#material_amount").val(Number($(this).val()) * quantity);
+
+           $("#material_gst_cost").val((Number($(this).val()) * quantity)  * (gst_rate/100))
+       });
+       $("#material_gst_rate").on('change focusout', function () {
+           var gst_rate = Number($("#material_gst_rate").val());
+           var material_amount = Number($("#material_amount").val());
+           $("#material_gst_cost").val(material_amount  * (gst_rate/100))
+       });
+    });
 });

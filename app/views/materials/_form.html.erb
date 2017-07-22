@@ -14,6 +14,7 @@
       </div>
     </div>
   <% end %>
+
   <div class="form-group">
     <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
     <div class="col-lg-3 col-sm-8 col-xs-8">
@@ -26,7 +27,7 @@
         end %>
       <% if !@material.supplier.blank? %>
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.name),
-                       {}, class: 'form-control') %>
+                       {}, class: 'form-control', autocomplete: 'off') %>
       <% else %>
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
                        {}, class: 'form-control') %>
@@ -38,25 +39,22 @@
     </div>
     <%=f.error_span(:supplier_id) %>
 
-    <% if params[:type_of_material] === 'OTHER ORDINARY' %>
-        <%= f.label :description, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-4">
-          <%= f.text_field :description, :class => 'form-control' %>
-        </div>
-        <%=f.error_span(:description) %>
-    <% end %>
-
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :description, :class => 'form-control', autocomplete: 'off' %>
+    </div>
+    <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
     <%= f.label :date, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.date_field :date, :class => 'form-control',required: true, value: @material.date %>
+      <%= f.date_field :date, :class => 'form-control', autocomplete: 'off',required: true, value: @material.date %>
     </div>
     <%=f.error_span(:date) %>
 
     <%= f.label :time, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.time_field :time, :class => 'form-control', required: true, value: @material.time %>
+      <%= f.time_field :time, :class => 'form-control', autocomplete: 'off', required: true, value: @material.time %>
     </div>
     <%=f.error_span(:time) %>
   </div>
@@ -77,7 +75,7 @@
     <%= f.label :quantity, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <div class="input-group">
-        <%= f.text_field :quantity, :class => 'form-control', required: true %>
+        <%= f.text_field :quantity, :class => 'form-control', autocomplete: 'off', required: true %>
         <span class="input-group-addon">
           <%= @material_list.material_unit %>
           <%= f.hidden_field :unit, value: @material_list.material_unit %>
@@ -91,7 +89,7 @@
     <%= f.label :challan_no, :class => 'control-label col-lg-2' %>
     <div class="col-md-4">
       <div class="input-group">
-        <%= f.text_field :challan_no, :class => 'form-control', required: true %>
+        <%= f.text_field :challan_no, :class => 'form-control', autocomplete: 'off', required: true %>
         <div class="input-group-btn">
           <%
               counter = 1
@@ -113,7 +111,7 @@
 
     <%= f.label :truck_no, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
-      <%= f.text_field :truck_no, :class => 'form-control', required: true %>
+      <%= f.text_field :truck_no, :class => 'form-control', autocomplete: 'off', required: true %>
     </div>
     <%=f.error_span(:truck_no) %>
 
@@ -145,16 +143,20 @@
       <div class="form-group">
         <%= f.label :rate, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :rate, :class => 'form-control', required: true %>
+          <%= f.text_field :rate, :class => 'form-control', autocomplete: 'off', required: true %>
         </div>
         <%=f.error_span(:rate) %>
 
         <%= f.label :amount, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.text_field :amount, :class => 'form-control', required: true, readonly: true %>
+          <%= f.text_field :amount, :class => 'form-control', autocomplete: 'off', required: true, readonly: true %>
         </div>
         <%=f.error_span(:amount) %>
       </div>
+
+        <% f.hidden_field :is_rate_added, value: true %>
+        <% f.hidden_field :rate_added_by, value: current_user.user_name %>
+        <% f.hidden_field :rate_added_at, value: Time.now  %>
   <% end %>
   <% if current_user.role === 'SUPERVISOR' %>
     <div class="form-group">
@@ -164,11 +166,12 @@
       </div>
       <%=f.error_span(:supervisor_name) %>
     </div>
+
   <% end %>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">
-      <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Create Material">
+      <input type="submit" name="commit" value="Save" class="btn btn-primary" id="material-save-btn" data-disable-with="Create Material">
       <%= link_to 'Cancel',{controller: 'sites', action: 'show_site_material', id: params[:site_id], type_of_material: params[:type_of_material]},
                   :class => 'btn btn-default' %>
     </div>

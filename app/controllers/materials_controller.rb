@@ -25,6 +25,10 @@ class MaterialsController < ApplicationController
   # GET /materials/1/edit
   def edit
     @supplier = Supplier.new
+    @material_list = MaterialList.find_by(:material_name => params[:type_of_material])
+
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
   end
 
   # POST /materials
@@ -54,14 +58,35 @@ class MaterialsController < ApplicationController
         format.json { render :show, status: :created, location: @material }
       else
         format.html { redirect_to session.delete(:return_to),
-                                  alert: 'This challan was used before / something went erong.'  }
+                                  alert: 'This challan was used before / something went wrong.'  }
         format.json { render json: @material.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update_material_rates
+    @material = Material.find(params[:material_id])
+    previus_amount = @material.amount.to_f
+    suppliers_total_amount = @material.supplier.total_amount.to_f - previus_amount
 
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    respond_to do |format|
+      if @material.update(:bill_no => params[:bill_no], :rate => params[:material_rate],
+                          :amount => params[:amount], :gst_rate => params[:gst_rate], :gst_cost => params[:gst_cost],
+                          :rate_added_by => params[:rate_added_by], :rate_added_at => params[:rate_added_at], :is_rate_added => true)
+        @material.supplier.update(:total_amount => (params[:amount].to_f + params[:gst_cost].to_f + suppliers_total_amount))
+
+        format.html { redirect_to session.delete(:return_to),
+                                  notice: 'Material rate was successfully Saved.' }
+        format.json { render :show, location: @material }
+      else
+        format.html { redirect_to session.delete(:return_to),
+                                  alert: 'something went wrong.'  }
+        format.json { render json: @material.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /materials/1
@@ -85,8 +110,8 @@ class MaterialsController < ApplicationController
           new_suppliers_total = suppliers_total - previous_amount
           @supplier.update(:total_amount => (material_params[:amount].to_f + new_suppliers_total ))
         end
-        @updating_material.update(:gst_cost => gst_cost, :amount => total_cost)
-        format.html { redirect_to @material, notice: 'Material was successfully Saved.' }
+        @material.update(:gst_cost => gst_cost, :amount => total_cost)
+        format.html { redirect_to session.delete(:return_to), notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :ok, location: @material }
       else
         format.html { render :edit }
@@ -115,6 +140,8 @@ class MaterialsController < ApplicationController
     def material_params
       params.require(:material).permit(:date, :supplier_id, :site_id, :type_of_material,
                                        :quantity, :unit, :challan_no, :truck_no, :time, :rate,
-                                       :amount, :supervisor_name,:challan_item, :description,:bill_no, :is_gst, :gst_rate)
+                                       :amount, :supervisor_name,:challan_item, :is_rate_added,
+                                       :rate_added_by, :rate_added_at, :description,:bill_no,
+                                       :is_gst, :gst_rate)
     end
 end

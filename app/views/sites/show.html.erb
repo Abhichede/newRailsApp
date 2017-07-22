@@ -112,8 +112,6 @@
   <% if current_user.role === 'SUPERVISOR' %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
-    <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
-    </li>
   <% else %>
     <li class="active">
       <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
@@ -146,7 +144,7 @@
                   <h4 class="text-center"><strong>Wing <%= letter.next %></strong></h4>
                   <hr>
                   <div class="col-md-offset-2">
-                  <% @site.flats.where(:wing => letter.next).where.not(:flat_type => 'SHOP').each do |flat| %>
+                  <% @site.flats.where('wing = ? AND flat_type != ?', letter.next, 'SHOP').order(:flat_number).each do |flat| %>
                       <%= link_to flat_path(flat) do %>
                         <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 text-center flats-well" style="margin: 0.5rem;">
                           <%= flat.flat_number %>
@@ -190,44 +188,67 @@
         </div>
       </div>
     <% end %>
-  <% end %>
-  <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
-    <% if current_user.role != 'SUPERVISOR' %>
-      <span class="pull-right">
-          <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                  data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
-      </span>
-    <% end %>
-    <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+    <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
+      <% if current_user.role != 'SUPERVISOR' %>
+    <span class="pull-right">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+    </span>
+      <% end %>
+      <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
 
-          <% MaterialList.all.each do |material| %>
+        <% MaterialList.all.each do |material| %>
             <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
 
-              <% else %>
+            <% else %>
                 <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
-                             :type_of_material=>material.material_name},
+                                                     :type_of_material=>material.material_name},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                             style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
             <% end %>
-          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div class="jumbotron tab-pane" id="supplier_jumbo" style="margin-top: 0.5em">
-    <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-      <% if Supplier.all.count == 0 %>
-          <h5><strong>No Material For This Site</strong></h5>
-      <% else %>
-          <% Supplier.all.each do |supplier| %>
-              <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-                <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
-                                                     :supplier=>supplier.id},
-                            class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                            style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
+    <div class="jumbotron tab-pane" id="supplier_jumbo" style="margin-top: 0.5em">
+      <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+        <% if Supplier.all.count == 0 %>
+            <h5><strong>No Material For This Site</strong></h5>
+        <% else %>
+            <% Supplier.all.each do |supplier| %>
+                <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+                    <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                                                           :supplier=>supplier.id},
+                                class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                                style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
                 <% end %>
             <% end %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+  <% if current_user.role === 'SUPERVISOR'  %>
+      <div class="jumbotron tab-pane active" id="material_jumbo" style="margin-top: 0.5em">
+        <% if current_user.role != 'SUPERVISOR' %>
+    <span class="pull-right">
+        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+    </span>
+        <% end %>
+        <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+
+          <% MaterialList.all.each do |material| %>
+              <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
+
+              <% else %>
+                  <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
+                                                       :type_of_material=>material.material_name},
+                              class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                              style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
 <% if current_user.role != 'SUPERVISOR' %>
   <div class="jumbotron tab-pane" id="labour_jumbo" style="margin-top: 0.5em">
     <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">

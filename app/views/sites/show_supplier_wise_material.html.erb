@@ -39,6 +39,7 @@
       <th>Quantity</th>
       <th>Rate</th>
       <th>Amount</th>
+      <th>GST</th>
       <th>Supervisor</th>
     </tr>
     </thead>
@@ -47,7 +48,7 @@
     %>
     <tbody>
 
-        <% @material.each do |material| %>
+        <% @site.materials.where(:supplier_id => @supplier.id).each do |material| %>
             <tr>
               <td><%= material.type_of_material %></td>
               <td><%= material.date %></td>
@@ -57,6 +58,7 @@
               <td><%=  material.quantity.to_f %> <%= material.unit %></td>
               <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
               <td>&#8377; <%= material.amount.to_f %></td>
+              <td>&#8377; <%= material.gst_cost.to_f %></td>
               <td><%= material.supervisor_name %></td>
             </tr>
                   <% total_amount = total_amount + material.amount.to_f %>
@@ -67,7 +69,7 @@
 <div class="pull-right">
   <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
   <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong><br/>
-  <strong>Balance Amount: &#8377; <%= total_amount.round(2) - @supplier.paid_amount.to_f.round(2) %></strong>
+  <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= total_amount.round(2) - @supplier.paid_amount.to_f.round(2) %></span></strong>
 </div>
 
 
@@ -82,8 +84,16 @@
       <div class="modal-header">
         <h4 class="modal-title w-100">Supplier's Payment</h4>
       </div>
-      <div class="modal-body">
-        <%= form_tag update_supplier_payment_path, method: :get, id: 'suppliers-payment_form'  do %>
+      <% if (total_amount.round(2) - @supplier.paid_amount.to_f.round(2)) <= 0 %>
+          <div class="modal-body">
+            <h4>There is no balance amount for this supplier on this site.</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+          </div>
+      <% else %>
+          <div class="modal-body">
+            <%= form_tag update_supplier_payment_path, method: :get, id: 'suppliers-payment_form'  do %>
 
             <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
                                class: 'form-control search-box', id: 'search-box', required: true %>
@@ -99,15 +109,15 @@
             <%= hidden_field_tag :id, params[:id], value: @supplier.id %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
             <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount %>
-            </div>
-            <div class="modal-footer">
-              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
-                             id: 'schedule_next_installment') do %>
-                  Save
-              <% end %>
+          </div>
+          <div class="modal-footer">
+            <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                           id: 'schedule_next_installment') do %>
+                Save
+            <% end %>
         <% end %>
-
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      <% end %>
         </div>
         </div>
 
@@ -138,15 +148,23 @@
               </tr>
             </thead>
             <tbody>
-              <% @outgoing_payment.each do |payments| %>
-                <tr>
-                  <td><%= payments.date %></td>
-                  <td>&#8377; <%= payments.amount %></td>
-                  <td><%= payments.payment_method %></td>
-                  <td><%= payments.payment_description %></td>
-                  <td><%= payments.paid_by %></td>
-                </tr>
-              <% end %>
+                <% @site.outgoing_payments.where(:payment_to => @supplier.name).each do |payments| %>
+                    <% if payments.blank? %>
+                        <tr>
+                          <td colspan="5">
+                            <h4 class="text-center">No Record</h4>
+                          </td>
+                        </tr>
+                    <% else %>
+                    <tr>
+                      <td><%= payments.date %></td>
+                      <td>&#8377; <%= payments.amount %></td>
+                      <td><%= payments.payment_method %></td>
+                      <td><%= payments.payment_description %></td>
+                      <td><%= payments.paid_by %></td>
+                    </tr>
+                    <% end %>
+                <% end %>
             </tbody>
           </table>
         </div>

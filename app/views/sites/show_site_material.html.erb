@@ -69,7 +69,31 @@
             <td>&#8377; <%= material.amount.to_f %></td>
           <% end %>
           <td><%= material.supervisor_name %></td>
-          <td><a href="#" class="btn btn-primary btn-sm">Add Rate</a></td>
+          <% if current_user.role != 'SUPERVISOR' %>
+            <td>
+              <div class="form-group">
+                <a class="btn btn-primary btn-block btn-xs" data-toggle="modal"
+                   id="material-<%= material.id %>" data-dl-id="<%= material.id %>" data-quantity="<%= material.quantity.to_f %>" data-target="#addRateSiteMaterial">
+                Add Rate
+                </a>
+                <%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
+                                     site_id: @site, type_of_material: params[:type_of_material] },
+                            class: 'btn btn-primary btn-block btn-xs' %>
+              </div>
+            </td>
+              <!-- ************************* Script ****************************** -->
+              <script type="text/javascript">
+                  $('#material-<%= material.id %>').on('click', function () {
+                      //get data-id attribute of the clicked element
+                      var material_id = $(this).data('dl-id');
+                      var quantity = $(this).data('quantity');
+                      //populate the textbox
+                      $("#addRateSiteMaterial").find('input[name="material_id"]').val(material_id);
+                      $("#addRateSiteMaterial").find('input[name="quantity"]').val(quantity);
+                  });
+              </script>
+              <!-- ************************** end ******************************** -->
+          <% end %>
         </tr>
               <%
                 total_quantity = total_quantity + material.quantity.to_f
@@ -121,6 +145,58 @@
             </div>
 
     </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="addRateSiteMaterial" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Add Material Rate</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_tag update_material_rate_path, method: :get, id: 'add-material-rate-form'  do %>
+            <%= hidden_field_tag :material_id, params[:material_id] %>
+            <%= hidden_field_tag :quantity %>
+            <div class="form-group">
+            <%= text_field_tag :bill_no, params[:bill_no],placeholder: 'Bill No',
+                               class: 'form-control', required: true %>
+            </div>
+            <div class="form-group">
+              <%= text_field_tag :material_rate, params[:rate],placeholder: 'Rate per Quantity',
+                                 class: 'form-control', id: 'new_material_rate', required: true %>
+            </div>
+            <div class="form-group">
+              <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                                 class: 'form-control', id: 'material_amount', required: true, readonly: true %>
+            </div>
+            <div class="form-group">
+            <%= select_tag :gst_rate, options_for_select([['GST Rate'],['0%','0'],['6%','6'],['12%','12'],['18%','18'],['28%','28']],
+                                                     :disabled=> 'GST Rate'),
+                       class: 'form-control', required: true, id: 'material_gst_rate' %>
+            </div>
+            <div class="form-group">
+            <%= text_field_tag :gst_cost, params[:gst_cost], placeholder: 'GST Cost', id: 'material_gst_cost',
+                               class: 'form-control', required: true, readonly: true %>
+            </div>
+            <%= hidden_field_tag :rate_added_by, params[:rate_added_by], value: current_user.user_name %>
+            <%= hidden_field_tag :rate_added_at, params[:rate_added_at], value: Time.now %>
+            </div>
+            <div class="modal-footer">
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                             id: 'save-paid-amount') do %>
+                  Save
+              <% end %>
+        <% end %>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
 
   </div>
 </div>
