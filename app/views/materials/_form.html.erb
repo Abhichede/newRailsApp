@@ -39,7 +39,7 @@
     </div>
     <%=f.error_span(:supplier_id) %>
 
-    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <%= f.label :description, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
     <div class="col-lg-4">
       <%= f.text_field :description, :class => 'form-control', autocomplete: 'off' %>
     </div>
@@ -133,7 +133,7 @@
         <div class="" id="gst-rate">
         <%= f.label :gst_rate, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
-          <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['6%','6'],['12%','12'],['18%','18'],['28%','28']],
+          <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['5%','5'],['12%','12'],['18%','18'],['28%','28']],
                                                      :disabled=> 'GST Rate', :selected=> @material.gst_rate),
                        {}, class: 'form-control') %>
         </div>
@@ -141,7 +141,7 @@
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :rate, :class => 'control-label col-lg-2' %>
+        <%= f.label 'Rate/'+@material_list.material_unit, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
           <%= f.text_field :rate, :class => 'form-control', autocomplete: 'off', required: true %>
         </div>

@@ -94,17 +94,26 @@
       <% else %>
           <div class="modal-body">
             <%= form_tag update_supplier_payment_path, method: :get, id: 'suppliers-payment_form'  do %>
-
+            <div class="form-group">
             <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
                                class: 'form-control search-box', id: 'search-box', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
                                class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
+            </div>
+            <div class="form-group">
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
                            class: 'form-control', id: 'payment_method', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
                                class: 'form-control search-box', id: 'payment_desc', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :paid_by, params[:paid_by],placeholder: 'Paid By',value: current_user.user_name ,
                                class: 'form-control search-box', id: 'paid_by', readonly: true %>
+            </div>
             <%= hidden_field_tag :payment_for, params[:payment_for], value: 'MATERIAL/SUPPLIER' %>
             <%= hidden_field_tag :id, params[:id], value: @supplier.id %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>

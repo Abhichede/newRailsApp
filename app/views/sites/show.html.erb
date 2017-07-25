@@ -97,7 +97,7 @@
         <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
         <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#suppliersOutstanding">Supplier</button>
+                data-toggle="modal" data-target="#suppliersOutstanding">Supplier Overview</button>
         <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#">Labour</button>
       </div>
@@ -123,7 +123,7 @@
     <% end %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
-    <li><a href="#supplier_jumbo" data-toggle="tab">Suppliers</a>
+    <li><a href="#supplier_jumbo" data-toggle="tab">Supplier's Payment</a>
     </li>
     <li><a href="#labour_jumbo" data-toggle="tab">Labour</a>
     </li>
@@ -254,7 +254,7 @@
     <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">
       <ul  class="nav nav-pills">
         <li class="active">
-          <a href="#contractor_labour" data-toggle="tab">Contractor</a>
+          <a href="#contractor_labour" data-toggle="tab">Contractual</a>
         </li>
         <li>
           <%= link_to 'Departmental', {controller: 'departmental_labours', action: 'show_departmental_labours', id: @site.id} %>
@@ -299,11 +299,11 @@
     <div class="modal-body">
         <%= form_tag material_list_add_path, method: :get, id: ''  do %>
 
-            <div><strong>Material Name</strong>
+            <div class="form-group"><strong>Material Name</strong>
               <%= text_field_tag :material_name, params[:material_name],placeholder: 'Material Name',
                                                                                     class: 'form-control', required:true, id: '' %>
             </div>
-            <div><strong>Material Unit</strong>
+            <div class="form-group"><strong>Material Unit</strong>
               <%= text_field_tag :material_unit, params[:material_unit],placeholder: 'Material Unit',
                                                                                     class: 'form-control', required:true, id: '' %>
             </div>
@@ -335,11 +335,11 @@
       <div class="modal-body">
         <%= form_tag contract_list_add_path, method: :get  do %>
 
-            <div><strong>Contract Name</strong>
+            <div class="form-group"><strong>Contract Name</strong>
               <%= text_field_tag :name, params[:name],placeholder: 'Contract Name',
                                  class: 'form-control', required:true %>
             </div>
-            <div><strong>Unit</strong>
+            <div class="form-group"><strong>Unit</strong>
               <%= text_field_tag :contract_unit, params[:contract_unit],placeholder: 'Unit',
                                  class: 'form-control', required:true%>
             </div>

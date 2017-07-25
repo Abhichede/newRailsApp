@@ -184,7 +184,7 @@ $(function() {
         var final_sale_deed = Number($("#booking_detail_final_sale_deed").val());
         var token_amount_entered = Number($(this).val());
 
-        if(token_amount_entered > final_sale_deed || token_amount_entered <= 0){
+        if(token_amount_entered > final_sale_deed ){
             $.notify('Token should be less than final sell deed', {className: 'error'});
             $("#booking_detail_final_sale_deed").focus();
             $("#booking-save-btn").attr('disabled', true);

@@ -74,7 +74,7 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.update(:bill_no => params[:bill_no], :rate => params[:material_rate],
-                          :amount => params[:amount], :gst_rate => params[:gst_rate], :gst_cost => params[:gst_cost],
+                          :amount => (params[:amount].to_f + params[:gst_cost].to_f), :gst_rate => params[:gst_rate], :gst_cost => params[:gst_cost],
                           :rate_added_by => params[:rate_added_by], :rate_added_at => params[:rate_added_at], :is_rate_added => true)
         @material.supplier.update(:total_amount => (params[:amount].to_f + params[:gst_cost].to_f + suppliers_total_amount))
 

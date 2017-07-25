@@ -162,17 +162,26 @@
       </div>
       <div class="modal-body">
         <%= form_tag update_departmental_labour_payment_path, method: :get, id: 'departmental_labours-payment_form'  do %>
-
+            <div class="form-group">
             <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
                                class: 'form-control search-box', id: 'search-box', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
                                class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
+            </div>
+            <div class="form-group">
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
                            class: 'form-control', id: 'payment_method', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
                                class: 'form-control search-box', id: 'payment_desc', required: true %>
+            </div>
+            <div class="form-group">
             <%= text_field_tag :payment_to, params[:payment_to],placeholder: 'Payment To',
                                class: 'form-control search-box', id: 'payment_to', required: true %>
+            </div>
             <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
             <%= hidden_field_tag :payment_for, params[:payment_for] %>
             <%= hidden_field_tag :id, params[:id] %>

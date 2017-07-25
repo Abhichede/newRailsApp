@@ -16,26 +16,13 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :date, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4 col-md-4">
-      <%= f.date_field :date, :class => 'form-control', required: true %>
-    </div>
-    <%=f.error_span(:date) %>
-
-    <%= f.label :contract_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4 col-md-4">
-      <%= f.text_field :contract_name, :class => 'form-control', value: params[:contract_name], readonly: true %>
-    </div>
-    <%=f.error_span(:contract_name) %>
-  </div>
-  <div class="form-group">
     <%= f.label :contractor_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
     <div class="col-lg-3 col-sm-8 col-xs-8">
       <%
         contractor_names = Array.new
         contractor_names.push(['Select Contractor'])
         Contractor.all.each do |contractor|
-            contractor_names.push([contractor.name.upcase,contractor.id])
+          contractor_names.push([contractor.name.upcase,contractor.id])
         end %>
       <% if !@contractual_labour.contractor.blank? %>
           <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: @contractual_labour.contractor.name),
@@ -50,6 +37,19 @@
 
     </div>
     <%=f.error_span(:contractor_id) %>
+
+    <%= f.label :contract_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.text_field :contract_name, :class => 'form-control', value: params[:contract_name], readonly: true %>
+    </div>
+    <%=f.error_span(:contract_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4 col-md-4">
+      <%= f.date_field :date, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:date) %>
 
     <%= f.label :quantity, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
     <div class="col-lg-4 col-md-4">
