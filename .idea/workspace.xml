@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/office_expences/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/office_expences/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/office_expences/index.html.erb" afterPath="$PROJECT_DIR$/app/views/office_expences/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/sites/show_supplier_wise_material.html.erb" afterPath="$PROJECT_DIR$/app/views/sites/show_supplier_wise_material.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/newRailsApp.iml" afterPath="$PROJECT_DIR$/newRailsApp.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -164,6 +155,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="a" />
         <option value="abhichede777 &lt;abhichede777@gmail.com&gt;" />
         <option value="Abhijit &lt;abhichede777@gmail.com&gt;" />
         <option value="abhichede777" />
@@ -1314,14 +1306,7 @@
       <workItem from="1500961800511" duration="1577000" />
       <workItem from="1500965186500" duration="20881000" />
       <workItem from="1500993214811" duration="6903000" />
-      <workItem from="1501002575615" duration="679000" />
-    </task>
-    <task id="LOCAL-00076" summary="new Mailer credentials added.">
-      <created>1494484743229</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1494484743229</updated>
+      <workItem from="1501002575615" duration="723000" />
     </task>
     <task id="LOCAL-00077" summary="new Mailer credentials added.">
       <created>1494528304188</created>
@@ -1659,11 +1644,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500990536675</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="issue with material payments was resolved, and date formats changed, new field added in contractual_labour 'payment_for_id'">
+      <created>1501003309250</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1501003309251</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="934811000" />
+    <option name="totallyTimeSpent" value="934855000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2044,6 +2036,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="517">
           <caret line="109" column="158" lean-forward="false" selection-start-line="109" selection-start-column="158" selection-end-line="109" selection-end-column="158" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2051,6 +2044,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="86" column="121" lean-forward="false" selection-start-line="86" selection-start-column="121" selection-end-line="86" selection-end-column="121" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2089,6 +2083,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="20" column="99" lean-forward="false" selection-start-line="20" selection-start-column="99" selection-end-line="20" selection-end-column="99" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2134,6 +2129,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="29" column="53" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
