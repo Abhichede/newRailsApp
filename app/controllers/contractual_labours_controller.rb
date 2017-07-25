@@ -24,15 +24,25 @@ class ContractualLaboursController < ApplicationController
 
   # GET /contractual_labours/1/edit
   def edit
+    @contract_list = ContractList.where(:name => params[:contract_name])
+    @contractor = Contractor.new
+
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
   end
 
   # POST /contractual_labours
   # POST /contractual_labours.json
   def create
     @contractual_labour = ContractualLabour.new(contractual_labour_params)
+    gst_cost = contractual_labour_params[:gst_cost].to_f
+    tds_cost = contractual_labour_params[:tds_cost].to_f
+    total_amount = contractual_labour_params[:amount].to_f + gst_cost - tds_cost
+
     @contractor = Contractor.find(contractual_labour_params[:contractor_id])
     respond_to do |format|
       if @contractual_labour.save
+        @contractual_labour.update(:amount => total_amount)
         format.html { redirect_to session.delete(:return_to), notice: "Contract was successfully allocated to #{@contractor.name}." }
         format.json { render :show, status: :created, location: @contractual_labour }
       else
@@ -45,9 +55,15 @@ class ContractualLaboursController < ApplicationController
   # PATCH/PUT /contractual_labours/1
   # PATCH/PUT /contractual_labours/1.json
   def update
+
+    gst_cost = contractual_labour_params[:gst_cost].to_f
+    tds_cost = contractual_labour_params[:tds_cost].to_f
+    total_amount = contractual_labour_params[:amount].to_f + gst_cost - tds_cost
+
     respond_to do |format|
       if @contractual_labour.update(contractual_labour_params)
-        format.html { redirect_to @contractual_labour, notice: 'Contractual labour was successfully updated.' }
+        @contractual_labour.update(:amount => total_amount)
+        format.html { redirect_to session.delete(:return_to), notice: 'Contractual labour was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractual_labour }
       else
         format.html { render :edit }
@@ -73,8 +89,9 @@ class ContractualLaboursController < ApplicationController
 
   def update_contractual_labour_payment
     @contractor = Contractor.find(params[:contractor_id])
-    paid_amount = @contractor.paid_amount.to_f
+
     @single_labour = ContractualLabour.find(params[:id])
+    paid_amount = @single_labour.paid_amount.to_f
     session.delete(:return_to)
     session[:return_to] ||= request.referer
 
@@ -82,10 +99,11 @@ class ContractualLaboursController < ApplicationController
 
       @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
                                               :payment_description => params[:payment_desc], :site_id => params[:site_id],:paid_by => params[:paid_by],
-                                              :date => params[:payment_date], :payment_to => @contractor.name)
+                                              :date => params[:payment_date], :payment_to => @contractor.name, :payment_for_id => params[:id])
 
       if @outgoing_payment.save
         @contractor.update(:paid_amount => (params[:amount].to_f + paid_amount))
+        @single_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))
 
         #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
@@ -102,7 +120,7 @@ class ContractualLaboursController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to session.delete(:return_to),
-                                  alert: "You can't pay this amount, Amount should not be greater than balance amount" }
+                                  alert: 'You can not pay this amount, Amount should not be greater than balance amount' }
         format.json { render json: @single_labour.errors, status: :unprocessable_entity }
       end
     end
@@ -111,7 +129,7 @@ class ContractualLaboursController < ApplicationController
   def contractual_labour_payment_details
 
     @contr_lab = ContractualLabour.find(params[:id])
-    @contr_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'CONTRACTOR', :site_id => @contr_lab.site_id, payment_to: @contr_lab.contractor.name)
+    @contr_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'CONTRACTOR', :site_id => @contr_lab.site_id, payment_to: @contr_lab.contractor.name, :payment_for_id => params[:id])
     @site = Site.find(@contr_lab.site_id)
     if @contr_lab_outgoing_payment.blank?
       render status: :not_found
@@ -128,6 +146,6 @@ class ContractualLaboursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractual_labour_params
-      params.require(:contractual_labour).permit(:date, :contract_name, :contractor_id, :site_id, :quantity, :unit, :rate, :amount, :created_by)
+      params.require(:contractual_labour).permit(:date, :contract_name, :contractor_id, :site_id, :quantity, :unit, :rate, :amount, :gst_rate, :gst_cost, :tds_rate, :tds_cost, :created_by)
     end
 end

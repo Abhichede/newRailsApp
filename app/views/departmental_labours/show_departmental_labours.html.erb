@@ -32,8 +32,7 @@
       <th>Total Amount</th>
       <th>Paid Amount</th>
       <th>Remaining Amount</th>
-      <th></th>
-      <th></th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -44,19 +43,19 @@
     <% else %>
         <% @departmental_labours.each do |departmental_labour| %>
             <tr>
-              <td><%= departmental_labour.date %></td>
+              <td><%= Date.parse(departmental_labour.date).strftime('%d-%m-%Y') %></td>
               <td><%= departmental_labour.type_of_work %></td>
               <td>&#8377; <%= departmental_labour.amount %></td>
               <td>&#8377; <%= departmental_labour.paid_amount %></td>
               <td>&#8377; <%= departmental_labour.amount.to_i - departmental_labour.paid_amount.to_i %></td>
               <td>
-                <a href="#departmentalLabourPaymentModal" class="btn btn-primary" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
-                   data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
-                  Pay
-                </a>
-              </td>
-              <td>
-                <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
+                <% if departmental_labour.amount.to_f - departmental_labour.paid_amount.to_f > 0 %>
+                  <a href="#departmentalLabourPaymentModal" class="btn btn-primary" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
+                     data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
+                    Pay
+                  </a>
+                <% end %>
+              <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
                                                id: departmental_labour.id}, method: :get, remote: true,
                             class: "btn btn-primary dept_lab_pay_det-#{departmental_labour.id}" %>
               </td>
@@ -160,6 +159,7 @@
       <div class="modal-header">
         <h4 class="modal-title w-100">Supplier's Payment</h4>
       </div>
+
       <div class="modal-body">
         <%= form_tag update_departmental_labour_payment_path, method: :get, id: 'departmental_labours-payment_form'  do %>
             <div class="form-group">

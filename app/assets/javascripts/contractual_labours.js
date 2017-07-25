@@ -11,8 +11,29 @@ $(function() {
         }
         else{
             var contractual_labour_rate = $("#contractual_labour_rate").val();
-            $("#contractual_labour_amount").val(contractual_labour_rate * contractual_labour_quantity);
+            var total_amount = contractual_labour_rate * contractual_labour_quantity;
+            var gst_rate = Number($("#contractual_gst_rate").val());
+            var tds_rate = Number($("#contractual_tds_rate").val());
+
+            $("#contractual_labour_amount").val(total_amount);
+            $("#contractual_gst_cost").val(total_amount * (gst_rate / 100));
+            $("#contractual_tds_cost").val(total_amount * (tds_rate / 100));
         }
+    });
+
+    $("#contractual_gst_rate").on('change keyup click', function () {
+       var total_amount = Number($("#contractual_labour_amount").val());
+       var gst_rate = Number($(this).val());
+
+       $("#contractual_gst_cost").val(total_amount * (gst_rate / 100));
+
+    });
+    $("#contractual_tds_rate").on('change keyup click', function () {
+        var total_amount = Number($("#contractual_labour_amount").val());
+        var tds_rate = Number($(this).val());
+
+        $("#contractual_tds_cost").val(total_amount * (tds_rate / 100));
+
     });
 
     // Initialize form validation on the registration form.

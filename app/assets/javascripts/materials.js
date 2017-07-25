@@ -13,7 +13,6 @@ $(function() {
 
     if($("#material_is_gst_true").is(':checked')){
        $("#gst-rate").attr('class', '');
-       $("#material_gst_rate").val('6');
     }else{
         $("#gst-rate").attr('class', 'hidden');
         $("#material_gst_rate").val('0');
@@ -21,7 +20,6 @@ $(function() {
 
     $("#material_is_gst_true").on('click', function () {
         $("#gst-rate").attr('class', '');
-        $("#material_gst_rate").val('6');
     });
     $("#material_is_gst_false").on('click', function () {
         $("#gst-rate").attr('class', 'hidden');

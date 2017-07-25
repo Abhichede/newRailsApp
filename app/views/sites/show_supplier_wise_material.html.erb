@@ -51,7 +51,7 @@
         <% @site.materials.where(:supplier_id => @supplier.id).each do |material| %>
             <tr>
               <td><%= material.type_of_material %></td>
-              <td><%= material.date %></td>
+              <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
               <td><%= material.time %></td>
               <td><%= material.truck_no %></td>
               <td><%= material.challan_no %></td>
@@ -63,13 +63,18 @@
             </tr>
                   <% total_amount = total_amount + material.amount.to_f %>
         <% end %>
+        <% paid_amount = 0 %>
+        <% OutgoingPayment.where(:site_id => @site.id, :payment_for => 'MATERIAL/SUPPLIER', :payment_for_id => @supplier.id).each do |payment|
+              paid_amount += payment.amount.to_f
+            end
+        %>
     </tbody>
   </table>
 </div>
 <div class="pull-right">
   <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
-  <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong><br/>
-  <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= total_amount.round(2) - @supplier.paid_amount.to_f.round(2) %></span></strong>
+  <strong>Paid Amount: &#8377; <%= paid_amount.round(2) %></strong><br/>
+  <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= total_amount.round(2) - paid_amount.round(2) %></span></strong>
 </div>
 
 
@@ -84,7 +89,7 @@
       <div class="modal-header">
         <h4 class="modal-title w-100">Supplier's Payment</h4>
       </div>
-      <% if (total_amount.round(2) - @supplier.paid_amount.to_f.round(2)) <= 0 %>
+      <% if (total_amount.round(2) - paid_amount.round(2)) <= 0 %>
           <div class="modal-body">
             <h4>There is no balance amount for this supplier on this site.</h4>
           </div>
@@ -117,7 +122,7 @@
             <%= hidden_field_tag :payment_for, params[:payment_for], value: 'MATERIAL/SUPPLIER' %>
             <%= hidden_field_tag :id, params[:id], value: @supplier.id %>
             <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
-            <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount %>
+            <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount], value: total_amount - paid_amount %>
           </div>
           <div class="modal-footer">
             <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
@@ -166,7 +171,7 @@
                         </tr>
                     <% else %>
                     <tr>
-                      <td><%= payments.date %></td>
+                      <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
                       <td>&#8377; <%= payments.amount %></td>
                       <td><%= payments.payment_method %></td>
                       <td><%= payments.payment_description %></td>

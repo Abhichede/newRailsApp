@@ -134,7 +134,7 @@
         <%= f.label :gst_rate, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
           <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['5%','5'],['12%','12'],['18%','18'],['28%','28']],
-                                                     :disabled=> 'GST Rate', :selected=> @material.gst_rate),
+                                                     :disabled=> 'GST Rate', :selected => @material.gst_rate),
                        {}, class: 'form-control') %>
         </div>
         <%=f.error_span(:gst_rate) %>

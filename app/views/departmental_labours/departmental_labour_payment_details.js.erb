@@ -4,7 +4,7 @@ $(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:success', function (event, d
     $("#pay_det_tbody").replaceWith('<tbody id="pay_det_tbody"></tbody>')
     <% @dept_lab_outgoing_payment.each do |dept| %>
       $("#pay_det_tbody").append('<tr>' +
-          '<td><%= dept.date %></td>'+
+          '<td><%= Date.parse(dept.date).strftime('%d-%m-%Y') %></td>'+
           '<td><%= dept.amount %></td>'+
           '<td><%= dept.payment_method %></td>'+
           '<td><%= dept.payment_description %></td>'+

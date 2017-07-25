@@ -32,6 +32,10 @@
       <th>Contractor</th>
       <th>Rate</th>
       <th>Quantity / Unit</th>
+      <th>GST Rate</th>
+      <th>GST Cost</th>
+      <th>TDS Rate</th>
+      <th>TDS Cost</th>
       <th>Total Amount</th>
       <th>Paid Amount</th>
       <th>Remaining Amount</th>
@@ -48,25 +52,33 @@
           total_amount = 0.0
           total_quantity = 0.0
           total_paid = 0.0
+          total_gst = 0.0
+          total_tds = 0.0
         %>
         <% @contractual_labours.each do |labour| %>
             <tr>
-              <td><%= labour.date %></td>
+              <td><%= Date.parse(labour.date).strftime('%d-%m-%Y') %></td>
               <td><%= labour.contractor.name %></td>
               <td>&#8377; <%= labour.rate.to_f.round(2) %></td>
               <td><%= labour.quantity.to_f.round(2) %> / <%= labour.unit %></td>
+              <td><%= labour.gst_rate %> %</td>
+              <td>&#8377; <%= labour.gst_cost %></td> <% total_gst += labour.gst_cost.to_f %>
+              <td><%= labour.tds_rate %> %</td>
+              <td>&#8377; <%= labour.tds_cost %></td><% total_tds += labour.tds_cost.to_f %>
               <td>&#8377; <%= labour.amount.to_f.round(2) %></td>
-              <td>&#8377; <%= contr_paid_amt = labour.contractor.paid_amount.to_f.round(2) %></td>
-              <td>&#8377; <%= (labour.amount.to_f.round(2) - contr_paid_amt) %></td>
+              <td>&#8377; <%= labour.paid_amount.to_f.round(2) %></td>
+              <% contr_paid_amt = labour.paid_amount.to_f.round(2) %>
+              <td>&#8377; <%= (labour.amount.to_f.round(2) - labour.paid_amount.to_f.round(2)) %></td>
               <td>
                 <span>
-                  <a href="#contractualLabourPaymentModal" class="btn btn-primary" id="pay-btn-<%= labour.id %>" data-toggle="modal"
+                  <a href="#contractualLabourPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-btn-<%= labour.id %>" data-toggle="modal"
                      data-dl-id="<%= labour.id %>" data-dl-contractor_id="<%= labour.contractor.id %>" data-total-amount="<%= labour.amount %>">
                   Pay
                 </a>
                   <%= link_to 'Payment Details',{controller: 'contractual_labours', action: 'contractual_labour_payment_details',
                                                  id: labour.id}, method: :get, remote: true,
-                              class: "btn btn-primary contr_lab_pay_det-#{labour.id}" %>
+                              class: "btn btn-primary contr_lab_pay_det-#{labour.id} btn-xs btn-block" %>
+                  <%= link_to 'Edit', {controller: 'contractual_labours', action: 'edit', id: labour, contract_name: params[:contract_name], site_id: params[:id]}, class: 'btn btn-primary btn-block btn-xs' %>
                 </span>
               </td>
             </tr>
@@ -83,6 +95,7 @@
                     var deptLabourId = $(this).data('dl-id');
                     var deptLabourContrId = $(this).data('dl-contractor_id');
                     var totalPayableAmount = $(this).data('total-amount');
+
                     //populate the textbox
                     $("#contractualLabourPaymentModal").find('input[name="id"]').val(deptLabourId);
                     $("#contractualLabourPaymentModal").find('input[name="contractor_id"]').val(deptLabourContrId);
@@ -95,6 +108,8 @@
           <td colspan="3"><strong>Totals</strong></td>
           <td colspan="1">
           <strong><%= total_quantity.round(2) %> <%= @contractual_labours.first.unit %></strong></td>
+          <td colspan="2" class="text-center"><strong>&#8377; <%= total_gst.round(2) %></td>
+          <td colspan="2" class="text-center"><strong>&#8377; <%= total_tds.round(2) %></td>
           <td colspan="1"><strong>&#8377; <%= total_amount.round(2) %></strong></td>
           <td colspan="1"><strong>&#8377; <%= total_paid.round(2) %></strong></td>
           <td colspan="1"><strong>&#8377; <%= total_amount.round(2) - total_paid.round(2) %></strong></td>

@@ -121,7 +121,7 @@
             <% @outgoing_payment = OutgoingPayment.where(:payment_to => @supplier.name) %>
             <% @outgoing_payment.each do |payments| %>
                 <tr>
-                  <td><%= payments.date %></td>
+                  <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
                   <td><%= payments.site.name %></td>
                   <td>&#8377; <%= payments.amount %></td>
                   <td><%= payments.payment_method %></td>

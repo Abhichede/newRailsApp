@@ -72,7 +72,7 @@ class DepartmentalLaboursController < ApplicationController
 
       @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
                                               :payment_description => params[:payment_desc], :site_id => params[:site_id],:paid_by => params[:paid_by],
-                                              :date => params[:payment_date], :payment_to => params[:payment_to])
+                                              :date => params[:payment_date], :payment_to => params[:payment_to], :payment_for_id => params[:id])
 
       if @outgoing_payment.save
         @single_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))

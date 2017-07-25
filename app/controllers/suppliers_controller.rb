@@ -56,13 +56,14 @@ class SuppliersController < ApplicationController
   
   # *********************************************************** #
   def update_supplier_payment
+    @supplier = Supplier.find(params[:id])
     paid_amount = @supplier.paid_amount.to_f
 
-    if (@supplier.total_amount.to_f - @supplier.paid_amount.to_f) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
+    if (@supplier.total_amount.to_f - paid_amount) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
 
       @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
                                               :payment_description => params[:payment_desc], :site_id => params[:site_id],:paid_by => params[:paid_by],
-                                              :date => params[:payment_date], :payment_to => @supplier.name)
+                                              :date => params[:payment_date], :payment_to => @supplier.name, :payment_for_id => @supplier.id)
 
       if @outgoing_payment.save
         @supplier.update(:paid_amount => (params[:amount].to_f + paid_amount))

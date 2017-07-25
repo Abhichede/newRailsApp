@@ -8,7 +8,7 @@ $("a#investment_details-<%= @investment.id %>").on('ajax:success', function (eve
         '<td><%= inv_mon.month %></td>'+
         '<td><%= inv_mon.interest %></td>'+
         '<td><%= inv_mon.paid_interest %></td>'+
-        '<td><%= inv_mon.paid_date %></td>'+
+        '<td><%= Date(inv_mon.paid_date).strftime('%d-%m-%Y') %></td>'+
         '<td><%= inv_mon.pending_interest %></td>'+
         '<td><%= inv_mon.paid_by %></td>'+
         ' </tr>');

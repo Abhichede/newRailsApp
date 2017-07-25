@@ -51,8 +51,10 @@ class MaterialsController < ApplicationController
     end
     respond_to do |format|
       if @material.save
-        @updating_material = Material.where(:challan_no => material_params[:challan_no])
-        @updating_material.update(:gst_cost => gst_cost, :amount => total_cost)
+        puts 'Material ID = '+@material.id.to_s
+        # @material = Material.where(:challan_no => material_params[:challan_no])
+        @material.update(:gst_cost => gst_cost, :amount => total_cost)
+
         @supplier.update(:total_amount => (total_cost + suppliers_total_amount))
         format.html { redirect_to session.delete(:return_to),
                                   notice: 'Material was successfully Saved.' }

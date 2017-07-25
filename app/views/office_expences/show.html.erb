@@ -5,7 +5,7 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
-  <dd><%= @office_expence.date %></dd>
+  <dd><%= Date.parse(@office_expence.date).strftime('%d-%m-%Y') %></dd>
   <dt><strong>Expense <%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @office_expence.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>

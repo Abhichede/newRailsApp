@@ -27,7 +27,7 @@ class OfficeExpencesController < ApplicationController
     @office_expence = OfficeExpence.new(office_expence_params)
     @outgoing_payment = OutgoingPayment.new(:payment_for => 'OFFICE-EXPENCE', :amount => office_expence_params[:amount],:payment_method => office_expence_params[:payment_method],
                                             :payment_description => office_expence_params[:payment_desc], :site_id => 0,:paid_by => office_expence_params[:paid_by],
-                                            :date => office_expence_params[:date], :payment_to => office_expence_params[:payment_to])
+                                            :date => office_expence_params[:date], :payment_to => office_expence_params[:payment_to], :payment_for_id => OfficeExpence.last.id + 1)
 
     respond_to do |format|
       if @outgoing_payment.save

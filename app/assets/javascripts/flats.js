@@ -29,7 +29,7 @@ $(function() {
        } else {
            if ($("#flat_flat_number").val().indexOf(wing_number)) {
                $.notify('Flat number should contain exact selected wing number', {className: 'error'});
-               $("label[for=flat_wing][class=error]").text('Flat number should contain exact selected wing number');
+               $("label[for=flat_wing][class=error]").text('Flat/Shop number should contain exact selected wing number');
                $("#flat-save-btn").attr('disabled', true)
            } else {
                $("#flat-save-btn").attr('disabled', false)
