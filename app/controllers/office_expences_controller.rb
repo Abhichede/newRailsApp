@@ -4,7 +4,7 @@ class OfficeExpencesController < ApplicationController
   # GET /office_expences
   # GET /office_expences.json
   def index
-    @office_expences = OfficeExpence.all
+    @office_expences = OfficeExpence.paginate(:page => params[:page], :per_page => 10).order('date DESC')
   end
 
   # GET /office_expences/1
@@ -15,6 +15,7 @@ class OfficeExpencesController < ApplicationController
   # GET /office_expences/new
   def new
     @office_expence = OfficeExpence.new
+    @office_expences = OfficeExpence.all
   end
 
   # GET /office_expences/1/edit
@@ -25,9 +26,15 @@ class OfficeExpencesController < ApplicationController
   # POST /office_expences.json
   def create
     @office_expence = OfficeExpence.new(office_expence_params)
+    if @office_expences.blank?
+      last_office_expese_id = 0
+
+    else
+      last_office_expese_id = @office_expences.last.id
+    end
     @outgoing_payment = OutgoingPayment.new(:payment_for => 'OFFICE-EXPENCE', :amount => office_expence_params[:amount],:payment_method => office_expence_params[:payment_method],
                                             :payment_description => office_expence_params[:payment_desc], :site_id => 0,:paid_by => office_expence_params[:paid_by],
-                                            :date => office_expence_params[:date], :payment_to => office_expence_params[:payment_to], :payment_for_id => OfficeExpence.last.id + 1)
+                                            :date => office_expence_params[:date], :payment_to => office_expence_params[:payment_to], :payment_for_id => last_office_expese_id + 1)
 
     respond_to do |format|
       if @outgoing_payment.save

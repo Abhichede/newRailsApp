@@ -102,12 +102,12 @@ class DepartmentalLaboursController < ApplicationController
   def show_departmental_labours
     @departmental_labour = DepartmentalLabour.new
     @site = Site.find(params[:id])
-    @departmental_labours = @site.departmental_labours.all
+    @departmental_labours = @site.departmental_labours.all.order("#{:date} DESC")
   end
 
   def departmental_labour_payment_details
     @dept_lab = DepartmentalLabour.find(params[:id])
-    @dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id)
+    @dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id).order("#{:date} ASC")
     @site = Site.find(@dept_lab.site_id)
     if @dept_lab_outgoing_payment.blank?
       render status: :not_found

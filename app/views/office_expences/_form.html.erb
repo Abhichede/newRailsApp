@@ -18,7 +18,7 @@
   <div class="form-group">
     <%= f.label :date, :class => 'control-label col-lg-2' %>
     <div class="col-lg-6">
-      <%= f.date_field :date, :class => 'form-control', reqiured: true %>
+      <%= f.date_field :date, :class => 'form-control', reqiured: true, value: @office_expence.date %>
     </div>
     <%=f.error_span(:date) %>
   </div>
@@ -47,7 +47,7 @@
     <%= f.label :payment_method, :class => 'control-label col-lg-2', reqiured: true  %>
     <div class="col-lg-6">
       <%= f.select(:payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],
-                                                     :disabled=> 'Payment Method', selected: 'Payment Method'),
+                                                     :disabled=> 'Payment Method', selected: @office_expence.payment_method),
                    {}, class: 'form-control') %>
     </div>
     <%=f.error_span(:payment_method) %>

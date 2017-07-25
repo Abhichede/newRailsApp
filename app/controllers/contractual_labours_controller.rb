@@ -84,7 +84,7 @@ class ContractualLaboursController < ApplicationController
 
   def show_contractual_labours
     @site = Site.find(params[:id])
-    @contractual_labours = @site.contractual_labours.where(:contract_name => params[:contract_name])
+    @contractual_labours = @site.contractual_labours.where(:contract_name => params[:contract_name]).order("#{:date} DESC")
   end
 
   def update_contractual_labour_payment
@@ -129,7 +129,8 @@ class ContractualLaboursController < ApplicationController
   def contractual_labour_payment_details
 
     @contr_lab = ContractualLabour.find(params[:id])
-    @contr_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'CONTRACTOR', :site_id => @contr_lab.site_id, payment_to: @contr_lab.contractor.name, :payment_for_id => params[:id])
+    @contr_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'CONTRACTOR', :site_id => @contr_lab.site_id,
+                                                        payment_to: @contr_lab.contractor.name, :payment_for_id => params[:id]).order("#{:date} ASC")
     @site = Site.find(@contr_lab.site_id)
     if @contr_lab_outgoing_payment.blank?
       render status: :not_found
