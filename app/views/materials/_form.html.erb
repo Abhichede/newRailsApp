@@ -77,8 +77,8 @@
       <div class="input-group">
         <%= f.text_field :quantity, :class => 'form-control', autocomplete: 'off', required: true %>
         <span class="input-group-addon">
-          <%= @material_list.material_unit %>
-          <%= f.hidden_field :unit, value: @material_list.material_unit %>
+          <%= material_unit = MaterialList.find_by( :material_name => params[:type_of_material] ).material_unit.to_s %>
+          <%= f.hidden_field :unit, value: material_unit %>
         </span>
       </div>
       <%=f.error_span(:quantity) %>
@@ -141,7 +141,7 @@
         </div>
       </div>
       <div class="form-group">
-        <%= f.label 'Rate/'+@material_list.material_unit, :class => 'control-label col-lg-2' %>
+        <%= f.label 'Rate/'+material_unit, :class => 'control-label col-lg-2' %>
         <div class="col-lg-4">
           <%= f.text_field :rate, :class => 'form-control', autocomplete: 'off', required: true %>
         </div>

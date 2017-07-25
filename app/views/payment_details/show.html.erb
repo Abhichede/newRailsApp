@@ -42,9 +42,9 @@
       <% end %>
         <td><%= count = count+1 %></td>
         <% if payment_detail.payment_date.blank? %>
-            <td><%= Date.parse(payment_detail.created_at.to_s) %></td>
+            <td><%= Date.parse(payment_detail.created_at.to_s).strftime('%d-%m-%Y') %></td>
         <% else %>
-            <td><%= payment_detail.payment_date %></td>
+            <td><%= Date.parse(payment_detail.payment_date).strftime('%d-%m-%Y') %></td>
         <% end %>
         <td><%= payment_detail.payment_type %></td>
         <td><%= payment_detail.payment_desc %></td>

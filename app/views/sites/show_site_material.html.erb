@@ -56,7 +56,7 @@
         %>
       <% @material.each do |material| %>
         <tr>
-          <td><%= material.date %></td>
+          <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
           <td><%= material.time %></td>
           <td><%= material.description %></td>
           <td><%= material.supplier.name %></td>

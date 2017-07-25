@@ -17,7 +17,8 @@ class MaterialsController < ApplicationController
     @material = Material.new
     @site = Site.find(params[:site_id])
     @supplier = Supplier.new
-    @material_list = MaterialList.find_by(:material_name => params[:type_of_material])
+    # @material_list = MaterialList.find_by(:material_name => params[:type_of_material])
+
     session.delete(:return_to)
     session[:return_to] ||= request.referer
   end

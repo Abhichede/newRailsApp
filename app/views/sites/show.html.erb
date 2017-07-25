@@ -11,20 +11,20 @@
     <% if current_user.role != 'SUPERVISOR' %>
     <div class="col-md-6">
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
-                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats.to_i %>
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count < @site.no_of_flats.to_i %>
                   <div class="col-md-4 col-sm-6 col-xs-6">
                       <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                               :class => 'btn btn-success btn-sm btn-block' %>
                   </div>
                 <% end %>
-                <% if @site.flats.where(:flat_type => 'SHOP').count <= @site.no_of_shops.to_i %>
+                <% if @site.flats.where(:flat_type => 'SHOP').count < @site.no_of_shops.to_i %>
                   <div class="col-md-4 col-sm-6 col-xs-6">
                       <%= link_to 'Add Shop', {:controller => "flats", :action => "new", :site_id => @site.id,:flat_type => 'SHOP' },
                                   :class => 'btn btn-success btn-sm btn-block' %>
                   </div>
                 <% end %>
               <% else %>
-                <% if @site.flats.where.not(:flat_type => 'SHOP').count <= @site.no_of_flats.to_i %>
+                <% if @site.flats.where.not(:flat_type => 'SHOP').count < @site.no_of_flats.to_i %>
                   <div class="col-md-4 col-sm-6 col-xs-6">
                       <%= link_to 'Add Flat', {:controller => "flats", :action => "new", :site_id => @site.id, :flat_type => 'FLAT' },
                                   :class => 'btn btn-success btn-sm btn-block' %>
@@ -419,7 +419,7 @@
 
       <div class="modal-body">
         <table class="table table-bordered table-responsive">
-          <thead style="position: fixed;">
+          <thead>
           <tr>
             <th>Material Name</th>
             <th>Total Amount</th>
