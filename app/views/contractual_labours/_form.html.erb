@@ -80,7 +80,7 @@
     <%= f.hidden_field :site_id, :value => params[:site_id] %>
   </div>
     <div class="form-group">
-      <%= f.label :gst_rate, :class => 'control-label col-lg-2' %>
+      <%= f.label 'GST Rate', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
         <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['5%','5'],['12%','12'],['18%','18'],['28%','28']],
                                                    :disabled=> 'GST Rate', :selected => @contractual_labour.gst_rate),
@@ -88,14 +88,14 @@
       </div>
       <%= f.error_span(:gst_rate) %>
 
-      <%= f.label :gst_cost, :class => 'control-label col-lg-2' %>
+      <%= f.label 'GST Cost', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
         <%= f.text_field :gst_cost, :class => 'form-control', id: 'contractual_gst_cost', required: true, readonly: true %>
       </div>
       <%= f.error_span(:gst_cost) %>
     </div>
     <div class="form-group">
-      <%= f.label :tds_rate, :class => 'control-label col-lg-2' %>
+      <%= f.label 'TDS Rate', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
         <%= f.select(:tds_rate, options_for_select([['TDS Rate'],['0%','0'],['1%','1'],['2%','2']],
                                                    :disabled=> 'TDS Rate', :selected => @contractual_labour.tds_rate),
@@ -103,7 +103,7 @@
       </div>
       <%= f.error_span(:tds_rate) %>
 
-      <%= f.label :tds_cost, :class => 'control-label col-lg-2' %>
+      <%= f.label 'TDS Cost', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
         <%= f.text_field :tds_cost, :class => 'form-control', id: 'contractual_tds_cost', required: true, readonly: true %>
       </div>

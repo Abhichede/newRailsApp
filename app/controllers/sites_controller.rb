@@ -44,11 +44,11 @@ class SitesController < ApplicationController
   end
 
   def show_site_material
-    @material = @site.materials.where(:type_of_material => params[:type_of_material])
+    @material = @site.materials.where(:type_of_material => params[:type_of_material]).paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
   end
 
   def show_supplier_wise_material
-    # @material = @site.materials.where(:supplier_id => params[:supplier])
+    @material = @site.materials.where(:supplier_id => params[:supplier]).paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
     @supplier = Supplier.find(params[:supplier])
     # @outgoing_payment = OutgoingPayment.where(:site_id => @site.id, :payment_to => @supplier.name)
   end

@@ -102,7 +102,7 @@ class DepartmentalLaboursController < ApplicationController
   def show_departmental_labours
     @departmental_labour = DepartmentalLabour.new
     @site = Site.find(params[:id])
-    @departmental_labours = @site.departmental_labours.all.order("#{:date} DESC")
+    @departmental_labours = @site.departmental_labours.paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
   end
 
   def departmental_labour_payment_details

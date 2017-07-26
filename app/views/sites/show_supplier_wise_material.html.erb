@@ -48,7 +48,7 @@
     %>
     <tbody>
 
-        <% @site.materials.where(:supplier_id => @supplier.id).each do |material| %>
+        <% @material.each do |material| %>
             <tr>
               <td><%= material.type_of_material %></td>
               <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
@@ -76,7 +76,7 @@
   <strong>Paid Amount: &#8377; <%= paid_amount.round(2) %></strong><br/>
   <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= total_amount.round(2) - paid_amount.round(2) %></span></strong>
 </div>
-
+<%= will_paginate @material, renderer: BootstrapPagination::Rails%>
 <!-- ********************************************************************************************** -->
 
 <!-- Modal -->

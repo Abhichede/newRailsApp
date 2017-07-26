@@ -84,7 +84,7 @@ class ContractualLaboursController < ApplicationController
 
   def show_contractual_labours
     @site = Site.find(params[:id])
-    @contractual_labours = @site.contractual_labours.where(:contract_name => params[:contract_name]).order("#{:date} DESC")
+    @contractual_labours = @site.contractual_labours.where(:contract_name => params[:contract_name]).paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
   end
 
   def update_contractual_labour_payment
