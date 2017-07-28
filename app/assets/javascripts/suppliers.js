@@ -7,6 +7,9 @@ $(function() {
      if(currently_paying_amount > max_payable_amount){
          alert("you can not make payment more than 'TOTAL AMOUNT', " +
              "if supplier owes extra payment then check for other sites.");
+         $("#suppliers-payment-save-btn").attr('disabled', true);
+     }else{
+         $("#suppliers-payment-save-btn").attr('disabled', false);
      }
  });
 

@@ -57,7 +57,7 @@
       <% @material.each do |material| %>
         <tr>
           <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
-          <td><%= material.time %></td>
+          <td><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
           <td><%= material.description %></td>
           <td><%= material.supplier.name %></td>
           <td><%= material.truck_no %></td>
@@ -65,10 +65,10 @@
           <td><%= material.quantity.to_f %> <%= material.unit %></td>
           <% if current_user.role != 'SUPERVISOR' %>
             <td><%= material.bill_no %></td>
-            <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
+            <td>&#8377; <%= material.rate.to_f.round(2) %>/<%= material.unit %></td>
             <td><%= material.gst_rate %> %</td>
-            <td>&#8377; <%= material.gst_cost.to_f %></td>
-            <td>&#8377; <%= material.amount.to_f %></td>
+            <td>&#8377; <%= material.gst_cost.to_f.round(2) %></td>
+            <td>&#8377; <%= material.amount.to_f.round(2) %></td>
           <% end %>
           <td><%= material.supervisor_name %></td>
           <td><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
@@ -97,11 +97,13 @@
               <!-- ************************** end ******************************** -->
           <% end %>
         </tr>
-              <%
-                total_quantity = total_quantity + material.quantity.to_f
-                total_amount = total_amount + material.amount.to_f
-              %>
       <% end %>
+        <%
+          @site.materials.where(:type_of_material => params[:type_of_material]).each do |material|
+            total_quantity = total_quantity + material.quantity.to_f
+            total_amount = total_amount + material.amount.to_f
+          end
+        %>
         <% if current_user.role != 'SUPERVISOR' %>
           <tr><td colspan="6">
             <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>

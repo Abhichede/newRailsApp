@@ -268,7 +268,7 @@ a{
 }
 .modal-dialog{
     height: 80% !important;
-    padding-top:10%;
+    /* padding-top:10%; */
     overflow-y: initial !important
 }
 .modal-body{
@@ -288,4 +288,14 @@ a{
     /* outline radius for mozilla/firefox only */
     -moz-box-shadow:0 0 10px #000;
     -webkit-box-shadow:0 0 10px #000;
+}
+
+/* static css for unit filed inn contractual labours and material*/
+#unit-addon-static{
+    padding-bottom: 4px !important;
+    width: auto;
+}
+
+#contractual_labour_unit{
+    width: 50%;
 }

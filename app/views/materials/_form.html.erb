@@ -16,8 +16,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
-    <div class="col-lg-3 col-sm-8 col-xs-8">
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2 col-sm-10 col-xs-10' %>
+    <div class="col-lg-3 col-sm-10 col-xs-10">
       <%
         supplier_names = ['Select Supplier']
         Supplier.all.each do |supplier|
@@ -26,20 +26,20 @@
           end
         end %>
       <% if !@material.supplier.blank? %>
-          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.name),
+          <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.id),
                        {}, class: 'form-control', autocomplete: 'off') %>
       <% else %>
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
                        {}, class: 'form-control') %>
       <% end %>
     </div>
-    <div class="col-lg-1 col-sm-4 col-xs-4">
+    <div class="col-lg-1 col-sm-2 col-xs-2">
       <a class="label label-default" data-toggle="modal" data-target="#addNewSupplier">Add New</a>
 
     </div>
     <%=f.error_span(:supplier_id) %>
 
-    <%= f.label :description, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.text_field :description, :class => 'form-control', autocomplete: 'off' %>
     </div>
@@ -76,9 +76,9 @@
     <div class="col-lg-4">
       <div class="input-group">
         <%= f.text_field :quantity, :class => 'form-control', autocomplete: 'off', required: true %>
-        <span class="input-group-addon">
-          <%= material_unit = MaterialList.find_by( :material_name => params[:type_of_material] ).material_unit.to_s %>
-          <%= f.hidden_field :unit, value: material_unit %>
+        <span class="input-group-addon" id="unit-addon-static">
+          <% material_unit = MaterialList.find_by( :material_name => params[:type_of_material] ).material_unit.to_s %>
+          Unit : <%= f.text_field :unit, value: material_unit %>
         </span>
       </div>
       <%=f.error_span(:quantity) %>

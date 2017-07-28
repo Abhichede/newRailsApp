@@ -52,22 +52,27 @@
             <tr>
               <td><%= material.type_of_material %></td>
               <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
-              <td><%= material.time %></td>
+              <td><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
               <td><%= material.truck_no %></td>
               <td><%= material.challan_no %></td>
               <td><%=  material.quantity.to_f %> <%= material.unit %></td>
-              <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
-              <td>&#8377; <%= material.amount.to_f %></td>
-              <td>&#8377; <%= material.gst_cost.to_f %></td>
+              <td>&#8377; <%= material.rate.to_f.round(2) %>/<%= material.unit %></td>
+              <td>&#8377; <%= material.amount.to_f.round(2) %></td>
+              <td>&#8377; <%= material.gst_cost.to_f.round(2) %></td>
               <td><%= material.supervisor_name %></td>
             </tr>
-                  <% total_amount = total_amount + material.amount.to_f %>
+
         <% end %>
         <% paid_amount = 0 %>
         <% OutgoingPayment.where(:site_id => @site.id, :payment_for => 'MATERIAL/SUPPLIER', :payment_for_id => @supplier.id).each do |payment|
               paid_amount += payment.amount.to_f
             end
         %>
+    <%
+      @site.materials.where(:supplier_id => params[:supplier]).each do |material|
+         total_amount = total_amount + material.amount.to_f
+      end
+    %>
     </tbody>
   </table>
 </div>
@@ -125,7 +130,7 @@
           </div>
           <div class="modal-footer">
             <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
-                           id: 'schedule_next_installment') do %>
+                           id: 'suppliers-payment-save-btn') do %>
                 Save
             <% end %>
         <% end %>
@@ -171,7 +176,7 @@
                     <% else %>
                     <tr>
                       <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
-                      <td>&#8377; <%= payments.amount %></td>
+                      <td>&#8377; <%= payments.amount.to_f.round(2) %></td>
                       <td><%= payments.payment_method %></td>
                       <td><%= payments.payment_description %></td>
                       <td><%= payments.paid_by %></td>

@@ -96,8 +96,10 @@ class MaterialsController < ApplicationController
   # PATCH/PUT /materials/1.json
   def update
     previous_amount = @material.amount.to_f
-    @supplier = Supplier.find(@material.supplier)
+    @previous_supplier = @material.supplier
+    @supplier = Supplier.find(material_params[:supplier_id])
     suppliers_total = @supplier.total_amount.to_f
+    previsous_suppliers_total = @previous_supplier.total_amount.to_f
     total_cost = material_params[:amount].to_f
 
     gst_cost = 0
@@ -109,10 +111,10 @@ class MaterialsController < ApplicationController
     end
     respond_to do |format|
       if @material.update(material_params)
-        if material_params[:amount].to_f != previous_amount
-          new_suppliers_total = suppliers_total - previous_amount
-          @supplier.update(:total_amount => (material_params[:amount].to_f + new_suppliers_total ))
-        end
+        @previous_supplier.update(:total_amount => previsous_suppliers_total - previous_amount)
+        new_suppliers_total = suppliers_total + total_cost
+        @supplier.update(:total_amount => new_suppliers_total )
+
         @material.update(:gst_cost => gst_cost, :amount => total_cost)
         format.html { redirect_to session.delete(:return_to), notice: 'Material was successfully Saved.' }
         format.json { render :show, status: :ok, location: @material }
@@ -142,7 +144,7 @@ class MaterialsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
       params.require(:material).permit(:date, :supplier_id, :site_id, :type_of_material,
-                                       :quantity, :unit, :challan_no, :truck_no, :time, :rate,
+                                       :quantity, :unit.upcase, :challan_no, :truck_no, :time, :rate,
                                        :amount, :supervisor_name,:challan_item, :is_rate_added,
                                        :rate_added_by, :rate_added_at, :description,:bill_no,
                                        :is_gst, :gst_rate)

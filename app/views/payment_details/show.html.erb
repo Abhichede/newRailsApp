@@ -91,8 +91,8 @@
 <hr/>
 <div class="row">
   <div class="col-md-6 pull-right">
-   <strong>Total Amount Paid : <%= @booking_detail.paid_amount %></strong><br/>
-    <strong>Balance Amount : <span id="pay-balance-amount"><%= @booking_detail.final_sale_deed.to_f - @booking_detail.paid_amount.to_f %></span> </strong>
+   <strong>Total Amount Paid : <%= @booking_detail.paid_amount.to_f.round(2) %></strong><br/>
+    <strong>Balance Amount : <span id="pay-balance-amount"><%= @booking_detail.final_sale_deed.to_f.round(2) - @booking_detail.paid_amount.to_f.round(2) %></span> </strong>
   </div>
 </div>
 

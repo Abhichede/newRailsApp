@@ -16,8 +16,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :contractor_id, :class => 'control-label col-lg-2 col-sm-12 col-xs-12' %>
-    <div class="col-lg-3 col-sm-8 col-xs-8">
+    <%= f.label :contractor_id, :class => 'control-label col-lg-2 col-sm-10 col-xs-10' %>
+    <div class="col-lg-3 col-sm-10 col-xs-10">
       <%
         contractor_names = Array.new
         contractor_names.push(['Select Contractor'])
@@ -32,7 +32,7 @@
                        {}, class: 'form-control') %>
       <% end %>
     </div>
-    <div class="col-lg-1 col-sm-4 col-xs-4">
+    <div class="col-lg-1 col-sm-2 col-xs-2">
       <a class="label label-default" data-toggle="modal" data-target="#addNewContractor">Add New</a>
 
     </div>
@@ -55,9 +55,8 @@
     <div class="col-lg-4 col-md-4">
       <div class="input-group">
         <%= f.text_field :quantity, :class => 'form-control', required: true %>
-        <span class="input-group-addon">
-          <%= @contract_list.first.contract_unit %>
-          <%= f.hidden_field :unit, value: @contract_list.first.contract_unit %>
+        <span class="input-group-addon" id="unit-addon-static">
+          Unit : <%= f.text_field :unit, value: @contract_list.first.contract_unit %>
         </span>
       </div>
       <%=f.error_span(:quantity) %>
@@ -82,7 +81,7 @@
     <div class="form-group">
       <%= f.label 'GST Rate', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
-        <%= f.select(:gst_rate, options_for_select([['GST Rate'],['0%','0'],['5%','5'],['12%','12'],['18%','18'],['28%','28']],
+        <%= f.select(:gst_rate, options_for_select([['GST Rate'],['Nil (0%)','0'],['5%','5'],['12%','12'],['18%','18'],['28%','28']],
                                                    :disabled=> 'GST Rate', :selected => @contractual_labour.gst_rate),
                      {}, class: 'form-control', id: 'contractual_gst_rate') %>
       </div>
@@ -97,7 +96,7 @@
     <div class="form-group">
       <%= f.label 'TDS Rate', :class => 'control-label col-lg-2' %>
       <div class="col-lg-4 col-md-4">
-        <%= f.select(:tds_rate, options_for_select([['TDS Rate'],['0%','0'],['1%','1'],['2%','2']],
+        <%= f.select(:tds_rate, options_for_select([['TDS Rate'],['Nil (0%)','0'],['1%','1'],['2%','2']],
                                                    :disabled=> 'TDS Rate', :selected => @contractual_labour.tds_rate),
                      {}, class: 'form-control', id: 'contractual_tds_rate') %>
       </div>

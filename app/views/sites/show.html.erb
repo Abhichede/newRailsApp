@@ -421,7 +421,7 @@
         <table class="table table-bordered table-responsive">
           <thead>
           <tr>
-            <th>Material Name</th>
+            <th>Supplier Name</th>
             <th>Total Amount</th>
             <th>Paid Amount</th>
             <th>Remaining amount</th>
@@ -448,15 +448,13 @@
                         total_amount += amount
                       %>
                       <%
-                        @outgoing_payment.where(:payment_to => supplier.name, :payment_for => 'MATERIAL/SUPPLIER').each do |outgoing_payment|
+                        @outgoing_payment.where(:payment_to => supplier.name, :payment_for => 'MATERIAL/SUPPLIER', :payment_for_id => supplier.id).each do |outgoing_payment|
                           paid += outgoing_payment.amount.to_i
                         end
-                        total_paid = paid
+                        total_paid += paid
                       %>
                   <td>&#8377; <%= amount %></td>
-                  <%  %>
                   <td>&#8377; <%= paid %></td>
-                  <%  %>
                   <td>&#8377; <%= amount - paid %></td>
                 </tr>
                   <% end %>

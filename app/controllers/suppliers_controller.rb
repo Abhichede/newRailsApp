@@ -10,9 +10,8 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1
   # GET /suppliers/1.json
   def show
-    @material = @supplier.materials.all
+    @material = @supplier.materials.paginate(:page => params[:page], :per_page => 10)
     @sites = Site.all
-
   end
 
   # GET /suppliers/new
@@ -58,7 +57,6 @@ class SuppliersController < ApplicationController
   def update_supplier_payment
     @supplier = Supplier.find(params[:id])
     paid_amount = @supplier.paid_amount.to_f
-
     if (@supplier.total_amount.to_f - paid_amount) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
 
       @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
@@ -85,7 +83,7 @@ class SuppliersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to controller: 'sites', action: 'show_supplier_wise_material',id: params[:site_id],
-                                  supplier: @supplier.id, alert: "You can't pay this amount." }
+                                  supplier: @supplier.id, alert: 'You can not pay this amount' }
         format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
     end
