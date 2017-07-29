@@ -382,18 +382,18 @@
           <% @site.booking_details.each do |booking| %>
               <tr>
                 <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
-                <td>&#8377; <%= booking.final_sale_deed %></td>
+                <td>&#8377; <%= booking.final_sale_deed.to_i %></td>
                 <% total_amount = total_amount + booking.final_sale_deed.to_i %>
-                <td>&#8377; <%= booking.paid_amount %></td>
+                <td>&#8377; <%= booking.paid_amount.to_i %></td>
                 <% total_paid = total_paid + booking.paid_amount.to_i %>
                 <td>&#8377; <%= booking.final_sale_deed.to_i - booking.paid_amount.to_i %></td>
               </tr>
           <% end %>
           <tr >
             <td><strong>Totals</strong></td>
-            <td><strong>&#8377; <%= total_amount %></strong></td>
-            <td><strong>&#8377; <%= total_paid %></strong></td>
-            <td><strong>&#8377; <%= total_amount - total_paid %></strong></td>
+            <td><strong>&#8377; <%= total_amount.to_i %></strong></td>
+            <td><strong>&#8377; <%= total_paid.to_i %></strong></td>
+            <td><strong>&#8377; <%= total_amount.to_i - total_paid.to_i %></strong></td>
           </tr>
           </tbody>
         </table>
