@@ -44,6 +44,17 @@ class InvestmentsController < ApplicationController
     end
   end
 
+  def investment_payment_details
+    @investment = Investment.find(params[:id])
+
+    if @investment.blank? || @investment.nil?
+      render status: :not_found
+      puts 'error: Not found'
+    else
+
+    end
+  end
+
   def update
   end
 
@@ -53,6 +64,8 @@ class InvestmentsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def investment_params
     params.require(:investment).permit(:investor_id, :investment_date, :investment_amount,
-                                       :interest_rate, :created_by, :last_month_interest, :current_month_interest, :total_payable_amount, :last_return_date )
+                                       :interest_rate, :created_by, :last_month_interest,
+                                       :current_month_interest, :total_payable_amount,
+                                       :last_return_date, :is_monthly, :returning_date )
   end
 end

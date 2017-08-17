@@ -21,6 +21,16 @@ $(function(){
 
     });
 
+    $("#investment_is_monthly_false").on('click', function () {
+        $("#investments_hidden_fields").attr('class', '');
+        $("#investments_interest_rate_div").attr('class', 'hidden');
+    });
+    $("#investment_is_monthly_true").on('click', function () {
+        $("#investments_hidden_fields").attr('class', 'hidden');
+        $("#investments_interest_rate_div").attr('class', 'form-group');
+    });
+
+
     $("form#investment").validate({
         debug: true,
         // Specify validation rules

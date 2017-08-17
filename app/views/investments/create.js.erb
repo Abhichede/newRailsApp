@@ -2,22 +2,20 @@
 $("form.investment").on('ajax:success', function (event, data, status) {
     console.log("success");
     $(this).trigger('reset');
+    off();
     $("#newInvestmentModal").modal('hide');
 
     var newRow = '<tr>' +
         '<td><%= @investment.investment_date %></td>'+
         '<td>&#8377; <%= @investment.investment_amount %> </td>'+
         '<td><%= @investment.interest_rate %> %</td>'+
-        '<td>&#8377; <%= @investment.last_month_interest %> </td>'+
         '<td>&#8377; <%= @investment.current_month_interest %> </td>'+
         '<td>&#8377; <%= @investment.total_payable_amount %> </td>'+
-        '<td><%= @investment.last_return_date %></td> ' +
-        '<td><%= @investment.created_by %></td> ' +
         '<td><button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= @investment.id %>" '+
               'data-toggle="modal" data-inv-id="<%= @investment.id %>" data-target="#newInvestmentReturnModal" >Return</button></td> '+
         '<td><%= link_to 'Details',{controller: 'investments', action: 'investment_details',
                                            id: @investment.id}, method: :get, remote: true,
-                        class: "btn btn-primary", id: "investment_details-#{@investment.id}" %></td>'+
+                        class: "btn btn-primary btn-sm btn-block", id: "investment_details-#{@investment.id}" %></td>'+
         '</tr>';
 
 

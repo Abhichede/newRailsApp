@@ -1,6 +1,5 @@
 var update_paid_amount_function = function () {
 
-    console.log("Paid Amount");
     $("#update-paid-amount-form").on('ajax:before', function (event, data, status) {
         show_spinner();
         console.log("Before");

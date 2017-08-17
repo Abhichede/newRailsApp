@@ -26,15 +26,27 @@ $(document).ready(function () {
     search_customer_function();
     schedule_next_installment_function();
     department_labour_payment_details();
-
-    var hide_spinner = function () {
-        $("#spinner").hide();
-    };
-
-
-    var show_spinner = function () {
-        $("#spinner").show();
-    };
+    off();
+    $("input[name=commit]").on('click', function () {
+       on();
+    });
 
 });
+
+var hide_spinner = function () {
+    $("#spinner").hide();
+};
+
+
+var show_spinner = function () {
+    $("#spinner").show();
+};
+
+function on() {
+    $("#overlay").css('display', 'block');
+}
+
+function off() {
+    $("#overlay").css('display', "none");
+}
 

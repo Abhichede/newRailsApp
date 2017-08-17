@@ -7,13 +7,15 @@ $("form#investment_return_form").on('ajax:after', function (event, data, status)
 });
 $("form#investment_return_form").on('ajax:success', function (event, data, status) {
     console.log("success");
+
     $(this).trigger('reset');
     $("#newInvestmentReturnModal").modal('hide');
-
+    off();
     $.notify(
         "Investment returns was successfully added, see details for more information",
         {style: 'bootstrap', className: 'success'}
     );
+    $("#investorTableBody").reload(true);
 
 
 });

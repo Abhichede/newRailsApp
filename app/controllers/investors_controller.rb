@@ -4,7 +4,7 @@ class InvestorsController < ApplicationController
   # GET /investors
   # GET /investors.json
   def index
-    @investors = Investor.all
+    @investors = Investor.all.paginate(:page => params[:page], :per_page => 6)
   end
 
   # GET /investors/1
@@ -12,7 +12,23 @@ class InvestorsController < ApplicationController
   def show
     @investment = Investment.new
     @investment_return = InvestmentReturn.new
+    @investor.investments.all.each do |investment|
+      last_month = investment.investment_monthly_interests.last.month.to_i
+      current_month = Date.current.month
+      interest_rate = investment.interest_rate.to_i
+      capital_amount = investment.investment_amount.to_f
+      last_total_payable = investment.total_payable_amount.to_f
 
+      interest_amount = (capital_amount * interest_rate / 100)
+      if current_month > last_month
+        @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => investment.id,
+                                                            :month => current_month,
+                                                            :interest_rate => interest_rate,
+                                                            :interest => interest_amount, :pending_interest => interest_amount)
+        @investment_monthly.save
+        investment.update(:current_month_interest => interest_amount, :total_payable_amount => (last_total_payable + interest_amount))
+      end
+    end
 
   end
 
@@ -62,7 +78,7 @@ class InvestorsController < ApplicationController
     paying_amount = investment_return_params[:amount].to_f
     @pendings = @investment.investment_monthly_interests.where(' pending_interest > ? ', 0)
     @pendings.each do |pending|
-      total_pending_interest += pending.pending_interest
+      total_pending_interest += pending.pending_interest.to_f
     end
 
     respond_to do |format|
@@ -71,11 +87,12 @@ class InvestorsController < ApplicationController
           @pendings.each do |pending|
             if paying_amount > 0
               if paying_amount >= pending.pending_interest
+                current_pending = pending.pending_interest.to_f
                 pending.update(:paid_interest => (pending.paid_interest.to_f + pending.pending_interest.to_f),
                         :paid_date => investment_return_params[:date], :paid_by => investment_return_params[:paid_by],
                         :pending_interest => 0)
-                total_pending_interest = paying_amount - pending.pending_interest
-                paying_amount = paying_amount - pending.pending_interest
+                total_pending_interest = total_pending_interest - current_pending
+                paying_amount = paying_amount - current_pending
 
               else
                 pending.update(:paid_interest => (pending.paid_interest.to_f + paying_amount),
