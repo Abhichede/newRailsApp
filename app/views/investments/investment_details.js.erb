@@ -5,7 +5,7 @@ $("a#investment_details-<%= @investment.id %>").on('ajax:success', function (eve
     $("#inv-mon-det_tbody").replaceWith('<tbody id="inv-mon-det_tbody"></tbody>')
     <% @inv_monthly_interest.each do |inv_mon| %>
     $("#inv-mon-det_tbody").append('<tr>' +
-        '<td><%= Date::MONTHNAMES[(inv_mon.month.to_i)] %></td>'+
+        '<td><%= Date.parse(inv_mon.month).strftime('%d-%b-%Y') %> to <%= (Date.parse(inv_mon.month)+29).strftime('%d-%b-%Y') %></td>'+
         '<td><%= inv_mon.interest %></td>'+
         '<td><%= inv_mon.paid_interest %></td>'+
         '<td><%= inv_mon.paid_date %></td>'+

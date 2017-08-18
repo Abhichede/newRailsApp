@@ -13,16 +13,16 @@ class InvestorsController < ApplicationController
     @investment = Investment.new
     @investment_return = InvestmentReturn.new
     @investor.investments.all.each do |investment|
-      last_month = investment.investment_monthly_interests.last.month.to_i
-      current_month = Date.current.month
+      last_date = Date.parse(investment.investment_monthly_interests.last.month)
+      current_date = Date.today
       interest_rate = investment.interest_rate.to_i
       capital_amount = investment.investment_amount.to_f
       last_total_payable = investment.total_payable_amount.to_f
 
       interest_amount = (capital_amount * interest_rate / 100)
-      if current_month > last_month
+      if (last_date + 30) < current_date
         @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => investment.id,
-                                                            :month => current_month,
+                                                            :month => (last_date  + 30),
                                                             :interest_rate => interest_rate,
                                                             :interest => interest_amount, :pending_interest => interest_amount)
         @investment_monthly.save

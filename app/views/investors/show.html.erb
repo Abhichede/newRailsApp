@@ -40,7 +40,7 @@
         </span>
       </div>
       <div class="panel-body">
-        Total Payable Amount : <span class="pull-right">&#8377;  <%= investment.total_payable_amount.to_f.round(2) %></span><br/>
+        Total Payable Amount : <span class="pull-right">&#8377;  <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span><br/>
         Interest Rate : <span class="pull-right"><%= investment.interest_rate %> %</span><br/>
         Current Month Interest : <span class="pull-right">&#8377; <%= investment.current_month_interest.to_f.round(2) %> </span>
       </div>
@@ -107,7 +107,7 @@
             <div class="form-group">
               <%= f.label :investment_date, :class => 'control-label col-lg-4' %>
               <div class="col-lg-6">
-                <%= f.date_field :investment_date, :class => 'form-control', required: true %>
+                <%= f.date_field :investment_date, :class => 'form-control', required: true, max: Date.today() %>
               </div>
               <%=f.error_span(:investment_date) %>
             </div>
@@ -196,7 +196,7 @@
                                class: 'form-control', id: 'inv-date-picker', required: true %>
             </div>
             <div class="form-group">
-            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount', id: 'investment_return_amount',
                                class: 'form-control', required: true %>
             </div>
             <div class="form-group">
@@ -212,7 +212,7 @@
             <%= hidden_field_tag :deleting_status, params[:deleting_status], value: false %>
             </div>
             <div class="modal-footer">
-              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: '') do %>
+              <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: 'inv_return_save_btn') do %>
                   Save
               <% end %>
         <% end %>

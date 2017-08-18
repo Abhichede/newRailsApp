@@ -15,13 +15,29 @@ class InvestmentsController < ApplicationController
     respond_to do |format|
       if @investment.save
         interest = investment_params[:investment_amount].to_f * (investment_params[:interest_rate].to_f / 100)
+        investment_date = Date.parse(investment_params[:investment_date])
+        total_payable_amount = investment_params[:investment_amount].to_f
+
+        while investment_date < Date.today
         @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => @investment.id,
-                                                            :month => Time.parse(investment_params[:investment_date]).month,
+                                                            :month => investment_date,
                                                             :interest_rate => investment_params[:interest_rate],
                                                             :interest => interest, :pending_interest => interest)
-        if @investment_monthly.save
+
+          if @investment_monthly.save
+            investment_date = investment_date + 30
+            total_payable_amount = total_payable_amount + interest
+          else
+            format.html { redirect_to session.delete(:return_to),
+                                      alert: 'something went wrong.'  }
+            format.json { render json: @investment_monthly.errors, status: :unprocessable_entity }
+          end
+
+        end
+        if @investment.update(:total_payable_amount => total_payable_amount)
           format.html { redirect_to session.delete(:return_to), notice: 'Investment was successfully added.' }
           format.json { render 'investors/show', status: :ok, location: @investment }
+
         else
           format.html { redirect_to session.delete(:return_to),
                                     alert: 'something went wrong.'  }

@@ -9,12 +9,11 @@ $(function(){
     });
     $("#investment_interest_rate").on('change focusout paste', function () {
         interest_rate = Number($(this).val());
-
         if(capital_amount == 0 ){
             alert("please enter capital amount");
         }else{
             var current_interest = ( interest_rate / 100 ) * capital_amount;
-            var total_payable_amount = capital_amount + current_interest;
+            var total_payable_amount = capital_amount ;
 
             $("#investment_current_month_interest").val(current_interest);
             $("#investment_total_payable_amount").val(total_payable_amount);
