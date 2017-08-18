@@ -3,6 +3,7 @@ $(function(){
     var capital_amount = 0;
     var interest_rate = 0;
 
+
     $("#investment_investment_amount").on('change focusout paste', function () {
        capital_amount = Number($(this).val());
     });
@@ -30,6 +31,25 @@ $(function(){
         $("#investments_interest_rate_div").attr('class', 'form-group');
     });
 
+    $("#investment_total_payable_amount").on('paste focusout', function () {
+       var investment_amount = Number($("#investment_investment_amount").val());
+       var total_payable_amount = Number($(this).val());
+
+       if(total_payable_amount < investment_amount){
+           $.notify(
+               "Total amount should be greater than or equal to investment(capital) amount.",
+               {style: 'bootstrap', className: 'error'}
+           );
+
+           $('#new_investment_submit').attr('disabled', true);
+       }else{
+           $('#new_investment_submit').attr('disabled', false);
+       }
+
+    });
+
+
+
 
     $("form#investment").validate({
         debug: true,
@@ -48,11 +68,11 @@ $(function(){
         // Specify validation error messages
         messages: {
             "investment[investment_amount]":{
-                required: "This is required Filed",
+                required: "This is required Field",
                 pattern: "Please enter valid Amount"
             },
             "investment[interest_rate]":{
-                required: "This is required Filed",
+                required: "This is required Field",
                 pattern: "Please enter valid Amount"
             }
         },

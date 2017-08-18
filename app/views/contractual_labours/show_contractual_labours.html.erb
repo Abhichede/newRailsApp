@@ -67,8 +67,8 @@
               <td>&#8377; <%= labour.tds_cost %></td><% total_tds += labour.tds_cost.to_f %>
               <td>&#8377; <%= labour.amount.to_f.round(2) %></td>
               <td>&#8377; <%= labour.paid_amount.to_f.round(2) %></td>
-              <% contr_paid_amt = labour.paid_amount.to_f.round(2) %>
               <td>&#8377; <%= (labour.amount.to_f.round(2) - labour.paid_amount.to_f.round(2)) %></td>
+              <% contr_paid_amt = labour.paid_amount.to_f.round(2) %>
               <td>
                 <span>
                   <a href="#contractualLabourPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-btn-<%= labour.id %>" data-toggle="modal"

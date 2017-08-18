@@ -9,6 +9,8 @@ class InvestmentsController < ApplicationController
 
   def create
     @investment = Investment.new(investment_params)
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
 
     respond_to do |format|
       if @investment.save
@@ -18,15 +20,17 @@ class InvestmentsController < ApplicationController
                                                             :interest_rate => investment_params[:interest_rate],
                                                             :interest => interest, :pending_interest => interest)
         if @investment_monthly.save
-          format.html
-          format.js
+          format.html { redirect_to session.delete(:return_to), notice: 'Investment was successfully added.' }
+          format.json { render 'investors/show', status: :ok, location: @investment }
         else
-          format.html
-          format.js {@investment.errors}
+          format.html { redirect_to session.delete(:return_to),
+                                    alert: 'something went wrong.'  }
+          format.json { render json: @investment_monthly.errors, status: :unprocessable_entity }
         end
       else
-        format.html
-        format.js {@investment.errors}
+        format.html { redirect_to session.delete(:return_to),
+                                  alert: 'something went wrong.'  }
+        format.json { render json: @investment.errors, status: :unprocessable_entity }
       end
     end
 

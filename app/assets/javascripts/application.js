@@ -27,8 +27,13 @@ $(document).ready(function () {
     schedule_next_installment_function();
     department_labour_payment_details();
     off();
-    $("input[name=commit]").on('click', function () {
-       on();
+    $("form").on('submit', function () {
+        if(this.valid){
+            on();
+        }else {
+            off();
+        }
+
     });
 
 });

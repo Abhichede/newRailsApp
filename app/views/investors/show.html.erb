@@ -31,7 +31,7 @@
   </div>
 </div>
 <% @investor.investments.order("investment_date DESC").each do |investment| %>
-  <div class="col-md-4">
+  <div class="col-md-4" id="investment-panels">
     <div class="panel panel-primary ">
       <div class="panel-heading">
         <%= Investor.num_to_lakh(investment.investment_amount.to_f) %>
@@ -46,7 +46,7 @@
       </div>
       <div class="panel-footer">
           <button class="btn btn-primary btn-sm " id="investment_return-<%= investment.id %>"
-                  data-toggle="modal" data-inv-id="<%= investment.id %>"
+                  data-toggle="modal" data-inv-id="<%= investment.id %>" data-inv-date="<%= investment.investment_date %>"
                   data-target="#newInvestmentReturnModal">Return</button>
           <%= link_to 'Interests',{controller: 'investments', action: 'investment_details',
                                           id: investment.id}, method: :get, remote: true,
@@ -62,9 +62,11 @@
       $('#investment_return-<%= investment.id %>').on('click', function () {
           //get data-id attribute of the clicked element
           var investmentId = $(this).data('inv-id');
+          var investmentDate = $(this).data('inv-date');
           console.log('investment ID = '+investmentId);
           //populate the textbox
           $("#investment_id").val(investmentId);
+          $("#inv-date-picker").attr('min', investmentDate);
       });
       $("a#investment_payment_details-<%= investment.id %>").on('click', function () {
           on();
@@ -85,7 +87,7 @@
       </div>
 
       <div class="modal-body">
-        <%= form_for @investment, :html => { :class => "form-horizontal investment", remote: true } do |f| %>
+        <%= form_for @investment, :html => { :class => "form-horizontal investment" } do |f| %>
 
             <% if @investment.errors.any? %>
                 <div id="error_expl" class="panel panel-danger">
@@ -105,7 +107,7 @@
             <div class="form-group">
               <%= f.label :investment_date, :class => 'control-label col-lg-4' %>
               <div class="col-lg-6">
-                <%= f.date_field :investment_date, :class => 'form-control' %>
+                <%= f.date_field :investment_date, :class => 'form-control', required: true %>
               </div>
               <%=f.error_span(:investment_date) %>
             </div>
@@ -119,14 +121,14 @@
             <div class="form-group">
               <%= f.label :investment_amount, :class => 'control-label col-lg-4' %>
               <div class="col-lg-6">
-                <%= f.text_field :investment_amount, :class => 'form-control' %>
+                <%= f.text_field :investment_amount, :class => 'form-control', required: true %>
               </div>
               <%=f.error_span(:investment_amount) %>
             </div>
             <div class="form-group" id="investments_interest_rate_div">
               <%= f.label :interest_rate, :class => 'control-label col-lg-4' %>
               <div class="col-lg-6">
-                <%= f.text_field :interest_rate, :class => 'form-control' %>
+                <%= f.text_field :interest_rate, :class => 'form-control', required: true %>
               </div>
               <%=f.error_span(:interest_rate) %>
             </div>
@@ -165,7 +167,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= f.submit nil, :class => 'btn btn-primary', id:'new_investment_submit' %>
           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
         <% end %>
         </div>
@@ -191,7 +193,7 @@
 
             <div class="form-group">
             <%= date_field_tag :date, params[:date],placeholder: 'Select Date',
-                               class: 'form-control', required: true %>
+                               class: 'form-control', id: 'inv-date-picker', required: true %>
             </div>
             <div class="form-group">
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
