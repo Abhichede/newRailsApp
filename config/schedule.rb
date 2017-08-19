@@ -14,7 +14,8 @@
 # end
 #
  every 10.minutes do
-   runner "BookingDetail.payment_schedule"
+   # runner "BookingDetail.payment_schedule"
+   puts "10 minute Cron job by whenever"
  end
 
 # Learn more: http://github.com/javan/whenever

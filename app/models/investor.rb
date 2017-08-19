@@ -18,11 +18,19 @@ class Investor < ApplicationRecord
         capital_amount = investment.investment_amount.to_f
         last_total_payable = investment.total_payable_amount.to_f
 
-        puts "last Date: #{last_date}"
-        puts "current Date: #{current_date}"
-        puts "Interest Rate: #{interest_rate}"
-        puts "Capital Amount: #{capital_amount}"
-        puts "last total payable: #{last_total_payable}"
+        puts "checking for new month..."
+
+        interest_amount = (capital_amount * interest_rate / 100)
+        if (last_date + 30) <= current_date
+          @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => investment.id,
+                                                              :month => (last_date  + 30),
+                                                              :interest_rate => interest_rate,
+                                                              :interest => interest_amount, :pending_interest => interest_amount)
+          @investment_monthly.save
+          investment.update(:current_month_interest => interest_amount, :total_payable_amount => (last_total_payable + interest_amount))
+
+          puts "next month interest updated successfully"
+        end
 
       end
     end

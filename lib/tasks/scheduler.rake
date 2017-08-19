@@ -1,6 +1,6 @@
 desc "Heroku scheduler tasks"
-task :dummy_testing => :environment do
-  puts "testing tasks before scheduling."
+task :daily_interest_check => :environment do
+  puts "checking for month complete to update."
   Investor.update_monthly_interest
   puts "success !!!!"
 end
