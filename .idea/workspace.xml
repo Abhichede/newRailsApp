@@ -2,32 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/investments.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/users.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/users/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/contractors_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/contractors_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/investments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/investments_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/investors_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/investors_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/common/search_result.html.erb" afterPath="$PROJECT_DIR$/app/views/common/search_result.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/contractors/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/contractors/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/contractors/index.html.erb" afterPath="$PROJECT_DIR$/app/views/contractors/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/contractors/show.html.erb" afterPath="$PROJECT_DIR$/app/views/contractors/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/contractual_labours/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/contractual_labours/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/investments/investment_details.js.erb" afterPath="$PROJECT_DIR$/app/views/investments/investment_details.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/investors/show.html.erb" afterPath="$PROJECT_DIR$/app/views/investors/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/sites/show.html.erb" afterPath="$PROJECT_DIR$/app/views/sites/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -45,11 +21,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="85" column="100" lean-forward="false" selection-start-line="85" selection-start-column="100" selection-end-line="85" selection-end-column="100" />
+            <state relative-caret-position="422">
+              <caret line="72" column="44" lean-forward="false" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -65,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/contractors/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="648">
@@ -245,7 +221,6 @@
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/application_record.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/booking_details_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/common/search_result.html.erb" />
         <option value="$PROJECT_DIR$/app/views/contractors/_form.html.erb" />
@@ -255,6 +230,7 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/controllers/contractors_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/contractors/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       </list>
     </option>
   </component>
@@ -416,7 +392,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="devise" />
+              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1509,14 +1485,7 @@
       <workItem from="1503133091671" duration="2928000" />
       <workItem from="1503163173960" duration="13000" />
       <workItem from="1503396845322" duration="8610000" />
-      <workItem from="1503413835427" duration="13443000" />
-    </task>
-    <task id="LOCAL-00089" summary="suppliers,materials,list of material added.">
-      <created>1496226713656</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1496226713656</updated>
+      <workItem from="1503413835427" duration="13876000" />
     </task>
     <task id="LOCAL-00090" summary="suppliers,materials,list of material added.">
       <created>1496226888200</created>
@@ -1854,11 +1823,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503121925220</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Contractors Form Added, Users controller changed, search method changed to search customer supplier and contractor at one search-box.">
+      <created>1503429048452</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1503429048453</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1072254000" />
+    <option name="totallyTimeSpent" value="1072687000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1913,7 +1889,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/swaraj-constructions" />
     </ignored-roots>
-    <MESSAGE value="Site validations" />
     <MESSAGE value="all changes are resolved." />
     <MESSAGE value="dropdown lists added." />
     <MESSAGE value="Scheduler added" />
@@ -1938,7 +1913,8 @@
     <MESSAGE value="Investments...." />
     <MESSAGE value="new updations.." />
     <MESSAGE value="Cron job check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cron job check" />
+    <MESSAGE value="Contractors Form Added, Users controller changed, search method changed to search customer supplier and contractor at one search-box." />
+    <option name="LAST_COMMIT_MESSAGE" value="Contractors Form Added, Users controller changed, search method changed to search customer supplier and contractor at one search-box." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -2012,6 +1988,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="123" lean-forward="false" selection-start-line="7" selection-start-column="123" selection-end-line="7" selection-end-column="123" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2076,6 +2053,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1720">
           <caret line="86" column="82" lean-forward="false" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2098,6 +2076,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="17" column="85" lean-forward="true" selection-start-line="17" selection-start-column="85" selection-end-line="17" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2119,6 +2098,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2126,6 +2106,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1240">
           <caret line="74" column="23" lean-forward="false" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2157,6 +2138,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2164,6 +2146,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="4" column="79" lean-forward="false" selection-start-line="4" selection-start-column="79" selection-end-line="4" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2238,14 +2221,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="85" column="100" lean-forward="false" selection-start-line="85" selection-start-column="100" selection-end-line="85" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/suppliers/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -2306,6 +2281,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
           <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="72" column="44" lean-forward="false" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
           <folding />
         </state>
       </provider>
