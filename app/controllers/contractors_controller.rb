@@ -1,5 +1,6 @@
 class ContractorsController < ApplicationController
   before_action :set_contractor, only: [:show, :edit, :update, :destroy]
+  before_action :authorised?
 
   # GET /contractors
   # GET /contractors.json

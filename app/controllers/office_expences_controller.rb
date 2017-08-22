@@ -1,5 +1,6 @@
 class OfficeExpencesController < ApplicationController
   before_action :set_office_expence, only: [:show, :edit, :update, :destroy]
+  before_action :authorised?
 
   # GET /office_expences
   # GET /office_expences.json

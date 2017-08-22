@@ -24,8 +24,8 @@
         Contractor.all.each do |contractor|
           contractor_names.push([contractor.name.upcase,contractor.id])
         end %>
-      <% if !@contractual_labour.contractor.blank? %>
-          <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: @contractual_labour.contractor.name),
+      <% if !@contractual_labour.contractor_id.blank? %>
+          <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: @contractual_labour.contractor_id),
                        {}, class: 'form-control') %>
       <% else %>
           <%= f.select(:contractor_id, options_for_select(contractor_names,:disabled=> 'Select Contractor', selected: 'Select Contractor'),

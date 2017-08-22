@@ -1,5 +1,6 @@
 class DepartmentalLaboursController < ApplicationController
   before_action :set_departmental_labour, only: [:show, :edit, :update, :destroy]
+  before_action :authorised?
 
   # GET /departmental_labours
   # GET /departmental_labours.json

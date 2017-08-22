@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   ## following code prevent rails to save cache page caching
   before_filter :set_cache_headers
 
+  def authorised?
+    if current_user.role === 'SUPERVISOR'
+      respond_to do |f|
+        f.html { redirect_to root_path, alert: 'You are not authorised to access this page.' }
+      end
+    end
+  end
+
+
   private
 
   def set_cache_headers

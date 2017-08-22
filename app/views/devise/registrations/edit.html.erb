@@ -25,11 +25,13 @@
         <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', default: 'we need your current password to confirm your changes') %>)</i>
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
-      <div class="form-group">
-        <%= f.label :role %>
-        <%= f.select(:role, options_for_select([['Select Role'],['ADMIN','ADMIN'],['ACCOUNTANT','ACCOUNTANT'],['SUPERVISOR','SUPERVISOR']],
-                                               :disabled=> 'Select Role'),{}, class: 'form-control') %>
-      </div>
+      <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
+        <div class="form-group">
+          <%= f.label :role %>
+          <%= f.select(:role, options_for_select([['Select Role'],['ADMIN','ADMIN'],['ACCOUNTANT','ACCOUNTANT'],['SUPERVISOR','SUPERVISOR']],
+                                                 :disabled=> 'Select Role'),{}, class: 'form-control') %>
+        </div>
+      <% end %>
       <%= f.submit t('.update', default: 'Update'), class: 'btn btn-primary' %>
     <% end %>
   </div>

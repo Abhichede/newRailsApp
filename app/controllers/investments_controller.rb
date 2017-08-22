@@ -1,5 +1,6 @@
 # sdf
 class InvestmentsController < ApplicationController
+  before_action :authorised?
 
   def index
   end

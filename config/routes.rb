@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'users', to: 'users#index'
+
   resources :investors
   resources :office_expences
   resources :contractors

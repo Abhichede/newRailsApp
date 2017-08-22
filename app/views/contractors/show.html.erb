@@ -1,27 +1,75 @@
 <%- model_class = Contractor -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="col-md-1">
+        <%= link_to contractors_path do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
+        <% end %>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h4><strong><%= @contractor.name %></strong></h4></div>
+          <div class="panel-body">
+            <div><strong>Contact No:</strong> <%= @contractor.contact_number %></div>
+            <div><strong>Address: </strong><%= @contractor.address %></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h4>Summary</h4></div>
+          <div class="panel-body">
+            <strong>Total Amount: &#8377; <%= @contractor.total_amount.to_f.round(2) %></strong><br/>
+            <strong>Paid Amount: &#8377; <%= @contractor.paid_amount.to_f.round(2) %></strong><br/>
+            <strong>Balance Amount: &#8377; <%= @contractor.total_amount.to_f.to_f.round(2) - @contractor.paid_amount.to_f.to_f.round(2) %></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Actions</h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-4">
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_contractor_path(@contractor), :class => 'btn btn-info btn-sm btn-block' %>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4">
+            <% link_to t('.destroy', :default => t("helpers.links.destroy")),
+                       contractor_path(@contractor),
+                       :method => 'delete',
+                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                       :class => 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<hr/>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @contractor.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
-  <dd><%= @contractor.contact_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @contractor.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:site_id) %>:</strong></dt>
-  <dd><%= @contractor.site_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contractual_labour_id) %>:</strong></dt>
-  <dd><%= @contractor.contractual_labour_id %></dd>
-</dl>
+<table class="table table-bordered table-responsive">
+  <thead class="thead head">
+    <tr class="table-row">
+      <th>Site</th>
+      <th>Contract</th>
+      <th>Qty</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody class="tbody">
+    <% @contractor.contractual_labours.each do |contract| %>
+      <tr>
+        <td><%= contract.site.name %></td>
+        <td><%= contract.contract_name %></td>
+        <td><%= contract.quantity %> <%= contract.unit %></td>
+        <td>&#8377; <%= contract.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%  %>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              contractors_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_contractor_path(@contractor), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              contractor_path(@contractor),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>

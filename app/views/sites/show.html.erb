@@ -53,39 +53,45 @@
       <div class="panel-heading">
           <h4><strong><%= @site.name.upcase %></strong></h4>
           <h5>
-            <div class="label label-primary">
-              Available Flats
+            Available
+            <div class="label label-primary label-sm">
+               Flats
+              <span class="badge">
+                <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
+                    @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
+               </span>
             </div>
-            <span class="label label-default label-sm">
-            <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
-                @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
-          </span>
-            &nbsp;&nbsp;
-            <div class="label label-primary">
-              Available Shops
+            &nbsp;
+            <div class="label label-primary label-sm">
+              Shops
+              <span class="badge">
+                <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
+              </span>
             </div>
-            <span class="label label-default label-sm">
-            <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
-          </span>
           </h5>
       </div>
       <div class="panel-body">
-            <dl class="dl-horizontal">
-              <dt><strong><%= model_class.human_attribute_name(:address) %></strong></dt>
-              <dd><strong>:</strong>  <%= @site.address %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:no_of_flats) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.no_of_flats %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:no_of_shops) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.no_of_shops %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:type_of_structures) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.type_of_structures %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:site_type) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.site_type %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:area_of_plot) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.area_of_plot %></dd>
-              <dt><strong><%= model_class.human_attribute_name(:project_approved_by) %> </strong></dt>
-              <dd><strong>:</strong>  <%= @site.project_approved_by %></dd>
-            </dl>
+        <section><strong><%= model_class.human_attribute_name(:address) %> :</strong>
+          <span class="pull-right"><%= @site.address %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:no_of_flats) %> :</strong>
+          <span class="pull-right"><%= @site.no_of_flats %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:no_of_shops) %> :</strong>
+          <span class="pull-right"><%= @site.no_of_shops %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:type_of_structures) %> :</strong>
+          <span class="pull-right"><%= @site.type_of_structures %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:site_type) %> :</strong>
+          <span class="pull-right"><%= @site.site_type %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:area_of_plot) %> :</strong>
+          <span class="pull-right"> <%= @site.area_of_plot %></span>
+        </section>
+        <section><strong><%= model_class.human_attribute_name(:project_approved_by) %> :</strong>
+          <span class="pull-right"><%= @site.project_approved_by %></span>
+        </section>
       </div>
     </div>
   </div>
@@ -94,12 +100,20 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong>Outstandings</strong></div>
       <div class="panel-body">
-        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
-        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#suppliersOutstanding">Supplier Overview</button>
-        <button class="btn btn-primary btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#">Labour</button>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#bookingCustomerOutstanding">Customers</button>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#suppliersOutstanding">Supplier Overview</button>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#">Labour</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

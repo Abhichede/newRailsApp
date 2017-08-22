@@ -1,5 +1,6 @@
 class BookingDetailsController < ApplicationController
   before_action :set_booking_detail, only: [:show, :edit, :update, :destroy]
+  before_action :authorised?
 
   # GET /booking_details.js
   # GET /booking_details.js.json
@@ -165,17 +166,24 @@ class BookingDetailsController < ApplicationController
   end
 
   def search
+
+    @search_list = {}
+
     if params[:search_customer]
       #@booking_detail =  BookingDetail.find_by(:customer_name => params[:search_customer])
-      @booking_detail =  BookingDetail.where('customer_name = ? OR customer_contact = ?', params[:search_customer], params[:search_customer])
+      @booking_detail =  BookingDetail.where('customer_name = ?', params[:search_customer])
+      @supplier = Supplier.where('lower(name) = ?', "#{params[:search_customer].downcase}")
+      @contractor = Contractor.where('lower(name) = ?', "#{params[:search_customer].downcase}")
+
+      @search_list = @booking_detail + @supplier + @contractor
     end
 
-    if @booking_detail
+    if @search_list
       #redirect_to booking_detail_path(@booking_detail)
       render 'common/search_result'
     else
       respond_to do |format|
-        format.html { redirect_to booking_details_path, alert: "Something went wrong or customer not available" }
+        format.html { redirect_to root_path, alert: "Something went wrong or customer not available" }
         format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
       end
     end
@@ -183,12 +191,30 @@ class BookingDetailsController < ApplicationController
 
   def autocomplete
 
-    @booking_detail = BookingDetail.where('lower(customer_name) LIKE ? OR lower(customer_contact) LIKE ?', "%#{params[:term].downcase}%", "%#{params[:term].downcase}%")
+    @booking_detail = BookingDetail.where('lower(customer_name) LIKE ?', "%#{params[:term].downcase}%")
+    @supplier = Supplier.where('lower(name) LIKE ?', "%#{params[:term].downcase}%")
+    @contractor = Contractor.where('lower(name) LIKE ?', "%#{params[:term].downcase}%")
+
+    @search_list = []
+
+   @booking_detail.each do |customer|
+     @search_list << customer.customer_name
+   end
+
+    @supplier.each do |customer|
+      @search_list << customer.name
+    end
+
+    @contractor.each do |customer|
+      @search_list << customer.name
+    end
+
+    puts @search_list
 
     respond_to do |format|
       format.html
       format.json{
-        render json: @booking_detail.map(&:customer_name).to_json
+        render json: @search_list
       }
     end
   end

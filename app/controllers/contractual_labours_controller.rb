@@ -1,5 +1,6 @@
 class ContractualLaboursController < ApplicationController
   before_action :set_contractual_labour, only: [:show, :edit, :update, :destroy]
+  before_action :authorised?
 
   # GET /contractual_labours
   # GET /contractual_labours.json
@@ -40,9 +41,12 @@ class ContractualLaboursController < ApplicationController
     total_amount = contractual_labour_params[:amount].to_f + gst_cost - tds_cost
 
     @contractor = Contractor.find(contractual_labour_params[:contractor_id])
+    contractor_total = @contractor.total_amount.to_f
+
     respond_to do |format|
       if @contractual_labour.save
         @contractual_labour.update(:amount => total_amount)
+        @contractor.update(:total_amount => contractor_total + total_amount)
         format.html { redirect_to session.delete(:return_to), notice: "Contract was successfully allocated to #{@contractor.name}." }
         format.json { render :show, status: :created, location: @contractual_labour }
       else
@@ -60,9 +64,18 @@ class ContractualLaboursController < ApplicationController
     tds_cost = contractual_labour_params[:tds_cost].to_f
     total_amount = contractual_labour_params[:amount].to_f + gst_cost - tds_cost
 
+    @previous_contractor = Contractor.find(@contractual_labour.contractor_id)
+    @new_contractor = Contractor.find(contractual_labour_params[:contractor_id])
+    previous_contractor_total = @previous_contractor.total_amount.to_f
+
+    @previous_contractor.update(:total_amount => previous_contractor_total - total_amount)
+
+    new_contractor_total = @new_contractor.total_amount.to_f
+
     respond_to do |format|
       if @contractual_labour.update(contractual_labour_params)
         @contractual_labour.update(:amount => total_amount)
+        @new_contractor.update(:total_amount => new_contractor_total + total_amount)
         format.html { redirect_to session.delete(:return_to), notice: 'Contractual labour was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractual_labour }
       else

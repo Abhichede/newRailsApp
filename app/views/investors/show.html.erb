@@ -68,20 +68,30 @@
         <strong>Outstanding Amount: <span class="pull-right">&#8377; <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span></strong>
       </div>
       <div class="panel-footer">
-          <button class="btn btn-primary btn-sm " id="investment_return-<%= investment.id %>"
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="investment_return-<%= investment.id %>"
                   data-toggle="modal" data-inv-id="<%= investment.id %>" data-inv-date="<%= investment.investment_date %>"
                   data-target="#newInvestmentReturnModal">Return</button>
-          <%= link_to 'Interests',{controller: 'investments', action: 'investment_details',
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= link_to 'Interests',{controller: 'investments', action: 'investment_details',
                                           id: investment.id}, method: :get, remote: true,
-                      class: "btn btn-primary btn-sm ", id: "investment_details-#{investment.id}" %>
-          <%= link_to 'Payments',{controller: 'investments', action: 'investment_payment_details',
+                                          class: "btn btn-primary btn-sm btn-block", id: "investment_details-#{investment.id}" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= link_to 'Payments',{controller: 'investments', action: 'investment_payment_details',
                                          id: investment.id}, method: :get, remote: true,
-                      class: "btn btn-primary btn-sm", id: "investment_payment_details-#{investment.id}" %>
+                                          class: "btn btn-primary btn-sm btn-block", id: "investment_payment_details-#{investment.id}" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <!-- ************************* Script ****************************** -->
-  <script type="text/javascript">
+  <script type="text/    script">
       $('#investment_return-<%= investment.id %>').on('click', function () {
           //get data-id attribute of the clicked element
           var investmentId = $(this).data('inv-id');
@@ -262,7 +272,7 @@
         <table class="table table-responsive table-bordered">
           <thead class="thead-default">
           <tr class="table-row">
-            <th>Month</th>
+            <th>Month_wise_distribution</th>
             <th>Interest</th>
             <th>Paid Interest</th>
             <th>Paid Date</th>
