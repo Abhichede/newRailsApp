@@ -12,13 +12,20 @@ class InvestmentsController < ApplicationController
     @investment = Investment.new(investment_params)
     session.delete(:return_to)
     session[:return_to] ||= request.referer
-
+    total_payable_amount = 0
     respond_to do |format|
       if @investment.save
         interest = investment_params[:investment_amount].to_f * (investment_params[:interest_rate].to_f / 100)
         investment_date = Date.parse(investment_params[:investment_date])
-        total_payable_amount = investment_params[:investment_amount].to_f
 
+        puts investment_params[:is_monthly]
+        if !investment_params[:is_monthly]
+          total_payable_amount = investment_params[:investment_amount].to_f
+          puts total_payable_amount
+        else
+          total_payable_amount = investment_params[:total_payable_amount].to_f
+          puts total_payable_amount
+        end
         while investment_date < Date.today
         @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => @investment.id,
                                                             :month => investment_date,
