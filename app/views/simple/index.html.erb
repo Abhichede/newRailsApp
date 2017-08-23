@@ -31,5 +31,20 @@
     </div>
   </div>
 
+  <div class="col-md-3">
+    <div class="panel panel-danger">
+      <div class="panel-heading text-center">
+        Currently Signed in users
+      </div>
+      <div class="panel-body text-center">
+        <% User.all.each do |user| %>
+          <% if UsersController.online?(user) %>
+            Name: <%= user.user_name %> <br/>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 </div>
 

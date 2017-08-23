@@ -366,7 +366,7 @@
       <% else %>
         <div class="modal-body">
 
-              <%= form_tag update_paid_amount_path, remote: true, method: :get, id: 'update-paid-amount-form'  do %>
+              <%= form_tag update_paid_amount_path, method: :get, id: 'update-paid-amount-form'  do %>
                       <%= hidden_field_tag :booking_id, params[:id], value: @booking_detail.id %>
                   <div class="form-group">
                       <%= text_field_tag :search, params[:search],placeholder: 'Payable Amount',

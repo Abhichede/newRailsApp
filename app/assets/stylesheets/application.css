@@ -168,16 +168,6 @@ select.form-control{
 .label-danger{
     border: solid 1px #d9534f !important;
 }
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
-    background-color: #0097A7;
-}
-.nav-pills>li>a{
-    font-weight: 600;
-}
-.nav-pills>li>a:hover{
-    background-color: #0097A7;
-    color: #FFFFFF;;
-}
 .panel-primary>.panel-heading{
     background-color: #0097A7;
     border-color: #0097A7 !important;

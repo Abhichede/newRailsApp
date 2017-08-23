@@ -122,7 +122,7 @@
 <% end %>
 
 
-<ul  class="nav nav-pills" style="margin-top: 2rem;">
+<ul  class="nav nav-tabs responsive" style="margin-top: 2rem;">
   <% if current_user.role === 'SUPERVISOR' %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
@@ -139,11 +139,11 @@
     </li>
     <li><a href="#supplier_jumbo" data-toggle="tab">Supplier's Payment</a>
     </li>
-    <li><a href="#labour_jumbo" data-toggle="tab">Labour</a>
+    <li><a href="#contractual_labour" data-toggle="tab">Labours</a>
     </li>
   <% end %>
 </ul>
-<div class="tab-content clearfix">
+<div class="tab-content clearfix responsive">
   <% if current_user.role != 'SUPERVISOR' %>
     <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
         <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
@@ -241,61 +241,59 @@
     </div>
   <% end %>
   <% if current_user.role === 'SUPERVISOR'  %>
-      <div class="jumbotron tab-pane active" id="material_jumbo" style="margin-top: 0.5em">
-        <% if current_user.role != 'SUPERVISOR' %>
-    <span class="pull-right">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
-    </span>
-        <% end %>
-        <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+    <div class="jumbotron tab-pane active" id="material_jumbo" style="margin-top: 0.5em">
+      <% if current_user.role != 'SUPERVISOR' %>
+        <span class="pull-right">
+          <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+        </span>
+      <% end %>
+      <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+        <% MaterialList.all.each do |material| %>
+          <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
 
-          <% MaterialList.all.each do |material| %>
-              <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
-
-              <% else %>
-                  <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
-                                                       :type_of_material=>material.material_name},
-                              class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                              style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
-              <% end %>
+          <% else %>
+              <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
+                                                   :type_of_material=>material.material_name},
+                          class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                          style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
           <% end %>
-        </div>
+        <% end %>
       </div>
+    </div>
   <% end %>
 <% if current_user.role != 'SUPERVISOR' %>
-  <div class="jumbotron tab-pane" id="labour_jumbo" style="margin-top: 0.5em">
-    <div class="row col-md-offset-5 col-sm-offset-1 col-xs-offset-1">
-      <ul  class="nav nav-pills">
-        <li class="active">
-          <a href="#contractor_labour" data-toggle="tab">Contractual</a>
-        </li>
-        <li>
-          <%= link_to 'Departmental', {controller: 'departmental_labours', action: 'show_departmental_labours', id: @site.id} %>
-        </li>
-      </ul>
-    </div>
-
-      <div class="jumbotron tab-pane" id="contractor_labour" style="margin-top: 0.5em">
-          <span class="pull-right">
-            <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                    data-toggle="modal" data-target="#newContractModal"><i class="fa fa-plus"></i></button>
-          </span>
-
-          <div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-
-            <% ContractList.all.each do |contract| %>
-                <% if contract.name.nil? || contract.name === '' || contract.name.blank? %>
-
-                <% else %>
-                    <%= link_to contract.name, {controller: 'contractual_labours', action: 'show_contractual_labours', :id => @site,
-                                                         :contract_name=>contract.name},
-                                class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
-                                style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
-                <% end %>
-            <% end %>
-          </div>
+  <div class="jumbotron tab-pane" id="contractual_labour" style="margin-top: 0.5em">
+    <div class="row">
+      <div class="pull-left col-md-6 col-sm-6 col-xs-6 col-lg-6">
+        <strong>Contractual Labours</strong>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+        <div class="col-md-6 col-lg-6">
+          <button class="btn btn-danger btn-sm btn-block" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#newContractModal">Add Contracts <i class="fa fa-plus"></i></button>
         </div>
+        <div class="col-md-6 col-lg-6">
+          <%= link_to 'Departmental Labours',
+                      {controller: 'departmental_labours', action: 'show_departmental_labours', id: @site},
+                      class: 'btn btn-primary btn-sm btn-block' %>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+
+      <% ContractList.all.each do |contract| %>
+          <% if contract.name.nil? || contract.name === '' || contract.name.blank? %>
+
+          <% else %>
+              <%= link_to contract.name, {controller: 'contractual_labours', action: 'show_contractual_labours', :id => @site,
+                                          :contract_name=>contract.name},
+                          class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
+                          style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
+          <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -372,12 +370,12 @@
 
 <!-- Modal -->
 <div class="modal fade-scale" id="bookingCustomerOutstanding" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100">Outstanding</h4>
+        <h4 class="modal-title">Outstanding</h4>
       </div>
 
       <div class="modal-body">
@@ -423,7 +421,7 @@
 
 <!-- Modal -->
 <div class="modal fade-scale" id="suppliersOutstanding" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -492,3 +490,10 @@
   </div>
 </div>
 <% end %>
+
+
+<script type="text/javascript">
+    (function($) {
+        fakewaffle.responsiveTabs(['xs', 'sm']);
+    })(jQuery);
+</script>

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resource :payment_details
   resource :investments
   resource :material_list
-  devise_for :users, :controllers => {registrations: 'registrations'}
+  devise_for :users, :controllers => {registrations: 'registrations', sessions: 'sessions'}
   root 'sites#index'
   get 'show_site_material', to: 'sites#show_site_material'
   get 'show_departmental_labours', to: 'departmental_labours#show_departmental_labours'
@@ -56,5 +56,6 @@ Rails.application.routes.draw do
   get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
   get 'departmental_labour_payment_details', to: 'departmental_labours#departmental_labour_payment_details'
 
+  get 'simple', to: 'simple#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
