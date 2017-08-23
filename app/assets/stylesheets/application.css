@@ -154,6 +154,12 @@ select.form-control{
     background-color: #000000 !important;
     border-color: #FFFFFF !important;
 }
+.btn-danger{
+    border: solid 1px #d9534f !important;
+    background-color: #d9534f !important;
+    color: #ffffff !important;
+}
+
 .label-default{
     background-color: #FFFFFF !important;
     border: solid 1px #0097A7;

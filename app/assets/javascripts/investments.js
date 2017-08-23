@@ -2,10 +2,16 @@ $(function(){
 
     var capital_amount = 0;
     var interest_rate = 0;
+    var total_payable_amount = 0;
+
 
 
     $("#investment_investment_amount").on('change focusout paste', function () {
        capital_amount = Number($(this).val());
+       total_payable_amount = capital_amount ;
+
+       $("#investment_total_payable_amount").val(total_payable_amount);
+
     });
     $("#investment_interest_rate").on('change focusout paste', function () {
         interest_rate = Number($(this).val());
@@ -13,7 +19,7 @@ $(function(){
             alert("please enter capital amount");
         }else{
             var current_interest = ( interest_rate / 100 ) * capital_amount;
-            var total_payable_amount = capital_amount ;
+            total_payable_amount = capital_amount ;
 
             $("#investment_current_month_interest").val(current_interest);
             $("#investment_total_payable_amount").val(total_payable_amount);

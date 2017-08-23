@@ -53,7 +53,7 @@
       <div class="panel-heading">
         <%= Investor.num_to_lakh(investment.investment_amount.to_f + (total_paid_amount - paid_interest)) %>
         <span class="pull-right">
-          <%= Date.parse(investment.investment_date).strftime('%d-%m-%Y') %>
+          <%= Date.parse(investment.investment_date).strftime('%d-%b-%Y') %>
         </span>
       </div>
       <div class="panel-body">
@@ -65,7 +65,12 @@
         <hr/>
         Total Amount : <span class="pull-right">&#8377; <%= investment.total_payable_amount.to_f.round(2) + total_paid_amount %></span><br/>
         Total Paid Amount: <span class="pull-right">&#8377; <%= total_paid_amount.round(2) %></span><br/>
-        <strong>Outstanding Amount: <span class="pull-right">&#8377; <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span></strong>
+        <strong>Outstanding Amount: <span class="pull-right">&#8377; <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span></strong><br/>
+        <% if !investment.is_monthly %>
+          Returning Date: <span class="pull-right"><%= Date.parse(investment.returning_date).strftime('%d-%b-%Y') %></span>
+        <% else %>
+          <br/>
+        <% end %>
       </div>
       <div class="panel-footer">
         <div class="row">
@@ -85,6 +90,12 @@
             <%= link_to 'Payments',{controller: 'investments', action: 'investment_payment_details',
                                          id: investment.id}, method: :get, remote: true,
                                           class: "btn btn-primary btn-sm btn-block", id: "investment_payment_details-#{investment.id}" %>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= link_to 'Delete',
+                       {controller: 'investors', action: 'destroy_investment', id: investment},
+                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                       :class => 'btn btn-danger btn-sm btn-block' %>
           </div>
         </div>
       </div>
@@ -111,7 +122,7 @@
 
 <!-- Modal -->
 <div class="modal fade-scale" id="newInvestmentModal" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -139,28 +150,28 @@
 
             <div class="form-group">
               <%= f.label :investment_date, :class => 'control-label col-lg-4' %>
-              <div class="col-lg-6">
+              <div class="col-lg-8">
                 <%= f.date_field :investment_date, :class => 'form-control', required: true, max: Date.today() %>
               </div>
               <%=f.error_span(:investment_date) %>
             </div>
             <div class="form-group">
               <%= f.label 'Returning Method', :class => 'control-label col-lg-4' %>
-              <div class="col-lg-6">
-                <%= f.radio_button :is_monthly, false,  class: 'radio-inline' %> Lumpsum
+              <div class="col-lg-8">
+                <%= f.radio_button :is_monthly, false,  class: 'radio-inline' %> Lumpsum <br/>
                 <%= f.radio_button :is_monthly, true, :checked => true, class: 'radio-inline' %> Quarterly/Monthly
               </div>
             </div>
             <div class="form-group">
               <%= f.label :investment_amount, :class => 'control-label col-lg-4' %>
-              <div class="col-lg-6">
+              <div class="col-lg-8">
                 <%= f.text_field :investment_amount, :class => 'form-control', required: true %>
               </div>
               <%=f.error_span(:investment_amount) %>
             </div>
             <div class="form-group" id="investments_interest_rate_div">
               <%= f.label :interest_rate, :class => 'control-label col-lg-4' %>
-              <div class="col-lg-6">
+              <div class="col-lg-8">
                 <%= f.text_field :interest_rate, :class => 'form-control', required: true %>
               </div>
               <%=f.error_span(:interest_rate) %>
@@ -168,14 +179,14 @@
             <div id="investments_hidden_fields" class="hidden">
               <div class="form-group">
                 <%= f.label :total_payable_amount, :class => 'control-label col-lg-4' %>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                   <%= f.text_field :total_payable_amount, :class => 'form-control', :value => '0' %>
                 </div>
                 <%=f.error_span(:total_payable_amount) %>
               </div>
               <div class="form-group">
                 <%= f.label :returning_date, :class => 'control-label col-lg-4' %>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                   <%= f.date_field :returning_date, :class => 'form-control', :value => Date.today %>
                 </div>
                 <%=f.error_span(:returning_date) %>
@@ -183,7 +194,7 @@
             </div>
             <div class="form-group hidden">
               <%= f.label :create_by, :class => 'control-label col-lg-4' %>
-              <div class="col-lg-6">
+              <div class="col-lg-8">
                 <%= f.text_field :created_by, :class => 'form-control', readonly: true, value: current_user.user_name %>
               </div>
               <%=f.error_span(:created_by) %>
@@ -213,7 +224,7 @@
 
 <!-- Modal -->
 <div class="modal fade-scale" id="newInvestmentReturnModal" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">

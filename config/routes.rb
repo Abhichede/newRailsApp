@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   post 'investment_returns', to: 'investors#investment_return'
   get 'investment_details', to: 'investments#investment_details'
   get 'investment_payment_details', to: 'investments#investment_payment_details'
+  get 'destroy_investment', to: 'investors#destroy_investment'
 
   get 'update_material_rate', to: 'materials#update_material_rates'
 

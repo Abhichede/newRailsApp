@@ -116,6 +116,28 @@ class InvestorsController < ApplicationController
     end
   end
 
+
+
+  def destroy_investment
+    @investment = Investment.find(params[:id])
+    @investor = @investment.investor
+    @investment.investment_monthly_interests.each do |monthly_interest|
+      monthly_interest.destroy
+    end
+
+    @investment.investment_returns.each do |returns|
+      returns.destroy
+    end
+
+    @investment.destroy
+    puts 'working'
+    respond_to do |format|
+      format.html { redirect_to investor_path(@investor),
+                                notice: 'Investment was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.

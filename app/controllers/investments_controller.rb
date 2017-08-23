@@ -1,11 +1,16 @@
 # sdf
 class InvestmentsController < ApplicationController
+  before_action :set_investment, only: [:destroy, :investment_details]
   before_action :authorised?
 
   def index
   end
 
   def edit
+  end
+
+  def show
+
   end
 
   def create
@@ -26,7 +31,7 @@ class InvestmentsController < ApplicationController
           total_payable_amount = investment_params[:total_payable_amount].to_f
           puts total_payable_amount
         end
-        while investment_date < Date.today
+        while investment_date <= Date.today
         @investment_monthly = InvestmentMonthlyInterest.new(:investment_id => @investment.id,
                                                             :month => investment_date,
                                                             :interest_rate => investment_params[:interest_rate],
@@ -61,7 +66,6 @@ class InvestmentsController < ApplicationController
   end
 
   def investment_details
-    @investment = Investment.find(params[:id])
     @inv_monthly_interest = InvestmentMonthlyInterest.where(:investment_id => @investment.id)
 
     if @inv_monthly_interest.blank?
@@ -88,6 +92,10 @@ class InvestmentsController < ApplicationController
 
 
   private
+
+  def set_investment
+    @investment = Investment.find(params[:id])
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def investment_params
