@@ -7,11 +7,6 @@ class UsersController < ApplicationController
 
 
   def self.online?(user)
-    if user.updated_at > 10.minutes.ago
-      return true
-
-    else
-      return false
-    end
+    user.is_online
   end
 end
