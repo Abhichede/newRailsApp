@@ -30,26 +30,6 @@ $(function(){
         $("#investments_interest_rate_div").attr('class', 'form-group');
     });
 
-    $("#investment_total_payable_amount").on('paste focusout', function () {
-       var investment_amount = Number($("#investment_investment_amount").val());
-       var total_payable_amount = Number($(this).val());
-
-       if(total_payable_amount < investment_amount){
-           $.notify(
-               "Total amount should be greater than or equal to investment(capital) amount.",
-               {style: 'bootstrap', className: 'error'}
-           );
-
-           $('#new_investment_submit').attr('disabled', true);
-       }else{
-           $('#new_investment_submit').attr('disabled', false);
-       }
-
-    });
-
-
-
-
     $("form#investment").validate({
         debug: true,
         // Specify validation rules
