@@ -66,7 +66,7 @@ class InvestmentsController < ApplicationController
   end
 
   def investment_details
-    @inv_monthly_interest = InvestmentMonthlyInterest.where(:investment_id => @investment.id)
+    @inv_monthly_interest = InvestmentMonthlyInterest.where(:investment_id => @investment.id).order(:month)
 
     if @inv_monthly_interest.blank?
       render status: :not_found
