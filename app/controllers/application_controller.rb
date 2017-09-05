@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_cache_headers
 
   def authorised?
-    if current_user.role === 'SUPERVISOR'
+    if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER'
       respond_to do |f|
         f.html { redirect_to root_path, alert: 'You are not authorised to access this page.' }
       end

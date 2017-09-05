@@ -20,6 +20,9 @@
           Add
         </button>
       </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+
+      </div>
     </div>
   </div>
 </div>
@@ -58,6 +61,12 @@
               <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
                                                id: departmental_labour.id}, method: :get, remote: true,
                             class: "btn btn-primary dept_lab_pay_det-#{departmental_labour.id}" %>
+
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          departmental_labour_path(departmental_labour),
+                          :method => 'delete',
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-danger btn-sm' %>
               </td>
             </tr>
 
@@ -80,7 +89,7 @@
     </tbody>
   </table>
 </div>
-<%= will_paginate @departmental_labours, renderer: BootstrapPagination::Rails%>
+<%= will_paginate @departmental_labours, renderer: BootstrapPagination::Rails %>
 <!-- Modal -->
 <div class="modal fade-scale" id="addNewDepartmentalLabour" role="dialog">
   <div class="modal-dialog " role="document">

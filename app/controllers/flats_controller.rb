@@ -87,10 +87,18 @@ class FlatsController < ApplicationController
   # DELETE /flats/1
   # DELETE /flats/1.json
   def destroy
+    if @flat.booking_status
+      @flat.booking_detail.payment_details.each do |payments|
+        payments.destroy
+      end
+
+      @flat.booking_detail.destroy
+    end
 
     @flat.destroy
+
     respond_to do |format|
-      format.html { redirect_to site_path(@flat.site_id), notice: 'Flat was successfully destroyed.' }
+      format.html { redirect_to site_path(@flat.site_id), notice: 'Flat was successfully deleted.' }
       format.json { head :no_content }
     end
   end

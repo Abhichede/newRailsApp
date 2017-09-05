@@ -222,11 +222,14 @@ class BookingDetailsController < ApplicationController
   # DELETE /booking_details.js/1
   # DELETE /booking_details.js/1.json
   def destroy
+    @flat = @booking_detail.flat
+    @booking_detail.flat.update(:booking_status=> 0, :booking_date=> nil)
+    @booking_detail.payment_details.each do |payments|
+      payments.destroy
+    end
     @booking_detail.destroy
-    @flat = Flat.find(@booking_detail.flat_id)
-    @flat.update(:booking_status=> 0, :booking_date=> nil)
     respond_to do |format|
-      format.html { redirect_to booking_details_url, notice: 'Booking detail was successfully destroyed.' }
+      format.html { redirect_to flat_path(@flat), notice: 'Booking detail was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -8,7 +8,7 @@
         <% end %>
       </div>
     </div>
-    <% if current_user.role != 'SUPERVISOR' %>
+    <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
     <div class="col-md-6">
               <% if @site.site_type === "Residential+Commercial" || @site.site_type === "Commercial" %>
                 <% if @site.flats.where.not(:flat_type => 'SHOP').count < @site.no_of_flats.to_i %>
@@ -46,7 +46,7 @@
     <% end %>
   </div>
 </div>
-<% if current_user.role != 'SUPERVISOR' %>
+<% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
@@ -123,7 +123,7 @@
 
 
 <ul  class="nav nav-tabs responsive" style="margin-top: 2rem;">
-  <% if current_user.role === 'SUPERVISOR' %>
+  <% if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER' %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
   <% else %>
@@ -144,7 +144,7 @@
   <% end %>
 </ul>
 <div class="tab-content clearfix responsive">
-  <% if current_user.role != 'SUPERVISOR' %>
+  <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
     <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
         <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
             <h5><strong>No flats were added, Click 'ADD FLAT' above to add flats</strong></h5>
@@ -203,12 +203,10 @@
       </div>
     <% end %>
     <div class="jumbotron tab-pane" id="material_jumbo" style="margin-top: 0.5em">
-      <% if current_user.role != 'SUPERVISOR' %>
-    <span class="pull-right">
-        <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
-    </span>
-      <% end %>
+      <span class="pull-right">
+          <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
+                  data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
+      </span>
       <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
 
         <% MaterialList.all.each do |material| %>
@@ -240,14 +238,8 @@
       </div>
     </div>
   <% end %>
-  <% if current_user.role === 'SUPERVISOR'  %>
+  <% if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER' %>
     <div class="jumbotron tab-pane active" id="material_jumbo" style="margin-top: 0.5em">
-      <% if current_user.role != 'SUPERVISOR' %>
-        <span class="pull-right">
-          <button class="btn btn-default btn-sm" id="payment-btn-on-booking"
-                  data-toggle="modal" data-target="#newMaterialModal"><i class="fa fa-plus"></i></button>
-        </span>
-      <% end %>
       <div class="row col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
         <% MaterialList.all.each do |material| %>
           <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
@@ -262,7 +254,7 @@
       </div>
     </div>
   <% end %>
-<% if current_user.role != 'SUPERVISOR' %>
+<% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
   <div class="jumbotron tab-pane" id="contractual_labour" style="margin-top: 0.5em">
     <div class="row">
       <div class="pull-left col-md-6 col-sm-6 col-xs-6 col-lg-6">

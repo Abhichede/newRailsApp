@@ -266,6 +266,10 @@ $(function() {
                 required: true,
                 pattern: /^([0-9]*[.])?[0-9]*$/
             },
+            "booking_detail[legal_charges]":{
+                required: true,
+                pattern: /^([0-9]*[.])?[0-9]*$/
+            },
             "booking_detail[MSEB_charges]":{
                 required: true,
                 pattern: /^([0-9]*[.])?[0-9]*$/
@@ -349,6 +353,10 @@ $(function() {
             },
             "booking_detail[stamp_duty]": {
                 required: "Please enter stamp duty amount",
+                pattern: "please enter valid amount"
+            },
+            "booking_detail[legal_charges]": {
+                required: "Please enter legal charges",
                 pattern: "please enter valid amount"
             },
             "booking_detail[MSEB_charges]": {

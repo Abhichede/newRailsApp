@@ -33,7 +33,7 @@
         <th>Truck No</th>
         <th>Challan No</th>
         <th>Quantity</th>
-        <% if current_user.role != 'SUPERVISOR' %>
+        <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
           <th>Bill No</th>
           <th>Rate</th>
           <th>GST Rate</th>
@@ -63,7 +63,7 @@
           <td><%= material.truck_no %></td>
           <td><%= material.challan_no %></td>
           <td><%= material.quantity.to_f %> <%= material.unit %></td>
-          <% if current_user.role != 'SUPERVISOR' %>
+          <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
             <td><%= material.bill_no %></td>
             <td>&#8377; <%= material.rate.to_f.round(2) %>/<%= material.unit %></td>
             <td><%= material.gst_rate %> %</td>
@@ -74,7 +74,7 @@
           <td><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
                                    site_id: @site, type_of_material: params[:type_of_material] },
                           class: 'btn btn-primary btn-block btn-xs' %></td>
-          <% if current_user.role != 'SUPERVISOR' %>
+          <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
             <td>
               <div class="form-group">
                 <a class="btn btn-primary btn-block btn-xs" data-toggle="modal"
@@ -104,7 +104,7 @@
             total_amount = total_amount + material.amount.to_f
           end
         %>
-        <% if current_user.role != 'SUPERVISOR' %>
+        <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
           <tr><td colspan="6">
             <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>
             <td colspan="9"><strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong></td>

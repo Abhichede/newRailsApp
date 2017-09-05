@@ -53,7 +53,7 @@
           <a class="navbar-brand" href="/"><%= image_tag 'HARAK-PATIL.png', class: 'responsive' %></a>
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
-        <% if current_user.role === 'SUPERVISOR' %>
+        <% if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER' %>
           <ul class="nav navbar-nav">
             <li><%= link_to sites_path  do %>
                   SITES

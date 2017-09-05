@@ -28,7 +28,7 @@ $(document).ready(function () {
     department_labour_payment_details();
     off();
     $("form").on('submit', function () {
-        if(this.valid){
+        if($(this).valid()){
             on();
         }else {
             off();

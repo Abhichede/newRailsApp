@@ -56,9 +56,14 @@ class DepartmentalLaboursController < ApplicationController
   # DELETE /departmental_labours/1
   # DELETE /departmental_labours/1.json
   def destroy
+    @site = @departmental_labour.site
+    OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+@departmental_labour.id.to_s,
+                          :payment_for_id => @departmental_labour.id).each do |outgoing|
+      outgoing.destroy
+    end
     @departmental_labour.destroy
     respond_to do |format|
-      format.html { redirect_to departmental_labours_url, notice: 'Departmental labour was successfully destroyed.' }
+      format.html { redirect_to controller: 'departmental_labours', action: 'show_departmental_labours', id: @site, notice: 'Departmental labour was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
