@@ -31,6 +31,7 @@ gem 'pg'
 gem 'whenever'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
+gem 'carrierwave_direct'
 gem 'mini_magick'
 gem 'delayed_job_active_record'
 gem 'bootstrap-multiselect-rails'
