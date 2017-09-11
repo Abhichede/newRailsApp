@@ -56,9 +56,9 @@
               <td><%= material.truck_no %></td>
               <td><%= material.challan_no %></td>
               <td><%=  material.quantity.to_f %> <%= material.unit %></td>
-              <td>&#8377; <%= material.rate.to_f.round(2) %>/<%= material.unit %></td>
-              <td>&#8377; <%= material.amount.to_f.round(2) %></td>
-              <td>&#8377; <%= material.gst_cost.to_f.round(2) %></td>
+              <td>&#8377; <%= number_to_indian_currency(material.rate.to_f.round(2)) %>/<%= material.unit %></td>
+              <td>&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
+              <td>&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
               <td><%= material.supervisor_name %></td>
             </tr>
 
@@ -77,9 +77,9 @@
   </table>
 </div>
 <div class="pull-right">
-  <strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong><br/>
-  <strong>Paid Amount: &#8377; <%= paid_amount.round(2) %></strong><br/>
-  <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= total_amount.round(2) - paid_amount.round(2) %></span></strong>
+  <strong>Total Amount: &#8377; <%= number_to_indian_currency(total_amount.round(2)) %></strong><br/>
+  <strong>Paid Amount: &#8377; <%= number_to_indian_currency(paid_amount.round(2)) %></strong><br/>
+  <strong>Balance Amount: &#8377; <span id="supplier-balance-amount"><%= number_to_indian_currency((total_amount - paid_amount).round(2)) %></span></strong>
 </div>
 <%= will_paginate @material, renderer: BootstrapPagination::Rails%>
 <!-- ********************************************************************************************** -->
@@ -176,7 +176,7 @@
                     <% else %>
                     <tr>
                       <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
-                      <td>&#8377; <%= payments.amount.to_f.round(2) %></td>
+                      <td>&#8377; <%= number_to_indian_currency(payments.amount.to_f.round(2)) %></td>
                       <td><%= payments.payment_method %></td>
                       <td><%= payments.payment_description %></td>
                       <td><%= payments.paid_by %></td>

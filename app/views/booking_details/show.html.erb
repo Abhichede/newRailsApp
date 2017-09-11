@@ -43,7 +43,6 @@
       <!-- <div class="col-md-2 col-sm-6 col-xs-5">
         <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
                 data-toggle="modal" data-target="#scheduleModal">Schedule</button> -->
-      </div>
     </div>
   </div>
 </div>
@@ -69,7 +68,7 @@
       <strong>CUSTOMER CONTACT </strong>
     </div>
     <div class="col-md-3 ">
-      <%= @booking_detail.customer_contact %>
+      <%= number_to_phone(@booking_detail.customer_contact, :country_code => 91) %>
     </div>
     <div class="col-md-3 ">
       <strong>CUSTOMER PAN </strong>
@@ -136,13 +135,13 @@
       <strong>GOVT. VALUE </strong>
     </div>
     <div class="col-md-3 col-lg-3">
-      &#8377; <%= (@booking_detail.flat.govt_value).to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.flat.govt_value.to_f.round(2)) %>
     </div>
     <div class="col-md-3 col-lg-3">
       <strong>ACTUAL AGREEMENT COST </strong>
     </div>
     <div class="col-md-3 col-lg-3">
-      &#8377; <%= @booking_detail.agreement_cost.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.agreement_cost.to_f.round(2)) %>
     </div>
     <div class="col-md-3 col-lg-3">
       <% if @booking_detail.flat.flat_type === 'SHOP' || @booking_detail.flat.flat_type === ' SHOP' %>
@@ -151,11 +150,11 @@
           <strong>FLAT COST </strong>
       <% end %>
     </div>
-    <div class="col-md-9 col-lg-9">
+    <div class="col-md-3 col-lg-3">
       <% if @booking_detail.flat.flat_cost.nil? || @booking_detail.flat.flat_cost.to_i == 0 %>
-          &#8377; <%= @booking_detail.flat_cost %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.flat_cost.to_f.round(2)) %>
       <% else %>
-          &#8377; <%= @booking_detail.flat.flat_cost %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.flat.flat_cost.to_f.round(2)) %>
       <% end %>
     </div>
     <hr/>
@@ -165,20 +164,20 @@
           <strong>VAT  </strong>
         </div>
         <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.vat.to_i %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.vat.to_f.round(2)) %>
         </div>
         <div class="col-md-3 ">
           <strong>SERVICE TAX </strong>
         </div>
         <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.service_tax.to_i %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.service_tax.to_f.round(2)) %>
         </div>
 
         <div class="col-md-3 ">
           <strong>LBT </strong>
         </div>
         <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.lbt.to_i %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.lbt.to_f.round(2)) %>
         </div>
 
       </div>
@@ -188,13 +187,13 @@
           <strong>GST RATE </strong>
         </div>
         <div class="col-md-3 ">
-          <%= @booking_detail.gst_rate %> %
+          <%= number_to_indian_currency(@booking_detail.gst_rate.to_f.round(2)) %> %
         </div>
         <div class="col-md-3 ">
           <strong>GST</strong>
         </div>
         <div class="col-md-3 ">
-          &#8377; <%= @booking_detail.gst_cost.to_i %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.gst_cost.to_f.round(2)) %>
         </div>
       </div>
     <% end %>
@@ -203,51 +202,51 @@
       <strong>STAMP DUTY </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.stamp_duty.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.stamp_duty.to_f.round(2)) %>
     </div>
     <div class="col-md-3 ">
       <strong>REGISTRATION FEES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.registration_fees.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.registration_fees.to_f.round(2)) %>
     </div>
     <div class="col-md-3 ">
       <strong>LEGAL CHARGES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.legal_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.legal_charges.to_f.round(2)) %>
     </div>
       <hr/>
     <div class="col-md-3 ">
       <strong>MSEB CHARGES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.MSEB_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.MSEB_charges.to_f.round(2)) %>
     </div>
     <div class="col-md-3 ">
       <strong>WATER CHARGES  </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.water_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.water_charges.to_f.round(2)) %>
     </div>
 
     <div class="col-md-3 ">
       <strong>ALLOTTED PARKING CHARGES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.parking_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.parking_charges.to_f.round(2)) %>
     </div>
     <div class="col-md-3 ">
       <strong>MAINTENANCE CHARGES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.maintenance_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.maintenance_charges.to_f.round(2)) %>
     </div>
     <div class="col-md-3 ">
       <strong>OTHER CHARGES </strong>
     </div>
     <div class="col-md-3 ">
-      &#8377; <%= @booking_detail.other_charges.to_i %>
+      &#8377; <%= number_to_indian_currency(@booking_detail.other_charges.to_f.round(2)) %>
     </div>
   </div>
 </div>
@@ -280,7 +279,7 @@
             <strong>SANCTIONED AMOUNT  </strong>
           </div>
           <div class="col-md-3 ">
-            &#8377; <%= @booking_detail.sanctioned_amount %>
+            &#8377; <%= number_to_indian_currency(@booking_detail.sanctioned_amount.to_f.round(2)) %>
           </div>
           <div class="col-md-3 ">
             <strong>EMPLOYEE CODE/NAME </strong>
@@ -305,7 +304,8 @@
           <strong>FINAL SELL DEED  </strong>
         </div>
         <div class="col-md-3 ">
-          <h4>&#8377; <strong><%= final_cost = @booking_detail.final_sale_deed.to_i %></strong></h4>
+          <h4>&#8377; <strong><%= number_to_indian_currency(@booking_detail.final_sale_deed.to_f.round(2)) %></strong></h4>
+            <% final_cost = @booking_detail.final_sale_deed.to_i %>
         </div>
       </div>
     </div>
@@ -315,7 +315,7 @@
           <strong>Token Amount </strong>
         </div>
         <div class="col-md-3">
-          &#8377; <%= @booking_detail.token_amount.to_i %>
+          &#8377; <%= number_to_indian_currency(@booking_detail.token_amount.to_f.round(2)) %>
         </div>
       </div>
     </div>
@@ -329,7 +329,7 @@
           <% if paid_amount.blank? %>
               &#8377; 0
           <% else %>
-          &#8377; <%= paid_amount %>
+          &#8377; <%= number_to_indian_currency(paid_amount.to_f.round(2)) %>
           <% end %>
         </div>
       </div>
@@ -340,9 +340,9 @@
       </div>
       <div class="col-md-3 ">
         <% if paid_amount.blank? %>
-            &#8377; <strong id="customer-balance-amount"><%= final_cost  %></strong>
+            &#8377; <strong id="customer-balance-amount"><%= final_cost %></strong>(<%= number_to_indian_currency(final_cost) %>)
         <% else %>
-            &#8377; <strong id="customer-balance-amount"><%= final_cost - paid_amount %></strong>
+            &#8377; <strong id="customer-balance-amount"><%= final_cost - paid_amount %></strong>(<%= number_to_indian_currency(final_cost - paid_amount) %>)
         <% end %>
       </div>
     </div>

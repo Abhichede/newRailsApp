@@ -6,10 +6,10 @@ $("a#investment_details-<%= @investment.id %>").on('ajax:success', function (eve
     <% @inv_monthly_interest.each do |inv_mon| %>
     $("#inv-mon-det_tbody").append('<tr>' +
         '<td><%= Date.parse(inv_mon.month).strftime('%d-%b-%y') %> to <%= (Date.parse(inv_mon.month)+29).strftime('%d-%b-%y') %></td>'+
-        '<td><%= inv_mon.interest %></td>'+
-        '<td><%= inv_mon.paid_interest %></td>'+
+        '<td>&#8377; <%= number_to_indian_currency(inv_mon.interest) %></td>'+
+        '<td>&#8377; <%= number_to_indian_currency(inv_mon.paid_interest) %></td>'+
         '<td><%= inv_mon.paid_date %></td>'+
-        '<td><%= inv_mon.pending_interest %></td>'+
+        '<td>&#8377; <%= number_to_indian_currency(inv_mon.pending_interest) %></td>'+
         '<td><%= inv_mon.paid_by %></td>'+
         ' </tr>');
     <% end %>

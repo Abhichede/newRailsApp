@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823083541) do
+ActiveRecord::Schema.define(version: 20170911051919) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 20170823083541) do
     t.boolean  "deleting_status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "site_id"
   end
 
   create_table "outgoing_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

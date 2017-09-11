@@ -18,7 +18,7 @@
           </div>
           <div class="panel-body" style="height: 10rem;">
             <strong>Addres: </strong> <%= contractor.address %> <br />
-            <strong>Contact: </strong> <%= contractor.contact_number %> <br />
+            <strong>Contact: </strong> <%= number_to_phone(contractor.contact_number, :country_code => 91) %> <br />
           </div>
           <div class="panel-footer text-center">
             <%= link_to 'View', contractor_path(contractor), class: 'btn btn-warning btn-sm' %>

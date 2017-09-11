@@ -11,7 +11,7 @@
         <div class="panel panel-default">
           <div class="panel-heading"><h4><strong><%= @contractor.name %></strong></h4></div>
           <div class="panel-body">
-            <div><strong>Contact No:</strong> <%= @contractor.contact_number %></div>
+            <div><strong>Contact No:</strong> <%= number_to_phone(@contractor.contact_number, :country_code => 91) %></div>
             <div><strong>Address: </strong><%= @contractor.address %></div>
           </div>
         </div>
@@ -20,9 +20,9 @@
         <div class="panel panel-default">
           <div class="panel-heading"><h4>Summary</h4></div>
           <div class="panel-body">
-            <strong>Total Amount: &#8377; <%= @contractor.total_amount.to_f.round(2) %></strong><br/>
-            <strong>Paid Amount: &#8377; <%= @contractor.paid_amount.to_f.round(2) %></strong><br/>
-            <strong>Balance Amount: &#8377; <%= @contractor.total_amount.to_f.to_f.round(2) - @contractor.paid_amount.to_f.to_f.round(2) %></strong>
+            <strong>Total Amount: &#8377; <%= number_to_indian_currency(@contractor.total_amount.to_f.round(2)) %></strong><br/>
+            <strong>Paid Amount: &#8377; <%= number_to_indian_currency(@contractor.paid_amount.to_f.round(2)) %></strong><br/>
+            <strong>Balance Amount: &#8377; <%= number_to_indian_currency((@contractor.total_amount.to_f - @contractor.paid_amount.to_f).round(2)) %></strong>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <td><%= contract.site.name %></td>
         <td><%= contract.contract_name %></td>
         <td><%= contract.quantity %> <%= contract.unit %></td>
-        <td>&#8377; <%= contract.amount %></td>
+        <td>&#8377; <%= number_to_indian_currency(contract.amount) %></td>
       </tr>
     <% end %>
   </tbody>

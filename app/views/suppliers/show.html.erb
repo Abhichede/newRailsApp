@@ -11,9 +11,9 @@
         <h4><strong><%= @supplier.name.upcase %></strong></h4>
       </div>
       <div class="col-md-6">
-        <strong>Total Amount: &#8377; <%= @supplier.total_amount.to_f.round(2) %></strong><br/>
-        <strong>Paid Amount: &#8377; <%= @supplier.paid_amount.to_f.round(2) %></strong><br/>
-        <strong>Balance Amount: &#8377; <%= @supplier.total_amount.to_f.to_f.round(2) - @supplier.paid_amount.to_f.to_f.round(2) %></strong>
+        <strong>Total Amount: &#8377; <%= number_to_indian_currency(@supplier.total_amount.to_f.round(2)) %></strong><br/>
+        <strong>Paid Amount: &#8377; <%= number_to_indian_currency(@supplier.paid_amount.to_f.round(2)) %></strong><br/>
+        <strong>Balance Amount: &#8377; <%= number_to_indian_currency(@supplier.total_amount.to_f.round(2) - @supplier.paid_amount.to_f.round(2)) %></strong>
       </div>
     </div>
     <div class="col-md-6">
@@ -47,7 +47,7 @@
       <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
       <dd><%= @supplier.email %></dd>
       <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
-      <dd><%= @supplier.contact_number %></dd>
+      <dd><%= number_to_phone(@supplier.contact_number, :country_code => 91) %></dd>
       <dt><strong><%= model_class.human_attribute_name(:contact_person) %>:</strong></dt>
       <dd><%= @supplier.contact_person %></dd>
     </dl>
@@ -83,9 +83,9 @@
           <td><%= material.truck_no %></td>
           <td><%= material.challan_no %></td>
           <td><%=  material.quantity.to_f.round(2) %> <%= material.unit %></td>
-          <td>&#8377; <%= material.rate %>/<%= material.unit %></td>
-          <td>&#8377; <%= material.amount.to_f.round(2) %></td>
-          <td>&#8377; <%= material.gst_cost.to_f.round(2) %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.rate) %>/<%= material.unit %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
           <td><%= material.supervisor_name %></td>
         </tr>
     <% end %>
@@ -123,7 +123,7 @@
                 <tr>
                   <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
                   <td><%= payments.site.name %></td>
-                  <td>&#8377; <%= payments.amount %></td>
+                  <td>&#8377; <%= number_to_indian_currency(payments.amount) %></td>
                   <td><%= payments.payment_method %></td>
                   <td><%= payments.payment_description %></td>
                   <td><%= payments.paid_by %></td>
@@ -132,7 +132,7 @@
             </tbody>
           </table>
         </div>
-        <div class="pull-right"><strong>Total paid Amount: &#8377; <%= @supplier.paid_amount %></strong> </div>
+        <div class="pull-right"><strong>Total paid Amount: &#8377; <%= number_to_indian_currency(@supplier.paid_amount) %></strong> </div>
       </div>
       <div class="modal-footer">
 
@@ -185,9 +185,9 @@
                     <% @site_wise.each do |site_wise| %>
                         <% total_amount += site_wise.amount.to_f %>
                     <% end %>
-                    <td>&#8377; <%= total_amount.round(2) %></td>
-                    <td>&#8377; <%= paid_amount.round(2) %></td>
-                    <td>&#8377; <%= total_amount.round(2) - paid_amount.round(2) %></td>
+                    <td>&#8377; <%= number_to_indian_currency(total_amount.round(2)) %></td>
+                    <td>&#8377; <%= number_to_indian_currency(paid_amount.round(2)) %></td>
+                    <td>&#8377; <%= number_to_indian_currency((total_amount - paid_amount).round(2)) %></td>
                   </tr>
               <% end %>
               </tbody>

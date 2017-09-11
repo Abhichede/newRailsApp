@@ -65,10 +65,10 @@
           <td><%= material.quantity.to_f %> <%= material.unit %></td>
           <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
             <td><%= material.bill_no %></td>
-            <td>&#8377; <%= material.rate.to_f.round(2) %>/<%= material.unit %></td>
+            <td>&#8377; <%= number_to_indian_currency(material.rate.to_f.round(2)) %>/<%= material.unit %></td>
             <td><%= material.gst_rate %> %</td>
-            <td>&#8377; <%= material.gst_cost.to_f.round(2) %></td>
-            <td>&#8377; <%= material.amount.to_f.round(2) %></td>
+            <td>&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
+            <td>&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
           <% end %>
           <td><%= material.supervisor_name %></td>
           <td><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
@@ -107,7 +107,7 @@
         <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
           <tr><td colspan="6">
             <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>
-            <td colspan="9"><strong>Total Amount: &#8377; <%= total_amount.round(2) %></strong></td>
+            <td colspan="9"><strong>Total Amount: &#8377; <%= number_to_indian_currency(total_amount.round(2)) %></strong></td>
           </tr>
         <% end %>
     <% end %>

@@ -10,7 +10,7 @@
         total_expense += e.amount.to_f
       end
     %>
-    <span style="font-size: large"> <strong>Total Amount : &#8377; <%= total_expense %></strong> </span>
+    <span style="font-size: large"> <strong>Total Amount : &#8377; <%= number_to_indian_currency(total_expense) %></strong> </span>
   </div>
   <div class="col-md-3">
     <%= link_to t('.new', :default => t("helpers.links.new")),
@@ -35,7 +35,7 @@
       <tr>
         <td><%= Date.parse(office_expence.date).strftime('%d-%m-%Y') %></td>
         <td><%= link_to office_expence.description, office_expence_path(office_expence) %></td>
-        <td>&#8377; <%= office_expence.amount %></td>
+        <td>&#8377; <%= number_to_indian_currency(office_expence.amount) %></td>
         <td><%= office_expence.payment_to %></td>
         <% if office_expence.payment_method === 'CHEQUE' %>
           <td style="background-color: #911012; color: #FFFFFF">

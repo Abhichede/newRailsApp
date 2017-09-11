@@ -23,6 +23,30 @@
     <%=f.error_span(:date) %>
   </div>
   <div class="form-group">
+    <%= f.label :site_id, :class => 'control-label col-lg-2 col-sm-10 col-xs-10' %>
+    <div class="col-lg-6">
+      <%
+        site_names = ['Select Site']
+        site_names.push(['OTHER', 0])
+        @sites.each do |site|
+          site_names.push([site.name.upcase,site.id])
+        end %>
+      <% if !@office_expence.site.blank? %>
+          <%= f.select(:site_id, options_for_select(site_names,:disabled=> 'Select Site', selected: @office_expence.site.id),
+                       {}, class: 'form-control', autocomplete: 'off') %>
+      <% else %>
+          <% if @office_expence.site_id == 0 %>
+
+              <%= f.select(:site_id, options_for_select(site_names,:disabled=> 'Select Site', selected: 0),
+                           {}, class: 'form-control', autocomplete: 'off') %>
+          <% else %>
+              <%= f.select(:site_id, options_for_select(site_names,:disabled=> 'Select Site', selected: 'Select Site'),
+                           {}, class: 'form-control') %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label 'Describe Expense', :class => 'control-label col-lg-2' %>
     <div class="col-lg-6">
       <%= f.text_field :description, :class => 'form-control', reqiured: true  %>

@@ -6,6 +6,7 @@ class Site < ApplicationRecord
   has_many :departmental_labours
   has_many :contractual_labours
   has_many :contractors
+  has_many :office_expences
 
   validates :name, uniqueness: true
   validates :type_of_structures, presence: true

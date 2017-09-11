@@ -193,15 +193,23 @@ a{
     div.row{
         margin: 0;
         padding: 0;
+
     }
     footer.footer{
         display: none;
     }
     div.col-md-3{
-        min-width: 50%;
+        width: 50%;
+        float: left;
     }
     div.notifications{
         display: none;
+    }
+
+    /* Default left, right, top, bottom margin is 2cm */
+    @page { margin: 2cm }
+    .panel, .panel-body, .panel-heading{
+        page-break-inside: avoid;
     }
 }
 /******************************************************************************/

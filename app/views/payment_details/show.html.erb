@@ -48,7 +48,7 @@
         <% end %>
         <td><%= payment_detail.payment_type %></td>
         <td><%= payment_detail.payment_desc %></td>
-        <td><%= payment_detail.payable_amount %></td>
+        <td>&#8377; <%= number_to_indian_currency(payment_detail.payable_amount) %></td>
         <td>
           <a href="#editPaymentModal" class="btn btn-primary" id="pay-btn-<%= payment_detail.id %>" data-toggle="modal"
                 data-dl-id="<%= payment_detail.id %>" data-payable-amount="<%= payment_detail.payable_amount %>"
@@ -91,8 +91,8 @@
 <hr/>
 <div class="row">
   <div class="col-md-6 pull-right">
-   <strong>Total Amount Paid : <%= @booking_detail.paid_amount.to_f.round(2) %></strong><br/>
-    <strong>Balance Amount : <span id="pay-balance-amount"><%= @booking_detail.final_sale_deed.to_f.round(2) - @booking_detail.paid_amount.to_f.round(2) %></span> </strong>
+   <strong>Total Amount Paid : <%= number_to_indian_currency(@booking_detail.paid_amount.to_f.round(2)) %></strong><br/>
+    <strong>Balance Amount : <span id="pay-balance-amount"><%= @booking_detail.final_sale_deed.to_f.round(2) - @booking_detail.paid_amount.to_f.round(2) %></span> (<%= number_to_indian_currency(@booking_detail.final_sale_deed.to_f.round(2) - @booking_detail.paid_amount.to_f.round(2)) %>)</strong>
   </div>
 </div>
 

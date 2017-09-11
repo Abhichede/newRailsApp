@@ -20,7 +20,7 @@
           <strong><%= model_class.human_attribute_name(:address) %>:</strong>
           <%= investor.address %><br/>
           <strong><%= model_class.human_attribute_name(:contact_number) %>:</strong>
-          <%= investor.contact_number %><br/>
+          <%= number_to_phone(investor.contact_number, :country_code => 91) %><br/>
           <strong><%= model_class.human_attribute_name(:email) %>:</strong>
           <%= investor.email %><br/>
       </div>

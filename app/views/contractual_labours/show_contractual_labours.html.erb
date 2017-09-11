@@ -59,15 +59,15 @@
             <tr>
               <td><%= Date.parse(labour.date).strftime('%d-%m-%Y') %></td>
               <td><%= labour.contractor.name %></td>
-              <td>&#8377; <%= labour.rate.to_f.round(2) %></td>
+              <td>&#8377; <%= number_to_indian_currency(labour.rate.to_f.round(2)) %></td>
               <td><%= labour.quantity.to_f.round(2) %> / <%= labour.unit %></td>
               <td><%= labour.gst_rate %> %</td>
-              <td>&#8377; <%= labour.gst_cost %></td> <% total_gst += labour.gst_cost.to_f %>
+              <td>&#8377; <%= number_to_indian_currency(labour.gst_cost) %></td> <% total_gst += labour.gst_cost.to_f %>
               <td><%= labour.tds_rate %> %</td>
-              <td>&#8377; <%= labour.tds_cost %></td><% total_tds += labour.tds_cost.to_f %>
-              <td>&#8377; <%= labour.amount.to_f.round(2) %></td>
-              <td>&#8377; <%= labour.paid_amount.to_f.round(2) %></td>
-              <td>&#8377; <%= (labour.amount.to_f.round(2) - labour.paid_amount.to_f.round(2)) %></td>
+              <td>&#8377; <%= number_to_indian_currency(labour.tds_cost) %></td><% total_tds += labour.tds_cost.to_f %>
+              <td>&#8377; <%= number_to_indian_currency(labour.amount.to_f.round(2)) %></td>
+              <td>&#8377; <%= number_to_indian_currency(labour.paid_amount.to_f.round(2)) %></td>
+              <td>&#8377; <%= number_to_indian_currency((labour.amount.to_f - labour.paid_amount.to_f).round(2)) %></td>
               <% contr_paid_amt = labour.paid_amount.to_f.round(2) %>
               <td>
                 <span>
@@ -108,11 +108,11 @@
           <td colspan="3"><strong>Totals</strong></td>
           <td colspan="1">
           <strong><%= total_quantity.round(2) %> <%= @contractual_labours.first.unit %></strong></td>
-          <td colspan="2" class="text-center"><strong>&#8377; <%= total_gst.round(2) %></td>
-          <td colspan="2" class="text-center"><strong>&#8377; <%= total_tds.round(2) %></td>
-          <td colspan="1"><strong>&#8377; <%= total_amount.round(2) %></strong></td>
-          <td colspan="1"><strong>&#8377; <%= total_paid.round(2) %></strong></td>
-          <td colspan="1"><strong>&#8377; <%= total_amount.round(2) - total_paid.round(2) %></strong></td>
+          <td colspan="2" class="text-center"><strong>&#8377; <%= number_to_indian_currency(total_gst.round(2)) %></td>
+          <td colspan="2" class="text-center"><strong>&#8377; <%= number_to_indian_currency(total_tds.round(2)) %></td>
+          <td colspan="1"><strong>&#8377; <%= number_to_indian_currency(total_amount.round(2)) %></strong></td>
+          <td colspan="1"><strong>&#8377; <%= number_to_indian_currency(total_paid.round(2)) %></strong></td>
+          <td colspan="1"><strong>&#8377; <%= number_to_indian_currency((total_amount - total_paid).round(2)) %></strong></td>
         </tr>
     <% end %>
 

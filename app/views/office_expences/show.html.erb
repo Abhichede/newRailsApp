@@ -9,7 +9,7 @@
   <dt><strong>Expense <%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @office_expence.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
-  <dd><%= @office_expence.amount %></dd>
+  <dd>&#8377; <%= number_to_indian_currency(@office_expence.amount) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payment_to) %>:</strong></dt>
   <dd><%= @office_expence.payment_to %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payment_method) %>:</strong></dt>
@@ -22,7 +22,7 @@
   <dd><%= @office_expence.deleting_status %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<%= link_to t(:back, :default => t("helpers.links.back")),
               office_expences_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_office_expence_path(@office_expence), :class => 'btn btn-default' %>

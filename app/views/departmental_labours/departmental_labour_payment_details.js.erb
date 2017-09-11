@@ -5,7 +5,7 @@ $(".dept_lab_pay_det-<%= @dept_lab.id %>").on('ajax:success', function (event, d
     <% @dept_lab_outgoing_payment.each do |dept| %>
       $("#pay_det_tbody").append('<tr>' +
           '<td><%= Date.parse(dept.date).strftime('%d-%m-%Y') %></td>'+
-          '<td><%= dept.amount %></td>'+
+          '<td>&#8377; <%= number_to_indian_currency(dept.amount) %></td>'+
           '<td><%= dept.payment_method %></td>'+
           '<td><%= dept.payment_description %></td>'+
           '<td><%= dept.paid_by %></td>'+

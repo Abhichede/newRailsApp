@@ -114,6 +114,12 @@
                     data-toggle="modal" data-target="#">Labour</button>
           </div>
         </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#siteWiseOfficeExpense">Site Expenses</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -386,18 +392,18 @@
           <% @site.booking_details.each do |booking| %>
               <tr>
                 <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
-                <td>&#8377; <%= booking.final_sale_deed.to_i %></td>
-                <% total_amount = total_amount + booking.final_sale_deed.to_i %>
-                <td>&#8377; <%= booking.paid_amount.to_i %></td>
-                <% total_paid = total_paid + booking.paid_amount.to_i %>
-                <td>&#8377; <%= booking.final_sale_deed.to_i - booking.paid_amount.to_i %></td>
+                <td>&#8377; <%= number_to_indian_currency(booking.final_sale_deed.to_f.round(2)) %></td>
+                <% total_amount = total_amount + booking.final_sale_deed.to_f %>
+                <td>&#8377; <%= number_to_indian_currency(booking.paid_amount.to_f.round(2)) %></td>
+                <% total_paid = total_paid + booking.paid_amount.to_f %>
+                <td>&#8377; <%= number_to_indian_currency((booking.final_sale_deed.to_f.round(2) - booking.paid_amount.to_f.round(2)).round(2)) %></td>
               </tr>
           <% end %>
           <tr >
             <td><strong>Totals</strong></td>
-            <td><strong>&#8377; <%= total_amount.to_i %></strong></td>
-            <td><strong>&#8377; <%= total_paid.to_i %></strong></td>
-            <td><strong>&#8377; <%= total_amount.to_i - total_paid.to_i %></strong></td>
+            <td><strong>&#8377; <%= number_to_indian_currency(total_amount.to_f.round(2)) %></strong></td>
+            <td><strong>&#8377; <%= number_to_indian_currency(total_paid.to_f.round(2)) %></strong></td>
+            <td><strong>&#8377; <%= number_to_indian_currency((total_amount.to_f - total_paid.to_f).round(2)) %></strong></td>
           </tr>
           </tbody>
         </table>
@@ -457,18 +463,76 @@
                         end
                         total_paid += paid
                       %>
-                  <td>&#8377; <%= amount %></td>
-                  <td>&#8377; <%= paid %></td>
-                  <td>&#8377; <%= amount - paid %></td>
+                  <td>&#8377; <%= number_to_indian_currency(amount) %></td>
+                  <td>&#8377; <%= number_to_indian_currency(paid) %></td>
+                  <td>&#8377; <%= number_to_indian_currency(amount - paid) %></td>
                 </tr>
                   <% end %>
               <% end %>
           <% end %>
           <tr >
             <td><strong>Totals</strong></td>
-            <td><strong>&#8377; <%= total_amount %></strong></td>
-            <td><strong>&#8377; <%= total_paid %></strong></td>
-            <td><strong>&#8377; <%=  total_amount - total_paid %></strong></td>
+            <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
+            <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
+            <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade-scale" id="siteWiseOfficeExpense" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Office Expense</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Desc</th>
+            <th>Amount</th>
+            <th>Payment to</th>
+            <th>Payment Method</th>
+            <th>Payment Desc</th>
+            <th>Payment Dodne by</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% total_amount = 0 %>
+          <% if @site.office_expences.count == 0 %>
+              <h5><strong>No expense found For This Site</strong></h5>
+          <% else %>
+              <% @site.office_expences.each do |expense| %>
+                  <% amount = 0 %>
+              <tr>
+                <td><%= expense.date %></td>
+                <td><%= link_to expense.description, office_expence_path(expense) %></td>
+                <td><%= amount = expense.amount.to_f %></td>
+                <td><%= expense.payment_to %></td>
+                <td><%= expense.payment_method %></td>
+                <td><%= expense.payment_desc %></td>
+                <td><%= expense.paid_by %></td>
+                <% total_amount += amount %>
+              </tr>
+              <% end %>
+          <% end %>
+          <tr >
+            <td><strong>Totals</strong></td>
+            <td colspan="6"><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
           </tr>
           </tbody>
         </table>
