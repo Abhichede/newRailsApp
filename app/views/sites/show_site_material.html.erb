@@ -23,8 +23,8 @@
   </div>
 </div>
 <div style="overflow: auto">
-  <table class="table table-bordered table-responsive">
-    <thead>
+  <table class="col-sm-12 table-bordered table-striped table-condensed cf">
+    <thead class="cf">
       <tr>
         <th>Date</th>
         <th>Time</th>
@@ -56,22 +56,22 @@
         %>
       <% @material.each do |material| %>
         <tr>
-          <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
-          <td><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
-          <td><%= material.description %></td>
-          <td><%= material.supplier.name %></td>
-          <td><%= material.truck_no %></td>
-          <td><%= material.challan_no %></td>
-          <td><%= material.quantity.to_f %> <%= material.unit %></td>
+          <td data-title="Date"><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
+          <td data-title="Time"><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
+          <td data-title="Desc"><%= material.description %></td>
+          <td data-title="Supplier"><%= material.supplier.name %></td>
+          <td data-title="Truck No"><%= material.truck_no %></td>
+          <td data-title="Challan No"><%= material.challan_no %></td>
+          <td data-title="Quantity"><%= material.quantity.to_f %> <%= material.unit %></td>
           <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
-            <td><%= material.bill_no %></td>
-            <td>&#8377; <%= number_to_indian_currency(material.rate.to_f.round(2)) %>/<%= material.unit %></td>
-            <td><%= material.gst_rate %> %</td>
-            <td>&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
-            <td>&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
+            <td data-title="Bill No"><%= material.bill_no %></td>
+            <td data-title="Rate">&#8377; <%= number_to_indian_currency(material.rate.to_f.round(2)) %>/<%= material.unit %></td>
+            <td data-title="GST Rate"><%= material.gst_rate %> %</td>
+            <td data-title="GST">&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
+            <td data-title="Amount">&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
           <% end %>
-          <td><%= material.supervisor_name %></td>
-          <td><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
+          <td data-title="Supervisor"><%= material.supervisor_name %></td>
+          <td data-title="Actions"><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
                                    site_id: @site, type_of_material: params[:type_of_material] },
                           class: 'btn btn-primary btn-block btn-xs' %></td>
           <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
