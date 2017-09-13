@@ -8,12 +8,12 @@ class OfficeExpencesController < ApplicationController
     if params[:filter_query]
       @site = Site.where('name LIKE ?', "%#{params[:filter_query]}%").first
       if !@site.blank?
-        @office_expences = OfficeExpence.where('description LIKE ? OR site_id = ?', "%#{params[:filter_query]}%", "#{@site.id}").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+        @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = ?', "%#{params[:filter_query].downcase}%", "#{@site.id}").paginate(:page => params[:page], :per_page => 10).order('date DESC')
       else
         if params[:filter_query].downcase === 'other'
-          @office_expences = OfficeExpence.where('description LIKE ? OR site_id = 0', "%#{params[:filter_query]}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+          @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = 0', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
         else
-          @office_expences = OfficeExpence.where('description LIKE ?', "%#{params[:filter_query]}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+          @office_expences = OfficeExpence.where('lower(description) LIKE ?', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
         end
 
       end
