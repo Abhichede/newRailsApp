@@ -135,7 +135,7 @@
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
   <% else %>
-    <li>
+    <li class="active">
       <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
     </li>
     <% if @site.site_type === 'Commercial' || @site.site_type === 'Residential+Commercial' %>
@@ -153,7 +153,7 @@
 </ul>
 <div class="tab-content clearfix responsive">
   <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
-    <div class="jumbotron tab-pane" id="flats_jumbo" style="margin-top: 0.5em">
+    <div class="jumbotron tab-pane active" id="flats_jumbo" style="margin-top: 0.5em">
         <% if (@site.flats.count - @site.flats.where(:flat_type => 'SHOP').count) == 0 %>
             <h5><strong>No flats were added, Click 'ADD FLAT' above to add flats</strong></h5>
         <% else %>
