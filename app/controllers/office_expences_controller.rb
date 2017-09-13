@@ -6,7 +6,7 @@ class OfficeExpencesController < ApplicationController
   # GET /office_expences.json
   def index
     if params[:filter_query]
-      @site = Site.where('name LIKE ?', "%#{params[:filter_query]}%").first
+      @site = Site.where('lower(name) LIKE ?', "%#{params[:filter_query].downcase}%").first
       if !@site.blank?
         @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = ?', "%#{params[:filter_query].downcase}%", "#{@site.id}").paginate(:page => params[:page], :per_page => 10).order('date DESC')
       else
