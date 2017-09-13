@@ -23,6 +23,19 @@
 
 body{
     background-color: #F5F5F5 !important;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+footer{
+    width: 100%;
+    position: fixed;
+    padding: 10px 0;
+}
+footer{
+    bottom: 0;
+    background: #333;
+    color: #fff;
 }
 
 ul.nav.navbar-nav>li>a, div.navbar-header>a.navbar-brand{
@@ -93,7 +106,7 @@ ul.nav.navbar-nav.navbar-right>li.open>ul.dropdown-menu>li>a{
 ul.nav.navbar-nav.navbar-right>li.open>ul.dropdown-menu>li>a:hover{
     background-color: rgba(44, 121, 127, 0.86) !important;
 }
-.navbar-static-top{
+.navbar-default{
     background-color: #006064 !important;
 }
 
@@ -434,4 +447,19 @@ Table responsive
     Label the data
     */
     #no-more-tables td:before { content: attr(data-title); }
+}
+
+/**
+Paginations
+ */
+
+.pagination>.active>span{
+    background-color: rgba(44, 121, 127, 0.86) !important;
+    color: #FFFFFF !important;
+}
+.pagination>li>a, .pagination>li>span{
+    color: rgba(44, 121, 127, 0.86) !important;
+}
+.pagination>.disabled>span{
+    color: #777777 !important;
 }

@@ -24,6 +24,34 @@ $(function() {
         $("#pay_det_tbody").replaceWith(' ');
     });
 
+    $("form.departmental_labour").validate({
+        debug: true,
+        // Specify validation rules
+        rules: {
+            'departmental_labour[date]':{
+              required: true
+            },
+            'departmental_labour[type_of_work]':{
+              required: true
+            },
+            "departmental_labour[amount]":{
+                required: true,
+                pattern:  /^([0-9]*[.])?[0-9]*$/
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            "departmental_labour[amount]":{
+                required: "This is required Filed",
+                pattern: "Please enter valid Amount"
+            }
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
     $("form#departmental_labours-payment_form").validate({
         debug: true,
         // Specify validation rules

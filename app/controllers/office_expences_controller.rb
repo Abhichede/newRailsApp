@@ -5,7 +5,23 @@ class OfficeExpencesController < ApplicationController
   # GET /office_expences
   # GET /office_expences.json
   def index
-    @office_expences = OfficeExpence.where(:site_id => 0).paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    if params[:filter_query]
+      @site = Site.where('name LIKE ?', "%#{params[:filter_query]}%").first
+      if !@site.blank?
+        @office_expences = OfficeExpence.where('description LIKE ? OR site_id LIKE ?', "%#{params[:filter_query]}%", "%#{@site.id}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+      else
+        if params[:filter_query].downcase === 'other'
+          @office_expences = OfficeExpence.where('description LIKE ? OR site_id = 0', "%#{params[:filter_query]}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+        else
+          @office_expences = OfficeExpence.where('description LIKE ?', "%#{params[:filter_query]}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+        end
+
+      end
+
+    else
+      @office_expences = OfficeExpence.paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    end
+
   end
 
   # GET /office_expences/1

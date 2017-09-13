@@ -13,33 +13,35 @@ $(function() {
 
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
-    $("form.office_expense").validate({
+    $("form.office_expence").validate({
         debug: true,
         // Specify validation rules
         rules: {
-            "office_expense[payment_method]":{
+            "office_expence[payment_method]":{
                 required: true
             },
-            "office_expense[description]":{
+            "office_expence[description]":{
                 required: true
             },
-            "office_expense[date]":{
+            'office_expence[site_id]': 'required',
+
+            "office_expence[date]":{
                 required: true
             },
-            "office_expense[payment_to]":{
+            "office_expence[payment_to]":{
                 required: true
             },
-            "office_expense[payment_desc]":{
+            "office_expence[payment_desc]":{
                 required: true
             },
-            "office_expense[amount]":{
+            "office_expence[amount]":{
                 required: true,
                 pattern: /^([0-9]*[.])?[0-9]*$/
             }
         },
         // Specify validation error messages
         messages: {
-            "office_expense[amount]":{
+            "office_expence[amount]":{
                 pattern: "Please enter valid amount"
             }
         },

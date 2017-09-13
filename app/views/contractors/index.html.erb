@@ -14,10 +14,10 @@
       <div class="col-md-3 col-sm-5 col-xs-11">
         <div class="panel panel-primary">
           <div class="panel-heading" style="height: 6rem;">
-            <h4><strong><%= contractor.name %></strong></h4>
+            <h4><strong><%= contractor.name.capitalize %></strong></h4>
           </div>
           <div class="panel-body" style="height: 10rem;">
-            <strong>Addres: </strong> <%= contractor.address %> <br />
+            <strong>Address: </strong> <%= contractor.address %> <br />
             <strong>Contact: </strong> <%= number_to_phone(contractor.contact_number, :country_code => 91) %> <br />
           </div>
           <div class="panel-footer text-center">

@@ -44,7 +44,7 @@
   </head>
   <body>
   <% if user_signed_in? %>
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top" id="header">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -137,10 +137,10 @@
       <%= yield %>
    </div>
 
-    <hr />
-    <footer class="text-center footer">
+    <footer class="text-center footer" data-role="footer" data-position="fixed">
       <p><span>&copy; Harak patil Constructions 2017 </span>|<span> Powered By: Linker IT Solutions PVT. LTD.</span></p>
     </footer>
+
     <script>
         $("#customer-search-box").autocomplete({
             source: '<%= autocomplete_booking_details_path(:json) %>'

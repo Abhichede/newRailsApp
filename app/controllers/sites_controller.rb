@@ -44,7 +44,12 @@ class SitesController < ApplicationController
   end
 
   def show_site_material
-    @material = @site.materials.where(:type_of_material => params[:type_of_material]).paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
+    if !params[:filter_query].blank?
+      @material = @site.materials.where('type_of_material = ? AND (challan_no LIKE ? OR bill_no LIKE ?)', params[:type_of_material], "%#{params[:filter_query ]}%", "%#{params[:filter_query ]}%").paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
+    else
+      @material = @site.materials.where(:type_of_material => params[:type_of_material]).paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
+    end
+
   end
 
   def show_supplier_wise_material

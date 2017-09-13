@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="col-md-2">
         <%= link_to site_path(@site) do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
@@ -14,16 +14,32 @@
         <h4><span class="label label-primary"><%= @site.name.upcase %></span></h4>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="col-md-4 col-sm-4 col-xs-4">
         <%= link_to "Add #{params[:type_of_material].capitalize}", {:controller => "materials", :action => "new", :site_id => params[:id],:type_of_material => params[:type_of_material] },
                     :class => 'btn btn-primary btn-sm' %>
       </div>
     </div>
+    <div class="col-md-4">
+      <%= form_tag show_site_material_path, method: :get, id: 'filters',
+                   class: 'form-inline' do %>
+          <div class="input-group input-group-sm">
+            <%= text_field_tag :filter_query, params[:filter_query],placeholder: 'Filter by "Challan Or Bill No"',
+                               class: 'form-control', id: 'search-box' %>
+            <%= hidden_field_tag :id, params[:id], value: params[:id]  %>
+            <%= hidden_field_tag :type_of_material, params[:type_of_material], value: params[:type_of_material]  %>
+            <span class="input-group-btn">
+                      <%= button_tag(type: :submit, class: 'btn btn-success btn-sm', id: '') do %>
+                        <i class="fa fa-search"></i>
+                      <% end %>
+                    </span>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
 <div style="overflow: auto">
-  <table class="col-sm-12 table-bordered table-striped table-condensed cf">
+  <table class="table col-sm-12 table-bordered table-striped table-condensed cf">
     <thead class="cf">
       <tr>
         <th>Date</th>
@@ -33,7 +49,7 @@
         <th>Truck No</th>
         <th>Challan No</th>
         <th>Quantity</th>
-        <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
+        <% if current_user.role == 'ADMIN' || current_user.role == 'ACCOUNTANT' %>
           <th>Bill No</th>
           <th>Rate</th>
           <th>GST Rate</th>
@@ -63,7 +79,7 @@
           <td data-title="Truck No"><%= material.truck_no %></td>
           <td data-title="Challan No"><%= material.challan_no %></td>
           <td data-title="Quantity"><%= material.quantity.to_f %> <%= material.unit %></td>
-          <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
+          <% if current_user.role == 'ADMIN' || current_user.role == 'ACCOUNTANT' %>
             <td data-title="Bill No"><%= material.bill_no %></td>
             <td data-title="Rate">&#8377; <%= number_to_indian_currency(material.rate.to_f.round(2)) %>/<%= material.unit %></td>
             <td data-title="GST Rate"><%= material.gst_rate %> %</td>
@@ -73,15 +89,12 @@
           <td data-title="Supervisor"><%= material.supervisor_name %></td>
           <td data-title="Actions"><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
                                    site_id: @site, type_of_material: params[:type_of_material] },
-                          class: 'btn btn-primary btn-block btn-xs' %></td>
-          <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
-            <td>
-              <div class="form-group">
+                          class: 'btn btn-primary btn-block btn-xs' %>
+          <% if current_user.role == 'ADMIN' || current_user.role == 'ACCOUNTANT' %>
                 <a class="btn btn-primary btn-block btn-xs" data-toggle="modal"
                    id="material-<%= material.id %>" data-dl-id="<%= material.id %>" data-quantity="<%= material.quantity.to_f %>" data-target="#addRateSiteMaterial">
                 Add Rate
                 </a>
-              </div>
             </td>
               <!-- ************************* Script ****************************** -->
               <script type="text/javascript">
