@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -1364,14 +1363,7 @@
       <workItem from="1505209838100" duration="9065000" />
       <workItem from="1505225215297" duration="3839000" />
       <workItem from="1505292097426" duration="5906000" />
-      <workItem from="1505298545300" duration="5714000" />
-    </task>
-    <task id="LOCAL-00107" summary="new modules added.">
-      <created>1498222814306</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1498222814307</updated>
+      <workItem from="1505298545300" duration="5857000" />
     </task>
     <task id="LOCAL-00108" summary="new modules added.">
       <created>1498223138570</created>
@@ -1709,11 +1701,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505313506752</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="new modifications and additions of filters to materials and office expenses.">
+      <created>1505314044588</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1505314044588</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1159288000" />
+    <option name="totallyTimeSpent" value="1159431000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
