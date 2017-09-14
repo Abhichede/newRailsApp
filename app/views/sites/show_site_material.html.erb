@@ -1,12 +1,12 @@
 <div class="page-header">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 ">
       <div class="col-md-2">
         <%= link_to site_path(@site) do %>
             <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
         <% end %>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-10">
         <h4>
           <strong><%= params[:type_of_material] %></strong>
           <span class="pull-right"></span>
@@ -14,22 +14,20 @@
         <h4><span class="label label-primary"><%= @site.name.upcase %></span></h4>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="col-md-4 col-sm-4 col-xs-4">
+    <div class="col-md-2" style="margin-bottom: 1rem">
         <%= link_to "Add #{params[:type_of_material].capitalize}", {:controller => "materials", :action => "new", :site_id => params[:id],:type_of_material => params[:type_of_material] },
-                    :class => 'btn btn-primary btn-sm' %>
-      </div>
+                    :class => 'btn btn-primary btn-sm ' %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <%= form_tag show_site_material_path, method: :get, id: 'filters',
                    class: 'form-inline' do %>
-          <div class="input-group input-group-sm">
+          <div class="input-group">
             <%= text_field_tag :filter_query, params[:filter_query],placeholder: 'Filter by "Challan Or Bill No"',
                                class: 'form-control', id: 'search-box' %>
             <%= hidden_field_tag :id, params[:id], value: params[:id]  %>
             <%= hidden_field_tag :type_of_material, params[:type_of_material], value: params[:type_of_material]  %>
             <span class="input-group-btn">
-                      <%= button_tag(type: :submit, class: 'btn btn-success btn-sm', id: '') do %>
+                      <%= button_tag(type: :submit, class: 'btn btn-success ', id: '') do %>
                         <i class="fa fa-search"></i>
                       <% end %>
                     </span>
