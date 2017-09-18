@@ -31,18 +31,41 @@
   </div>
 </div>
 <% @investor.investments.order("investment_date DESC").each do |investment| %>
+    <%
+      total_interest = 0
+      total_months = 0
+      paid_interest = 0
+    %>
+    <% investment.investment_monthly_interests.each do |interest| %>
+        <% total_interest = total_interest + interest.interest.to_f %>
+        <% total_months = total_months + 1 %>
+        <% paid_interest = paid_interest + interest.paid_interest.to_f %>
+    <% end %>
+    <%
+      total_paid_amount = 0
+
+      investment.investment_returns.each do |returns|
+        total_paid_amount = total_paid_amount + returns.amount.to_f
+      end
+    %>
   <div class="col-md-4" id="investment-panels">
     <div class="panel panel-primary ">
       <div class="panel-heading">
-        <%= Investor.num_to_lakh(investment.investment_amount.to_f) %>
+        <%= Investor.num_to_lakh(investment.investment_amount.to_f + (total_paid_amount - paid_interest)) %>
         <span class="pull-right">
           <%= Date.parse(investment.investment_date).strftime('%d-%m-%Y') %>
         </span>
       </div>
       <div class="panel-body">
-        Total Payable Amount : <span class="pull-right">&#8377;  <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span><br/>
+        <strong>Investment Amount : <span class="pull-right">&#8377; <%= investment.investment_amount.to_f + (total_paid_amount - paid_interest) %></span></strong><br/>
         Interest Rate : <span class="pull-right"><%= investment.interest_rate %> %</span><br/>
-        Current Month Interest : <span class="pull-right">&#8377; <%= investment.current_month_interest.to_f.round(2) %> </span>
+        Total Months : <span class="pull-right"><%= total_months %></span><br/>
+        <strong>Total Interest : <span class="pull-right">&#8377; <%= total_interest %></span></strong><br/>
+        Paid Interest : <span class="pull-right">&#8377; <%= paid_interest %></span><br/>
+        <hr/>
+        Total Amount : <span class="pull-right">&#8377; <%= investment.total_payable_amount.to_f.round(2) + total_paid_amount %></span><br/>
+        Total Paid Amount: <span class="pull-right">&#8377; <%= total_paid_amount.round(2) %></span><br/>
+        <strong>Outstanding Amount: <span class="pull-right">&#8377; <strong id="inv_total_payable_amount-<%= investment.id %>"><%= investment.total_payable_amount.to_f.round(2) %></strong></span></strong>
       </div>
       <div class="panel-footer">
           <button class="btn btn-primary btn-sm " id="investment_return-<%= investment.id %>"

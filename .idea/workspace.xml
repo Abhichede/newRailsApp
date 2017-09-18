@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/investments.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/investments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/investors.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/investors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/investments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/investments_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/investors_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/investors_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/investments/investment_details.js.erb" afterPath="$PROJECT_DIR$/app/views/investments/investment_details.js.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/investors/show.html.erb" afterPath="$PROJECT_DIR$/app/views/investors/show.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -26,11 +21,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/investors/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="67" column="27" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="27" />
+            <state relative-caret-position="380">
+              <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="182" column="1" lean-forward="false" selection-start-line="182" selection-start-column="1" selection-end-line="182" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -39,18 +44,28 @@
       <file leaf-file-name="investments_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/investments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
+            <state relative-caret-position="-520">
               <caret line="18" column="67" lean-forward="false" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="investors_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="investment_payment_details.js.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/investments/investment_payment_details.js.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="61" lean-forward="false" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="investors_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/investors_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="24" column="86" lean-forward="false" selection-start-line="24" selection-start-column="86" selection-end-line="24" selection-end-column="86" />
+            <state relative-caret-position="-1120">
+              <caret line="25" column="86" lean-forward="false" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -211,7 +226,6 @@
         <option value="$PROJECT_DIR$/app/controllers/sites_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/materials.js" />
         <option value="$PROJECT_DIR$/app/controllers/materials_controller.rb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/show.html.erb" />
         <option value="$PROJECT_DIR$/db/migrate/20170803061423_add_column_toinvestments.rb" />
@@ -233,9 +247,10 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/investments.js" />
         <option value="$PROJECT_DIR$/app/controllers/investments_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/investments/investment_details.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/investors/show.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/investors.js" />
         <option value="$PROJECT_DIR$/app/controllers/investors_controller.rb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
+        <option value="$PROJECT_DIR$/app/views/investors/show.html.erb" />
       </list>
     </option>
   </component>
@@ -440,6 +455,10 @@
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -456,10 +475,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1391,14 +1406,7 @@
       <workItem from="1502961321804" duration="2798000" />
       <workItem from="1503040525530" duration="17184000" />
       <workItem from="1503064452999" duration="2209000" />
-      <workItem from="1503071314576" duration="875000" />
-    </task>
-    <task id="LOCAL-00085" summary="modification of paths and new view for typeofstructures">
-      <created>1494997106243</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1494997106245</updated>
+      <workItem from="1503071314576" duration="5721000" />
     </task>
     <task id="LOCAL-00086" summary="delete buttons are hidden">
       <created>1495081782442</created>
@@ -1736,11 +1744,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503049579215</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="new updations..">
+      <created>1503072229053</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1503072229054</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1031258000" />
+    <option name="totallyTimeSpent" value="1036104000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1991,13 +2006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/booking_details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -2016,13 +2024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/investments/investment_payment_details.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="61" lean-forward="false" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -2162,13 +2163,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="15" column="54" lean-forward="false" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/investors/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="67" column="27" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -2183,16 +2177,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/investments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
+        <state relative-caret-position="-520">
           <caret line="18" column="67" lean-forward="false" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/investments/investment_payment_details.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="61" lean-forward="false" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/investors_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1120">
+          <caret line="25" column="86" lean-forward="false" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="182" column="1" lean-forward="false" selection-start-line="182" selection-start-column="1" selection-end-line="182" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/investors/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="24" column="86" lean-forward="false" selection-start-line="24" selection-start-column="86" selection-end-line="24" selection-end-column="86" />
+          <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
           <folding />
         </state>
       </provider>
