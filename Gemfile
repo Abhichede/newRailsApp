@@ -36,6 +36,7 @@ gem 'mini_magick'
 gem 'delayed_job_active_record'
 gem 'bootstrap-multiselect-rails'
 gem 'will_paginate-bootstrap'
+gem 'sendgrid-ruby'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

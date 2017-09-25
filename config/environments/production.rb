@@ -63,10 +63,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-      :address              => "email-smtp.us-east-1.amazonaws.com",
+      :address              => "smtp.sendgrid.net",
       :port                 => 587,
-      :user_name            => 'AKIAIOVZIAZVK3DH7IPQ',
-      :password             => 'AqX73g53KJpnRXVy2+Sjf7pb5bSeNzlZXPbdczT0B1Nb',
+      :user_name            => ENV['SENDGRID_USERNAME'],
+      :password             => ENV['SENDGRID_PASSWORD'],
       :authentication       => "plain",
       :enable_starttls_auto => true
   }

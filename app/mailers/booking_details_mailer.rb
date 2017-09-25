@@ -1,20 +1,20 @@
 class BookingDetailsMailer < ApplicationMailer
   def booking_details_mail(booking_details)
     @booking_detail = booking_details
-    mail(to: 'patilharak@gmail.com', subject: 'Booking Details')
+    mail(to: 'abhichede777@gmail.com', subject: 'Booking Details')
   end
 
   def payment_details_mail(payment_details)
     @payment_detail = payment_details
-    mail(to: 'patilharak@gmail.com', subject: 'Payment Details')
+    mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
   end
 
   def schedule_next_installment_mail(booking_details)
     @booking_detail = booking_details
-    mail(to: 'patilharak@gmail.com', subject: 'Payment Details')
+    mail(to: 'abhichede777@gmail.com', subject: 'Payment Details')
   end
 
   def dummy_mail
-    mail(to: 'patilharak@gmail.com', subject: 'Dummy Mail')
+    mail(to: 'abhichede777@gmail.com', subject: 'Dummy Mail')
   end
 end

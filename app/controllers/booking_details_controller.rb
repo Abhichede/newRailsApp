@@ -45,7 +45,7 @@ class BookingDetailsController < ApplicationController
           @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
 
           #Booking Mailer
-          #BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
+          BookingDetailsMailer.booking_details_mail(@booking_detail).deliver
 
           format.html { redirect_to @booking_detail, notice: 'Booked successfully.' }
           format.json { render :show, status: :created, location: @booking_detail }
