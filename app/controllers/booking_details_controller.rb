@@ -83,16 +83,18 @@ class BookingDetailsController < ApplicationController
                                         :payment_desc=>params[:check_desc],:payment_date=>params[:payment_date],
                                         :booking_detail_id=>params[:booking_id])
     if params[:search].blank?
-        respond_to do |format|
-          format.html { redirect_to @booking_detail, alert: "Blank Amount" }
-          format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
-        end
+      respond_to do |format|
+        format.html { redirect_to @booking_detail, alert: "Blank Amount" }
+        format.json { render json: @booking_detail.errors, status: :unprocessable_entity }
+      end
       return
     end
     
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
       if @payment_detail.save
-        #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+
+        BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+
         respond_to do |format|
           format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
           format.json { render json: @booking_detail }
@@ -130,7 +132,7 @@ class BookingDetailsController < ApplicationController
     if @booking_detail.update(:paid_amount => new_editing_amount )
       if @payment_detail.update(:payable_amount => params[:payable_amount], :payment_type => params[:payment_type],
                                 :payment_desc => params[:check_desc], :payment_date => params[:payment_date])
-        #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+        BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
           format.html { redirect_to session[:return_to] ||= request.referer,
                                     notice: "Rs.#{params[:payable_amount]} Amount paid." }

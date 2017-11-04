@@ -69,26 +69,33 @@ $(function() {
 
     var is_loan_possible = $("#booking_detail_loan_possible").val();
     var is_gst = true;
+    var stamp_duty_val = 5;
 
     if($("#booking_detail_is_gst_true").is(':checked')){
         is_gst = true;
         $("#non-gst-taxes").attr('class', 'hidden');
         $("#gst-taxes").attr('class', ' ');
+        stamp_duty_val = 6;
     }else {
         is_gst = false;
         $("#non-gst-taxes").attr('class', ' ');
         $("#gst-taxes").attr('class', 'hidden');
+        stamp_duty_val = 5;
     }
 
     $("#booking_detail_is_gst_true").on('click', function () {
         is_gst = true;
         $("#non-gst-taxes").attr('class', 'hidden');
         $("#gst-taxes").attr('class', ' ');
+        stamp_duty_val = 6;
+        $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*Number($("#booking_detail_agreement_cost").val()));
     });
     $("#booking_detail_is_gst_false").on('click', function () {
         is_gst = false;
         $("#non-gst-taxes").attr('class', ' ');
         $("#gst-taxes").attr('class', 'hidden');
+        stamp_duty_val = 5;
+        $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*Number($("#booking_detail_agreement_cost").val()));
     });
 
     if(is_loan_possible === 'Yes'){
@@ -116,7 +123,7 @@ $(function() {
     $("#booking_detail_agreement_cost").on("change keyup", function () {
         var agreement_cost = Number($("#booking_detail_agreement_cost").val());
 
-        $("#booking_detail_stamp_duty").attr('value', (5/100)*agreement_cost);
+        $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*agreement_cost);
         $("#booking_detail_registration_fees").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_vat").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_service_tax").attr('value', (4.52/100)*agreement_cost);
