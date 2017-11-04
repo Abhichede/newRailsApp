@@ -233,7 +233,12 @@
             <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
 
             <% else %>
-                <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
+                <% quantity = 0 %>
+                <% @site.materials.where(type_of_material: material.material_name).each do |material_quantity|
+                  quantity += material_quantity.quantity.to_f
+                end
+                %>
+                <%= link_to ('<strong>'+material.material_name+'</strong><br/>'+quantity.to_s+' '+material.material_unit).html_safe, {controller: 'sites', action: 'show_site_material', :id => @site,
                                                      :type_of_material => material.material_name},
                             class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                             style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
@@ -248,10 +253,12 @@
         <% else %>
             <% Supplier.all.each do |supplier| %>
                 <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+                    <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
                     <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                            :supplier=>supplier.id},
                                 class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                                 style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
+                    <% end %>
                 <% end %>
             <% end %>
         <% end %>
@@ -265,7 +272,12 @@
           <% if material.material_name.nil? || material.material_name === '' || material.material_name.blank? %>
 
           <% else %>
-              <%= link_to material.material_name, {controller: 'sites', action: 'show_site_material', :id => @site,
+              <% quantity = 0 %>
+              <% @site.materials.where(type_of_material: material.material_name).each do |material_quantity|
+                    quantity += material_quantity.quantity.to_f
+                  end
+              %>
+              <%= link_to ('<strong>'+material.material_name+'</strong><br/>'+quantity.to_s+' '+material.material_unit).html_safe, {controller: 'sites', action: 'show_site_material', :id => @site,
                                                    :type_of_material=>material.material_name},
                           class: 'well col-md-3 col-lg-3 col-sm-10 col-xs-10 text-center flats-well',
                           style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
@@ -461,10 +473,11 @@
                 <% amount = 0
                    paid = 0 %>
                 <tr>
-                  <td><% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-                        <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
-                                                               :supplier=>supplier.id} %>
-                  </td>
+
+                  <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+                    <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
+                      <td>  <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                                                               :supplier=>supplier.id} %></td>
                       <%
                         @materials.where(:supplier_id => supplier.id).each do |material|
                           amount += material.amount.to_i
@@ -477,11 +490,12 @@
                         end
                         total_paid += paid
                       %>
-                  <td>&#8377; <%= number_to_indian_currency(amount) %></td>
-                  <td>&#8377; <%= number_to_indian_currency(paid) %></td>
-                  <td>&#8377; <%= number_to_indian_currency(amount - paid) %></td>
-                </tr>
+                      <td>&#8377; <%= number_to_indian_currency(amount) %></td>
+                      <td>&#8377; <%= number_to_indian_currency(paid) %></td>
+                      <td>&#8377; <%= number_to_indian_currency(amount - paid) %></td>
+                    <% end %>
                   <% end %>
+                </tr>
               <% end %>
           <% end %>
           <tr >
