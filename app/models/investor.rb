@@ -14,9 +14,9 @@ class Investor < ApplicationRecord
       investor.investments.each do |investment|
         last_date = Date.parse(investment.investment_monthly_interests.last.month)
         current_date = Date.today
-        interest_rate = investment.interest_rate.to_i
-        capital_amount = investment.investment_amount.to_f
-        last_total_payable = investment.total_payable_amount.to_f
+        interest_rate = investment.interest_rate.to_f.round(2)
+        capital_amount = investment.investment_amount.to_f.round(2)
+        last_total_payable = investment.total_payable_amount.to_f.round(2)
 
         puts "checking for new month..."
 
@@ -31,6 +31,9 @@ class Investor < ApplicationRecord
 
           puts "next month interest updated successfully"
         end
+
+        puts "interest_rate: "+ interest_rate.to_s
+        puts "Capital Amount: "+ capital_amount.to_s
 
       end
     end
