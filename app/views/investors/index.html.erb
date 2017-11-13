@@ -13,10 +13,10 @@
 <% @investors.each do |investor| %>
     <div class="col-md-4 col-sm-5 col-xs-11">
     <div class="panel panel-primary ">
-      <div class="panel-heading">
+      <div class="panel-heading" style="height: 8rem;">
         <h4><strong><%= investor.name %></strong></h4>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="height: 15rem;">
           <strong><%= model_class.human_attribute_name(:address) %>:</strong>
           <%= investor.address %><br/>
           <strong><%= model_class.human_attribute_name(:contact_number) %>:</strong>
