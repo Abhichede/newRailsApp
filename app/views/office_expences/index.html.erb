@@ -53,7 +53,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @office_expences.order("#{:date} DESC").each do |office_expence| %>
+      <% @office_expences.each do |office_expence| %>
         <tr>
           <td><%= Date.parse(office_expence.date).strftime('%d-%m-%Y') %></td>
           <td>

@@ -75,26 +75,28 @@ $(function() {
         is_gst = true;
         $("#non-gst-taxes").attr('class', 'hidden');
         $("#gst-taxes").attr('class', ' ');
-        stamp_duty_val = 6;
+        $("#stamp_duty_select").val("6")
     }else {
         is_gst = false;
         $("#non-gst-taxes").attr('class', ' ');
         $("#gst-taxes").attr('class', 'hidden');
-        stamp_duty_val = 5;
+        $("#stamp_duty_select").val("5")
     }
 
     $("#booking_detail_is_gst_true").on('click', function () {
         is_gst = true;
         $("#non-gst-taxes").attr('class', 'hidden');
         $("#gst-taxes").attr('class', ' ');
-        stamp_duty_val = 6;
+        $("#stamp_duty_select").val("6");
+        stamp_duty_val = Number($("#stamp_duty_select").val());
         $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*Number($("#booking_detail_agreement_cost").val()));
     });
     $("#booking_detail_is_gst_false").on('click', function () {
         is_gst = false;
         $("#non-gst-taxes").attr('class', ' ');
         $("#gst-taxes").attr('class', 'hidden');
-        stamp_duty_val = 5;
+        $("#stamp_duty_select").val("5");
+        stamp_duty_val = Number($("#stamp_duty_select").val());
         $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*Number($("#booking_detail_agreement_cost").val()));
     });
 
@@ -122,8 +124,9 @@ $(function() {
     });
     $("#booking_detail_agreement_cost").on("change keyup", function () {
         var agreement_cost = Number($("#booking_detail_agreement_cost").val());
+        stamp_duty_val = Number($("#stamp_duty_select").val());
 
-        $("#booking_detail_stamp_duty").attr('value', (stamp_duty_val/100)*agreement_cost);
+        $("#booking_detail_stamp_duty").attr('value', Number((stamp_duty_val/100)*agreement_cost));
         $("#booking_detail_registration_fees").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_vat").attr('value', (1/100)*agreement_cost);
         $("#booking_detail_service_tax").attr('value', (4.52/100)*agreement_cost);
@@ -133,6 +136,13 @@ $(function() {
         $("#booking_detail_gst_cost").attr('value', (gst_rate/100)*agreement_cost);
 
     });
+
+    $("#stamp_duty_select").on("change", function () {
+        var agreement_cost = Number($("#booking_detail_agreement_cost").val());
+        stamp_duty_val = Number($("#stamp_duty_select").val());
+        $("#booking_detail_stamp_duty").attr('value', Number((stamp_duty_val/100)*agreement_cost));
+    });
+
     $("#maintenance_in_sqft").on('focusout', function () {
 
        var flat_area = Number($("#booking_detail_flat_area").val());
