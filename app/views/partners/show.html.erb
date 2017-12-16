@@ -1,0 +1,195 @@
+<%- model_class = Partner -%>
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-2">
+        <%= link_to partners_path do %>
+            <i class="glyphicon glyphicon-arrow-left btn btn-warning"></i>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <h4><strong><%= @partner.name.upcase %></strong></h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_partner_path(@partner), :class => 'btn btn-primary btn-block btn-sm' %>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                data-toggle="modal" data-target="#newPaymentModal">Add Investment</button>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-4">
+        <% link_to t('.destroy', :default => t("helpers.links.destroy")),
+                   partner_path(@partner),
+                   :method => 'delete',
+                   :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                   :class => 'btn btn-danger btn-sm btn-block' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="donutchart" style="width: 50%; height: 200px;"></div>
+</div>
+
+<div class="row">
+  <div class="col-lg-5 panel panel-primary" style="overflow: auto; max-height: 50rem">
+    <div class="panel-heading"><strong>DEBITS</strong><span class="pull-right">Total: <%= @partner.partner_payments.where(:payment_type => 'DEBIT').sum(:amount) %></span></div>
+    <div class="panel-body">
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Payment method</th>
+          <th>Payment desc</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @partner.partner_payments.where(:payment_type => 'DEBIT').each do |partner_payment| %>
+            <tr>
+              <td><%= partner_payment.date %></td>
+              <td><%= partner_payment.amount %></td>
+              <td><%= partner_payment.payment_method %></td>
+              <td><%= partner_payment.payment_desc %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-1">
+
+  </div>
+  <div class="col-lg-5 panel panel-primary" style="overflow: auto; max-height: 50rem">
+    <div class="panel-heading"><strong>CREDITS</strong><span class="pull-right">Total: <%= @partner.partner_payments.where(:payment_type => 'CREDIT').sum(:amount) %></span></div>
+    <div class="panel-body">
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Payment method</th>
+          <th>Payment desc</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @partner.partner_payments.where(:payment_type => 'CREDIT').each do |partner_payment| %>
+            <tr>
+              <td><%= partner_payment.date %></td>
+              <td><%= partner_payment.amount %></td>
+              <td><%= partner_payment.payment_method %></td>
+              <td><%= partner_payment.payment_desc %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade-scale" id="newPaymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">New Payment</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for @partner_payment, :html => { :class => "form-horizontal investment" } do |f| %>
+
+            <% if @partner_payment.errors.any? %>
+                <div id="error_expl" class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><%= pluralize(@partner_payment.errors.count, "error") %> prohibited this departmental_labour from being saved:</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul>
+                      <% @partner_payment.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label 'Payment Type', :class => 'control-label col-lg-4' %>
+              <div class="col-lg-8">
+                <%= f.select(:payment_type, options_for_select([['Type'],['DEBIT','DEBIT'],['CREDIT','CREDIT']],
+                                                           :disabled=> 'Type'),
+                             {}, class: 'form-control') %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :date, :class => 'control-label col-lg-4' %>
+              <div class="col-lg-8">
+                <%= f.date_field :date, :class => 'form-control', required: true %>
+              </div>
+              <span class="error"><%=f.error_span(:date) %></span>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :amount, :class => 'control-label col-lg-4' %>
+              <div class="col-lg-8">
+                <%= f.text_field :amount, :class => 'form-control', required: true %>
+              </div>
+              <%=f.error_span(:amount) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :payment_method, :class => 'control-label col-lg-4', reqiured: true  %>
+              <div class="col-lg-8">
+                <%= f.select(:payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],
+                                                                 :disabled=> 'Payment Method'),
+                             {}, class: 'form-control') %>
+              </div>
+              <%=f.error_span(:payment_method) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :payment_desc, :class => 'control-label col-lg-4' %>
+              <div class="col-lg-8">
+                <%= f.text_field :payment_desc, :class => 'form-control', reqiured: true  %>
+              </div>
+              <%=f.error_span(:payment_desc) %>
+            </div>
+            <%= f.hidden_field :partner_id, value: @partner.id  %>
+
+            <div class="modal-footer">
+              <%= f.submit 'Add', :class => 'btn btn-primary btn-sm' %>
+              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        <% end %>
+        </div>
+
+        </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Partners'],
+            ['DEBITS',     <%= @partner.partner_payments.where(:payment_type => 'DEBIT').sum(:amount) %>],
+            ['CREDITS',      <%= @partner.partner_payments.where(:payment_type => 'CREDIT').sum(:amount) %>]
+        ]);
+
+        var options = {
+            title: 'Expenditures',
+            pieHole: 0.2
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+    }
+</script>

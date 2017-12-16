@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :partner_payments
+  resources :partners
   get 'users', to: 'users#index'
 
   resources :investors

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Payment type:</strong>
+  <%= @partner_payment.payment_type %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @partner_payment.date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @partner_payment.amount %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @partner_payment.payment_method %>
+</p>
+
+<p>
+  <strong>Payment desc:</strong>
+  <%= @partner_payment.payment_desc %>
+</p>
+
+<%= link_to 'Edit', edit_partner_payment_path(@partner_payment) %> |
+<%= link_to 'Back', partner_payments_path %>
