@@ -15,6 +15,18 @@ class SitesController < ApplicationController
     @materials = @site.materials.all
     @outgoing_payment = @site.outgoing_payments.all
     @contract_list = ContractList.new
+    @pie_size = {
+        :height => 500,
+        :width => 500
+    }
+
+    @pie_data = [
+        [ 'red', 300 ],
+        [ 'red', 50 ],
+        [ 'red', 40 ],
+        [ 'red', 40 ],
+        [ 'red', 60 ]
+    ].to_ary
   end
 
   # GET /sites/new

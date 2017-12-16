@@ -124,6 +124,21 @@
         </div>
       </div>
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Report</strong></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-4">
+          Total Expenditure: <%= number_to_indian_currency(get_spent)  %><br/>
+          Total Income: <%= number_to_indian_currency(get_income)  %>
+          </div>
+          <div class="col-lg-8">
+            <div id="piechart" style="width: 350px; height: 200px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <hr/>
@@ -583,3 +598,27 @@
         fakewaffle.responsiveTabs(['xs', 'sm']);
     })(jQuery);
 </script>
+
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+          var data = google.visualization.arrayToDataTable([
+              ['Task', 'Number'],
+              ['Office Expense',     <%= (get_total_oe.to_f * 100) / get_spent.to_f %>],
+              ['Material',      <%= (get_total_m.to_f * 100) / get_spent.to_f %>],
+              ['Labours',  <%= (get_total_cl.to_f * 100) / get_spent.to_f %>],
+              ['Departmental', <%= (get_total_dl.to_f * 100) / get_spent.to_f %>]
+          ]);
+
+          var options = {
+              title: 'Expenditures'
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+          chart.draw(data, options);
+      }
+  </script>
