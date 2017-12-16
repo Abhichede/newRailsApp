@@ -607,10 +607,10 @@
 
           var data = google.visualization.arrayToDataTable([
               ['Task', 'Number'],
-              ['Office Expense',     <%= (get_total_oe.to_f * 100) / get_spent.to_f %>],
-              ['Material',      <%= (get_total_m.to_f * 100) / get_spent.to_f %>],
-              ['Labours',  <%= (get_total_cl.to_f * 100) / get_spent.to_f %>],
-              ['Departmental', <%= (get_total_dl.to_f * 100) / get_spent.to_f %>]
+              ['Office Expense',     <%= get_total_oe.to_f %>],
+              ['Material',      <%= get_total_m.to_f %>],
+              ['Labours',  <%= get_total_cl.to_f %>],
+              ['Departmental', <%= get_total_dl.to_f %>]
           ]);
 
           var options = {
