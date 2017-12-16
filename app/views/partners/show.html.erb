@@ -37,7 +37,18 @@
 
 <div class="row">
   <div class="col-lg-5 panel panel-primary" style="overflow: auto; max-height: 50rem">
-    <div class="panel-heading"><strong>DEBITS</strong><span class="pull-right">Total: <%= @partner.partner_payments.where(:payment_type => 'DEBIT').sum(:amount) %></span></div>
+    <%
+      total_debit = 0.0
+      total_credit = 0.0
+      @partner.partner_payments.where(:payment_type => 'DEBIT').each do |debits|
+        total_debit += debits.amount.to_f.round(2)
+      end
+
+      @partner.partner_payments.where(:payment_type => 'CREDIT').each do |debits|
+        total_credit += debits.amount.to_f.round(2)
+      end
+    %>
+    <div class="panel-heading"><strong>DEBITS</strong><span class="pull-right">Total: <%= total_debit %></span></div>
     <div class="panel-body">
       <table class="table table-bordered table-responsive">
         <thead>
@@ -66,7 +77,7 @@
 
   </div>
   <div class="col-lg-5 panel panel-primary" style="overflow: auto; max-height: 50rem">
-    <div class="panel-heading"><strong>CREDITS</strong><span class="pull-right">Total: <%= @partner.partner_payments.where(:payment_type => 'CREDIT').sum(:amount) %></span></div>
+    <div class="panel-heading"><strong>CREDITS</strong><span class="pull-right">Total: <%= total_credit %></span></div>
     <div class="panel-body">
       <table class="table table-bordered table-responsive">
         <thead>
@@ -180,8 +191,8 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Partners'],
-            ['DEBITS',     <%= @partner.partner_payments.where(:payment_type => 'DEBIT').sum(:amount) %>],
-            ['CREDITS',      <%= @partner.partner_payments.where(:payment_type => 'CREDIT').sum(:amount) %>]
+            ['DEBITS',     <%= total_debit %>],
+            ['CREDITS',      <%= total_credit %>]
         ]);
 
         var options = {
