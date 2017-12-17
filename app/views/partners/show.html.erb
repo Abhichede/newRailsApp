@@ -57,6 +57,7 @@
           <th>Amount</th>
           <th>Payment method</th>
           <th>Payment desc</th>
+          <th colspan="2"></th>
         </tr>
         </thead>
 
@@ -67,6 +68,16 @@
               <td><%= partner_payment.amount %></td>
               <td><%= partner_payment.payment_method %></td>
               <td><%= partner_payment.payment_desc %></td>
+              <td>
+                <%= link_to edit_partner_payment_path(partner_payment), :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Edit" do %>
+                    <i class="glyphicon glyphicon-edit btn btn-primary"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to partner_payment, method: :delete, data: { confirm: 'Are you sure?' }, :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Delete" do %>
+                    <i class="glyphicon glyphicon-remove btn btn-danger"></i>
+                <% end %>
+              </td>
             </tr>
         <% end %>
         </tbody>
@@ -86,6 +97,7 @@
           <th>Amount</th>
           <th>Payment method</th>
           <th>Payment desc</th>
+          <th colspan="2"></th>
         </tr>
         </thead>
 
@@ -96,6 +108,16 @@
               <td><%= partner_payment.amount %></td>
               <td><%= partner_payment.payment_method %></td>
               <td><%= partner_payment.payment_desc %></td>
+              <td>
+                <%= link_to edit_partner_payment_path(partner_payment), :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Edit" do %>
+                    <i class="glyphicon glyphicon-edit btn btn-primary"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to partner_payment, method: :delete, data: { confirm: 'Are you sure?' }, :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Delete" do %>
+                    <i class="glyphicon glyphicon-remove btn btn-danger"></i>
+                <% end %>
+              </td>
             </tr>
         <% end %>
         </tbody>
@@ -137,7 +159,7 @@
               <%= f.label 'Payment Type', :class => 'control-label col-lg-4' %>
               <div class="col-lg-8">
                 <%= f.select(:payment_type, options_for_select([['Type'],['DEBIT','DEBIT'],['CREDIT','CREDIT']],
-                                                           :disabled=> 'Type'),
+                                                               :disabled=> 'Type'),
                              {}, class: 'form-control') %>
               </div>
             </div>
@@ -178,9 +200,8 @@
               <%= f.submit 'Add', :class => 'btn btn-primary btn-sm' %>
               <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
         <% end %>
-        </div>
-
-        </div>
+      </div>
+    </div>
     </div>
 
   </div>

@@ -1,42 +1,63 @@
-<%= form_for(partner_payment) do |f| %>
-  <% if partner_payment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(partner_payment.errors.count, "error") %> prohibited this partner_payment from being saved:</h2>
+<%= form_for @partner_payment, :html => { :class => "form-horizontal investment" } do |f| %>
 
-      <ul>
-      <% partner_payment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @partner_payment.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@partner_payment.errors.count, "error") %> prohibited this departmental_labour from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @partner_payment.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label 'Payment Type', :class => 'control-label col-lg-4' %>
+      <div class="col-lg-8">
+        <%= f.select(:payment_type, options_for_select([['Type'],['DEBIT','DEBIT'],['CREDIT','CREDIT']],
+                                                       :disabled=> 'Type', selected: @partner_payment.payment_type),
+                     {}, class: 'form-control') %>
+      </div>
     </div>
-  <% end %>
+    <div class="form-group">
+      <%= f.label :date, :class => 'control-label col-lg-4' %>
+      <div class="col-lg-8">
+        <%= f.date_field :date, :class => 'form-control', required: true, value: @partner_payment.date %>
+      </div>
+      <span class="error"><%=f.error_span(:date) %></span>
+    </div>
 
-  <div class="field">
-    <%= f.label :payment_type %>
-    <%= f.text_field :payment_type %>
-  </div>
+    <div class="form-group">
+      <%= f.label :amount, :class => 'control-label col-lg-4' %>
+      <div class="col-lg-8">
+        <%= f.text_field :amount, :class => 'form-control', required: true %>
+      </div>
+      <%=f.error_span(:amount) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :payment_method, :class => 'control-label col-lg-4', reqiured: true  %>
+      <div class="col-lg-8">
+        <%= f.select(:payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],
+                                                         :disabled=> 'Payment Method', selected: @partner_payment.payment_method),
+                     {}, class: 'form-control') %>
+      </div>
+      <%=f.error_span(:payment_method) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :payment_desc, :class => 'control-label col-lg-4' %>
+      <div class="col-lg-8">
+        <%= f.text_field :payment_desc, :class => 'form-control', reqiured: true  %>
+      </div>
+      <%=f.error_span(:payment_desc) %>
+    </div>
+    <%= f.hidden_field :partner_id, value: @partner_payment.partner.id  %>
 
-  <div class="field">
-    <%= f.label :date %>
-    <%= f.text_field :date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :amount %>
-    <%= f.text_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= f.label :payment_method %>
-    <%= f.text_field :payment_method %>
-  </div>
-
-  <div class="field">
-    <%= f.label :payment_desc %>
-    <%= f.text_field :payment_desc %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group text-center  ">
+      <%= f.submit 'Add', :class => 'btn btn-primary btn-sm' %>
+      <%= link_to 'Cancel', :back, class: 'btn btn-default btn-sm' %>
+    </div>
 <% end %>

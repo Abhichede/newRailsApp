@@ -44,7 +44,7 @@ class PartnerPaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @partner_payment.update(partner_payment_params)
-        format.html { redirect_to @partner_payment, notice: 'Partner payment was successfully updated.' }
+        format.html { redirect_to partner_path(@partner_payment.partner), notice: 'Partner payment was successfully updated.' }
         format.json { render :show, status: :ok, location: @partner_payment }
       else
         format.html { render :edit }
@@ -56,9 +56,11 @@ class PartnerPaymentsController < ApplicationController
   # DELETE /partner_payments/1
   # DELETE /partner_payments/1.json
   def destroy
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
     @partner_payment.destroy
     respond_to do |format|
-      format.html { redirect_to partner_payments_url, notice: 'Partner payment was successfully destroyed.' }
+      format.html { redirect_to session.delete(:return_to), notice: 'Partner payment was successfully removed.' }
       format.json { head :no_content }
     end
   end
