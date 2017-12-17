@@ -331,7 +331,7 @@ a{
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.84);
-    z-index: 2;
+    z-index: 1060;
     cursor: pointer;
 }
 #spinner{
