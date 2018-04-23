@@ -101,9 +101,9 @@ class MaterialsController < ApplicationController
   def update
     previous_amount = @material.amount.to_f
     @previous_supplier = @material.supplier
-    @supplier = Supplier.find(material_params[:supplier_id])
-    suppliers_total = @supplier.total_amount.to_f
     previous_suppliers_total = @previous_supplier.total_amount.to_f
+    @previous_supplier.update(:total_amount => previous_suppliers_total - previous_amount)
+
     total_cost = material_params[:amount].to_f
 
     gst_cost = 0
@@ -113,9 +113,12 @@ class MaterialsController < ApplicationController
       total_cost = material_amount + (material_amount * gst_rate / 100)
       gst_cost = material_amount * gst_rate / 100
     end
+
+    @supplier = Supplier.find(material_params[:supplier_id])
+    suppliers_total = @supplier.total_amount.to_f
     respond_to do |format|
       if @material.update(material_params)
-        @previous_supplier.update(:total_amount => previous_suppliers_total - previous_amount)
+
         new_suppliers_total = suppliers_total + total_cost
         @supplier.update(:total_amount => new_suppliers_total )
 

@@ -64,12 +64,15 @@ class ContractualLaboursController < ApplicationController
     tds_cost = contractual_labour_params[:tds_cost].to_f
     total_amount = contractual_labour_params[:amount].to_f + gst_cost - tds_cost
 
+    ## previous contractor amount calculations ##
     @previous_contractor = Contractor.find(@contractual_labour.contractor_id)
-    @new_contractor = Contractor.find(contractual_labour_params[:contractor_id])
+    pre_contractual_lab_total = @contractual_labour.amount.to_f
     previous_contractor_total = @previous_contractor.total_amount.to_f
+    @previous_contractor.update(:total_amount => previous_contractor_total - pre_contractual_lab_total)
+    ## END ##
 
-    @previous_contractor.update(:total_amount => previous_contractor_total - total_amount)
 
+    @new_contractor = Contractor.find(contractual_labour_params[:contractor_id])
     new_contractor_total = @new_contractor.total_amount.to_f
 
     respond_to do |format|
