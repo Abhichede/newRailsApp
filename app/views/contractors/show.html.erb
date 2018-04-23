@@ -20,9 +20,9 @@
         <div class="panel panel-default">
           <div class="panel-heading"><h4>Summary</h4></div>
           <div class="panel-body">
-            <strong>Total Amount: &#8377; <%= number_to_indian_currency(@contractor.total_amount.to_f.round(2)) %></strong><br/>
-            <strong>Paid Amount: &#8377; <%= number_to_indian_currency(@contractor.paid_amount.to_f.round(2)) %></strong><br/>
-            <strong>Balance Amount: &#8377; <%= number_to_indian_currency((@contractor.total_amount.to_f - @contractor.paid_amount.to_f).round(2)) %></strong>
+            <strong>Total Amount: &#8377; <%= number_to_indian_currency(@contractor.total_amount_owe) %></strong><br/>
+            <strong>Paid Amount: &#8377; <%= number_to_indian_currency(@contractor.total_amount_paid) %></strong><br/>
+            <strong>Balance Amount: &#8377; <%= number_to_indian_currency((@contractor.total_amount_owe - @contractor.total_amount_paid).round(2)) %></strong>
           </div>
         </div>
       </div>
