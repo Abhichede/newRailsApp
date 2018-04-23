@@ -11,6 +11,12 @@ $(function() {
         }
     });
 
+    $("#office-expenses-table").dataTable({
+        'pageLength': 25,
+        "order": [[ 0, "desc" ]],
+        "columnDefs" : [{"targets":0, "type":"date-eu"}]
+    });
+
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     $("form.office_expence").validate({

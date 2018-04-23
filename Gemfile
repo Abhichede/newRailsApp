@@ -38,6 +38,8 @@ gem 'bootstrap-multiselect-rails'
 gem 'will_paginate-bootstrap'
 gem 'sendgrid-ruby'
 
+gem 'jquery-datatables-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

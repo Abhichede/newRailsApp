@@ -19,8 +19,7 @@
     <h5> <strong>Total Amount : &#8377; <%= number_to_indian_currency(total_expense) %></strong> </h5>
   </div>
   <div class="col-md-3" style="margin-bottom: 1rem">
-    <%= form_tag office_expences_path, method: :get, id: 'filters',
-                 class: '' do %>
+    <% form_tag office_expences_path, method: :get, id: 'filters', class: '' do %>
         <div class="input-group">
           <%= text_field_tag :filter_query, params[:filter_query], placeholder: 'Filter by "Site or Desc"',
                              class: 'form-control', id: 'search-box' %>
@@ -39,7 +38,7 @@
   </div>
 </div>
 <div style="overflow: auto">
-  <table class="table table-bordered table-responsive">
+  <table class="table table-bordered table-responsive" id="office-expenses-table">
     <thead>
       <tr>
         <th><%= model_class.human_attribute_name(:date) %></th>
@@ -80,4 +79,4 @@
     </tbody>
   </table>
 </div>
-<%= will_paginate @office_expences, renderer: BootstrapPagination::Rails%>
+<% #will_paginate @office_expences, renderer: BootstrapPagination::Rails%>

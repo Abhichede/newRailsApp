@@ -16,6 +16,7 @@
  *= require font-awesome
  *= require bootstrap-multiselect
  * require bootstrap-material-design-rails
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_tree .
  *= require_self
  */

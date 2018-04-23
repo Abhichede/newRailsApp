@@ -5,22 +5,24 @@ class OfficeExpencesController < ApplicationController
   # GET /office_expences
   # GET /office_expences.json
   def index
-    if params[:filter_query]
-      @site = Site.where('lower(name) LIKE ?', "%#{params[:filter_query].downcase}%").first
-      if !@site.blank?
-        @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = ?', "%#{params[:filter_query].downcase}%", "#{@site.id}").paginate(:page => params[:page], :per_page => 10).order('date DESC')
-      else
-        if params[:filter_query].downcase === 'other'
-          @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = 0', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
-        else
-          @office_expences = OfficeExpence.where('lower(description) LIKE ?', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
-        end
+    # if params[:filter_query]
+    #   @site = Site.where('lower(name) LIKE ?', "%#{params[:filter_query].downcase}%").first
+    #   if !@site.blank?
+    #     @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = ?', "%#{params[:filter_query].downcase}%", "#{@site.id}").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    #   else
+    #     if params[:filter_query].downcase === 'other'
+    #       @office_expences = OfficeExpence.where('lower(description) LIKE ? OR site_id = 0', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    #     else
+    #       @office_expences = OfficeExpence.where('lower(description) LIKE ?', "%#{params[:filter_query].downcase}%").paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    #     end
+    #
+    #   end
+    #
+    # else
+    #   @office_expences = OfficeExpence.paginate(:page => params[:page], :per_page => 10).order('date DESC')
+    # end
 
-      end
-
-    else
-      @office_expences = OfficeExpence.paginate(:page => params[:page], :per_page => 10).order('date DESC')
-    end
+    @office_expences = OfficeExpence.all
 
   end
 
