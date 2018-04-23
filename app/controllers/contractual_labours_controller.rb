@@ -109,11 +109,11 @@ class ContractualLaboursController < ApplicationController
     session.delete(:return_to)
     session[:return_to] ||= request.referer
 
-    if (@single_labour.amount.to_f - paid_amount) >= params[:amount].to_f #&& params[:amount].to_f <= params[:max_payable_amount].to_f
+    if (@single_labour.amount.to_f - paid_amount) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
 
       @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
                                               :payment_description => params[:payment_desc], :site_id => params[:site_id],:paid_by => params[:paid_by],
-                                              :date => params[:payment_date], :payment_to => @contractor.name, :payment_for_id => params[:contractor_id])
+                                              :date => params[:payment_date], :payment_to => @contractor.name, :payment_for_id => params[:id])
 
       if @outgoing_payment.save
         @contractor.update(:paid_amount => (params[:amount].to_f + contractor_paid))
