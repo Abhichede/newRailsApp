@@ -116,7 +116,7 @@
             </tr>
             </thead>
             <tbody>
-            <% @outgoing_payment = OutgoingPayment.where("payment_to = ? OR (payment_for = 'MATERIAL/SUPPLIER' AND payment_for_id = ?)", @supplier.name, @supplier.id) %>
+            <% @outgoing_payment = OutgoingPayment.where("payment_for = 'MATERIAL/SUPPLIER' AND payment_for_id = ?", @supplier.id) %>
             <% @outgoing_payment.each do |payments| %>
                 <tr>
                   <td><%= Date.parse(payments.date).strftime('%d-%m-%Y') %></td>
