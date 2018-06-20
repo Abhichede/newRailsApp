@@ -166,7 +166,7 @@
               </tr>
             </thead>
             <tbody>
-                <% @site.outgoing_payments.where("payment_to = '#{@supplier.name}' OR (payment_for = 'MATERIAL/SUPPLIER' AND payment_for_id = #{@supplier.id})").each do |payments| %>
+                <% @site.outgoing_payments.where("payment_for = 'MATERIAL/SUPPLIER' AND payment_for_id = #{@supplier.id}").each do |payments| %>
                     <% if payments.blank? %>
                         <tr>
                           <td colspan="5">
