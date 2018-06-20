@@ -464,3 +464,8 @@ Paginations
 .pagination>.disabled>span{
     color: #777777 !important;
 }
+
+/* Autocomplete list */
+.ui-autocomplete{
+    z-index: 1100 !important;
+}
