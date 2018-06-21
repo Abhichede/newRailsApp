@@ -86,7 +86,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="paymentModal" role="dialog">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -110,6 +110,7 @@
             <div class="form-group">
             <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
                                class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
+              <span class="note">Amount should not be greater than <strong><%= total_amount - paid_amount %></strong></span>
             </div>
             <div class="form-group">
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
@@ -142,6 +143,53 @@
   </div>
 </div>
 <!-- ********************************************************************************************** -->
+
+<!-- Modal -->
+<div class="modal fade" id="editPaymentModal" role="dialog">
+  <div class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Edit Supplier's Payment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag edit_supplier_payment_path, method: :get, id: 'suppliers-payment_form' do %>
+          <div class="form-group">
+            <%= date_field_tag :payment_date, params[:payment_date], placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box', required: true %>
+          </div>
+          <div class="form-group">
+            <%= text_field_tag :amount, params[:amount], placeholder: 'Amount',
+                               class: 'form-control currently_paying_amount', id: 'payable_amount', required: true %>
+            <span class="note">Amount should not be greater than <strong id="max_payable_amount_text"></strong></span>
+          </div>
+          <div class="form-group">
+            <%= select_tag :payment_method, options_for_select([['Payment Method'], ['CASH', 'CASH'], ['CHEQUE', 'CHEQUE']], :disabled => 'Payment Method'),
+                           class: 'form-control', id: 'payment_method', required: true %>
+          </div>
+          <div class="form-group">
+            <%= text_field_tag :payment_desc, params[:payment_desc], placeholder: 'Payment Description',
+                               class: 'form-control search-box', id: 'payment_desc', required: true %>
+          </div>
+          <%= hidden_field_tag :id, params[:id], value: @supplier.id %>
+          <%= hidden_field_tag :site_id, params[:site_id], value: @site.id %>
+          <%= hidden_field_tag :payment_id, params[:payment_id] %>
+          <%= hidden_field_tag :max_payable_amount, params[:max_payable_amount] %>
+          </div>
+          <div class="modal-footer">
+            <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm',
+                           id: 'suppliers-payment-save-btn') do %>
+              Save
+            <% end %>
+        <% end %>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ********************************************************************************************** -->
 <!-- ********************************************************************************************** -->
 
 <!-- Modal -->
@@ -155,7 +203,7 @@
       </div>
       <div class="modal-body">
         <div style="overflow: auto">
-          <table class="table-responsive table table-stripped">
+          <table class="table table-responsive table-bordered">
             <thead>
               <tr>
                 <th>Date</th>
@@ -163,6 +211,7 @@
                 <th>Pay. Method</th>
                 <th>Desc.</th>
                 <th>Paid By</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -180,7 +229,45 @@
                       <td><%= payments.payment_method %></td>
                       <td><%= payments.payment_description %></td>
                       <td><%= payments.paid_by %></td>
+                      <td>
+                        <a href="#editPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-btn-<%= payments.id %>" data-toggle="modal"
+                           data-dl-id="<%= payments.payment_for_id %>" data-dl-payment_id="<%= payments.id %>" data-amount="<%= payments.amount %>"
+                           data-payable_amount="<%= total_amount - (paid_amount - payments.amount.to_f) %>"
+                           data-payment_date="<%= payments.date %>" data-payment_method="<%= payments.payment_method %>" data-payment_desc="<%= payments.payment_description %>">
+                          Edit
+                        </a>
+
+                        <%= link_to 'Delete', destroy_supplier_payment_path(payment_id: payments.id, supplier_id: payments.payment_for_id, site_id: @site.id),
+                                    :data => {:confirm => 'Deleted transactions can not get reversed. Are you sure?'},
+                                    class: 'btn btn-danger btn-xs btn-block' %>
+                      </td>
                     </tr>
+
+                <!-- ************************* Script ****************************** -->
+                <script type="text/javascript">
+                    $('#pay-btn-<%= payments.id %>').on('click', function () {
+                        $("#paymentDetailsModal").modal('hide');
+                        //get data-id attribute of the clicked element
+                        var supplier_id = $(this).data('dl-id');
+                        var paymentID = $(this).data('dl-payment_id');
+                        var totalAmount = $(this).data('amount');
+                        var paymentDate = $(this).data('payment_date');
+                        var paymentMethod = $(this).data('payment_method');
+                        var paymentDesc = $(this).data('payment_desc');
+                        var payable_amount = $(this).data('payable_amount');
+
+                        //populate the textbox
+                        $("#editPaymentModal").find('input[name="id"]').val(supplier_id);
+                        $("#editPaymentModal").find('input[name="payment_id"]').val(paymentID);
+                        $("#editPaymentModal").find('input[name="payment_date"]').val(paymentDate);
+                        $("#editPaymentModal").find('input[name="payment_method"]').val(paymentMethod);
+                        $("#editPaymentModal").find('input[name="payment_desc"]').val(paymentDesc);
+                        $("#editPaymentModal").find('input[name="amount"]').val(totalAmount);
+                        $("#editPaymentModal").find('input[name="max_payable_amount"]').val(payable_amount);
+                        $("#editPaymentModal").find('strong#max_payable_amount_text').text(payable_amount);
+                    });
+                </script>
+                <!-- ************************** end ******************************** -->
                     <% end %>
                 <% end %>
             </tbody>

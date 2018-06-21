@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   get 'show_departmental_labours', to: 'departmental_labours#show_departmental_labours'
   get 'show_supplier_wise_material', to: 'sites#show_supplier_wise_material'
   get 'update_supplier_payment', to: 'suppliers#update_supplier_payment'
+  get 'edit_supplier_payment', to: 'suppliers#edit_supplier_payment'
+  get 'destroy_supplier_payment', to: 'suppliers#destroy_supplier_payment'
   get 'show_payment_details', to: 'payment_details#show'
   get 'destroy_payment', to: 'payment_details#show'
   get 'update_paid_amount', to: 'booking_details#update_paid_amount'
@@ -47,7 +49,9 @@ Rails.application.routes.draw do
   get 'schedule_next_installment', to: 'booking_details#schedule_next_installment'
   get 'show_contractual_labours', to: 'contractual_labours#show_contractual_labours'
   get 'update_contractual_labour_payment', to: 'contractual_labours#update_contractual_labour_payment'
+  get 'edit_contractual_labour_payment', to: 'contractual_labours#edit_contractual_labour_payment'
   get 'contractual_labour_payment_details', to: 'contractual_labours#contractual_labour_payment_details'
+  get 'destroy_contractual_labour_payment', to: 'contractual_labours#destroy_contractual_labour_payment'
 
   post 'investment_returns', to: 'investors#investment_return'
   get 'investment_details', to: 'investments#investment_details'
@@ -57,6 +61,8 @@ Rails.application.routes.draw do
   get 'update_material_rate', to: 'materials#update_material_rates'
 
   get 'update_departmental_labour_payment', to: 'departmental_labours#update_departmental_labour_payment'
+  get 'edit_departmental_labour_payment', to: 'departmental_labours#edit_departmental_labour_payment'
+  get 'destroy_departmental_labour_payment', to: 'departmental_labours#destroy_departmental_labour_payment'
   get 'departmental_labour_payment_details', to: 'departmental_labours#departmental_labour_payment_details'
 
   get 'simple', to: 'simple#index'

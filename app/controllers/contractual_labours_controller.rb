@@ -143,8 +143,44 @@ class ContractualLaboursController < ApplicationController
     end
   end
 
-  def contractual_labour_payment_details
+  def edit_contractual_labour_payment
+    @contractor = Contractor.find(params[:contractor_id])
+    @single_labour = ContractualLabour.find(params[:contractual_labour_id])
+    @outgoing_payment = OutgoingPayment.find(params[:id])
 
+    paid_amount = @single_labour.paid_amount.to_f - @outgoing_payment.amount.to_f
+    contractor_paid = @contractor.paid_amount.to_f - @outgoing_payment.amount.to_f
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    if (@single_labour.amount.to_f - paid_amount) >= params[:amount].to_f #&& params[:amount].to_f <= params[:max_payable_amount].to_f
+      if @outgoing_payment.update(:amount => params[:amount], :payment_method => params[:payment_method],
+                                  :payment_description => params[:payment_desc],
+                                  :date => params[:payment_date])
+        @contractor.update(:paid_amount => (params[:amount].to_f + contractor_paid))
+        @single_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))
+
+        respond_to do |format|
+          format.html { redirect_to session.delete(:return_to),notice: "Rs. #{params[:amount]} Amount updated." }
+          format.json { render json: @single_labour }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to session.delete(:return_to), alert: "Something went wrong." }
+          format.json { render json: @single_labour.errors, status: :unprocessable_entity }
+        end
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to session.delete(:return_to),
+                                  alert: 'You can not pay this amount, Amount should not be greater than balance amount' }
+        format.json { render json: @single_labour.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def contractual_labour_payment_details
     @contr_lab = ContractualLabour.find(params[:id])
     @contr_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'CONTRACTOR', :site_id => @contr_lab.site_id,
                                                         payment_to: @contr_lab.contractor.name, :payment_for_id => @contr_lab.id).order("#{:date} ASC")
@@ -153,6 +189,27 @@ class ContractualLaboursController < ApplicationController
       render status: :not_found
     else
 
+    end
+  end
+
+  def destroy_contractual_labour_payment
+    @outgoing_payment = OutgoingPayment.find(params[:payment_id])
+    @contr_lab = ContractualLabour.find(@outgoing_payment.payment_for_id)
+    @contractor = @contr_lab.contractor
+    amount = @outgoing_payment.amount.to_f
+    contr_lab_paid = @contr_lab.paid_amount.to_f
+    contractor_paid = @contractor.paid_amount.to_f
+
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    if @outgoing_payment.destroy!
+      @contr_lab.update(paid_amount: (contr_lab_paid - amount))
+      @contractor.update(paid_amount: (contractor_paid - amount))
+
+      respond_to do |format|
+        format.html { redirect_to session.delete(:return_to), notice: "Payment Destroyed." }
+      end
     end
   end
 

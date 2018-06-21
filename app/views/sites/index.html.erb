@@ -16,7 +16,12 @@
  <div class="col-lg-4 col-md-6 col-sm-6 site-card" style="margin-top: 2rem; margin-bottom: 2rem;">
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h4 class="card-title"><strong><%= site.name.upcase %></strong></h4>
+      <h4 class="card-title">
+        <strong><%= site.name.upcase %></strong>
+        <% if site.materials.where(is_rate_added: false).count > 0 %>
+          <span class="label label-danger pull-right blink_me">New material to add rate</span>
+        <% end %>
+      </h4>
     </div>
     <div class="panel-body" style="padding: 0 !important;">
       <% if site.photo_path.blank? %>

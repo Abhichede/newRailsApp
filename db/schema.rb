@@ -147,14 +147,6 @@ ActiveRecord::Schema.define(version: 20171216161313) do
     t.decimal  "pending_interest", precision: 10, default: 0
   end
 
-  create_table "investment_return_meta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "investment_id"
-    t.string   "meta_key"
-    t.string   "meta"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "investment_returns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "date"
     t.integer  "investment_id"
@@ -196,13 +188,6 @@ ActiveRecord::Schema.define(version: 20171216161313) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "list_materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "unit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "material_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "material_name"
     t.string   "material_unit"
@@ -234,7 +219,7 @@ ActiveRecord::Schema.define(version: 20171216161313) do
     t.string   "gst_cost",         default: "0"
     t.boolean  "is_rate_added",    default: false
     t.string   "rate_added_by",    default: "NA"
-    t.datetime "rate_added_at",    default: '2017-07-22 06:06:05'
+    t.datetime "rate_added_at",    default: '2018-06-17 18:35:52'
   end
 
   create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

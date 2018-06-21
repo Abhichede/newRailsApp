@@ -10,14 +10,44 @@ $(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:success', function (event,
         '<td><%= dept.payment_description %></td>'+
         '<td><%= dept.paid_by %></td>'+
         '<td><%= dept.payment_to %></td>'+
+        '<td>'+
+        '<a href="#contractualLabourEditPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-edit-btn-<%= dept.id %>" data-toggle="modal"\n' +
+        'data-dl-id="<%= dept.id %>" data-contr_lab_id="<%= @contr_lab.id %>" data-total-amount="<%= dept.amount %>" '+
+        'data-date="<%= dept.date %>" data-payment_method="<%= dept.payment_method %>" '+
+        'data-payment_desc="<%= dept.payment_description %>" data-contractor_id="<%= @contr_lab.contractor.id %>">\n' +
+        '                          Edit\n' +
+        '                        </a>'+
+        '<%= link_to 'Delete', destroy_contractual_labour_payment_path(payment_id: dept.id),
+         :data => { :confirm => 'Deleted transactions can not get reversed. \n Are you sure?' }, class: 'btn btn-danger btn-xs btn-block' %>' +
+        '</td>'+
         ' </tr>');
+
+        $('#pay-edit-btn-<%= dept.id %>').on('click', function () {
+            $("#paymentDetailsModal").modal('hide');
+          //get data-id attribute of the clicked element
+          var paymentId = $(this).data('dl-id');
+          var deptLabourContrId = $(this).data('contractor_id');
+          var totalPayableAmount = $(this).data('total-amount');
+          var paymentMethod = $(this).data('payment_method');
+          var paymentDesc = $(this).data('payment_desc');
+          var paymentDate = $(this).data('date');
+
+          //populate the textbox
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="id"]').val(paymentId);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="contractor_id"]').val(deptLabourContrId);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="amount"]').val(totalPayableAmount);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="payment_method"]').val(paymentMethod);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="payment_desc"]').val(paymentDesc);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="payment_date"]').val(paymentDate);
+      })
+
     <% end %>
 
     $("#paymentDetailsModal").modal('show');
 });
 $(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:error', function (event, data, status) {
     console.log("error");
-    $("#contr-pay_det_tbody").replaceWith('<tbody id="contr-pay_det_tbody"><tr><td colspan="6" class="text-center">'+
+    $("#contr-pay_det_tbody").replaceWith('<tbody id="contr-pay_det_tbody"><tr><td colspan="7" class="text-center">'+
         'No record</td></tr></tbody>');
     $("#paymentDetailsModal").modal('show');
 });

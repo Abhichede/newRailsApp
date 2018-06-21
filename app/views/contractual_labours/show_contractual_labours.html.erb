@@ -58,7 +58,7 @@
         <% @contractual_labours.each do |labour| %>
             <tr>
               <td><%= Date.parse(labour.date).strftime('%d-%m-%Y') %></td>
-              <td><%= labour.contractor.name %></td>
+              <td><%= link_to labour.contractor.name, contractor_path(labour.contractor) %></td>
               <td>&#8377; <%= number_to_indian_currency(labour.rate.to_f.round(2)) %></td>
               <td><%= labour.quantity.to_f.round(2) %> / <%= labour.unit %></td>
               <td><%= labour.gst_rate %> %</td>
@@ -113,6 +113,7 @@
           <td colspan="1"><strong>&#8377; <%= number_to_indian_currency(total_amount.round(2)) %></strong></td>
           <td colspan="1"><strong>&#8377; <%= number_to_indian_currency(total_paid.round(2)) %></strong></td>
           <td colspan="1"><strong>&#8377; <%= number_to_indian_currency((total_amount - total_paid).round(2)) %></strong></td>
+          <td></td>
         </tr>
     <% end %>
 
@@ -149,7 +150,7 @@
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
                                class: 'form-control search-box', id: 'payment_desc', required: true %>
             </div>
-            <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
+            <%= hidden_field_tag :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
             <%= hidden_field_tag :payment_for, params[:payment_for], value: 'CONTRACTOR' %>
             <%= hidden_field_tag :id, params[:id] %>
             <%= hidden_field_tag :contractor_id, params[:contractor_id] %>
@@ -169,10 +170,55 @@
   </div>
 </div>
 <!-- ********************************************************************************************** -->
+
+<!-- Modal -->
+<div class="modal fade-scale" id="contractualLabourEditPaymentModal" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Edit Payment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag edit_contractual_labour_payment_path, method: :get, id: 'contractual_labours-edit_payment_form'  do %>
+          <div class="form-group">
+            <%= date_field_tag :payment_date, params[:payment_date],placeholder: 'Select Date',
+                               class: 'form-control search-box', id: 'search-box', required: true %>
+          </div>
+          <div class="form-group">
+            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
+          </div>
+          <div class="form-group">
+            <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
+                           class: 'form-control', id: 'payment_method', required: true %>
+          </div>
+          <div class="form-group">
+            <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
+                               class: 'form-control search-box', id: 'payment_desc', required: true %>
+          </div>
+          <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
+          <%= hidden_field_tag :contractual_labour_id, params[:id] %>
+          <%= hidden_field_tag :id %>
+          <%= hidden_field_tag :contractor_id, params[:contractor_id] %>
+          </div>
+          <div class="modal-footer">
+            <%= button_tag(type: :submit, class: 'btn btn-primary btn-sm', id: 'dept_pay_btn') do %>
+              Save
+            <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+  </div>
+</div>
 <!-- ********************************************************************************************** -->
 <!-- Modal -->
-<div class="modal fade-scale" id="paymentDetailsModal" role="dialog">
-  <div class="modal-dialog" role="document">
+<div class="modal  fade-scale" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -190,6 +236,7 @@
               <th>Desc.</th>
               <th>Paid By</th>
               <th>Payment to</th>
+              <th>Actions</th>
             </tr>
             </thead>
             <tbody id="contr-pay_det_tbody">

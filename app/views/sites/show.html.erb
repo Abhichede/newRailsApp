@@ -100,7 +100,7 @@
   <div class="col-md-6">
 
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Outstandings</strong></div>
+      <div class="panel-heading"><strong>Outstanding</strong></div>
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
@@ -113,35 +113,50 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
             <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
-                    data-toggle="modal" data-target="#">Labour</button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
-                    data-toggle="modal" data-target="#siteWiseOfficeExpense">Site Expenses</button>
+                    data-toggle="modal" data-target="#siteWiseOfficeExpense">Site Expenses
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Report</strong></div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-lg-4">
-          Total Expenditure: <%= number_to_indian_currency(get_spent)  %><br/>
-          Total Income: <%= number_to_indian_currency(get_income)  %>
-          </div>
-          <div class="col-lg-8">
-            <div id="piechart" style="width: 350px; height: 200px;"></div>
-          </div>
-        </div>
+      <div class="panel-heading">
+        <strong>Report</strong>
+        <span class="pull-right label label-info">Total Expenditure:<br/> <%= number_to_indian_currency(get_spent) %></span>
+        <span class="pull-right label label-info">Total Income: <br/><%= number_to_indian_currency(get_income) %></span>
+      </div>
+      <div cstss="panel-body">
+        <div id="piechart"></div>
       </div>
     </div>
   </div>
+
+  <% if @site.materials.where(is_rate_added: false).count > 0 %>
+    <div class="col-lg-6 col-md-6 col-lg-offset-6 col-md-offset-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          There are some materials remains to add their rates.
+        </div>
+        <div class="panel-body" style="max-height: 20rem; overflow: auto;">
+          <ul class="list-group">
+            <% @site.materials.where(is_rate_added: false).group(:type_of_material).count.each do |m| %>
+              <li class="list-group-item">
+                <%= link_to m[0], show_site_material_path(id: @site.id, type_of_material: m[0]) %>
+                <span class="pull-right label label-danger">
+                    <%= m[1] %>
+                  </span>
+              </li>
+
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 <hr/>
+
 <% end %>
 
 
@@ -250,7 +265,7 @@
             <% else %>
                 <% quantity = 0 %>
                 <% @site.materials.where(type_of_material: material.material_name).each do |material_quantity|
-                  quantity += material_quantity.quantity.to_f
+                  quantity += material_quantity.quantity.to_f.round(2)
                 end
                 %>
                 <%= link_to ('<strong>'+material.material_name+'</strong><br/>'+quantity.to_s+' '+material.material_unit).html_safe, {controller: 'sites', action: 'show_site_material', :id => @site,

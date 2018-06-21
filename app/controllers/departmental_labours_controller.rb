@@ -57,8 +57,8 @@ class DepartmentalLaboursController < ApplicationController
   # DELETE /departmental_labours/1.json
   def destroy
     @site = @departmental_labour.site
-    OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+@departmental_labour.id.to_s,
-                          :payment_for_id => @departmental_labour.id).each do |outgoing|
+    OutgoingPayment.where(payment_for: 'DEPARTMENTAL_LABOURS-'+@departmental_labour.id.to_s,
+                          payment_for_id: @departmental_labour.id).each do |outgoing|
       outgoing.destroy
     end
     @departmental_labour.destroy
@@ -76,12 +76,12 @@ class DepartmentalLaboursController < ApplicationController
 
     if (@single_labour.amount.to_f - @single_labour.paid_amount.to_f) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
 
-      @outgoing_payment = OutgoingPayment.new(:payment_for => params[:payment_for], :amount => params[:amount],:payment_method => params[:payment_method],
-                                              :payment_description => params[:payment_desc], :site_id => params[:site_id],:paid_by => params[:paid_by],
-                                              :date => params[:payment_date], :payment_to => params[:payment_to], :payment_for_id => params[:id])
+      @outgoing_payment = OutgoingPayment.new(payment_for: params[:payment_for], amount: params[:amount],payment_method: params[:payment_method],
+                                              payment_description: params[:payment_desc], site_id: params[:site_id],paid_by: params[:paid_by],
+                                              date: params[:payment_date], payment_to: params[:payment_to], payment_for_id: params[:id])
 
       if @outgoing_payment.save
-        @single_labour.update(:paid_amount => (params[:amount].to_f + paid_amount))
+        @single_labour.update(paid_amount: (params[:amount].to_f + paid_amount))
 
         #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
         respond_to do |format|
@@ -90,16 +90,81 @@ class DepartmentalLaboursController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html { redirect_to session.delete(:return_to), alert: "Something went wrong." }
+          format.html { redirect_to session.delete(:return_to), alert: 'Something went wrong.' }
           format.json { render json: @single_labour.errors, status: :unprocessable_entity }
         end
       end
 
     else
       respond_to do |format|
-        format.html { redirect_to session.delete(:return_to),
-                                  alert: "You can't pay this amount, Amount should not be greater than balance amount" }
+        format.html { 
+          redirect_to session.delete(:return_to),
+                      alert: "You can't pay this amount, Amount should not be greater than balance amount" }
         format.json { render json: @single_labour.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def edit_departmental_labour_payment
+    @single_labour = DepartmentalLabour.find(params[:id])
+    @outgoing_payment = OutgoingPayment.find(params[:payment_id])
+
+    paid_amount = @single_labour.paid_amount.to_f - @outgoing_payment.amount.to_f
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    if (@single_labour.amount.to_f - @single_labour.paid_amount.to_f) >= params[:amount].to_f && params[:amount].to_f <= params[:max_payable_amount].to_f
+
+      if @outgoing_payment.update(amount: params[:amount],payment_method: params[:payment_method],
+                                  payment_description: params[:payment_desc],
+                                  date: params[:payment_date])
+        @single_labour.update(paid_amount: (params[:amount].to_f + paid_amount))
+
+        #BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+        respond_to do |format|
+          format.html { redirect_to session.delete(:return_to), notice: 'Transaction updated.' }
+          format.json { render json: @single_labour }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to session.delete(:return_to), alert: 'Something went wrong.' }
+          format.json { render json: @single_labour.errors, status: :unprocessable_entity }
+        end
+      end
+
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to session.delete(:return_to),
+                      alert: "You can not pay this amount, Amount should not be greater than #{params[:max_payable_amount]}" }
+        format.json { render json: @single_labour.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def destroy_departmental_labour_payment
+    @single_labour = DepartmentalLabour.find(params[:id])
+    @outgoing_payment = OutgoingPayment.find(params[:payment_id])
+
+    paid_amount = @single_labour.paid_amount.to_f - @outgoing_payment.amount.to_f
+    session.delete(:return_to)
+    session[:return_to] ||= request.referer
+
+    if @outgoing_payment.destroy!
+      @single_labour.update(paid_amount: paid_amount)
+
+      respond_to do |format|
+        format.html {
+          redirect_to session.delete(:return_to),
+                      notice: 'Transaction deleted.' }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to session.delete(:return_to),
+                      alert: 'Something went wrong while deleting.' }
       end
     end
 
@@ -108,12 +173,12 @@ class DepartmentalLaboursController < ApplicationController
   def show_departmental_labours
     @departmental_labour = DepartmentalLabour.new
     @site = Site.find(params[:id])
-    @departmental_labours = @site.departmental_labours.paginate(:page => params[:page], :per_page => 10).order("#{:date} DESC")
+    @departmental_labours = @site.departmental_labours.paginate(page: params[:page], per_page: 10).order("#{:date} DESC")
   end
 
   def departmental_labour_payment_details
     @dept_lab = DepartmentalLabour.find(params[:id])
-    @dept_lab_outgoing_payment = OutgoingPayment.where(:payment_for => 'DEPARTMENTAL_LABOURS-'+params[:id], :site_id => @dept_lab.site_id).order("#{:date} ASC")
+    @dept_lab_outgoing_payment = OutgoingPayment.where(payment_for: 'DEPARTMENTAL_LABOURS-'+params[:id], site_id: @dept_lab.site_id).order("#{:date} ASC")
     @site = Site.find(@dept_lab.site_id)
     if @dept_lab_outgoing_payment.blank?
       render status: :not_found

@@ -38,6 +38,8 @@ $(document).ready(function () {
 
     });
 
+    setInterval(blinker, 1000);
+
 });
 
 var hide_spinner = function () {
@@ -55,5 +57,10 @@ function on() {
 
 function off() {
     $("#overlay").css('display', "none");
+}
+
+function blinker() {
+    $('.blink_me').fadeOut(500);
+    $('.blink_me').fadeIn(500);
 }
 
