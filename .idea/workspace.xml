@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.generators" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.generators" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/departmental_labours_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/suppliers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/suppliers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/departmental_labours/departmental_labour_payment_details.js.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/departmental_labours/departmental_labour_payment_details.js.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/departmental_labours/show_departmental_labours.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/departmental_labours/show_departmental_labours.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/sites/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sites/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/sites/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sites/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/sites/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sites/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/sites/show_supplier_wise_material.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sites/show_supplier_wise_material.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newRailsApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/newRailsApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/materials/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/materials/_form.html.erb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -74,14 +57,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="125" column="15" selection-start-line="125" selection-start-column="15" selection-end-line="127" selection-end-column="15" />
+            <state relative-caret-position="73">
+              <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
+              <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20170616162805_change_columns_from_contractual_labours.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="85" selection-start-line="4" selection-start-column="85" selection-end-line="4" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show_site_material.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/sites/show_site_material.html.erb">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/materials/_form.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="158" column="11" selection-start-line="158" selection-start-column="11" selection-end-line="158" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -211,7 +218,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/assets/javascripts/departmental_labours.js" />
         <option value="$PROJECT_DIR$/app/views/contractors/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/suppliers/index.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/office_expences_controller.rb" />
@@ -262,6 +268,7 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/views/sites/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/materials/_form.html.erb" />
       </list>
     </option>
   </component>
@@ -306,20 +313,20 @@
               <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="materials" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
@@ -1275,14 +1282,7 @@
       <workItem from="1529259153028" duration="7723000" />
       <workItem from="1529385466433" duration="1491000" />
       <workItem from="1529472941465" duration="8040000" />
-      <workItem from="1529591145686" duration="14386000" />
-    </task>
-    <task id="LOCAL-00132" summary="Investments....">
-      <created>1502962943682</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1502962943682</updated>
+      <workItem from="1529591145686" duration="15315000" />
     </task>
     <task id="LOCAL-00133" summary="new updations..">
       <created>1503049579191</created>
@@ -1620,11 +1620,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529481990738</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="Some changes made&#10;1. Added facility to edit and delete payments of &#10;   a. Contractor&#10;   b. Supplier&#10;   c. Departmental Labour&#10;   &#10;2. Notify admin/Accountant about new materials to add rate.">
+      <created>1529612279756</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1529612279757</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1253663000" />
+    <option name="totallyTimeSpent" value="1254592000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1653,7 +1660,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49287322" weight="0.5173797" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28676966" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28676966" />
       <window_info anchor="right" id="Database" order="5" weight="0.32975152" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24981245" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24981245" />
@@ -1682,7 +1689,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/swaraj-constructions" />
     </ignored-roots>
-    <MESSAGE value="Changes done in bookings, flats." />
     <MESSAGE value="issue with material payments was resolved, and date formats changed, new field added in contractual_labour 'payment_for_id'" />
     <MESSAGE value="material edit issues solved" />
     <MESSAGE value="Investments...." />
@@ -1707,7 +1713,8 @@
     <MESSAGE value="added google pie chart on sites page with script CDN in app-layout" />
     <MESSAGE value="added partners module with some added functionality" />
     <MESSAGE value="spinner's overlay changed to pull it to top of pages contents." />
-    <option name="LAST_COMMIT_MESSAGE" value="spinner's overlay changed to pull it to top of pages contents." />
+    <MESSAGE value="Some changes made&#10;1. Added facility to edit and delete payments of &#10;   a. Contractor&#10;   b. Supplier&#10;   c. Departmental Labour&#10;   &#10;2. Notify admin/Accountant about new materials to add rate." />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes made&#10;1. Added facility to edit and delete payments of &#10;   a. Contractor&#10;   b. Supplier&#10;   c. Departmental Labour&#10;   &#10;2. Notify admin/Accountant about new materials to add rate." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1720,13 +1727,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3640">
-          <caret line="182" column="29" lean-forward="true" selection-start-line="182" selection-start-column="29" selection-end-line="182" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3260">
@@ -1770,13 +1770,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20171216155819_create_partner_payments.rb" />
-    <entry file="file://$PROJECT_DIR$/app/views/materials/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="137" column="52" lean-forward="true" selection-start-line="135" selection-start-column="10" selection-end-line="137" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/office_expences/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1380">
@@ -1891,13 +1884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1580">
           <caret line="79" column="19" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="85" selection-start-line="4" selection-start-column="85" selection-end-line="4" selection-end-column="85" />
         </state>
       </provider>
     </entry>
@@ -2027,11 +2013,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/materials_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2618" />
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6c22d751-53bb-4b49-ae8d-0891d4df67c1/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -2061,11 +2042,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="125" column="15" selection-start-line="125" selection-start-column="15" selection-end-line="127" selection-end-column="15" />
+        <state relative-caret-position="73">
+          <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
+          <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="85" selection-start-line="4" selection-start-column="85" selection-end-line="4" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/sites/show_site_material.html.erb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/materials_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2618" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/materials/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="158" column="11" selection-start-line="158" selection-start-column="11" selection-end-line="158" selection-end-column="11" />
         </state>
       </provider>
     </entry>

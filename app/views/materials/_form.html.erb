@@ -154,9 +154,9 @@
         <%=f.error_span(:amount) %>
       </div>
 
-        <% f.hidden_field :is_rate_added, value: true %>
-        <% f.hidden_field :rate_added_by, value: current_user.user_name %>
-        <% f.hidden_field :rate_added_at, value: Time.now  %>
+        <%= f.hidden_field :is_rate_added, value: true %>
+        <%= f.hidden_field :rate_added_by, value: current_user.user_name %>
+        <%= f.hidden_field :rate_added_at, value: Time.now  %>
   <% end %>
   <% if current_user.role === 'SUPERVISOR' %>
     <div class="form-group">
