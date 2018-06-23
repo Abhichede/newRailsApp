@@ -26,7 +26,8 @@ $(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:success', function (event,
             $("#paymentDetailsModal").modal('hide');
           //get data-id attribute of the clicked element
           var paymentId = $(this).data('dl-id');
-          var deptLabourContrId = $(this).data('contractor_id');
+          var contractorId = $(this).data('contractor_id');
+          var contrLabID = $(this).data('contr_lab_id');
           var totalPayableAmount = $(this).data('total-amount');
           var paymentMethod = $(this).data('payment_method');
           var paymentDesc = $(this).data('payment_desc');
@@ -34,7 +35,8 @@ $(".contr_lab_pay_det-<%= @contr_lab.id %>").on('ajax:success', function (event,
 
           //populate the textbox
           $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="id"]').val(paymentId);
-          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="contractor_id"]').val(deptLabourContrId);
+          $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="contractor_id"]').val(contractorId);
+            $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="contractual_labour_id"]').val(contrLabID);
           $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="amount"]').val(totalPayableAmount);
           $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="payment_method"]').val(paymentMethod);
           $("#contractualLabourEditPaymentModal").find('form#contractual_labours-edit_payment_form').find('input[name="payment_desc"]').val(paymentDesc);

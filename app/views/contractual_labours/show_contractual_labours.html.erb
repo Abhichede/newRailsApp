@@ -198,8 +198,8 @@
             <%= text_field_tag :payment_desc, params[:payment_desc],placeholder: 'Payment Description',
                                class: 'form-control search-box', id: 'payment_desc', required: true %>
           </div>
-          <%= hidden_field :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
-          <%= hidden_field_tag :contractual_labour_id, params[:id] %>
+          <%= hidden_field_tag :paid_by, params[:paid_by], value: current_user.user_name , id: 'paid_by' %>
+          <%= hidden_field_tag :contractual_labour_id %>
           <%= hidden_field_tag :id %>
           <%= hidden_field_tag :contractor_id, params[:contractor_id] %>
           </div>
