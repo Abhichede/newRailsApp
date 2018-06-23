@@ -445,15 +445,17 @@
           <tbody>
           <% total_amount = 0
              total_paid = 0 %>
-          <% @site.booking_details.each do |booking| %>
-              <tr>
-                <td><%= link_to booking.gender+' '+booking.customer_name, booking_detail_path(booking) %> (<%= booking.flat.flat_number %>)</td>
-                <td>&#8377; <%= number_to_indian_currency(booking.final_sale_deed.to_f.round(2)) %></td>
-                <% total_amount = total_amount + booking.final_sale_deed.to_f %>
-                <td>&#8377; <%= number_to_indian_currency(booking.paid_amount.to_f.round(2)) %></td>
-                <% total_paid = total_paid + booking.paid_amount.to_f %>
-                <td>&#8377; <%= number_to_indian_currency((booking.final_sale_deed.to_f.round(2) - booking.paid_amount.to_f.round(2)).round(2)) %></td>
-              </tr>
+          <% @site.flats.order(:flat_number).each do |flat| %>
+            <% if flat.booking_detail %>
+                <tr>
+                  <td><%= link_to flat.booking_detail.gender+' '+flat.booking_detail.customer_name, booking_detail_path(flat.booking_detail) %> (<%= flat.booking_detail.flat.flat_number %>)</td>
+                  <td>&#8377; <%= number_to_indian_currency(flat.booking_detail.final_sale_deed.to_f.round(2)) %></td>
+                  <% total_amount = total_amount + flat.booking_detail.final_sale_deed.to_f %>
+                  <td>&#8377; <%= number_to_indian_currency(flat.booking_detail.paid_amount.to_f.round(2)) %></td>
+                  <% total_paid = total_paid + flat.booking_detail.paid_amount.to_f %>
+                  <td>&#8377; <%= number_to_indian_currency((flat.booking_detail.final_sale_deed.to_f.round(2) - flat.booking_detail.paid_amount.to_f.round(2)).round(2)) %></td>
+                </tr>
+            <% end %>
           <% end %>
           <tr >
             <td><strong>Totals</strong></td>

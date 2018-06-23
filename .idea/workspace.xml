@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d889cc3-0f6f-47c4-a096-aeb3912b0608" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.rakeTasks" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/sites/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sites/show.html.erb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -59,29 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="contractual_labours_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-117">
-              <caret line="159" column="62" lean-forward="true" selection-start-line="159" selection-start-column="62" selection-end-line="159" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show_contractual_labours.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="201" column="53" selection-start-line="201" selection-start-column="32" selection-end-line="201" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contractual_labour_payment_details.js.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="38" column="142" selection-start-line="38" selection-start-column="142" selection-end-line="38" selection-end-column="142" />
+            <state relative-caret-position="73">
+              <caret line="456" column="16" selection-start-line="456" selection-start-column="16" selection-end-line="456" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -229,11 +209,11 @@
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/departmental_labours/departmental_labour_payment_details.js.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
+        <option value="$PROJECT_DIR$/app/views/materials/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/sites/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/materials/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/contractual_labours/contractual_labour_payment_details.js.erb" />
       </list>
     </option>
   </component>
@@ -261,7 +241,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
@@ -285,6 +265,12 @@
               <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -292,7 +278,7 @@
               <item name="newRailsApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="contractual_labours" type="462c0819:PsiDirectoryNode" />
+              <item name="sites" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="newRailsApp" type="b2602c69:ProjectViewProjectNode" />
@@ -303,7 +289,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -1243,14 +1229,8 @@
       <workItem from="1529591145686" duration="15792000" />
       <workItem from="1529658075350" duration="38000" />
       <workItem from="1529693358161" duration="91000" />
-      <workItem from="1529733339396" duration="1307000" />
-    </task>
-    <task id="LOCAL-00134" summary="new updations..">
-      <created>1503072229053</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1503072229054</updated>
+      <workItem from="1529733339396" duration="2292000" />
+      <workItem from="1529764680757" duration="2051000" />
     </task>
     <task id="LOCAL-00135" summary="new updations..">
       <created>1505755451518</created>
@@ -1588,11 +1568,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529612965587</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="Some changes made&#10;1. Added facility to edit and delete payments of &#10;   a. Contractor&#10;   b. Supplier&#10;   c. Departmental Labour&#10;   &#10;2. Notify admin/Accountant about new materials to add rate.">
+      <created>1529734857275</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1529734857275</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1256505000" />
+    <option name="totallyTimeSpent" value="1259541000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1605,7 +1592,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1537" height="912" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32904884" />
@@ -1616,11 +1602,11 @@
       <window_info anchor="right" id="Maven Projects" order="9" weight="0.32933232" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.328" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49736643" weight="0.63770056" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49287322" weight="0.51604277" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.49736643" visible="true" weight="0.63770056" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49287322" weight="0.25802138" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29885828" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30288786" />
       <window_info anchor="right" id="Database" order="5" weight="0.32975152" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24981245" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24981245" />
@@ -1688,13 +1674,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/materials/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3160">
@@ -1741,13 +1720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/suppliers/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="32" />
         </state>
       </provider>
     </entry>
@@ -1890,13 +1862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/suppliers/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="118" column="117" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/payment_details/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-540">
@@ -1936,13 +1901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
           <caret line="240" column="102" selection-start-line="240" selection-start-column="102" selection-end-line="240" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/suppliers_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="153" column="9" lean-forward="true" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1988,13 +1946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/sites/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20170616162805_change_columns_from_contractual_labours.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -2009,25 +1960,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/models/supplier.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
-          <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
+        <state relative-caret-position="40">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/suppliers/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-117">
-          <caret line="159" column="62" lean-forward="true" selection-start-line="159" selection-start-column="62" selection-end-line="159" selection-end-column="62" />
+        <state>
+          <caret selection-end-line="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/suppliers/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="201" column="53" selection-start-line="201" selection-start-column="32" selection-end-line="201" selection-end-column="53" />
+        <state relative-caret-position="2360">
+          <caret line="118" column="117" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/suppliers_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="155" column="8" lean-forward="true" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/sites/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -2035,6 +1999,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="38" column="142" selection-start-line="38" selection-start-column="142" selection-end-line="38" selection-end-column="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/contractual_labours/show_contractual_labours.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/contractual_labours_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="147" column="16" selection-start-line="147" selection-start-column="16" selection-end-line="147" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/sites/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="456" column="16" selection-start-line="456" selection-start-column="16" selection-end-line="456" selection-end-column="16" />
         </state>
       </provider>
     </entry>
