@@ -19,8 +19,17 @@
                     :class => 'btn btn-primary btn-sm ' %>
     </div>
     <div class="col-md-6">
-      <%= form_tag show_site_material_path, method: :get, id: 'filters',
-                   class: 'form-inline' do %>
+      <%= form_tag show_site_material_path, method: :get, id: 'filters', class: 'form-inline' do %>
+      <% supplier_names = ['Select Supplier']
+        Supplier.all.each do |supplier|
+          if supplier.deleting_status === "false" || supplier.deleting_status.blank?
+            supplier_names.push([supplier.name.upcase,supplier.id])
+          end
+        end 
+      %>
+          <%= date_field_tag :filter_date, params[:filter_date], placeholder: 'Date',
+                      class: 'form-control', id: 'search-date' %>
+          <%= select_tag :supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: params[:supplier_id]), {class: 'form-control', id: 'search-date'} %>
           <div class="input-group">
             <%= text_field_tag :filter_query, params[:filter_query],placeholder: 'Filter by "Challan Or Bill No"',
                                class: 'form-control', id: 'search-box' %>
