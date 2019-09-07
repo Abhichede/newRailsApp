@@ -219,7 +219,7 @@ ActiveRecord::Schema.define(version: 20171216161313) do
     t.string   "gst_cost",         default: "0"
     t.boolean  "is_rate_added",    default: false
     t.string   "rate_added_by",    default: "NA"
-    t.datetime "rate_added_at",    default: '2018-06-17 18:35:52'
+    t.datetime "rate_added_at",    default: '2019-09-07 10:32:07'
   end
 
   create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
