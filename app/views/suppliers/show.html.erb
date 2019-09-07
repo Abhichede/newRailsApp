@@ -52,7 +52,19 @@
     </div>
   </div>
 </div>
+<div style="padding: 20px;">
+<%= form_tag supplier_path, method: :get, id: 'filters', class: 'form-inline' do %>
 
+    From Date: <%= date_field_tag :from_date, params[:from_date], placeholder: 'Date',
+                class: 'form-control', id: 'from-date' %>
+    To Date: <%= date_field_tag :to_date, params[:to_date], placeholder: 'Date',
+                class: 'form-control', id: 'to-date' %>
+    <%= button_tag(type: :submit, class: 'btn btn-success', id: '') do %>
+      <i class="fa fa-search"></i>
+    <% end %>
+    <%= link_to 'Print',supplier_path(supplier_params, id: @supplier.id, format: :pdf), :class => 'btn btn-primary btn-sm' %>
+<% end %>
+</div>
 <div style="overflow: auto">
   <table class="table table-responsive table-bordered">
     <thead>

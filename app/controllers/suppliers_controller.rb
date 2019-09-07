@@ -1,6 +1,7 @@
 class SuppliersController < ApplicationController
   before_action :set_supplier, only: [:show, :edit, :update, :destroy, :update_supplier_payment]
   before_action :authorised?, except: [:create]
+  helper_method :supplier_params
 
   # GET /suppliers
   # GET /suppliers.json
@@ -12,7 +13,15 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1.json
   def show
     @material = @supplier.materials.paginate(page: params[:page], per_page: 10)
+    @material = @material.where("date BETWEEN ? AND ?", params[:from_date], params[:to_date]) if params[:from_date].present? && params[:to_date].present?
     @sites = Site.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "materials"   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   # GET /suppliers/new
@@ -182,8 +191,10 @@ class SuppliersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def supplier_params
-      params.require(:supplier).permit(:name, :address, :email, :contact_number,
+      if(params[:supplier])
+        params.require(:supplier).permit(:name, :address, :email, :contact_number,
                                        :contact_person, :deleting_status, :total_amount,
                                        :paid_amount)
+      end
     end
 end

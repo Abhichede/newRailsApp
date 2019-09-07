@@ -37,6 +37,8 @@ gem 'delayed_job_active_record'
 gem 'bootstrap-multiselect-rails'
 gem 'will_paginate-bootstrap'
 gem 'sendgrid-ruby'
+gem 'wicked_pdf', '~> 1.1'
+gem 'wkhtmltopdf-binary'
 
 gem 'jquery-datatables-rails'
 

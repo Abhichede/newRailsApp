@@ -1,0 +1,35 @@
+<table class="table table-responsive table-bordered" style="width: fit-content !important;">
+    <thead>
+    <tr>
+      <th>Site Name</th>
+      <th>Material Name</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Truck No</th>
+      <th>Challan No</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Amount</th>
+      <th>GST</th>
+      <th>Supervisor</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @material.each do |material| %>
+        <tr>
+          <td><%= material.site.name.upcase %></td>
+          <td><%= material.type_of_material %></td>
+          <td><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
+          <td><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
+          <td><%= material.truck_no %></td>
+          <td><%= material.challan_no %></td>
+          <td><%=  material.quantity.to_f.round(2) %> <%= material.unit %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.rate) %>/<%= material.unit %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
+          <td>&#8377; <%= number_to_indian_currency(material.gst_cost.to_f.round(2)) %></td>
+          <td><%= material.supervisor_name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
