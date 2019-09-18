@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :flats
   resources :sites do
     get :print_all_customer_details, on: :member
+    get :print_all_supplier_details, on: :member
   end
   resource :payment_details
   resource :investments

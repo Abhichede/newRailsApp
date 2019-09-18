@@ -493,6 +493,7 @@
           <thead>
           <tr>
             <th>Supplier Name</th>
+            <th>Contact</th>
             <th>Total Amount</th>
             <th>Paid Amount</th>
             <th>Remaining amount</th>
@@ -513,6 +514,7 @@
                     <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
                       <td>  <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                                :supplier=>supplier.id} %></td>
+                      <td>  <%= supplier.contact_number %></td>
                       <%
                         @materials.where(:supplier_id => supplier.id).each do |material|
                           amount += material.amount.to_i
@@ -534,7 +536,7 @@
               <% end %>
           <% end %>
           <tr >
-            <td><strong>Totals</strong></td>
+            <td colspan="2"><strong>Totals</strong></td>
             <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
             <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
             <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
@@ -544,6 +546,7 @@
 
       </div>
       <div class="modal-footer">
+      <%= link_to 'Print', print_all_supplier_details_site_path(@site, format: :pdf), class: 'btn btn-primary btn-sm' %>
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :show_site_material,
-                                  :show_supplier_wise_material,:show_departmental_labours, :print_all_customer_details]
+                                  :show_supplier_wise_material,:show_departmental_labours, 
+                                  :print_all_customer_details, :print_all_supplier_details]
 
   # GET /sites
   # GET /sites.json
@@ -95,6 +96,16 @@ class SitesController < ApplicationController
 
   # print customer details
   def print_all_customer_details
+    respond_to do |format|
+      format.pdf do
+        render pdf: "booking_details"   # Excluding ".pdf" extension.
+      end
+    end
+  end
+  # print supplier details
+  def print_all_supplier_details
+    @materials = @site.materials.all
+    @outgoing_payment = @site.outgoing_payments.all
     respond_to do |format|
       format.pdf do
         render pdf: "booking_details"   # Excluding ".pdf" extension.

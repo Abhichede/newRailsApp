@@ -1,0 +1,54 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>Supplier Name</th>
+    <th>Contact</th>
+    <th>Total Amount</th>
+    <th>Paid Amount</th>
+    <th>Remaining amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% total_amount = 0
+      total_paid = 0 %>
+  <% if Supplier.all.count == 0 %>
+      <h5><strong>No Material For This Site</strong></h5>
+  <% else %>
+      <% Supplier.all.each do |supplier| %>
+        <% amount = 0
+            paid = 0 %>
+        <tr>
+
+          <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+            <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
+              <td>  <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
+                                                        :supplier=>supplier.id} %></td>
+              <td>  <%= supplier.contact_number %></td>
+              <%
+                @materials.where(:supplier_id => supplier.id).each do |material|
+                  amount += material.amount.to_i
+                end
+                total_amount += amount
+              %>
+              <%
+                @outgoing_payment.where(:payment_to => supplier.name, :payment_for => 'MATERIAL/SUPPLIER', :payment_for_id => supplier.id).each do |outgoing_payment|
+                  paid += outgoing_payment.amount.to_i
+                end
+                total_paid += paid
+              %>
+              <td>&#8377; <%= number_to_indian_currency(amount) %></td>
+              <td>&#8377; <%= number_to_indian_currency(paid) %></td>
+              <td>&#8377; <%= number_to_indian_currency(amount - paid) %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+  <% end %>
+  <tr >
+    <td colspan="2"><strong>Totals</strong></td>
+    <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
+    <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
+    <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
+  </tr>
+  </tbody>
+</table>
