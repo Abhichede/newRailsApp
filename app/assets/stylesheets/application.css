@@ -58,6 +58,12 @@ a>div.flats-well{
     color: #FFFFFF;
     background-color: #00897b !important;
 }
+a.flats-well {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 div.row.custom-row{
     margin-top: 0.5rem;
 }
