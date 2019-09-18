@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     collection { get :autocomplete }
   end
   resources :flats
-  resources :sites
+  resources :sites do
+    get :print_all_customer_details, on: :member
+  end
   resource :payment_details
   resource :investments
   resource :material_list

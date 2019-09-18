@@ -1,6 +1,6 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy, :show_site_material,
-                                  :show_supplier_wise_material,:show_departmental_labours]
+                                  :show_supplier_wise_material,:show_departmental_labours, :print_all_customer_details]
 
   # GET /sites
   # GET /sites.json
@@ -90,6 +90,15 @@ class SitesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # print customer details
+  def print_all_customer_details
+    respond_to do |format|
+      format.pdf do
+        render pdf: "booking_details"   # Excluding ".pdf" extension.
+      end
     end
   end
 

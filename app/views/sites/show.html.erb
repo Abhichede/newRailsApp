@@ -437,6 +437,7 @@
           <thead>
           <tr>
             <th>Customer Name (Flat No.)</th>
+            <th>Contact</th>
             <th>Total Amount</th>
             <th>Received Amount</th>
             <th>Outstanding amount</th>
@@ -449,6 +450,7 @@
             <% if flat.booking_detail %>
                 <tr>
                   <td><%= link_to flat.booking_detail.gender+' '+flat.booking_detail.customer_name, booking_detail_path(flat.booking_detail) %> (<%= flat.booking_detail.flat.flat_number %>)</td>
+                  <td><%= flat.booking_detail.customer_contact %></td>
                   <td>&#8377; <%= number_to_indian_currency(flat.booking_detail.final_sale_deed.to_f.round(2)) %></td>
                   <% total_amount = total_amount + flat.booking_detail.final_sale_deed.to_f %>
                   <td>&#8377; <%= number_to_indian_currency(flat.booking_detail.paid_amount.to_f.round(2)) %></td>
@@ -458,7 +460,7 @@
             <% end %>
           <% end %>
           <tr >
-            <td><strong>Totals</strong></td>
+            <td colspan="2"><strong>Totals</strong></td>
             <td><strong>&#8377; <%= number_to_indian_currency(total_amount.to_f.round(2)) %></strong></td>
             <td><strong>&#8377; <%= number_to_indian_currency(total_paid.to_f.round(2)) %></strong></td>
             <td><strong>&#8377; <%= number_to_indian_currency((total_amount.to_f - total_paid.to_f).round(2)) %></strong></td>
@@ -468,6 +470,7 @@
 
       </div>
       <div class="modal-footer">
+        <%= link_to 'Print', print_all_customer_details_site_path(@site, format: :pdf), class: 'btn btn-primary btn-sm' %>
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>
