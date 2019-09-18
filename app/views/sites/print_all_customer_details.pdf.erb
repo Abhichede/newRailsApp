@@ -1,6 +1,6 @@
 <table class="table table-bordered table-responsive">
   <thead>
-  <tr>
+  <tr style="page-break-inside: avoid;">
     <th>Customer Name (Flat No.)</th>
     <th>Contact</th>
     <th>Total Amount</th>
@@ -13,7 +13,7 @@
       total_paid = 0 %>
   <% @site.flats.order(:flat_number).each do |flat| %>
     <% if flat.booking_detail %>
-        <tr>
+        <tr style="page-break-inside: avoid;">
           <td><%= link_to flat.booking_detail.gender+' '+flat.booking_detail.customer_name, booking_detail_path(flat.booking_detail) %> (<%= flat.booking_detail.flat.flat_number %>)</td>
           <td><%= flat.booking_detail.customer_contact %></td>
           <td>&#8377; <%= number_to_indian_currency(flat.booking_detail.final_sale_deed.to_f.round(2)) %></td>
@@ -24,7 +24,7 @@
         </tr>
     <% end %>
   <% end %>
-  <tr >
+  <tr style="page-break-inside: avoid;">
     <td colspan="2"><strong>Totals</strong></td>
     <td><strong>&#8377; <%= number_to_indian_currency(total_amount.to_f.round(2)) %></strong></td>
     <td><strong>&#8377; <%= number_to_indian_currency(total_paid.to_f.round(2)) %></strong></td>

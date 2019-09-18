@@ -1,6 +1,6 @@
 <table class="table table-bordered table-responsive">
   <thead>
-  <tr>
+  <tr style="page-break-inside: avoid;">
     <th>Supplier Name</th>
     <th>Contact</th>
     <th>Total Amount</th>
@@ -17,7 +17,7 @@
       <% Supplier.all.each do |supplier| %>
         <% amount = 0
             paid = 0 %>
-        <tr>
+        <tr style="page-break-inside: avoid;">
 
           <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
             <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
@@ -44,7 +44,7 @@
         </tr>
       <% end %>
   <% end %>
-  <tr >
+  <tr style="page-break-inside: avoid;">
     <td colspan="2"><strong>Totals</strong></td>
     <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
     <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
