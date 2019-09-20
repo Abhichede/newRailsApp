@@ -20,7 +20,7 @@
                         :class=> 'btn btn-primary btn-sm btn-block' %>
           </div>
       <% else %>
-          <% if @flat.flat_type === 'SHOP' || @flat.flat_type === ' SHOP' %>
+          <% if @flat.flat_type.include? 'SHOP' %>
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <%= link_to 'Book SHOP',
                             {controller: 'booking_details', action: 'new', :flat_id=> @flat,

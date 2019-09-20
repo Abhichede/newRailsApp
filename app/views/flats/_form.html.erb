@@ -89,17 +89,19 @@
     <%=f.error_span(:govt_rate) %>
   </div>
   <div class="form-group">
-    <%= f.label :flat_type, :class => 'control-label col-lg-2' %>
+    <%= f.label 'select type', :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%
-        flat_types = ['SELECT FLAT TYPE']
-        flat_types += @site.type_of_structures.split(', ') %>
-      <% if params[:flat_type] === "SHOP" || @flat.flat_type === 'SHOP' %>
-          <%= f.select(:flat_type, options_for_select([['SHOP', 'SHOP']],:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
-                       {}, class: 'form-control') %>
+        flat_types = ['SELECT TYPE']
+        flat_types += @site.type_of_structures.split(', ')
+        p flat_types
+        shop_types = flat_types.map {|type| type if type.include? 'SHOP'}.compact %>
+      <% if params[:flat_type] === ("SHOP") || @flat.flat_type.include?('SHOP') %>
+          <%= f.select(:flat_type, options_for_select(shop_types,:disabled=> 'SELECT TYPE', :selected=> @flat.flat_type),
+                  {}, class: 'form-control') %>
       <% else %>
-      <%= f.select(:flat_type, options_for_select(flat_types,:disabled=> 'SELECT FLAT TYPE', :selected=> @flat.flat_type),
-                   {}, class: 'form-control') %>
+        <%= f.select(:flat_type, options_for_select(flat_types,:disabled=> 'SELECT TYPE', :selected=> @flat.flat_type),
+                  {}, class: 'form-control') %>
       <% end %>
     </div>
     <%=f.error_span(:flat_type) %>

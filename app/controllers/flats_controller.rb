@@ -29,12 +29,9 @@ class FlatsController < ApplicationController
     @flat = Flat.new(flat_params)
     session.delete(:return_to)
     session[:return_to] ||= request.referer
-    flat_type = 'FLAT'
-    if flat_params[:flat_type] === 'SHOP'
-      flat_type = 'SHOP'
-      @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number], :flat_type => 'SHOP')
+    if flat_params[:flat_type].include?('SHOP') || flat_params[:flat_type].include?('shop')
+      @flats = Flat.where(site_id: flat_params[:site_id], flat_number: flat_params[:flat_number], :flat_type => flat_params[:flat_type])
       respond_to do |format|
-
         if !@flats.blank?
           format.html { redirect_to session[:return_to] ||= request.referer, alert: 'Shop number already available' }
           format.json { render json: @flat.errors, status: 'Shop number already available' }
@@ -50,7 +47,7 @@ class FlatsController < ApplicationController
 
       end
     else
-      @flats = Flat.where("site_id = ? AND flat_number = ? AND flat_type != ?", flat_params[:site_id], flat_params[:flat_number], 'SHOP')
+      @flats = Flat.where("site_id = ? AND flat_number = ? AND flat_type NOT LIKE %?%", flat_params[:site_id], flat_params[:flat_number], 'SHOP')
       respond_to do |format|
 
         if !@flats.blank?
