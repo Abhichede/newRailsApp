@@ -47,7 +47,7 @@ class FlatsController < ApplicationController
 
       end
     else
-      @flats = Flat.where("site_id = ? AND flat_number = ? AND flat_type NOT LIKE %?%", flat_params[:site_id], flat_params[:flat_number], 'SHOP')
+      @flats = Flat.where("site_id = ? AND flat_number = ? AND flat_type NOT LIKE ?", flat_params[:site_id], flat_params[:flat_number], '%SHOP%')
       respond_to do |format|
 
         if !@flats.blank?

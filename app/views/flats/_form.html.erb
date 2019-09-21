@@ -93,13 +93,13 @@
     <div class="col-lg-4">
       <%
         flat_types = ['SELECT TYPE']
-        flat_types += @site.type_of_structures.split(', ')
-        p flat_types
-        shop_types = flat_types.map {|type| type if type.include? 'SHOP'}.compact %>
-      <% if params[:flat_type] === ("SHOP") || @flat.flat_type.include?('SHOP') %>
+        flat_types += @site.type_of_structures.split(', ') %>
+      <% if (params[:flat_type].present? && params[:flat_type] === ("SHOP")) || (@flat.flat_type.present? && @flat.flat_type.include?('SHOP')) %>
+          <% shop_types = flat_types.map {|type| type if type.include? 'SHOP'}.compact %>
           <%= f.select(:flat_type, options_for_select(shop_types,:disabled=> 'SELECT TYPE', :selected=> @flat.flat_type),
                   {}, class: 'form-control') %>
       <% else %>
+        <% flat_types = flat_types.map {|type| type unless type.include? 'SHOP'}.compact %>
         <%= f.select(:flat_type, options_for_select(flat_types,:disabled=> 'SELECT TYPE', :selected=> @flat.flat_type),
                   {}, class: 'form-control') %>
       <% end %>
