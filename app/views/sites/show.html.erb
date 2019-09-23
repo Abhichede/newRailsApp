@@ -196,7 +196,7 @@
                   <h4 class="text-center"><strong>Wing <%= letter.next %></strong></h4>
                   <hr>
                   <div class="col-md-offset-2">
-                  <% @site.flats.where('wing = ? AND (flat_type NOT LIKE ? OR flat_type NOT LIKE ?)', letter.next, '%SHOP%', '%shop%').order(:flat_number).each do |flat| %>
+                  <% @site.flats.where('wing = ? AND flat_type NOT LIKE ?', letter.next, '%SHOP%').order(:flat_number).each do |flat| %>
                       <%= link_to flat_path(flat) do %>
                         <div class="well col-md-3 col-lg-3 col-sm-5 col-xs-5 flats-well" style="margin: 0.5rem;">
                           <h5> <strong><%= flat.flat_number %></strong></h5>
