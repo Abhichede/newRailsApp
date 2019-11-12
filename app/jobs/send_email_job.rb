@@ -3,6 +3,6 @@ class SendEmailJob < ActiveJob::Base
 
   def perform(user)
     @user = user
-    BookingDetailsMailer.schedule_next_installment_mail(@user).deliver_later
+    # BookingDetailsMailer.schedule_next_installment_mail(@user).deliver_later
   end
 end

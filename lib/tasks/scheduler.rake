@@ -8,5 +8,5 @@ end
 task :testing_task => :environment do
   puts "testing scheduler and mailers"
 
-  BookingDetailsMailer.dummy_mail.deliver
+  # BookingDetailsMailer.dummy_mail.deliver
 end

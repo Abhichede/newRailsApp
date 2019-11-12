@@ -6,7 +6,7 @@ class BookingDetail < ApplicationRecord
   def self.payment_schedule
     @booking_detail = BookingDetail.where("schedule_date = #{Date.today}")
     @booking_detail.each do |booking|
-      BookingDetailsMailer.schedule_next_installment_mail(booking).deliver
+      # BookingDetailsMailer.schedule_next_installment_mail(booking).deliver
     end
   end
 

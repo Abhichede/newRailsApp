@@ -45,10 +45,10 @@ class BookingDetailsController < ApplicationController
           @booking_detail.update(:paid_amount=>@booking_detail.token_amount)
 
           #Booking Mailer
-          @mailing_users = User.where(role: 'ADMIN')
-          @mailing_users.each do |mailing_user|
-            BookingDetailsMailer.booking_details_mail(@booking_detail, mailing_user).deliver
-          end
+          # @mailing_users = User.where(role: 'ADMIN')
+          # @mailing_users.each do |mailing_user|
+          #   BookingDetailsMailer.booking_details_mail(@booking_detail, mailing_user).deliver
+          # end
 
           format.html { redirect_to @booking_detail, notice: 'Booked successfully.' }
           format.json { render :show, status: :created, location: @booking_detail }
@@ -96,10 +96,10 @@ class BookingDetailsController < ApplicationController
     if @booking_detail.update(:paid_amount=> (params[:search].to_i + @booking_detail.paid_amount.to_i).to_s )
       if @payment_detail.save
 
-        @mailing_users = User.where(role: 'ADMIN')
-        @mailing_users.each do |mailing_user|
-          BookingDetailsMailer.payment_details_mail(@payment_detail, mailing_user).deliver
-        end
+        # @mailing_users = User.where(role: 'ADMIN')
+        # @mailing_users.each do |mailing_user|
+        #   BookingDetailsMailer.payment_details_mail(@payment_detail, mailing_user).deliver
+        # end
 
         respond_to do |format|
           format.html { redirect_to @booking_detail, notice: "Rs.#{params[:search]} Amount paid." }
@@ -139,10 +139,10 @@ class BookingDetailsController < ApplicationController
       if @payment_detail.update(:payable_amount => params[:payable_amount], :payment_type => params[:payment_type],
                                 :payment_desc => params[:check_desc], :payment_date => params[:payment_date])
 
-        @mailing_users = User.where(role: 'ADMIN')
-        @mailing_users.each do |mailing_user|
-          BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
-        end
+        # @mailing_users = User.where(role: 'ADMIN')
+        # @mailing_users.each do |mailing_user|
+        #   BookingDetailsMailer.payment_details_mail(@payment_detail).deliver
+        # end
 
         respond_to do |format|
           format.html { redirect_to session[:return_to] ||= request.referer,
