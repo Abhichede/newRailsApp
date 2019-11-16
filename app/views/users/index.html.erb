@@ -5,6 +5,7 @@
       <th>Email</th>
       <th>Role</th>
       <th>Last log-in</th>
+      <th>Active</th>
     </tr>
   </thead>
 
@@ -15,6 +16,9 @@
         <td><%= user.email %></td>
         <td><%= user.role %></td>
         <td><%= Time.parse(user.last_sign_in_at.to_s).strftime('%d-%b-%Y %I:%M %P') %></td>
+        <td id="is_user_active">
+          <input type="checkbox" <%= user.active? ? 'checked' : '' %> <%= user.role == 'ADMIN' ? 'disabled' : '' %> onclick="toggleUserStatus(<%= user.id %>)">
+        </td>
       </tr>
     <% end %>
   </tbody>

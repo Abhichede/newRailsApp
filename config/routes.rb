@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   resources :partner_payments
   resources :partners
-  get 'users', to: 'users#index'
+  resources :users, only: %i[index] do
+    get :toggle_user_status, on: :member, format: :json
+  end
+
 
   resources :investors
   resources :office_expences
