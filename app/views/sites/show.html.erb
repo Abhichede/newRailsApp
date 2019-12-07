@@ -164,6 +164,8 @@
   <% if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER' %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
+    <li><a href="#contractual_labour" data-toggle="tab">Labours</a>
+    </li>
   <% else %>
     <li class="active">
       <a  href="#flats_jumbo" data-toggle="tab">Flats</a>
@@ -327,6 +329,15 @@
                           style: 'margin: 1rem; background-color: #00897b; color: #FFF !important;' %>
           <% end %>
         <% end %>
+      </div>
+    </div>
+    <div class="jumbotron tab-pane" id="contractual_labour" style="margin-top: 0.5em">
+      <div class="row">
+        <div class="col-md-3 col-lg-3">
+          <%= link_to 'Departmental',
+                      {controller: 'departmental_labours', action: 'show_departmental_labours', id: @site},
+                      class: 'btn btn-primary btn-sm btn-block' %>
+        </div>
       </div>
     </div>
   <% end %>

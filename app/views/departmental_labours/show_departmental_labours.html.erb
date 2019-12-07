@@ -52,17 +52,19 @@
               <td>&#8377; <%= number_to_indian_currency(departmental_labour.paid_amount) %></td>
               <td>&#8377; <%= number_to_indian_currency(departmental_labour.amount.to_i - departmental_labour.paid_amount.to_i) %></td>
               <td>
-                <% if departmental_labour.amount.to_f - departmental_labour.paid_amount.to_f > 0 %>
-                  <a href="#departmentalLabourPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
-                     data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
-                    Pay
-                  </a>
+                <% if !(['ENGINEER', 'SUPERVISOR'].include? current_user.role) %>
+                  <% if departmental_labour.amount.to_f - departmental_labour.paid_amount.to_f > 0 %>
+                    <a href="#departmentalLabourPaymentModal" class="btn btn-primary btn-xs btn-block" id="pay-btn-<%= departmental_labour.id %>" data-toggle="modal"
+                      data-dl-id="<%= departmental_labour.id %>" data-total-amount="<%= departmental_labour.amount %>">
+                      Pay
+                    </a>
+                  <% end %>
+                  <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
+                                                  id: departmental_labour.id}, method: :get, remote: true,
+                                class: "btn btn-primary btn-xs btn-block dept_lab_pay_det-#{departmental_labour.id}" %>
                 <% end %>
-              <%= link_to 'Payment Details',{controller: 'departmental_labours', action: 'departmental_labour_payment_details',
-                                               id: departmental_labour.id}, method: :get, remote: true,
-                            class: "btn btn-primary btn-xs btn-block dept_lab_pay_det-#{departmental_labour.id}" %>
 
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                           departmental_labour_path(departmental_labour),
                           :method => 'delete',
                           :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
