@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191116171348) do
+ActiveRecord::Schema.define(version: 20191208161627) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20191116171348) do
     t.string   "lbt"
     t.string   "stamp_duty"
     t.string   "other_charges"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "paid_amount"
     t.string   "water_charges"
     t.string   "parking_charges"
@@ -47,11 +47,12 @@ ActiveRecord::Schema.define(version: 20191116171348) do
     t.string   "schedule_date"
     t.string   "schedule_desc"
     t.string   "booking_date"
-    t.string   "gender",              default: "MR."
-    t.string   "flat_cost",           default: "0"
-    t.boolean  "is_gst",              default: false
-    t.integer  "gst_rate",            default: 0
-    t.string   "gst_cost",            default: "0"
+    t.string   "gender",                           default: "MR."
+    t.string   "flat_cost",                        default: "0"
+    t.boolean  "is_gst",                           default: false
+    t.integer  "gst_rate",                         default: 0
+    t.string   "gst_cost",                         default: "0"
+    t.float    "apartment_declaration", limit: 24, default: 0.0
   end
 
   create_table "contract_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

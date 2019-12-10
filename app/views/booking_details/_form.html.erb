@@ -110,7 +110,7 @@
     </div>
     <div class="form-group">
       <%= f.label 'Taxation', :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <% if @booking_detail.is_gst %>
           <%= f.radio_button :is_gst, false,  class: 'radio-inline' %> NON GST
           <%= f.radio_button :is_gst, true, :checked => true, class: 'radio-inline' %> GST
@@ -118,6 +118,11 @@
           <%= f.radio_button :is_gst, false, :checked => true,  class: 'radio-inline' %> NON GST
           <%= f.radio_button :is_gst, true, class: 'radio-inline' %> GST
         <% end %>
+      </div>
+      <%= f.label 'Apartment Declaration', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :apartment_declaration, :class => 'form-control', required: true,
+                         placeholder: :apartment_declaration, title: 'Apartment Declaration' %>
       </div>
     </div>
    <hr/>
