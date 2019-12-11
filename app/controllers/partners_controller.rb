@@ -11,6 +11,8 @@ class PartnersController < ApplicationController
   # GET /partners/1.json
   def show
     @partner_payment = PartnerPayment.new
+    @debits = @partner.debits
+    @credit = @partner.credit
   end
 
   # GET /partners/new

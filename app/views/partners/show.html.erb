@@ -62,7 +62,7 @@
         </thead>
 
         <tbody>
-        <% @partner.partner_payments.where(:payment_type => 'DEBIT').each do |partner_payment| %>
+        <% @debits.each do |partner_payment| %>
             <tr>
               <td><%= partner_payment.date %></td>
               <td><%= partner_payment.amount %></td>
@@ -102,7 +102,7 @@
         </thead>
 
         <tbody>
-        <% @partner.partner_payments.where(:payment_type => 'CREDIT').each do |partner_payment| %>
+        <% @credit.each do |partner_payment| %>
             <tr>
               <td><%= partner_payment.date %></td>
               <td><%= partner_payment.amount %></td>
