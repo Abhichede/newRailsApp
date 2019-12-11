@@ -57,11 +57,8 @@ class SitesController < ApplicationController
   end
 
   def show_site_material
-    @material = @site.materials.where(type_of_material: params[:type_of_material])
-    @material = @material.where(supplier_id: params[:supplier_id]) if params[:supplier_id].present?
-    @material = @material.where('type_of_material = ? AND (challan_no LIKE ? OR bill_no LIKE ?)', params[:type_of_material], "%#{params[:filter_query ]}%", "%#{params[:filter_query ]}%") if params[:filter_query].present?
-    @material = @material.where('date = ?', params[:filter_date]) if params[:filter_date].present?
-    @material = @material.order("date DESC").paginate(:page => params[:page], :per_page => 10)
+    @materials = @site.find_material(params[:type_of_material])
+    @material = filter_material
   end
 
   def show_supplier_wise_material
@@ -123,5 +120,12 @@ class SitesController < ApplicationController
     def site_params
       params.require(:site).permit(:name, :address, :no_of_flats, :no_of_shops, :site_type,
                                    :project_approved_by, :area_of_plot, :photo_path, :no_of_wings, :type_of_structures=> [])
+    end
+
+    def filter_material
+      @materials = @materials.where(supplier_id: params[:supplier_id]) if params[:supplier_id].present?
+      @materials = @materials.where('type_of_material = ? AND (challan_no LIKE ? OR bill_no LIKE ?)', params[:type_of_material], "%#{params[:filter_query ]}%", "%#{params[:filter_query ]}%") if params[:filter_query].present?
+      @materials = @materials.where('date = ?', params[:filter_date]) if params[:filter_date].present?
+      @materials = @materials.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
     end
 end

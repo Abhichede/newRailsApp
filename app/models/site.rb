@@ -17,4 +17,8 @@ class Site < ApplicationRecord
 
 
   mount_uploader :photo_path, ImageUploader
+
+  def find_material type
+    materials.where(type_of_material: type)
+  end
 end

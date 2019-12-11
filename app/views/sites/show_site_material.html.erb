@@ -68,7 +68,7 @@
       </tr>
     </thead>
     <tbody>
-    <% if @material.blank? %>
+    <% if @materials.blank? %>
       <tr>
         <td colspan="10" class="text-center"><strong><%= params[:type_of_material] %> was not supplied on this site.</strong></td>
       </tr>
@@ -77,7 +77,7 @@
           total_amount = 0.0
           total_quantity = 0.0
         %>
-      <% @material.each do |material| %>
+      <% @materials.each do |material| %>
         <tr>
           <td data-title="Date"><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
           <td data-title="Time"><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
@@ -126,7 +126,7 @@
         %>
         <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
           <tr><td colspan="6">
-            <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @material.first.unit %></strong></td>
+            <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @materials.first.unit %></strong></td>
             <td colspan="9"><strong>Total Amount: &#8377; <%= number_to_indian_currency(total_amount.round(2)) %></strong></td>
           </tr>
         <% end %>
@@ -135,7 +135,7 @@
     </tbody>
   </table>
 </div>
-<%= will_paginate @material, renderer: BootstrapPagination::Rails%>
+<%= will_paginate @materials, renderer: BootstrapPagination::Rails%>
 <!-- Modal -->
 <div class="modal fade-scale" id="addRateSiteMaterial" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
