@@ -164,7 +164,7 @@
   <% if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER' %>
     <li><a href="#material_jumbo" data-toggle="tab">Material</a>
     </li>
-    <li><a href="#contractual_labour" data-toggle="tab">Labours</a>
+    <li><a href="#contractual_labour_supervisor" data-toggle="tab">Labours</a>
     </li>
   <% else %>
     <li class="active">
@@ -331,7 +331,7 @@
         <% end %>
       </div>
     </div>
-    <div class="jumbotron tab-pane" id="contractual_labour" style="margin-top: 0.5em">
+    <div class="jumbotron tab-pane" id="contractual_labour_supervisor" style="margin-top: 0.5em">
       <div class="row">
         <div class="col-md-3 col-lg-3">
           <%= link_to 'Departmental',
