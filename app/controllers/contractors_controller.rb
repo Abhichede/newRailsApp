@@ -11,6 +11,7 @@ class ContractorsController < ApplicationController
   # GET /contractors/1
   # GET /contractors/1.json
   def show
+    @outgoing_payments = @contractor.outgoing_payments
   end
 
   # GET /contractors/new

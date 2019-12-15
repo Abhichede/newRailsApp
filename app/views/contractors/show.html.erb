@@ -37,6 +37,10 @@
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_contractor_path(@contractor), :class => 'btn btn-info btn-sm btn-block' %>
           </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
+          </div>
           <div class="col-md-4 col-sm-4 col-xs-4">
             <% link_to t('.destroy', :default => t("helpers.links.destroy")),
                        contractor_path(@contractor),
@@ -73,3 +77,48 @@
 </table>
 <%  %>
 
+<!-- Modal -->
+<div class="modal fade-scale" id="paymentDetailsModal" role="dialog">
+  <div class="modal-dialog " role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Contractor's Payment Details</h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto">
+          <table class="table table-bordered table-responsive">
+            <thead>
+            <tr>
+              <th>Date</th>
+              <th>Site</th>
+              <th>Amount</th>
+              <th>Pay. Method</th>
+              <th>Desc.</th>
+              <th>Paid By</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @outgoing_payments.each do |payment| %>
+                <tr>
+                  <td><%= Date.parse(payment["date"]).strftime('%d-%m-%Y') %></td>
+                  <td><%= Site.find(payment["site_id"]).name %></td>
+                  <td>&#8377; <%= number_to_indian_currency(payment["amount"]) %></td>
+                  <td><%= payment["payment_method"] %></td>
+                  <td><%= payment["payment_description"] %></td>
+                  <td><%= payment["paid_by"] %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="pull-right"><strong>Total paid Amount: &#8377; <%= number_to_indian_currency(@contractor.paid_amount) %></strong> </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
