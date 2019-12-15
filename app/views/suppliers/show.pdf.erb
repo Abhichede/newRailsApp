@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody>
-
+    <% @material = @supplier.materials %>
     <% @material.each do |material| %>
         <tr>
           <td><%= material.site.name.upcase %></td>
