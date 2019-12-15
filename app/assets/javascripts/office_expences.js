@@ -33,7 +33,11 @@ $(function() {
           .column(3, { search: "applied" })
           .data()
           .sum();
-        $(api.table().footer()).html("<td colspan='3'>Total:</td><td colspan='5'>$ " + data.toLocaleString() +"</td>");
+        $(api.table().footer()).html(
+          "<td colspan='3'><strong>Total: </strong></td><td colspan='5'><strong>₹ " +
+            data.toLocaleString() +
+            "</strong></td>"
+        );
       }
     });
 
