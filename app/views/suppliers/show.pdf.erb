@@ -16,6 +16,7 @@
     </thead>
     <tbody>
     <% @material = @supplier.materials %>
+    <% @material = @material.where("date BETWEEN ? AND ?", params[:from_date], params[:to_date]) if params[:from_date].present? && params[:to_date].present? %>
     <% @material.each do |material| %>
         <tr>
           <td><%= material.site.name.upcase %></td>

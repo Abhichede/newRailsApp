@@ -62,7 +62,7 @@
     <%= button_tag(type: :submit, class: 'btn btn-success', id: '') do %>
       <i class="fa fa-search"></i>
     <% end %>
-    <%= link_to 'Print',supplier_path(supplier_params, id: @supplier.id, format: :pdf), :class => 'btn btn-primary btn-sm' %>
+    <%= link_to 'Print',supplier_path(supplier_params, id: @supplier.id, from_date: params[:from_date], to_date: params[:to_date], format: :pdf), :class => 'btn btn-primary btn-sm' %>
 <% end %>
 </div>
 <div style="overflow: auto">
