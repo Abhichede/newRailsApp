@@ -62,7 +62,7 @@
               <td>&#8377; <%= number_to_indian_currency(labour.rate.to_f.round(2)) %></td>
               <td><%= labour.quantity.to_f.round(2) %> / <%= labour.unit %></td>
               <td><%= labour.gst_rate %> %</td>
-              <td>&#8377; <%= number_to_indian_currency(labour.gst_cost) %></td> <% total_gst += labour.gst_cost.to_f %>
+              <td>&#8377; <%= number_to_indian_currency(labour.gst_cost.to_f.round(2)) %></td> <% total_gst += labour.gst_cost.to_f %>
               <td><%= labour.tds_rate %> %</td>
               <td>&#8377; <%= number_to_indian_currency(labour.tds_cost) %></td><% total_tds += labour.tds_cost.to_f %>
               <td>&#8377; <%= number_to_indian_currency(labour.amount.to_f.round(2)) %></td>
