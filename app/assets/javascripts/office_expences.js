@@ -1,5 +1,16 @@
 $(function() {
+    $.fn.dataTable.Api.register('sum()', function () {
+        return this.flatten().reduce(function (a, b) {
+            if (typeof a === 'string') {
+                a = a.replace(/[^\d.-]/g, '') * 1;
+            }
+            if (typeof b === 'string') {
+                b = b.replace(/[^\d.-]/g, '') * 1;
+            }
 
+            return a + b;
+        }, 0);
+    });
     $("#material_rate").on('change keyup paste', function () {
         var material_quantity = $("input#material_quantity").val();
 
@@ -11,10 +22,19 @@ $(function() {
         }
     });
 
-    $("#office-expenses-table").dataTable({
-        'pageLength': 25,
-        "order": [[ 0, "desc" ]],
-        "columnDefs" : [{"targets":0, "type":"date-eu"}]
+    var officeExpenceTable = $("#office-expenses-table").dataTable({
+      'pageLength': 25,
+      "order": [[ 0, "desc" ]],
+      "columnDefs" : [{"targets":0, "type":"date-eu"}],
+      drawCallback: function () {
+        var api = this.api();
+        total = 0
+        data = api
+          .column(3, { search: "applied" })
+          .data()
+          .sum();
+        $(api.table().footer()).html("<td colspan='3'>Total:</td><td colspan='5'>$ " + data.toLocaleString() +"</td>");
+      }
     });
 
     // Initialize form validation on the registration form.
