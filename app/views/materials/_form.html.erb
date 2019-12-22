@@ -158,7 +158,7 @@
         <%= f.hidden_field :rate_added_by, value: current_user.user_name %>
         <%= f.hidden_field :rate_added_at, value: Time.now  %>
   <% end %>
-  <% if current_user.role === 'SUPERVISOR' %>
+  <% if ['SUPERVISOR', 'ENGINEER'].include?(current_user.role) %>
     <div class="form-group">
       <%= f.label :supervisor_name, :class => 'control-label col-lg-2' %>
       <div class="col-lg-4">
