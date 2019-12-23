@@ -263,6 +263,6 @@ class BookingDetailsController < ApplicationController
                                              :parking_charges, :maintenance_charges,:lbt,
                                              :legal_charges,:name_of_bank,:branch_of_bank,:sanctioned_amount,
                                              :employee_name, :token_amount, :payment_type, :payment_desc, :booking_date,
-                                             :final_sale_deed, :gender, :flat_cost, :is_gst, :gst_rate, :gst_cost)
+                                             :final_sale_deed, :gender, :flat_cost, :is_gst, :gst_rate, :gst_cost, :apartment_declaration, :infrastructure_development_cost)
     end
 end

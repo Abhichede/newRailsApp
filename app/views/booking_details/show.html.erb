@@ -248,6 +248,18 @@
     <div class="col-md-3 ">
       &#8377; <%= number_to_indian_currency(@booking_detail.other_charges.to_f.round(2)) %>
     </div>
+    <div class="col-md-3 ">
+      <strong>APARTMENT DECLARATION </strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= number_to_indian_currency(@booking_detail.apartment_declaration.to_f.round(2)) %>
+    </div>
+    <div class="col-md-3 ">
+      <strong>INFRASTRUCTURE DEVELOPMENT </strong>
+    </div>
+    <div class="col-md-3 ">
+      &#8377; <%= number_to_indian_currency(@booking_detail.infrastructure_development_cost.to_f.round(2)) %>
+    </div>
   </div>
 </div>
 <div class="panel panel-default">

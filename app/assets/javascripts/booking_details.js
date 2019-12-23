@@ -156,7 +156,7 @@ $(function() {
         "#booking_detail_other_charges,#booking_detail_stamp_duty,#booking_detail_maintenance_charges" +
         ",#booking_detail_registration_fees,#booking_detail_vat,#booking_detail_service_tax,#booking_detail_lbt," +
         "#booking_detail_legal_charges,#booking_detail_flat_cost, #booking_detail_gst_rate, " +
-        "#booking_detail_is_gst_false, #booking_detail_is_gst_true").on("change keyup", function () {
+        "#booking_detail_is_gst_false, #booking_detail_is_gst_true, #booking_detail_apartment_declaration, #booking_detail_infrastructure_development_cost").on("change keyup", function () {
 
         var water_charges = Number($("#booking_detail_water_charges").val());
         var parking_charges = Number($("#booking_detail_parking_charges").val());
@@ -166,6 +166,8 @@ $(function() {
 
         var pre_balance_amount = Number($("#booking_detail_flat_cost").val());
         var agreement_cost = Number($("#booking_detail_agreement_cost").val());
+        var apartment_declaration = Number($("#booking_detail_apartment_declaration").val());
+        var infrastructure_development_cost = Number($("#booking_detail_infrastructure_development_cost").val());
 
         if($("#booking_detail_is_gst_true").is(':checked')){
             var gst_rate = $("#booking_detail_gst_rate").val();
@@ -177,7 +179,7 @@ $(function() {
             var gst_cost = Number($("#booking_detail_gst_cost").val());
 
            var balance_amount = pre_balance_amount + water_charges + MSEB_charges + parking_charges + maintenance_charges +
-                    other_charges + stamp_duty + registration_fees + legal_charges + gst_cost;
+               other_charges + stamp_duty + registration_fees + legal_charges + gst_cost + apartment_declaration + infrastructure_development_cost;
 
             $("#booking_detail_final_sale_deed").attr('value', balance_amount);
 

@@ -125,6 +125,13 @@
                          placeholder: :apartment_declaration, title: 'Apartment Declaration' %>
       </div>
     </div>
+    <div class="form-group">
+      <%= f.label 'Infrastructure Development', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-4">
+        <%= f.text_field :infrastructure_development_cost, :class => 'form-control', required: true,
+                         placeholder: :infrastructure_development_cost, title: 'Infrastructure Development' %>
+      </div>
+    </div>
    <hr/>
 
     <div class="form-group">
