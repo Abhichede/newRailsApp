@@ -154,6 +154,6 @@ class MaterialsController < ApplicationController
                                        :quantity, :unit, :challan_no, :truck_no, :time, :rate,
                                        :amount, :supervisor_name,:challan_item, :is_rate_added,
                                        :rate_added_by, :rate_added_at, :description,:bill_no,
-                                       :is_gst, :gst_rate)
+                                       :is_gst, :gst_rate, {challan_photos: []})
     end
 end

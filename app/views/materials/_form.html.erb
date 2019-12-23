@@ -116,6 +116,13 @@
     <%=f.error_span(:truck_no) %>
 
   </div>
+  <div class="form-group">
+    <%= f.label 'Challan Photos', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.file_field :challan_photos, :class => 'form-control', required: true, multiple: true %>
+    </div>
+    <%=f.error_span(:bill_no) %>
+  </div>
   <% if current_user.role === 'ADMIN' || current_user.role === 'ACCOUNTANT' %>
       <div class="form-group">
         <%= f.label :bill_no, :class => 'control-label col-lg-2' %>

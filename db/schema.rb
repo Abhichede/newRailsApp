@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191223184623) do
+ActiveRecord::Schema.define(version: 20191223193618) do
 
   create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "customer_name"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20191223184623) do
     t.boolean  "is_rate_added",    default: false
     t.string   "rate_added_by",    default: "NA"
     t.datetime "rate_added_at",    default: '2019-09-07 10:32:07'
+    t.json     "challan_photos"
   end
 
   create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
