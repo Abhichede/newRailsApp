@@ -3,5 +3,5 @@ class Material < ApplicationRecord
   belongs_to :supplier
 
  # validates :challan_no, :uniqueness => true, presence: true
-  mount_uploaders :challan_photos, ImageUploader
+  mount_uploaders :challan_photos, ChallanUploader
 end

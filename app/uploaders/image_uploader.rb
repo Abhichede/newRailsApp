@@ -1,12 +1,3 @@
-CarrierWave.configure do |config|
-  config.fog_credentials = {
-      :provider               => 'AWS',
-      :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
-      :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
-  }
-  config.fog_directory  = ENV['AWS_S3_BUCKET'] # bucket name
-end
-
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
@@ -71,7 +62,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
    def filename
-     "#{model.class.to_s.underscore}_#{model.id}_#{SecureRandom.urlsafe_base64}.jpg" if original_filename
+     "#{model.class.to_s.underscore}_#{model.id}.jpg" if original_filename
    end
 
 end

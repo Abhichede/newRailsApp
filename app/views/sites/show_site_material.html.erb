@@ -94,9 +94,9 @@
             <td data-title="Amount">&#8377; <%= number_to_indian_currency(material.amount.to_f.round(2)) %></td>
           <% end %>
           <td data-title="Supervisor"><%= material.supervisor_name %></td>
-          <td data-title="Actions"><%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id,
-                                   site_id: @site, type_of_material: params[:type_of_material] },
-                          class: 'btn btn-primary btn-block btn-xs' %>
+          <td data-title="Actions">
+            <%= link_to 'Edit', {controller: 'materials', action: 'edit', id: material.id, site_id: @site, type_of_material: params[:type_of_material] }, class: 'btn btn-primary btn-block btn-xs' %>
+            <%= link_to 'Challans', '', class: 'btn btn-primary btn-block btn-xs', "data-toggle": "modal", id: "challan_#{material.id}", "data-photos": material.challan_photos.to_json, "data-target": '#showMaterialChallanPhoto' %>
           <% if current_user.role == 'ADMIN' || current_user.role == 'ACCOUNTANT' %>
                 <a class="btn btn-primary btn-block btn-xs" data-toggle="modal"
                    id="material-<%= material.id %>" data-dl-id="<%= material.id %>" data-quantity="<%= material.quantity.to_f %>" data-target="#addRateSiteMaterial">
@@ -113,6 +113,16 @@
                       $("#addRateSiteMaterial").find('input[name="material_id"]').val(material_id);
                       $("#addRateSiteMaterial").find('input[name="quantity"]').val(quantity);
                   });
+                  $("#challan_<%= material.id %>").on('click', function() {
+                    var photos = $(this).data('photos');
+                    var gallery = $('#challan_photo_gallery')
+                    var photos_tags = ''
+                    for(photo in photos) {
+                      console.log(photo)
+                      photos_tags += `<a href='${photos[photo].url}' target='_blank'><img src='${photos[photo].url}'/></>`
+                    }
+                    gallery.html(photos_tags)
+                  })
               </script>
               <!-- ************************** end ******************************** -->
           <% end %>
@@ -185,6 +195,25 @@
 
         </div>
 
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade-scale" id="showMaterialChallanPhoto" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Add Material Rate</h4>
+      </div>
+
+      <div class="modal-body">
+        <div id="challan_photo_gallery">
+          
+        </div>
+        <button type="button" class="btn btn-default btn-sm pull-right" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
