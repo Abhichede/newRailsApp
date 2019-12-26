@@ -26,16 +26,18 @@ class BookingDetail < ApplicationRecord
     other_charges = booking_detail.other_charges.to_i
     is_gst = booking_detail.is_gst
     gst_cost = booking_detail.gst_cost.to_f
+    apartment_declaration = booking_detail.apartment_declaration.to_f
+    infrastructure_development_cost = booking_detail.infrastructure_development_cost.to_f
 
     if is_gst
     all_charges = gst_cost+ stamp_duty + registration_fees+ legal_charges + mseb_charges + water_charges + parking_charges +
-        maintenance_charges + other_charges + flat_cost
+        maintenance_charges + other_charges + flat_cost + apartment_declaration + infrastructure_development_cost
 
     return all_charges
     else
       all_charges = vat + service_tax + stamp_duty + registration_fees +
           lbt + legal_charges + mseb_charges + water_charges + parking_charges +
-          maintenance_charges + other_charges + flat_cost
+          maintenance_charges + other_charges + flat_cost + apartment_declaration + infrastructure_development_cost
 
       return all_charges
     end
