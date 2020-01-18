@@ -183,7 +183,7 @@ class ContractualLaboursController < ApplicationController
   def contractual_labour_payment_details
     @contr_lab = ContractualLabour.find(params[:id])
     contractor = @contr_lab.contractor
-    @contr_lab_outgoing_payment = contractor.outgoing_payments.select{|p| p['site_id'] == @contr_lab.site_id.to_s}
+    @contr_lab_outgoing_payment = contractor.outgoing_payments.select{|p| (p['site_id'] == @contr_lab.site_id.to_s && p['payment_for_id'] == @contr_lab.id)}
     @site = Site.find(@contr_lab.site_id)
     if @contr_lab_outgoing_payment.blank?
       render status: :not_found
