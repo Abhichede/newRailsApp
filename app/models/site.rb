@@ -3,9 +3,9 @@ class Site < ApplicationRecord
   has_many :booking_details, dependent: :destroy
   has_many :materials, dependent: :destroy
   has_many :outgoing_payments, dependent: :destroy
-  has_many :departmental_labours, dependent: :destroy
-  has_many :contractual_labours, dependent: :destroy
-  has_many :contractors, dependent: :destroy
+  has_many :departmental_labours
+  has_many :contractual_labours
+  has_many :contractors
   has_many :office_expences, dependent: :destroy
 
   validates :name, uniqueness: true
