@@ -1,6 +1,6 @@
 class Investor < ApplicationRecord
 
-  has_many :investments
+  has_many :investments, dependent: :destroy
 
 
   def self.num_to_lakh(num)
