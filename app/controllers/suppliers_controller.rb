@@ -12,8 +12,8 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1
   # GET /suppliers/1.json
   def show
-    @material = @supplier.materials.paginate(page: params[:page], per_page: 10)
-    @material = @material.where("date BETWEEN ? AND ?", params[:from_date], params[:to_date]) if params[:from_date].present? && params[:to_date].present?
+    @material = @supplier.materials.order('Date(date) DESC').paginate(page: params[:page], per_page: 10)
+    @material = @material.where("date BETWEEN ? AND ?", params[:from_date], params[:to_date]).order('Date(date) DESC') if params[:from_date].present? && params[:to_date].present?
     @sites = Site.all
 
     respond_to do |format|

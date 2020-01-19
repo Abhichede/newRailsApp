@@ -4,7 +4,7 @@ $("a#investment_payment_details-<%= @investment.id %>").on('ajax:success', funct
     off();
 
     $("#inv-pay-det_tbody").replaceWith('<tbody id="inv-pay-det_tbody"></tbody>')
-    <% @investment.investment_returns.all.each do |inv_mon| %>
+    <% @investment.investment_returns.all.order('Date(date) DESC').each do |inv_mon| %>
     $("#inv-pay-det_tbody").append('<tr>' +
         '<td><%= Date.parse(inv_mon.date).strftime('%d-%m-%Y') %></td>'+
         '<td><%= inv_mon.amount %></td>'+

@@ -60,8 +60,8 @@
         <strong>Investment Amount : <span class="pull-right">&#8377; <%= number_to_indian_currency(investment.investment_amount.to_f + (total_paid_amount - paid_interest)) %></span></strong><br/>
         Interest Rate : <span class="pull-right"><%= investment.interest_rate %> %</span><br/>
         Total Months : <span class="pull-right"><%= total_months %></span><br/>
-        <strong>Total Interest : <span class="pull-right">&#8377; <%= number_to_indian_currency(total_interest) %></span></strong><br/>
-        Paid Interest : <span class="pull-right">&#8377; <%= number_to_indian_currency(paid_interest) %></span><br/>
+        <strong>Total Interest : <span class="pull-right">&#8377; <%= number_to_indian_currency(total_interest.round(2)) %></span></strong><br/>
+        Paid Interest : <span class="pull-right">&#8377; <%= number_to_indian_currency(paid_interest.round(2)) %></span><br/>
         <hr/>
         Total Amount : <span class="pull-right">&#8377; <%= number_to_indian_currency(investment.total_payable_amount.to_f.round(2) + total_paid_amount) %></span><br/>
         Total Paid Amount: <span class="pull-right">&#8377; <%= number_to_indian_currency(total_paid_amount.round(2)) %></span><br/>
