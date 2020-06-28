@@ -53,4 +53,5 @@ test:
 #
 
 production:
+  <<: *default
   database: harak_patil_in
