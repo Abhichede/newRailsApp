@@ -60,3 +60,5 @@
 #     # password: "please use keys"
 #   }
 server 'ec2-13-234-75-158.ap-south-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{web app db}
+set :rails_env, "production"
+set :puma_bind, %w[tcp://0.0.0.0:9292 unix://#{shared_path}/tmp/sockets/puma.sock]
