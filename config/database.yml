@@ -10,12 +10,12 @@
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  host: localhost
+  adapter: postgresql
+  encoding: UTF8
   pool: 5
-  username: root
+  username: ubuntu
   password: password
-  # socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -53,10 +53,4 @@ test:
 #
 
 production:
-  adapter: mysql2
-  pool: 5
-  timeout: 5000
-  username: root
-  password: root
-  database: rails_cloudsql_database
-  socket: /cloudsql/myapplication-c17e7:us-central1:rails-cloudsql-instance
+  database: harak_patil_in
