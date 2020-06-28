@@ -4,8 +4,9 @@ lock "3.8.0"
 set :user, 'deploy'
 set :application, 'newRailsApp'
 set :repo_url, 'https://github.com/Abhichede/newRailsApp.git' # Edit this to match your repository
-set :branch, :master
-set :deploy_to, '/home/ec2-user/newRailsApp'
+
+set :branch, ENV['BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
+set :deploy_to, "/home/ubuntu/projects/#{ENV['APPNAME']}"
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
