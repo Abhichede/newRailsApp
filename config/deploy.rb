@@ -9,7 +9,7 @@ set :repo_url, 'https://github.com/Abhichede/newRailsApp.git' # Edit this to mat
 set :branch, ENV['BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
 set :deploy_to, "/home/ubuntu/projects/#{ENV['APPNAME']}"
 set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 set :rvm_type, :user
 set :rvm_ruby_version, 'ruby-2.4.1' # Edit this if you are using MRI Ruby
