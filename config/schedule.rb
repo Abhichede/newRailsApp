@@ -13,9 +13,13 @@
 #   rake "some:great:rake:task"
 # end
 #
- every 10.minutes do
+ every 2.minutes do
    # runner "BookingDetail.payment_schedule"
-   puts "10 minute Cron job by whenever"
+   rake 'testing_task'
  end
+
+ every 1.day, at: '6:00 pm' do
+  rake 'daily_interest_check'
+end
 
 # Learn more: http://github.com/javan/whenever

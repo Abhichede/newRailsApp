@@ -24,3 +24,4 @@
 # Ignore application configuration
 /config/application.yml
 /config/initializers/dev_env.rb
+config/secrets.yml
