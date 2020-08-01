@@ -162,7 +162,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100">Supplier's Payment Details</h4>
+        <h4 class="modal-title w-100">Outstandings</h4>
       </div>
       <div class="modal-body">
         <div style="overflow: auto">
@@ -185,7 +185,7 @@
                       paid_amount = 0
                     %>
                     <%
-                      @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_to: @supplier.name)
+                      @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_for_id: @supplier.id)
 
                       @outgoing_payment.each do |outgoing_payment|
                         paid_amount += outgoing_payment.amount.to_f
