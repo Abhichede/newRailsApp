@@ -185,7 +185,7 @@
                       paid_amount = 0
                     %>
                     <%
-                      @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_for_id: @supplier.id)
+                      @outgoing_payment = OutgoingPayment.where(:site_id => site, payment_for_id: @supplier.id, :payment_for => 'MATERIAL/SUPPLIER')
 
                       @outgoing_payment.each do |outgoing_payment|
                         paid_amount += outgoing_payment.amount.to_f
