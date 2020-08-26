@@ -25,3 +25,5 @@
 /config/application.yml
 /config/initializers/dev_env.rb
 config/secrets.yml
+public
+config/harak-patil-nginx

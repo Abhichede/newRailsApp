@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191223193618) do
+ActiveRecord::Schema.define(version: 20200826153254) do
 
-  create_table "booking_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "booking_details", force: :cascade do |t|
     t.string   "customer_name"
     t.string   "customer_address"
     t.string   "customer_contact"
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "lbt"
     t.string   "stamp_duty"
     t.string   "other_charges"
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "paid_amount"
     t.string   "water_charges"
     t.string   "parking_charges"
@@ -47,16 +50,16 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "schedule_date"
     t.string   "schedule_desc"
     t.string   "booking_date"
-    t.string   "gender",                                     default: "MR."
-    t.string   "flat_cost",                                  default: "0"
-    t.boolean  "is_gst",                                     default: false
-    t.integer  "gst_rate",                                   default: 0
-    t.string   "gst_cost",                                   default: "0"
-    t.float    "apartment_declaration",           limit: 24, default: 0.0
-    t.float    "infrastructure_development_cost", limit: 24, default: 0.0
+    t.string   "gender",                          default: "MR."
+    t.string   "flat_cost",                       default: "0"
+    t.boolean  "is_gst",                          default: false
+    t.integer  "gst_rate",                        default: 0
+    t.string   "gst_cost",                        default: "0"
+    t.float    "apartment_declaration",           default: 0.0
+    t.float    "infrastructure_development_cost", default: 0.0
   end
 
-  create_table "contract_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contract_lists", force: :cascade do |t|
     t.string   "name"
     t.boolean  "deleting_status", default: false
     t.datetime "created_at",                      null: false
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "contract_unit"
   end
 
-  create_table "contractors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contractors", force: :cascade do |t|
     t.string   "name"
     t.string   "contact_number"
     t.string   "address"
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "paid_amount"
   end
 
-  create_table "contractual_labours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contractual_labours", force: :cascade do |t|
     t.string   "date"
     t.string   "contract_name"
     t.integer  "contractor_id"
@@ -93,11 +96,20 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "paid_amount",   default: "0"
   end
 
-  create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "priority",                 default: 0, null: false
-    t.integer  "attempts",                 default: 0, null: false
-    t.text     "handler",    limit: 65535,             null: false
-    t.text     "last_error", limit: 65535
+  create_table "customer_documents", force: :cascade do |t|
+    t.integer  "booking_detail_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "path"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
@@ -108,7 +120,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  create_table "departmental_labours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "departmental_labours", force: :cascade do |t|
     t.string   "date"
     t.string   "type_of_work"
     t.string   "amount"
@@ -118,7 +130,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.integer  "site_id"
   end
 
-  create_table "flats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "flats", force: :cascade do |t|
     t.string   "area"
     t.string   "floor"
     t.string   "flat_cost"
@@ -136,20 +148,20 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "flat_rate"
   end
 
-  create_table "investment_monthly_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "investment_monthly_interests", force: :cascade do |t|
     t.integer  "investment_id"
     t.string   "interest_rate"
     t.string   "interest"
-    t.string   "paid_interest",                   default: "0"
-    t.string   "paid_date",                       default: "nil"
-    t.string   "paid_by",                         default: "NA"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "paid_interest",    default: "0"
+    t.string   "paid_date",        default: "nil"
+    t.string   "paid_by",          default: "NA"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "month"
-    t.decimal  "pending_interest", precision: 10, default: 0
+    t.decimal  "pending_interest", default: "0.0"
   end
 
-  create_table "investment_returns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "investment_returns", force: :cascade do |t|
     t.string   "date"
     t.integer  "investment_id"
     t.string   "amount"
@@ -161,13 +173,13 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.boolean  "deleting_status", default: false
   end
 
-  create_table "investments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "investments", force: :cascade do |t|
     t.integer  "investor_id"
     t.string   "investment_date"
     t.string   "investment_amount"
     t.string   "interest_rate",          default: "0"
     t.string   "created_by"
-    t.string   "deleting_status",        default: "0"
+    t.string   "deleting_status",        default: "f"
     t.string   "returned_amount",        default: "0"
     t.string   "last_return_date",       default: ""
     t.string   "last_month_interest",    default: ""
@@ -179,7 +191,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "returning_date",         default: "NA"
   end
 
-  create_table "investors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "investors", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.string   "contact_number"
@@ -190,14 +202,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "material_challans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "material_id"
-    t.text     "photo",       limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "material_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "material_lists", force: :cascade do |t|
     t.string   "material_name"
     t.string   "material_unit"
     t.boolean  "deleting_status"
@@ -205,7 +210,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "materials", force: :cascade do |t|
     t.string   "date"
     t.integer  "supplier_id"
     t.integer  "site_id"
@@ -228,11 +233,11 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "gst_cost",         default: "0"
     t.boolean  "is_rate_added",    default: false
     t.string   "rate_added_by",    default: "NA"
-    t.datetime "rate_added_at",    default: '2019-09-07 10:32:07'
+    t.datetime "rate_added_at",    default: '2020-06-28 10:37:30'
     t.json     "challan_photos"
   end
 
-  create_table "office_expences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "office_expences", force: :cascade do |t|
     t.string   "date"
     t.string   "description"
     t.string   "amount"
@@ -246,7 +251,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.integer  "site_id"
   end
 
-  create_table "outgoing_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "outgoing_payments", force: :cascade do |t|
     t.string   "payment_for"
     t.string   "amount"
     t.string   "payment_method"
@@ -261,7 +266,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.integer  "payment_for_id"
   end
 
-  create_table "partner_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "partner_payments", force: :cascade do |t|
     t.string   "payment_type"
     t.string   "date"
     t.string   "amount"
@@ -272,7 +277,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "partners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "partners", force: :cascade do |t|
     t.string   "name"
     t.string   "mobile"
     t.string   "other_desc"
@@ -280,7 +285,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "payment_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "payment_details", force: :cascade do |t|
     t.string   "payable_amount"
     t.string   "payment_type"
     t.string   "payment_desc"
@@ -290,15 +295,15 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "payment_date"
   end
 
-  create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sites", force: :cascade do |t|
     t.string   "name"
-    t.text     "address",             limit: 65535
+    t.text     "address"
     t.integer  "no_of_flats"
     t.string   "type_of_structures"
     t.string   "unit_number"
     t.string   "area_of_plot"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "project_approved_by"
     t.string   "photo_path"
     t.string   "site_type"
@@ -306,7 +311,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "no_of_shops"
   end
 
-  create_table "supplier_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "supplier_payments", force: :cascade do |t|
     t.integer  "supplier_id"
     t.integer  "material_id"
     t.integer  "site_id"
@@ -319,7 +324,7 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "suppliers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "suppliers", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.string   "email"
@@ -332,13 +337,13 @@ ActiveRecord::Schema.define(version: 20191223193618) do
     t.string   "paid_amount"
   end
 
-  create_table "type_of_structures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "type_of_structures", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"

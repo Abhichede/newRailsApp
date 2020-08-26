@@ -2,6 +2,7 @@ class BookingDetail < ApplicationRecord
   belongs_to :site
   belongs_to :flat
   has_many :payment_details, dependent: :destroy
+  has_many :customer_documents, dependent: :destroy
 
   def self.payment_schedule
     @booking_detail = BookingDetail.where("schedule_date = #{Date.today}")

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :booking_details  do
     collection { get :autocomplete }
+    resources :customer_documents, only: %i[create update show index]
   end
   resources :flats
   resources :sites do
