@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require hermitage
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
@@ -52,11 +53,11 @@ var show_spinner = function () {
 };
 
 function on() {
-    $("#overlay").css('display', 'block');
+    $("#__overlay").css('display', 'block');
 }
 
 function off() {
-    $("#overlay").css('display', "none");
+    $("#__overlay").css('display', "none");
 }
 
 function blinker() {

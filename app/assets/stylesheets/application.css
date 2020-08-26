@@ -328,7 +328,7 @@ a{
 #contractual_labour_unit{
     width: 50%;
 }
-#overlay {
+#__overlay {
     position: fixed;
     display: none;
     width: 100%;

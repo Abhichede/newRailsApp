@@ -126,6 +126,10 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hermitage (0.0.7)
+      coffee-rails
+      jquery-rails
+      rails (>= 3.2)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.9.3)
@@ -301,6 +305,7 @@ DEPENDENCIES
   devise-bootstrap-views
   figaro
   font-awesome-rails
+  hermitage
   jbuilder (~> 2.5)
   jquery-datatables-rails
   jquery-rails

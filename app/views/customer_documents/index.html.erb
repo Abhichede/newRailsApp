@@ -17,19 +17,6 @@
     </div>
   </div>
   <div class="row">
-    <%= @customer_documents.each do |document| %>
-      <div class="col-md-4">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h4 class="card-title">
-              <strong><%= document.name.upcase %></strong>
-            </h4>
-          </div>
-          <div class="panel-body">
-            <%= image_tag document.path.url, class: 'img-responsive' %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render_gallery_for @customer_documents, original: -> customer_document { customer_document.path.url}, thumbnail: -> customer_document { customer_document.path.url}, title: 'name', list_tag: :div, item_class: 'col-md-4', item_tag: :span %>
   </div>
 </div>

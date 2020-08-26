@@ -37,6 +37,7 @@ gem 'will_paginate-bootstrap'
 gem 'sendgrid-ruby'
 gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf-binary'
+gem 'hermitage'
 
 gem 'jquery-datatables-rails'
 
