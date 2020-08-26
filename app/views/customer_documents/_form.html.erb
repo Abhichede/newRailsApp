@@ -1,0 +1,48 @@
+<%= form_for @customer_document, url: booking_detail_customer_documents_path, :html => { :class => "form-horizontal flat" } do |f| %>
+
+  <% if @customer_document.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@customer_document.errors.count, "error") %> prohibited this customer document from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @customer_document.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<div class="container">
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :name, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :description, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:description) %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'File', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.file_field :path, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:path) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <input type="submit" name="commit" value="Save" class="btn btn-primary", id="customer-documents-save-btn" data-disable-with="Create Customer Document">
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                :back, :class => 'btn btn-default' %>
+    </div>
+  </div>
+</div>
+<% end %>

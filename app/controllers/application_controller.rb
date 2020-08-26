@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   ## following code prevent rails to save cache page caching
-  before_filter :set_cache_headers
+  # before_filter :set_cache_headers
 
   def authorised?
     if current_user.role === 'SUPERVISOR' || current_user.role === 'ENGINEER'

@@ -13,10 +13,10 @@ class CustomerDocumentsController < ApplicationController
   end
 
   def create
-    @customer_document = CustomerDocument.new(customer_document_params)
+    @customer_document = booking_details.customer_documents.build(customer_document_params)
       respond_to do |format|
         if @customer_document.save!
-          format.html { redirect_to @booking_detail, notice: 'Booked successfully.' }
+          format.html { redirect_to booking_detail_customer_documents_path, notice: 'Created successfully.' }
         else
           format.html { render :new }
         end
@@ -30,6 +30,6 @@ class CustomerDocumentsController < ApplicationController
   end
 
   def customer_document_params
-    params.require(:customer_documents).permit(:name, :description, :path)
+    params.require(:customer_document).permit(:name, :description, :path)
   end
 end

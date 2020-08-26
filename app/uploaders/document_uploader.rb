@@ -1,9 +1,7 @@
-class ImageUploader < CarrierWave::Uploader::Base
-
+class DocumentUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
-  include CarrierWaveDirect::Uploader
+  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.development?
@@ -27,45 +25,26 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-    process resize_to_fill: [420, 280]
+  # process scale: [200, 300]
   #
   # def scale(width, height)
   #   # do something
   # end
 
-  def resize(width, height, gravity = 'Center')
-    manipulate! do |img|
-      img.combine_options do |cmd|
-        cmd.resize "#{width}"
-        if img[:width] < img[:height]
-          cmd.gravity gravity
-          cmd.background "rgba(255,255,255,0.0)"
-          cmd.extent "#{width}x#{height}"
-        end
-      end
-      img = yield(img) if block_given?
-      img
-    end
-  end
-
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
-  # version :medium do
-  #  process :resize_to_fit => [320, 260]
-  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-   def extension_whitelist
-     %w(jpg jpeg gif png)
-   end
+  def extension_whitelist
+    %w(jpg jpeg gif png pdf)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-   def filename
-     "#{model.class.to_s.underscore}_#{model.id}.jpg" if original_filename
-   end
-
+  # def filename
+  #   "something.jpg" if original_filename
+  # end
 end
