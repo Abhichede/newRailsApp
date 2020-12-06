@@ -50,7 +50,7 @@
     %>
     <div class="panel-heading"><strong>DEBITS</strong><span class="pull-right">Total: <%= total_debit %></span></div>
     <div class="panel-body">
-      <table class="table table-bordered table-responsive">
+      <table class="table table-bordered table-responsive" id="partner_debit_table">
         <thead>
         <tr>
           <th>Date</th>
@@ -81,23 +81,26 @@
             </tr>
         <% end %>
         </tbody>
+        <tfoot>
+          <tr>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>
-  <div class="col-lg-1">
-
-  </div>
-  <div class="col-lg-5 panel panel-primary" style="overflow: auto; max-height: 50rem">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-6 panel panel-primary" style="overflow: auto; max-height: 50rem">
     <div class="panel-heading"><strong>CREDITS</strong><span class="pull-right">Total: <%= total_credit %></span></div>
     <div class="panel-body">
-      <table class="table table-bordered table-responsive">
+      <table class="table table-bordered table-responsive" id="partner_credit_table">
         <thead>
         <tr>
           <th>Date</th>
           <th>Amount</th>
           <th>Payment method</th>
           <th>Payment desc</th>
-          <th colspan="2"></th>
+          <th></th>
+          <th></th>
         </tr>
         </thead>
 
@@ -121,6 +124,10 @@
             </tr>
         <% end %>
         </tbody>
+        <tfoot>
+          <tr>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>
