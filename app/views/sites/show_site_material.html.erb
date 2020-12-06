@@ -78,6 +78,10 @@
           total_quantity = 0.0
         %>
       <% @materials.each do |material| %>
+        <%
+          total_quantity = total_quantity + material.quantity.to_f
+          total_amount = total_amount + material.amount.to_f
+        %>
         <tr>
           <td data-title="Date"><%= Date.parse(material.date).strftime('%d-%m-%Y') %></td>
           <td data-title="Time"><%= Time.strptime(material.time, '%H:%M').strftime('%I:%M %P') %></td>
@@ -128,12 +132,6 @@
           <% end %>
         </tr>
       <% end %>
-        <%
-          @site.materials.where(:type_of_material => params[:type_of_material]).each do |material|
-            total_quantity = total_quantity + material.quantity.to_f
-            total_amount = total_amount + material.amount.to_f
-          end
-        %>
         <% if current_user.role != 'SUPERVISOR' || current_user.role != 'ENGINEER' %>
           <tr><td colspan="6">
             <strong>Total Quantity: <%= total_quantity.round(2) %> <%= @materials.first.unit %></strong></td>
