@@ -18,7 +18,7 @@
     <div class="panel-heading">
       <h4 class="card-title">
         <strong><%= site.name.upcase %></strong>
-        <% if site.materials.where(is_rate_added: false).count > 0 %>
+        <% if site.materials_remaining_rate.count > 0 %>
           <span class="label label-danger pull-right blink_me">New material to add rate</span>
         <% end %>
       </h4>

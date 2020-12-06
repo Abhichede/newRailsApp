@@ -132,7 +132,7 @@
     </div>
   </div>
 
-  <% if @site.materials.where(is_rate_added: false).count > 0 %>
+  <% if @site.materials_remaining_rate.count > 0 %>
     <div class="col-lg-6 col-md-6 col-lg-offset-6 col-md-offset-6">
       <div class="panel panel-danger">
         <div class="panel-heading">
@@ -140,7 +140,7 @@
         </div>
         <div class="panel-body" style="max-height: 20rem; overflow: auto;">
           <ul class="list-group">
-            <% @site.materials.where(is_rate_added: false).group(:type_of_material).count.each do |m| %>
+            <% @site.materials_remaining_rate.group(:type_of_material).count.each do |m| %>
               <li class="list-group-item">
                 <%= link_to m[0], show_site_material_path(id: @site.id, type_of_material: m[0]) %>
                 <span class="pull-right label label-danger">

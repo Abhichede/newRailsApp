@@ -21,4 +21,8 @@ class Site < ApplicationRecord
   def find_material type
     materials.where(type_of_material: type)
   end
+
+  def materials_remaining_rate
+    self.materials.where("CAST(amount as float) = 0.0")
+  end
 end
