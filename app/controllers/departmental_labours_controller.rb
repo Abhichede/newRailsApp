@@ -174,6 +174,7 @@ class DepartmentalLaboursController < ApplicationController
     @departmental_labour = DepartmentalLabour.new
     @site = Site.find(params[:id])
     @departmental_labours = @site.departmental_labours.paginate(page: params[:page], per_page: 10).order("#{:date} DESC")
+    @departmental_labours = @departmental_labours.where(date: params[:date]) if params[:date]
   end
 
   def departmental_labour_payment_details

@@ -21,7 +21,16 @@
         </button>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
-
+        <%= form_tag show_departmental_labours_path, method: :get, id: 'filters', class: 'form-inline' do %>
+          <%= hidden_field_tag :id, params[:id], value: params[:id]  %>
+          <div class="input-group">
+            <%= date_field_tag :date, params[:date], placeholder: 'Date', class: 'form-control', id: 'search-date' %>
+            <span class="input-group-btn">
+              <%= button_tag(type: :submit, class: 'btn btn-success', id: '') do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </span>
+        <%end%>
       </div>
     </div>
   </div>
