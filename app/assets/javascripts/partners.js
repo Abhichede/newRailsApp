@@ -5,7 +5,6 @@ $(function(){
   $("#partner_debit_table, #partner_credit_table").dataTable({
     'pageLength': 10,
     "order": [[ 0, "desc" ]],
-    "columnDefs" : [{"targets":0, "type":"date-eu"}],
     drawCallback: function () {
       var api = this.api();
       total = 0
@@ -13,7 +12,6 @@ $(function(){
         .column(1, { search: "applied" })
         .data()
         .sum();
-      console.log(data, $(api.table().footer()))
       $(api.table().footer()).html(
         "<td><strong>Total: </strong></td><td colspan='2'><strong>₹ " +
           data.toLocaleString() +

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200826153254) do
+ActiveRecord::Schema.define(version: 20210220170520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 20200826153254) do
 
   create_table "partner_payments", force: :cascade do |t|
     t.string   "payment_type"
-    t.string   "date"
+    t.date     "date"
     t.string   "amount"
     t.string   "payment_method"
     t.string   "payment_desc"
