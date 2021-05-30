@@ -47,9 +47,9 @@
     </thead>
     <tbody>
     <%
-      total = 0.0
-      total_paid = 0.0
-      total_remaining = 0.0
+      total = @all_departmental_labours.sum{|entry| entry.amount.to_f}
+      total_paid = @all_departmental_labours.sum{|entry| entry.paid_amount.to_f}
+      total_remaining = total - total_paid
     %>
     <% if @departmental_labours.blank? %>
         <tr>
@@ -57,11 +57,6 @@
         </tr>
     <% else %>
         <% @departmental_labours.each do |departmental_labour| %>
-            <%
-              total += departmental_labour.amount.to_f
-              total_paid += departmental_labour.paid_amount.to_f
-              total_remaining += (departmental_labour.amount.to_f - departmental_labour.paid_amount.to_f)
-            %>
             <tr>
               <td><%= Date.parse(departmental_labour.date).strftime('%d-%m-%Y') %></td>
               <td><%= departmental_labour.type_of_work %></td>
@@ -106,9 +101,9 @@
     <% end %>
       <tr>
       <th colspan=2 >Total</th>
-      <td ><%= total.round(2) %></td>
-      <td ><%= total_paid.round(2) %></td>
-      <td ><%= total_remaining.round(2) %></td>
+      <td ><%= number_to_currency(total, unit: "₹", precision: 2, delimiter: ',') %></td>
+      <td ><%= number_to_currency(total_paid, unit: "₹", precision: 2, delimiter: ',') %></td>
+      <td ><%= number_to_currency(total_remaining, unit: "₹", precision: 2, delimiter: ',') %></td>
       </tr>
     </tbody>
   </table>

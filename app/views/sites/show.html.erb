@@ -100,7 +100,11 @@
   <div class="col-md-6">
 
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Outstanding</strong></div>
+      <div class="panel-heading">
+        <strong>Report</strong>
+        <span class="pull-right label label-info">Total Expenditure:<br/> <%= number_to_indian_currency(get_spent) %></span>
+        <span class="pull-right label label-info">Total Income: <br/><%= number_to_indian_currency(get_income) %></span>
+      </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
@@ -113,21 +117,47 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
             <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
+                    data-toggle="modal" data-target="#contractorsOutstanding">Contractor Overview</button>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
                     data-toggle="modal" data-target="#siteWiseOfficeExpense">Site Expenses
             </button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <strong>Report</strong>
-        <span class="pull-right label label-info">Total Expenditure:<br/> <%= number_to_indian_currency(get_spent) %></span>
-        <span class="pull-right label label-info">Total Income: <br/><%= number_to_indian_currency(get_income) %></span>
-      </div>
-      <div cstss="panel-body">
-        <div id="piechart"></div>
+        <br/>
+        <div class="row">
+          <table class="table table-bordered table-responsive">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Total expense</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Site</td>
+                <td><%= number_to_currency(get_total_oe.to_f, unit: "₹", precision: 2, delimiter: ',') %></td>
+              </tr>
+              <tr>
+                <td>Materials</td>
+                <td><%= number_to_currency(get_total_m.to_f, unit: "₹", precision: 2, delimiter: ',') %></td>
+              </tr>
+              <tr>
+                <td>Contractors</td>
+                <td><%= number_to_currency(get_total_cl.to_f, unit: "₹", precision: 2, delimiter: ',') %></td>
+              </tr>
+              <tr>
+                <td>Departmental</td>
+                <td><%= number_to_currency(get_total_dl.to_f, unit: "₹", precision: 2, delimiter: ',') %></td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <th><%= number_to_currency((get_total_oe.to_f + get_total_m.to_f + get_total_cl.to_f + get_total_dl.to_f), unit: "₹", precision: 2, delimiter: ',') %></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -562,6 +592,61 @@
             <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
             <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
           </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+      <%= link_to 'Print', print_all_supplier_details_site_path(@site, format: :pdf), class: 'btn btn-primary btn-sm' %>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="modal fade-scale" id="contractorsOutstanding" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Outstanding</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th>Contract Name</th>
+            <th>Contractor Name</th>
+            <th>Total Amount</th>
+            <th>Paid Amount</th>
+            <th>Remaining amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @site.contractual_labours_grouped_by_contractor.count == 0 %>
+              <h5><strong>No Contracts</strong></h5>
+          <% else %>
+              <% total_amount = 0; total_paid = 0; %>
+              <% @site.contractual_labours_grouped_by_contractor.each do |labours_data| %>
+                <tr>
+                  <td><%= link_to labours_data[:contract_name], show_contractual_labours_path(contract_name: labours_data[:contract_name], id: @site.id) %></td>
+                  <td><%= labours_data[:contractor_name] %></td>
+                  <td><%= number_to_currency(labours_data[:total_amount], unit: "₹", precision: 2, delimiter: ',') %></td>
+                  <td><%= number_to_currency(labours_data[:total_paid], unit: "₹", precision: 2, delimiter: ',') %></td>
+                  <td><%= number_to_currency(labours_data[:remaining_amount], unit: "₹", precision: 2, delimiter: ',') %></td>
+                  <% total_amount +=  labours_data[:total_amount] %>
+                  <% total_paid +=  labours_data[:total_paid] %>
+                </tr>
+              <% end %>
+              <tr>
+              <th colspan="2">Total: </th>
+              <th><%= number_to_currency(total_amount, unit: "₹", precision: 2, delimiter: ',') %></th>
+              <th><%= number_to_currency(total_paid, unit: "₹", precision: 2, delimiter: ',') %></th>
+              <th><%= number_to_currency(total_amount - total_paid, unit: "₹", precision: 2, delimiter: ',') %></th>
+              </tr>
+          <% end %>
           </tbody>
         </table>
 

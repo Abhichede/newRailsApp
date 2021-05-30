@@ -50,7 +50,7 @@ module SitesHelper
     total_cl = 0.0
     @expenditure_source = @site.contractual_labours
     @expenditure_source.each do |expenditure|
-      total_cl += expenditure.amount.to_f.round
+      total_cl += expenditure.paid_amount.to_f.round
     end
     return total_cl
   end
@@ -59,7 +59,7 @@ module SitesHelper
     total_dl = 0.0
     @expenditure_source = @site.departmental_labours
     @expenditure_source.each do |expenditure|
-      total_dl += expenditure.amount.to_f.round
+      total_dl += expenditure.paid_amount.to_f.round
     end
     return total_dl
   end

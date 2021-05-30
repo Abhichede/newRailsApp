@@ -173,8 +173,13 @@ class DepartmentalLaboursController < ApplicationController
   def show_departmental_labours
     @departmental_labour = DepartmentalLabour.new
     @site = Site.find(params[:id])
-    @departmental_labours = @site.departmental_labours.paginate(page: params[:page], per_page: 10).order("#{:date} DESC")
-    @departmental_labours = @departmental_labours.where(date: params[:from_date]..params[:to_date]) if params[:from_date] && params[:to_date]
+    @all_departmental_labours = @site.departmental_labours
+    if params[:from_date] && params[:to_date]
+      @all_departmental_labours = @all_departmental_labours.where(date: params[:from_date]..params[:to_date])
+      @departmental_labours = @all_departmental_labours.paginate(page: params[:page], per_page: 10).order("#{:date} DESC")
+    else
+      @departmental_labours = @all_departmental_labours.paginate(page: params[:page], per_page: 10).order("#{:date} DESC")
+    end
   end
 
   def departmental_labour_payment_details
