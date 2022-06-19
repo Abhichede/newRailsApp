@@ -40,7 +40,6 @@ $(document).ready(function () {
     });
 
     setInterval(blinker, 1000);
-
 });
 
 var hide_spinner = function () {

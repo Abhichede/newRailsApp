@@ -95,7 +95,7 @@ ul.nav.navbar-nav>li>a:hover,div.navbar-header>a.navbar-brand:hover{
     background-color: rgba(44, 121, 127, 0.86);
     color: #FFFFFF;
 }
-.dropdown-menu{
+.nav .dropdown-menu{
     -webkit-box-shadow: none;
     background-color: #006064;
     border: none !important;

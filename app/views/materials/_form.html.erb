@@ -27,10 +27,10 @@
         end %>
       <% if !@material.supplier.blank? %>
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: @material.supplier.id),
-                       {}, class: 'form-control', autocomplete: 'off') %>
+                       {}, class: 'form-control selectpicker', autocomplete: 'off', "data-show-subtext": false, "data-live-search": true) %>
       <% else %>
           <%= f.select(:supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: 'Select Supplier'),
-                       {}, class: 'form-control') %>
+                       {}, class: 'form-control selectpicker', "data-show-subtext":true, "data-live-search": true) %>
       <% end %>
     </div>
     <div class="col-lg-1 col-sm-2 col-xs-2">
