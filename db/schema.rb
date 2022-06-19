@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210220170520) do
+ActiveRecord::Schema.define(version: 20220619170558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20210220170520) do
     t.string   "path"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "contractor_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -128,6 +129,11 @@ ActiveRecord::Schema.define(version: 20210220170520) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "site_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.integer "customer_document_id"
+    t.string  "path"
   end
 
   create_table "flats", force: :cascade do |t|

@@ -1,8 +1,8 @@
-class CustomerDocumentsController < ApplicationController
+class ContractorDocumentsController < ApplicationController
   before_action :authorised?
 
   def index
-    @customer_documents = booking_details.customer_documents
+    @customer_documents = contractor.customer_documents
   end
 
   def show
@@ -13,11 +13,11 @@ class CustomerDocumentsController < ApplicationController
   end
 
   def create
-    @customer_document = booking_details.customer_documents.build(customer_document_params)
+    @customer_document = contractor.customer_documents.build(customer_document_params)
       respond_to do |format|
         if @customer_document.save!
           build_images(@customer_document)
-          format.html { redirect_to booking_detail_customer_documents_path, notice: 'Created successfully.' }
+          format.html { redirect_to contractor_contractor_documents_path, notice: 'Created successfully.' }
         else
           format.html { render :new }
         end
@@ -26,8 +26,8 @@ class CustomerDocumentsController < ApplicationController
 
   private
 
-  def booking_details
-    @booking_details ||= BookingDetail.find(params[:booking_detail_id])
+  def contractor
+    @contractor ||= Contractor.find(params[:contractor_id])
   end
 
   def customer_document_params

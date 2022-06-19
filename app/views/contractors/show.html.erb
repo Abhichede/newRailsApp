@@ -41,6 +41,11 @@
             <button class="btn btn-primary btn-sm btn-block" id="payment-btn-on-booking"
                     data-toggle="modal" data-target="#paymentDetailsModal">Payment Details</button>
           </div>
+          <div class="col-md-6">
+            <%= link_to 'Documents',
+                    contractor_contractor_documents_path(@contractor),
+                    :class => 'btn btn-warning btn-sm btn-block' %>
+          </div>
           <div class="col-md-4 col-sm-4 col-xs-4">
             <% link_to t('.destroy', :default => t("helpers.links.destroy")),
                        contractor_path(@contractor),

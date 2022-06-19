@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :investors
   resources :office_expences
-  resources :contractors
+  resources :contractors do
+    resources :contractor_documents, only: %i[create update show index new edit]
+  end
   resources :contractual_labours
   resources :departmental_labours
   get 'type_of_structures/index'

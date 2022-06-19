@@ -179,7 +179,8 @@
 
               <% @sites.each do |site| %>
                   <tr>
-                    <td><%= site.name.upcase %></td>
+                    <td><%= link_to site.name.upcase, {controller: 'sites', action: 'show_supplier_wise_material', :id => site.id,
+                                                           :supplier=>@supplier.id} %></td>
                     <%
                       total_amount = 0
                       paid_amount = 0
