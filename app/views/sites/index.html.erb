@@ -35,10 +35,10 @@
     </div>
     <div class="card-data text-muted text-center">
       <% if site.site_type === "Residential+Commercial" || site.site_type === "Commercial" %>
-          Booked Flats <span class="badge"> <%= (site.flats.where(:booking_status=>1).count - site.flats.where(:flat_type => 'SHOP', :booking_status => 1).count) %></span>
-          Booked Shops <span class="badge"> <%= site.flats.where(:booking_status=>1, :flat_type => 'SHOP').count %></span>
+          Booked Flats <span class="badge"> <%= (site.flats.booked_flats.count - site.flats.booked_shops.count) %></span>
+          Booked Shops <span class="badge"> <%= site.flats.booked_shops.count %></span>
       <% else %>
-          Booked Flats <span class="badge"> <%= site.flats.where(:booking_status=>1).count %></span>
+          Booked Flats <span class="badge"> <%= site.flats.booked_flats.count %></span>
       <% end %>
     </div>
   </div>

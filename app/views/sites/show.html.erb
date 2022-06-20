@@ -57,15 +57,15 @@
             <div class="label label-primary label-sm">
                Flats
               <span class="badge">
-                <%= "#{@site.no_of_flats.to_i - (@site.flats.where(:booking_status=>1).count -
-                    @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count )}" %>/<%= @site.no_of_flats %>
+                <%= "#{@site.no_of_flats.to_i - (@site.flats.booked_flats.count -
+                    @site.flats.booked_shops.count )}" %>/<%= @site.no_of_flats %>
                </span>
             </div>
             &nbsp;
             <div class="label label-primary label-sm">
               Shops
               <span class="badge">
-                <%= "#{@site.no_of_shops.to_i - @site.flats.where(:flat_type => 'SHOP', :booking_status=>1).count}" %>/<%= @site.no_of_shops %>
+                <%= "#{@site.no_of_shops.to_i - @site.flats.booked_shops.count}" %>/<%= @site.no_of_shops %>
               </span>
             </div>
           </h5>
