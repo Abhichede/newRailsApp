@@ -559,10 +559,9 @@
               <% Supplier.all.each do |supplier| %>
                 <% amount = 0
                    paid = 0 %>
-                <tr>
-
-                  <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
-                    <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
+                <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
+                  <% if @site.materials.where(supplier_id: supplier.id).count > 0 %>
+                    <tr>
                       <td>  <%= link_to supplier.name.capitalize, {controller: 'sites', action: 'show_supplier_wise_material', :id => @site,
                                                                :supplier=>supplier.id} %></td>
                       <td>  <%= supplier.contact_number %></td>
@@ -581,9 +580,9 @@
                       <td>&#8377; <%= number_to_indian_currency(amount) %></td>
                       <td>&#8377; <%= number_to_indian_currency(paid) %></td>
                       <td>&#8377; <%= number_to_indian_currency(amount - paid) %></td>
-                    <% end %>
+                    </tr>
                   <% end %>
-                </tr>
+                <% end %>
               <% end %>
           <% end %>
           </tbody>
