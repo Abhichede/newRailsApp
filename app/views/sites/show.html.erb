@@ -540,7 +540,7 @@
       </div>
 
       <div class="modal-body">
-        <table class="table table-bordered table-responsive">
+        <table class="table table-bordered table-responsive" id="suppliers_outstanding_table">
           <thead>
           <tr>
             <th>Supplier Name</th>
@@ -586,15 +586,16 @@
                 </tr>
               <% end %>
           <% end %>
-          <tr >
-            <td colspan="2"><strong>Totals</strong></td>
-            <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
-            <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
-            <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
-          </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Totals</strong></td>
+              <td><strong>&#8377; <%= number_to_indian_currency(total_amount) %></strong></td>
+              <td><strong>&#8377; <%= number_to_indian_currency(total_paid) %></strong></td>
+              <td><strong>&#8377; <%=  number_to_indian_currency(total_amount - total_paid) %></strong></td>
+            </tr>
+          </tfoot>
         </table>
-
       </div>
       <div class="modal-footer">
       <%= link_to 'Print', print_all_supplier_details_site_path(@site, format: :pdf), class: 'btn btn-primary btn-sm' %>
@@ -725,6 +726,7 @@
 <script type="text/javascript">
     (function($) {
         fakewaffle.responsiveTabs(['xs', 'sm']);
+        $("#suppliers_outstanding_table").dataTable();
     })(jQuery);
 </script>
 
