@@ -44,8 +44,8 @@ $(document).ready(function () {
     for (var amountToWordIndex = 0; amountToWordIndex < amountToShowInWords.length; amountToWordIndex++) {
         var numberFieldInLoop = amountToShowInWords[amountToWordIndex];
         if (numberFieldInLoop) {
-            numberFieldInLoop.addEventListener("input", function () {
-                $(numberFieldInLoop).next()[0].innerHTML = inWords(numberFieldInLoop.value);
+            numberFieldInLoop.addEventListener("input", function (event) {
+                $(event.target).next("span")[0].innerHTML = inWords(event.target.value);
             });
         }
     }
