@@ -195,8 +195,9 @@
                                class: 'form-control search-box', id: 'search-box', required: true %>
             </div>
             <div class="form-group">
-            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
-                               class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
+            <%= number_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control amount-to-be-shown-in-words', id: 'dept_labour_payable_amount', required: true %>
+            <span id="amount_in_number"> </span>
             </div>
             <div class="form-group">
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),
@@ -246,8 +247,9 @@
                                class: 'form-control search-box', id: 'search-box', required: true %>
           </div>
           <div class="form-group">
-            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount',
-                               class: 'form-control', id: 'dept_labour_payable_amount', required: true %>
+            <%= number_field_tag :amount, params[:amount],placeholder: 'Amount',
+                               class: 'form-control amount-to-be-shown-in-words', id: 'dept_labour_payable_amount', required: true %>
+            <span id="amount_in_number"></span><br/>
             <span class="note">Amount should not be greater than <strong id="max_amount_text"></strong></span>
           </div>
           <div class="form-group">

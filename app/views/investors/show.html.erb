@@ -165,7 +165,8 @@
             <div class="form-group">
               <%= f.label :investment_amount, :class => 'control-label col-lg-4' %>
               <div class="col-lg-8">
-                <%= f.text_field :investment_amount, :class => 'form-control', required: true %>
+                <%= f.number_field :investment_amount, :class => 'form-control amount-to-be-shown-in-words', required: true %>
+                <span id="amount_in_number"></span>
               </div>
               <%=f.error_span(:investment_amount) %>
             </div>
@@ -240,8 +241,9 @@
                                class: 'form-control', id: 'inv-date-picker', required: true %>
             </div>
             <div class="form-group">
-            <%= text_field_tag :amount, params[:amount],placeholder: 'Amount', id: 'investment_return_amount',
-                               class: 'form-control', required: true %>
+            <%= number_field_tag :amount, params[:amount],placeholder: 'Amount', id: 'investment_return_amount',
+                               class: 'form-control amount-to-be-shown-in-words', required: true %>
+            <span id="amount_in_number"></span>
             </div>
             <div class="form-group">
             <%= select_tag :payment_method, options_for_select([['Payment Method'],['CASH','CASH'],['CHEQUE','CHEQUE']],:disabled=> 'Payment Method'),

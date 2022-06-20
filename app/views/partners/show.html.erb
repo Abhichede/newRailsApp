@@ -182,7 +182,8 @@
             <div class="form-group">
               <%= f.label :amount, :class => 'control-label col-lg-4' %>
               <div class="col-lg-8">
-                <%= f.text_field :amount, :class => 'form-control', required: true %>
+                <%= f.number_field :amount, :class => 'form-control amount-to-be-shown-in-words', required: true %>
+                <span id="amount_in_number"></span>
               </div>
               <%=f.error_span(:amount) %>
             </div>
