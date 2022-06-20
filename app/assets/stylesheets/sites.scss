@@ -8,3 +8,11 @@
   text-overflow: ellipsis;
   font-size: 14px;
 }
+.site-card .panel-body {
+  height: 235px;
+  overflow: hidden;
+}
+.site-card .panel-heading {
+  height: 55px;
+  overflow: hidden;
+}
