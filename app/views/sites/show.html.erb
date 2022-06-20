@@ -727,7 +727,11 @@
 <script type="text/javascript">
     (function($) {
         fakewaffle.responsiveTabs(['xs', 'sm']);
-        $("#suppliers_outstanding_table").dataTable();
+        $("#suppliers_outstanding_table").DataTable({
+            paging: false,
+            ordering: false,
+            info: false,
+        });
     })(jQuery);
 </script>
 
