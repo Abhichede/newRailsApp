@@ -41,11 +41,11 @@ $(document).ready(function () {
 
     setInterval(blinker, 1000);
     var amountToShowInWords = document.getElementsByClassName('amount-to-be-shown-in-words')
-    for (let index = 0; index < amountToShowInWords.length; index++) {
-        const numberField = amountToShowInWords[index];
-        if (numberField) {
-            numberField.addEventListener("input", function () {
-                $(numberField).next()[0].innerHTML = inWords(numberField.value);
+    for (var amountToWordIndex = 0; amountToWordIndex < amountToShowInWords.length; amountToWordIndex++) {
+        var numberFieldInLoop = amountToShowInWords[amountToWordIndex];
+        if (numberFieldInLoop) {
+            numberFieldInLoop.addEventListener("input", function () {
+                $(numberFieldInLoop).next()[0].innerHTML = inWords(numberFieldInLoop.value);
             });
         }
     }
