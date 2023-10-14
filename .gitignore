@@ -28,3 +28,4 @@ config/secrets.yml
 public
 config/harak-patil-nginx
 .DS_Store
+newRailsApp.iml
