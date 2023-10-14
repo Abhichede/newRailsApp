@@ -15,7 +15,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
+.idea
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
@@ -27,3 +27,4 @@
 config/secrets.yml
 public
 config/harak-patil-nginx
+.DS_Store
