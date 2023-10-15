@@ -75,6 +75,6 @@ class BookingFormsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_form_params
-      params.require(:booking_form).permit(:date, :name, :address, :phone_number, :adhar, :pan_number, :building_name, :unit_no, :type_of_unit, :area, :floor, :flat_cost, :mseb_and_other_charges, :water_charges, :booking_charges, :balance_amount, :gst, :allotted_parking_charges, :maintenance_charges, :loan_possible, :actual_agreement_cost, :government_consideration, :stamp_duty, :registration_charges, :final_sale_deed_fees, :apartment_declaration, :infrastructure_and_development, :amenities_difference, :terms_and_conditions, :extras, :legal_charges, :package_amount, :booking_cost_type)
+      params.require(:booking_form).permit(:date, :name, :address, :phone_number, :adhar, :pan_number, :building_name, :unit_no, :type_of_unit, :area, :floor, :flat_cost, :mseb_and_other_charges, :water_charges, :booking_charges, :balance_amount, :gst, :allotted_parking_charges, :maintenance_charges, :loan_possible, :actual_agreement_cost, :government_consideration, :stamp_duty, :registration_charges, :other_charges, :project_address, :infrastructure_and_development, :amenities_difference, :terms_and_conditions, :extras, :legal_charges, :package_amount, :booking_cost_type)
     end
 end

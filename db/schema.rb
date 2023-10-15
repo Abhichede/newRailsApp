@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20231015115617) do
+ActiveRecord::Schema.define(version: 20231015135659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,10 +84,10 @@ ActiveRecord::Schema.define(version: 20231015115617) do
     t.integer  "government_consideration"
     t.integer  "stamp_duty"
     t.integer  "registration_charges"
-    t.integer  "final_sale_deed_fees"
+    t.integer  "other_charges"
     t.integer  "apartment_declaration"
     t.integer  "infrastructure_and_development"
-    t.text     "amenities_difference"
+    t.text     "project_address"
     t.text     "terms_and_conditions"
     t.text     "extras"
     t.datetime "created_at",                     null: false
