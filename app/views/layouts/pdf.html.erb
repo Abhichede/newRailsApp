@@ -6,16 +6,15 @@
     <%= wicked_pdf_javascript_include_tag "number_pages" %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+      body {
+          background-color: white !important;
+          padding-top: 0;
+          padding-bottom: 0;
+      }
       table { overflow: visible !important; }
       thead { display: table-header-group }
       tfoot { display: table-row-group }
       tr { page-break-inside: avoid }
-      .booking-form.table-bordered {
-          border: 1px solid #000 !important;
-      }
-      .booking-form.table-bordered tr {
-          padding: -2px;
-      }
       .booking-form.table-bordered > thead > tr > th,
       .booking-form.table-bordered > tbody > tr > th,
       .booking-form.table-bordered > tfoot > tr > th,
@@ -23,7 +22,7 @@
       .booking-form.table-bordered > tbody > tr > td,
       .booking-form.table-bordered > tfoot > tr > td {
           border: 1px solid #000 !important;
-          padding-left: 5px;
+          padding: 2px 0 0 5px;
       }
       .key-value-container {
           display: flex;
