@@ -13,7 +13,7 @@ class BookingFormsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@booking_form.name}", page_size: "A4"
+        render pdf: "#{@booking_form.name}", page_size: "A4", zoom: 2
       end
     end
   end
