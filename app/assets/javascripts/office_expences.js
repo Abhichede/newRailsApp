@@ -22,7 +22,7 @@ $(function() {
         }
     });
 
-    var officeExpenceTable = $("#office-expenses-table").dataTable({
+    var officeExpenceTable = $("#office-expenses-table,#booking-forms-table").dataTable({
       'pageLength': 25,
       "order": [[ 0, "desc" ]],
       "columnDefs" : [{"targets":0, "type":"date-eu"}],

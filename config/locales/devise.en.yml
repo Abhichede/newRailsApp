@@ -63,3 +63,13 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  booking_forms:
+    index:
+      new: "New Booking"
+      title: "Booking Forms"
+    new:
+      title: "New booking form"
+    show:
+      edit: "Edit"
+      title: "Booking form"
+  back: "Back"

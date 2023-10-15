@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  name: MyString
+  address: MyText
+  phone_number: MyString
+  adhar: MyString
+  pan_number: MyString
+  building_name: MyString
+  unit_no: 
+  type_of_unit: MyString
+  area: MyString
+  floor: MyString
+  flat_cost: 1
+  mseb_and_other_charges: 1
+  water_charges: 1
+  booking_charges: 1
+  balance_amount: 1
+  gst: 1
+  allotted_parking_charges: 1
+  maintainance_charges: 1
+  loan_possible: 1
+  actual_agreement_cost: 1
+  government_consideration: 1
+  stamp_duty: 1
+  registration_charges: 1
+  final_sale_deed_fees: 1
+  apartment_declaration: 1
+  infrastructure_and_development: 1
+  amenities_difference: MyText
+  terms_and_consitions: MyText
+  extras: MyText
+
+two:
+  date: MyString
+  name: MyString
+  address: MyText
+  phone_number: MyString
+  adhar: MyString
+  pan_number: MyString
+  building_name: MyString
+  unit_no: 
+  type_of_unit: MyString
+  area: MyString
+  floor: MyString
+  flat_cost: 1
+  mseb_and_other_charges: 1
+  water_charges: 1
+  booking_charges: 1
+  balance_amount: 1
+  gst: 1
+  allotted_parking_charges: 1
+  maintainance_charges: 1
+  loan_possible: 1
+  actual_agreement_cost: 1
+  government_consideration: 1
+  stamp_duty: 1
+  registration_charges: 1
+  final_sale_deed_fees: 1
+  apartment_declaration: 1
+  infrastructure_and_development: 1
+  amenities_difference: MyText
+  terms_and_consitions: MyText
+  extras: MyText

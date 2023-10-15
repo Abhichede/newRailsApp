@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :booking_forms
   resources :partner_payments
   resources :partners
   resources :users, only: %i[index] do

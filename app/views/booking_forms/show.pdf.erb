@@ -1,0 +1,412 @@
+<table style="font-size: 14px;border-color: black" class="table-bordered booking-form">
+    <tr>
+      <td colspan="2" style="padding-left: 5px">
+        <div style="font-weight: bold; font-size: 16px;">Harak Patil Group of Companies</div>
+        <div><span style="font-weight: bold">Office Address:</span> Lam Road, Opp Deolali Super specility Hospital, Deolali, Camp, Nashik, Maharashtra 422401</div>
+        <div><span style="font-weight: bold">Email:</span> Info@harakpatil.com</div>
+        <div><span style="font-weight: bold">Mob: </span> 8888018889</div>
+      </td>
+      <td colspan="1">
+        <%= image_tag('HARAK_PATIL_GROUP.jpg', width: 100, height: 100) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p style="padding-left: 180pt;text-indent: 0pt;font-weight: bold">BOOKING APPLICATION FORM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Date: <%= Date.parse(@booking_form.date).strftime('%d-%m-%Y') %></span></p>
+      </td>
+    </tr>
+    <tr style="background-color: #E0B768;">
+      <td colspan="3">
+        <div style="text-align:center;font-weight: bold">PERSONAL DETAILS</div>
+      </td>
+    </tr>
+  <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">NAME OF PURCHASER:</span>
+          <span><%= @booking_form.name %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">ADDRESS:</span>
+          <span><%= @booking_form.address %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">MOBILE:</span>
+            <span><%= @booking_form.phone_number %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">ADHAR NO:</span>
+            <span><%= @booking_form.adhar %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">PAN NO:</span>
+            <span><%= @booking_form.pan_number %></span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background-color: #E0B768;">
+      <td colspan="3">
+        <div style="text-align:center;font-weight: bold">PROJECT DETAILS</div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="key-value-container">
+          <span class="key">PROJECT NAME:</span>
+            <span><%= @booking_form.building_name %></span>
+        </div>
+      </td>
+      <td>
+        <div class="key-value-container">
+          <span class="key">UNIT NO:</span>
+          <span><%= @booking_form.unit_no %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">PROJECT ADDRESS:</span>
+          <span><%= @booking_form.building_name %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="key-value-container">
+          <span class="key">TYPE OF UNIT:</span>
+            <span><%= @booking_form.type_of_unit %></span>
+        </div>
+      </td>
+      <td>
+        <div class="key-value-container">
+          <span class="key">AREA:</span>
+            <span><%= @booking_form.area %></span>
+        </div>
+      </td>
+      <td>
+        <div class="key-value-container">
+          <span class="key">FLOOR:</span>
+            <span><%= @booking_form.floor %></span>
+        </div>
+      </td>
+    </tr>
+  <tr style="background-color: #E0B768;">
+    <td colspan="3">
+      <div style="text-align:center;font-weight: bold">COST DETAILS</div>
+    </td>
+  </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">FLAT / SHOP COST :</span>
+            <span class="value">
+              <%= number_to_indian_currency(@booking_form.flat_cost) %>
+              <% if @booking_form.booking_cost_type == "WITH_PACKAGE" %>
+                <span class="with-package" style="font-weight: bold;">(INCLUDING ALL CHARGES)</span>
+              <% end %>
+            </span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">GOVERNMENT CONSIDERATION :</span>
+          <span class="value"><%= number_to_indian_currency(@booking_form.government_consideration) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">ACTUAL AGREEMENT COST :</span>
+          <span class="value"><%= number_to_indian_currency(@booking_form.actual_agreement_cost) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">M.S.E.B. CHARGES :</span>
+            <span class="value"><%= number_to_indian_currency(@booking_form.mseb_and_other_charges) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">WATER CHARGES :</span>
+            <span class="value"><%= number_to_indian_currency(@booking_form.water_charges) %></span>
+        </div>
+      </td>
+    </tr>
+  <tr>
+    <td colspan="3">
+      <div class="key-value-container">
+        <span class="key">ALLOTTED PARKING CHARGES :</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.allotted_parking_charges) %></span>
+      </div>
+    </td>
+  </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">MAINTENANCE CHARGES :</span>
+            <span class="value"><%= number_to_indian_currency(@booking_form.maintenance_charges) %></span>
+        </div>
+      </td>
+    </tr>
+  <tr>
+    <td  colspan="3">
+      <div class="key-value-container">
+        <span class="key">STAMP DUTY :</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.stamp_duty) %></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="key-value-container">
+        <span class="key">REGISTRATION FEES :</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.registration_charges) %></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="key-value-container">
+        <span class="key">GST:</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.gst) %></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="key-value-container">
+        <span class="key">LEGAL CHARGES:</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.legal_charges) %></span>
+      </div>
+    </td>
+  </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">APARTMENT DECLARATION FEES :</span>
+            <span class="value"><%= number_to_indian_currency(@booking_form.apartment_declaration) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">INFRASTRUCTURE &amp; DEVLOPMENT:</span>
+            <span class="value"><%= number_to_indian_currency(@booking_form.infrastructure_and_development) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">OTHER CHARGES:</span>
+          <span class="value" class="value"><%= number_to_indian_currency(@booking_form.infrastructure_and_development) %></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="key-value-container">
+          <span class="key">BOOKING CHARGES:</span>
+          <span class="value"><%= number_to_indian_currency(@booking_form.booking_charges) %></span>
+        </div>
+      </td>
+    </tr>
+  <tr>
+    <td colspan="3">
+      <div class="key-value-container">
+        <span class="key">LOAN POSSIBLE :</span>
+        <span class="value"><%= number_to_indian_currency(@booking_form.loan_possible) %></span>
+      </div>
+    </td>
+  </tr>
+    <tr style="font-weight: bold">
+      <td colspan="1">
+        <p style="text-align: left;">SALES TEAM</p>
+        <p style="text-align: left">
+          SIGNATURE:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+        <p style="text-align: left">
+          NAME:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+      </td>
+      <td colspan="2">
+        <p style="text-align: left;">PURCHASER</p>
+        <p style="text-align: left">
+          SIGNATURE:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+        <p style="text-align: left">
+          NAME:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+      </td>
+    </tr>
+</table>
+<br /><br />
+<div style="border: 1px solid; padding: 5px">
+  <table class="table table-bordered booking-form documents" style="font-weight: bold;font-size: 13px">
+    <tr style="background-color: #E0B768;">
+      <td colspan="3" style="text-align: center">DOCUMENTS REQUIRED FOR LOAN</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SALARIED PERSON</td>
+      <td style="text-align: center">SELF EMPLOYEE</td>
+    </tr>
+    <tr>
+      <td>1) SALARY SLIP LAST 6 MONTHS ORIGINAL</td>
+      <td>1) COMPUTATION OF INCOME FOR LAST 3 YRS</td>
+    </tr>
+    <tr>
+      <td>2) FORM NO 16 A</td>
+      <td>2) P &amp; L AND BALANCE SHEET FOR LAST 3 YRS</td>
+    </tr>
+    <tr>
+      <td>3) LIC POLICY XEROX</td>
+      <td>3) COPY OF IT RETUNRS FOR LAST 3 YRS</td>
+    </tr>
+    <tr>
+      <td>4) PASSPORT SIZE PHOTO 1+1</td>
+      <td>4) PASSPORT SIZE PHOTO 1+1</td>
+    </tr>
+    <tr>
+      <td>5) 1% PROCCESING FEE CHEQUE</td>
+      <td>5) 1% PROCCESING FEE CHEQUE</td>
+    </tr>
+    <tr>
+      <td>6) BANK STATEMENT FOR LAST 6 MONTHS</td>
+      <td>6) BANK STATEMENT FOR LAST 6 MONTHS</td>
+    </tr>
+    <tr>
+      <td>7) PAN CARD</td>
+      <td>7) PAN CARD</td>
+    </tr>
+    <tr>
+      <td>8) ADHAR CARD</td>
+      <td>8) ADHAR CARD</td>
+    </tr>
+    <tr><td>9) SERVICE CERTIFICATE</td><td></td></tr>
+    <tr><td>10) JOINING LETTER</td><td></td></tr>
+  </table>
+  <div style="font-size: 14px; font-weight: bold">
+    NOTE: <i>UPON THE FULL AND FINAL PAYMENT OF THE AFOREMENTIONED AMOUNT, POSSESSION WILL BE GRANTED AFTER THAT.</i>
+  </div>
+  <p style="margin-top:0pt; margin-bottom:8pt;">&nbsp;</p>
+  <p style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:14pt;"><strong><u>Terms &amp; Conditions</u></strong></p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>A minimum token amount of either 10% of the property's cost or 5,00,000/- (whichever is greater) is necessary when making a booking.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Payment for the property should be made in accordance with the predefined payment slabs established at the time of booking.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>All required inspections and checks must be conducted before taking possession of the property. No exceptions or excuses will be considered thereafter.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>If the property is canceled, a deduction of 10% from the amount paid will be applicable.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>If the property is canceled, a minimum of 60 days' notice is necessary for the return of funds.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>If there are any alterations or additions made to the existing property, any additional charges incurred will be the responsibility of the customers.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="font-family:'Noto Sans Symbols';">●</span><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>If there are any changes in taxes or government charges, such as Stamp Duty, Registration Fees, and G.S.T., the customer will be responsible for paying the revised amount.</p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:14pt;">&nbsp;</p>
+  <br />
+  <br />
+  <table style="width: 100%">
+    <tbody>
+      <tr style="font-weight: bold">
+        <td>
+          <p style="text-align: left;">BUILDER</p>
+          <p style="text-align: left">
+            SIGNATURE:
+            <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </p>
+          <p style="text-align: left">
+            NAME:
+            <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </p>
+        </td>
+        <td colspan="1"></td>
+        <td>
+          <p style="text-align: left;">PURCHASER</p>
+          <p style="text-align: left">
+            SIGNATURE:
+            <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </p>
+          <p style="text-align: left">
+            NAME:
+            <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+<div style="border: 1px solid; padding: 5px">
+<p style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:14pt;"><strong><u>Declaration</u></strong></p>
+<p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;"><span style="width:9.54pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>I/We affirm that the Booking Form has been provided at our request, and all the fields in the Booking Form have been accurately completed to the best of our knowledge. We have thoroughly reviewed and comprehended the Terms & Conditions outlined above and commit to adhere to them without any reservations, subject to potential amendments over time.</p>
+<br />
+<br />
+<table>
+  <tr style="font-weight: bold">
+    <td colspan="2">
+    </td>
+    <td colspan="1">
+      <p style="text-align: left;">PURCHASER</p>
+      <p style="text-align: left">
+        SIGNATURE:
+        <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </p>
+      <p style="text-align: left">
+        NAME:
+        <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </p>
+    </td>
+  </tr>
+</table>
+<br />
+<hr>
+<% if @booking_form.extras %>
+  <p style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:14pt;"><strong><u>Additional Remarks</u></strong></p>
+  <p style="margin-top:0pt; margin-left:36pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:108%; font-size:14pt;">
+    <%= @booking_form.extras %>
+  </p>
+  <br />
+  <table>
+    <tr style="font-weight: bold">
+      <td colspan="2">
+      </td>
+      <td colspan="1">
+        <p style="text-align: left;">PURCHASER</p>
+        <p style="text-align: left">
+          SIGNATURE:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+        <p style="text-align: left">
+          NAME:
+          <span style="text-decoration: underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </p>
+      </td>
+    </tr>
+  </table>
+<% end %>
+</div>

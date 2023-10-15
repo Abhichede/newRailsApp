@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header row">
+  <div class="col-md-3">
+    <h2><%=t '.title', :default => 'Booking forms' %></h2>
+  </div>
+  <div class="col-md-6"></div>
+  <div class="col-md-3">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_booking_form_path,
+                :class => 'btn btn-primary' %>
+  </div>
+</div>
+<div style="overflow: auto">
+<table class="table table-bordered table-responsive" id="booking-forms-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @booking_forms.each do |booking_form| %>
+      <tr>
+        <td><%= booking_form.date %></td>
+        <td><%= booking_form.name %></td>
+        <td><%= booking_form.address %></td>
+        <td><%= booking_form.phone_number %></td>
+        <td><%= link_to 'Print', booking_form_path(booking_form.id, format: :pdf) %></td>
+        <td><%= link_to 'Edit', edit_booking_form_path(booking_form) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

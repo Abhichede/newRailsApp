@@ -1,0 +1,29 @@
+.checkmark {
+  position: relative;
+}
+
+.checkmark::before,
+.checkmark::after {
+  content: "";
+  position: absolute;
+  width: 3px; /* Adjust the size of the checkmark */
+  height: 10px; /* Adjust the size of the checkmark */
+  background-color: #000; /* Green color */
+}
+.checkmark::after {
+  height: 20px; /* Adjust the size of the checkmark */
+}
+
+.checkmark::before {
+  top: 21px; /* Adjust the positioning */
+  left: 14px; /* Adjust the positioning */
+  transform: rotate(-45deg); /* Rotate the checkmark */
+  transform-origin: left top;
+}
+
+.checkmark::after {
+  top: 7px; /* Adjust the positioning */
+  left: 20px; /* Adjust the positioning */
+  transform: rotate(45deg); /* Rotate the checkmark */
+  transform-origin: left bottom;
+}

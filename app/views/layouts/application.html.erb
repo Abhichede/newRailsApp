@@ -91,6 +91,10 @@
                   Partners
               <% end %>
             </li>
+            <li><%= link_to booking_forms_path  do %>
+                  Booking Form
+              <% end %>
+            </li>
           </ul>
           <div class="nav navbar-form navbar-left">
             <%= form_tag search_booking_details_path, method: :get, id: 'customer_search_form',

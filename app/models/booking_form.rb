@@ -1,0 +1,2 @@
+class BookingForm < ApplicationRecord
+end

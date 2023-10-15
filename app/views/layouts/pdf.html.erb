@@ -10,6 +10,35 @@
       thead { display: table-header-group }
       tfoot { display: table-row-group }
       tr { page-break-inside: avoid }
+      .booking-form.table-bordered {
+          border: 1px solid #000 !important;
+      }
+      .table-bordered.booking-form.documents.table>thead>tr>th, .table-bordered.booking-form.documents.table>tbody>tr>th, .table-bordered.booking-form.documents.table>tfoot>tr>th, .table-bordered.booking-form.documents.table>thead>tr>td, .table-bordered.booking-form.documents.table>tbody>tr>td, .table-bordered.booking-form.documents.table>tfoot>tr>td{
+        padding: 2px;
+      }
+      .booking-form.table-bordered > thead > tr > th,
+      .booking-form.table-bordered > tbody > tr > th,
+      .booking-form.table-bordered > tfoot > tr > th,
+      .booking-form.table-bordered > thead > tr > td,
+      .booking-form.table-bordered > tbody > tr > td,
+      .booking-form.table-bordered > tfoot > tr > td {
+          border: 1px solid #000 !important;
+          padding-left: 5px
+      }
+      .key-value-container {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 5px;
+      }
+      .key-value-container > .key {
+          float: left;
+          padding-right: 30px;
+          font-weight: bold;
+      }
+      .key-value-container > .value {
+          float: right;
+          margin-right: 250px;
+      }
     </style>
   </head>
   <body onload='number_pages'>

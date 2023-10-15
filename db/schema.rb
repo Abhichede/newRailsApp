@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220619170558) do
+ActiveRecord::Schema.define(version: 20231015115617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,44 @@ ActiveRecord::Schema.define(version: 20220619170558) do
     t.string   "gst_cost",                        default: "0"
     t.float    "apartment_declaration",           default: 0.0
     t.float    "infrastructure_development_cost", default: 0.0
+  end
+
+  create_table "booking_forms", force: :cascade do |t|
+    t.string   "date"
+    t.string   "name"
+    t.text     "address"
+    t.string   "phone_number"
+    t.string   "adhar"
+    t.string   "pan_number"
+    t.string   "building_name"
+    t.string   "unit_no"
+    t.string   "type_of_unit"
+    t.string   "area"
+    t.string   "floor"
+    t.integer  "flat_cost"
+    t.integer  "mseb_and_other_charges"
+    t.integer  "water_charges"
+    t.integer  "booking_charges"
+    t.integer  "balance_amount"
+    t.integer  "gst"
+    t.integer  "allotted_parking_charges"
+    t.integer  "maintenance_charges"
+    t.string   "loan_possible"
+    t.integer  "actual_agreement_cost"
+    t.integer  "government_consideration"
+    t.integer  "stamp_duty"
+    t.integer  "registration_charges"
+    t.integer  "final_sale_deed_fees"
+    t.integer  "apartment_declaration"
+    t.integer  "infrastructure_and_development"
+    t.text     "amenities_difference"
+    t.text     "terms_and_conditions"
+    t.text     "extras"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "legal_charges"
+    t.integer  "package_amount"
+    t.string   "booking_cost_type"
   end
 
   create_table "contract_lists", force: :cascade do |t|

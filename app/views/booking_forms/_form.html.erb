@@ -1,0 +1,218 @@
+<%= form_for(booking_form, :html => { :class => "form-horizontal office_expence" }) do |f| %>
+  <% if @booking_form.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@booking_form.errors.count, "error") %> prohibited this booking form from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @booking_form.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.date_field :date, :class => 'form-control', required: true, value: @booking_form.date %>
+    </div>
+    <%=f.error_span(:date) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_area :address, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone_number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :phone_number, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :adhar, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :adhar, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pan_number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :pan_number, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :building_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :building_name, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :unit_no, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :unit_no, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type_of_unit, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :type_of_unit, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :area, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :area, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :floor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_field :floor, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :booking_cost_type, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.radio_button :booking_cost_type, "WITH_PACKAGE",  class: 'radio-inline' %> WITH PACKAGE
+      <%= f.radio_button :booking_cost_type, "WITHOUT_PACKAGE", :checked => true, class: 'radio-inline' %> WITHOUT PACKAGE
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :flat_cost, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :flat_cost, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mseb_and_other_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :mseb_and_other_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :water_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :water_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :booking_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :booking_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :balance_amount, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :balance_amount, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gst, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :gst, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :allotted_parking_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :allotted_parking_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :maintenance_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :maintenance_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :loan_possible, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :loan_possible, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :actual_agreement_cost, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :actual_agreement_cost, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :government_consideration, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :government_consideration, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :stamp_duty, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :stamp_duty, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :registration_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :registration_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :legal_charges, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :legal_charges, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :final_sale_deed_fees, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.number_field :final_sale_deed_fees, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :extras, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+      <%= f.text_area :extras, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit 'Save', :class => 'btn btn-primary btn-sm' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  booking_forms_path, :class => 'btn btn-default btn-sm' %>
+    </div>
+  </div>
+<% end %>
