@@ -28,6 +28,7 @@ gem "font-awesome-rails"
 gem 'pg'
 gem 'whenever'
 gem 'rails_12factor', group: :production
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem 'carrierwave'
 gem 'carrierwave_direct'
 gem 'mini_magick'

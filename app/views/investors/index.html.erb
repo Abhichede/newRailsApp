@@ -1,12 +1,23 @@
 <%- model_class = Investor -%>
-<div class="page-header">
-  <h3><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>
-    <span class="pull-right">
-        <%= link_to 'Add Investor',
-                    new_investor_path,
-                    :class => 'btn btn-primary' %>
+<div class="page-header investors-page-header">
+  <h3><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h3>
+  <span class="action-section">
+        <%= form_tag investors_path, method: :get, id: 'investor_search_form',
+                     class: 'form-inline' do %>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :search_investor, params[:search_investor],placeholder: 'Search',
+                                 class: 'form-control', id: 'investor-search-box' %>
+              <span class="input-group-btn">
+                  <%= button_tag(type: :submit, class: 'btn btn-success btn-sm', id: '') do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                </span>
+            </div>
+        <% end %>
+    <%= link_to 'Add Investor',
+                new_investor_path,
+                :class => 'btn btn-primary' %>
     </span>
-  </h3>
 </div>
 
 <div class="row">
