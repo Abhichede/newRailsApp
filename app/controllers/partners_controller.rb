@@ -4,7 +4,10 @@ class PartnersController < ApplicationController
   # GET /partners
   # GET /partners.json
   def index
-    @partners = Partner.all.paginate(:page => params[:page], :per_page => 8)
+    if params.has_key? :search_partner
+      @partners = Partner.where('lower(name) LIKE ?', "%#{params[:search_partner].downcase}%").paginate(:page => params[:page], :per_page => 8)
+    else @partners = Partner.all.paginate(:page => params[:page], :per_page => 8)
+    end
   end
 
   # GET /partners/1
