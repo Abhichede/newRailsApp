@@ -6,8 +6,8 @@ class InvestorsController < ApplicationController
   # GET /investors.json
   def index
     if params.has_key? :search_investor
-      @investors = Investor.where('lower(name) LIKE ?', "%#{params[:search_investor].downcase}%").paginate(:page => params[:page], :per_page => 6)
-    else @investors = Investor.all.paginate(:page => params[:page], :per_page => 6)
+      @investors = Investor.where('lower(name) LIKE ?', "%#{params[:search_investor].downcase}%").paginate(:page => params[:page], :per_page => 6).order(:name)
+    else @investors = Investor.all.paginate(:page => params[:page], :per_page => 6).order(:name)
     end
   end
 
