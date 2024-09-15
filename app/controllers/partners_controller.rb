@@ -5,8 +5,8 @@ class PartnersController < ApplicationController
   # GET /partners.json
   def index
     if params.has_key? :search_partner
-      @partners = Partner.where('lower(name) LIKE ?', "%#{params[:search_partner].downcase}%").paginate(:page => params[:page], :per_page => 8).order(:name)
-    else @partners = Partner.all.paginate(:page => params[:page], :per_page => 8).order(:name)
+      @partners = Partner.where('lower(name) LIKE ?', "%#{params[:search_partner].downcase}%").order(:name).paginate(:page => params[:page], :per_page => 8)
+    else @partners = Partner.all.order(:name).paginate(:page => params[:page], :per_page => 8)
     end
   end
 
