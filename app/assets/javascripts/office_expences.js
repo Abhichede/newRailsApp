@@ -26,7 +26,6 @@ $(function() {
       'pageLength': 25,
       "order": [[ 0, "desc" ]],
       "columnDefs" : [{"targets":0, "type":"date-eu"}],
-      paging: false,
       drawCallback: function () {
         var api = this.api();
         total = 0
