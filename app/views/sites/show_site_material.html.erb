@@ -29,7 +29,8 @@
       %>
           <%= date_field_tag :filter_date, params[:filter_date], placeholder: 'Date',
                       class: 'form-control', id: 'search-date' %>
-          <%= select_tag :supplier_id, options_for_select(supplier_names,:disabled=> 'Select Supplier', selected: params[:supplier_id]), {class: 'form-control', id: 'search-date'} %>
+          <%= select_tag :supplier_id, options_for_select(supplier_names, :disabled => 'Select Supplier', selected: params[:supplier_id]),
+                         class: 'form-control selectpicker', id: 'filter-supplier', autocomplete: 'off', "data-live-search": true %>
           <div class="input-group">
             <%= text_field_tag :filter_query, params[:filter_query],placeholder: 'Filter by "Challan Or Bill No"',
                                class: 'form-control', id: 'search-box' %>

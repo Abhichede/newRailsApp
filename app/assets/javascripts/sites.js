@@ -1,5 +1,9 @@
 $(function() {
 
+    if ($('#filter-supplier').length) {
+        $('#filter-supplier').selectpicker({liveSearch: true});
+    }
+
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     $("form.site").validate({
