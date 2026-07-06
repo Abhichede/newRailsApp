@@ -69,5 +69,27 @@ $(function() {
             $("#site_no_of_shops").attr('value', no_of_shops);
             $("#site_no_of_shops").attr('readonly', false);
         }
-    })
+    });
+
+    function filterSiteTabChips($searchInput) {
+        var query = $.trim($searchInput.val()).toLowerCase();
+        var $tabPane = $searchInput.closest('.tab-pane');
+
+        $tabPane.find('.site-chip-item').each(function() {
+            var text = $.trim($(this).text()).toLowerCase();
+            var matches = query === '' || text.indexOf(query) !== -1;
+            $(this).toggle(matches);
+        });
+    }
+
+    $(document).on('input keyup', '.site-chip-search', function() {
+        filterSiteTabChips($(this));
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function() {
+        var target = $(this).attr('href');
+        $(target).find('.site-chip-search').each(function() {
+            filterSiteTabChips($(this));
+        });
+    });
 });

@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
+
+  def apply_list_sort(default_sort_by: 'created_at', default_sort_dir: 'desc')
+    @sort_by = %w[created_at name].include?(params[:sort_by]) ? params[:sort_by] : default_sort_by
+    @sort_dir = %w[asc desc].include?(params[:sort_dir]) ? params[:sort_dir] : default_sort_dir
+    { @sort_by => @sort_dir.to_sym }
+  end
 end

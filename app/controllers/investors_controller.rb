@@ -5,10 +5,11 @@ class InvestorsController < ApplicationController
   # GET /investors
   # GET /investors.json
   def index
-    if params.has_key? :search_investor
-      @investors = Investor.where('lower(name) LIKE ?', "%#{params[:search_investor].downcase}%").order(:name).paginate(:page => params[:page], :per_page => 6)
-    else @investors = Investor.all.order(:name).paginate(:page => params[:page], :per_page => 6)
+    scope = Investor.all
+    if params[:search_investor].present?
+      scope = scope.where('lower(name) LIKE ?', "%#{params[:search_investor].downcase}%")
     end
+    @investors = scope.order(apply_list_sort).paginate(page: params[:page], per_page: 6)
   end
 
   # GET /investors/1
@@ -16,6 +17,7 @@ class InvestorsController < ApplicationController
   def show
     @investment = Investment.new
     @investment_return = InvestmentReturn.new
+    @investments = @investor.investments.order(created_at: :desc)
   end
 
   # GET /investors/new

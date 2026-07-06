@@ -1,0 +1,23 @@
+<%= form_tag url, method: :get, class: 'form-inline list-sort-form', style: 'margin-bottom: 1rem;' do %>
+  <% if local_assigns[:hidden_params].present? %>
+    <% hidden_params.each do |key, value| %>
+      <% if value.present? %>
+        <%= hidden_field_tag key, value %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= label_tag :sort_by, 'Sort by', style: 'margin-right: 5px;' %>
+    <%= select_tag :sort_by,
+                   options_for_select([['Created date', 'created_at'], ['Name', 'name']], @sort_by),
+                   class: 'form-control input-sm',
+                   onchange: 'this.form.submit()' %>
+  </div>
+  <div class="form-group" style="margin-left: 10px;">
+    <%= label_tag :sort_dir, 'Order', style: 'margin-right: 5px;' %>
+    <%= select_tag :sort_dir,
+                   options_for_select([['Ascending', 'asc'], ['Descending', 'desc']], @sort_dir),
+                   class: 'form-control input-sm',
+                   onchange: 'this.form.submit()' %>
+  </div>
+<% end %>

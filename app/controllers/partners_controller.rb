@@ -4,10 +4,11 @@ class PartnersController < ApplicationController
   # GET /partners
   # GET /partners.json
   def index
-    if params.has_key? :search_partner
-      @partners = Partner.where('lower(name) LIKE ?', "%#{params[:search_partner].downcase}%").order(:name).paginate(:page => params[:page], :per_page => 8)
-    else @partners = Partner.all.order(:name).paginate(:page => params[:page], :per_page => 8)
+    scope = Partner.all
+    if params[:search_partner].present?
+      scope = scope.where('lower(name) LIKE ?', "%#{params[:search_partner].downcase}%")
     end
+    @partners = scope.order(apply_list_sort).paginate(page: params[:page], per_page: 8)
   end
 
   # GET /partners/1

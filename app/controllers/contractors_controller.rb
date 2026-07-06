@@ -5,7 +5,7 @@ class ContractorsController < ApplicationController
   # GET /contractors
   # GET /contractors.json
   def index
-    @contractors = Contractor.all
+    @contractors = Contractor.all.order(apply_list_sort)
   end
 
   # GET /contractors/1

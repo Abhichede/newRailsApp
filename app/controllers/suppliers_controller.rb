@@ -6,7 +6,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers
   # GET /suppliers.json
   def index
-    @suppliers = Supplier.all.paginate(page: params[:page], per_page: 8)
+    @suppliers = Supplier.all.order(apply_list_sort).paginate(page: params[:page], per_page: 8)
   end
 
   # GET /suppliers/1

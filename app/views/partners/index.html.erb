@@ -21,6 +21,8 @@
     </span>
 </div>
 
+<%= render 'common/list_sort', url: partners_path, hidden_params: { search_partner: params[:search_partner] } %>
+
 <div class="row">
   <% @partners.each do |partner| %>
     <div class="col-md-3 col-sm-5 col-xs-11">
@@ -39,5 +41,5 @@
     </div>
   <% end %>
 </div>
-<%= will_paginate @partners, renderer: BootstrapPagination::Rails%>
+<%= will_paginate @partners, renderer: BootstrapPagination::Rails, params: { sort_by: @sort_by, sort_dir: @sort_dir, search_partner: params[:search_partner] } %>
 

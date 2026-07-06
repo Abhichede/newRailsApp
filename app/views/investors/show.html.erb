@@ -30,7 +30,7 @@
     </div>
   </div>
 </div>
-<% @investor.investments.order("investment_date DESC").each do |investment| %>
+<% @investments.each do |investment| %>
     <%
       total_interest = 0
       total_months = 0

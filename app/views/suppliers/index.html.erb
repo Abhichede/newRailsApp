@@ -9,6 +9,8 @@
   </h3>
 </div>
 
+<%= render 'common/list_sort', url: suppliers_path %>
+
 <div class="row">
   <% @suppliers.each do |supplier| %>
       <% if supplier.deleting_status === 'false' || supplier.deleting_status.blank? %>
@@ -29,4 +31,4 @@
       <% end %>
   <% end %>
 </div>
-<%= will_paginate @suppliers, renderer: BootstrapPagination::Rails%>
+<%= will_paginate @suppliers, renderer: BootstrapPagination::Rails, params: { sort_by: @sort_by, sort_dir: @sort_dir } %>
