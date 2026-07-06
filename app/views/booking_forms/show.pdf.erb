@@ -209,7 +209,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">APARTMENT DECLARATION FEES :</span>
-            <span class="value"><%= number_to_indian_currency(@booking_form.apartment_declaration) %></span>
+            <span class="value"><%= display_booking_form_charge(@booking_form.apartment_declaration) %></span>
         </div>
       </td>
     </tr>
@@ -217,7 +217,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">INFRASTRUCTURE &amp; DEVLOPMENT:</span>
-            <span class="value"><%= number_to_indian_currency(@booking_form.infrastructure_and_development) %></span>
+            <span class="value"><%= display_booking_form_charge(@booking_form.infrastructure_and_development) %></span>
         </div>
       </td>
     </tr>
@@ -225,7 +225,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">OTHER CHARGES:</span>
-          <span class="value" class="value"><%= number_to_indian_currency(@booking_form.infrastructure_and_development) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.other_charges) %></span>
         </div>
       </td>
     </tr>

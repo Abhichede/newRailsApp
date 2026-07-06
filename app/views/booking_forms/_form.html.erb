@@ -1,4 +1,4 @@
-<%= form_for(booking_form, :html => { :class => "form-horizontal office_expence" }) do |f| %>
+<%= form_for(booking_form, html: { class: 'form-horizontal booking_form' }) do |f| %>
   <% if @booking_form.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -180,20 +180,20 @@
   <div class="form-group">
     <%= f.label :apartment_declaration, :class => 'control-label col-lg-2' %>
     <div class="col-lg-6">
-      <%= f.number_field :apartment_declaration, :class => 'form-control' %>
+      <%= f.text_field :apartment_declaration, class: 'form-control booking-form-alphanumeric-charge', title: 'Numbers, -, (), / and . only' %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :infrastructure_and_development, :class => 'control-label col-lg-2' %>
     <div class="col-lg-6">
-      <%= f.number_field :infrastructure_and_development, :class => 'form-control' %>
+      <%= f.text_field :infrastructure_and_development, class: 'form-control booking-form-alphanumeric-charge', title: 'Numbers, -, (), / and . only' %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :other_charges, :class => 'control-label col-lg-2' %>
     <div class="col-lg-6">
-      <%= f.number_field :other_charges, :class => 'form-control' %>
+      <%= f.text_field :other_charges, class: 'form-control booking-form-alphanumeric-charge', title: 'Numbers, -, (), / and . only' %>
     </div>
   </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20231015135659) do
+ActiveRecord::Schema.define(version: 20260706060000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 20231015135659) do
     t.integer  "government_consideration"
     t.integer  "stamp_duty"
     t.integer  "registration_charges"
-    t.integer  "other_charges"
-    t.integer  "apartment_declaration"
-    t.integer  "infrastructure_and_development"
+    t.string   "other_charges"
+    t.string   "apartment_declaration"
+    t.string   "infrastructure_and_development"
     t.text     "project_address"
     t.text     "terms_and_conditions"
     t.text     "extras"
@@ -277,7 +277,7 @@ ActiveRecord::Schema.define(version: 20231015135659) do
     t.string   "gst_cost",         default: "0"
     t.boolean  "is_rate_added",    default: false
     t.string   "rate_added_by",    default: "NA"
-    t.datetime "rate_added_at",    default: '2020-06-28 10:37:30'
+    t.datetime "rate_added_at",    default: '2026-07-05 23:56:25'
     t.json     "challan_photos"
   end
 
