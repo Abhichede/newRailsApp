@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.order('created_at ASC')
+    @sites = Site.order(created_at: :desc)
   end
 
   # GET /sites/1
