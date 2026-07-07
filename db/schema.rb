@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20260706060000) do
+ActiveRecord::Schema.define(version: 20260706120000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,19 +71,19 @@ ActiveRecord::Schema.define(version: 20260706060000) do
     t.string   "type_of_unit"
     t.string   "area"
     t.string   "floor"
-    t.integer  "flat_cost"
-    t.integer  "mseb_and_other_charges"
-    t.integer  "water_charges"
-    t.integer  "booking_charges"
-    t.integer  "balance_amount"
-    t.integer  "gst"
-    t.integer  "allotted_parking_charges"
-    t.integer  "maintenance_charges"
+    t.string   "flat_cost"
+    t.string   "mseb_and_other_charges"
+    t.string   "water_charges"
+    t.string   "booking_charges"
+    t.string   "balance_amount"
+    t.string   "gst"
+    t.string   "allotted_parking_charges"
+    t.string   "maintenance_charges"
     t.string   "loan_possible"
-    t.integer  "actual_agreement_cost"
-    t.integer  "government_consideration"
-    t.integer  "stamp_duty"
-    t.integer  "registration_charges"
+    t.string   "actual_agreement_cost"
+    t.string   "government_consideration"
+    t.string   "stamp_duty"
+    t.string   "registration_charges"
     t.string   "other_charges"
     t.string   "apartment_declaration"
     t.string   "infrastructure_and_development"
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 20260706060000) do
     t.text     "extras"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "legal_charges"
-    t.integer  "package_amount"
+    t.string   "legal_charges"
+    t.string   "package_amount"
     t.string   "booking_cost_type"
   end
 

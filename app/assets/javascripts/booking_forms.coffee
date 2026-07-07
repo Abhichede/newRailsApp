@@ -4,6 +4,25 @@
 
 ALPHANUMERIC_CHARGE_PATTERN = /^[0-9\-().\/\.]*$/
 
+BOOKING_FORM_CHARGE_FIELDS = [
+  'flat_cost'
+  'government_consideration'
+  'actual_agreement_cost'
+  'mseb_and_other_charges'
+  'water_charges'
+  'allotted_parking_charges'
+  'maintenance_charges'
+  'stamp_duty'
+  'registration_charges'
+  'gst'
+  'legal_charges'
+  'apartment_declaration'
+  'infrastructure_and_development'
+  'other_charges'
+  'booking_charges'
+  'loan_possible'
+]
+
 initBookingFormChargeFields = ->
   $('.booking-form-alphanumeric-charge').off('input.bookingFormCharge').on 'input.bookingFormCharge', ->
     sanitized = @value.replace /[^0-9\-().\/\.]/g, ''
@@ -12,21 +31,17 @@ initBookingFormChargeFields = ->
 initBookingFormValidation = ->
   return unless $('form.booking_form').length
 
+  rules = {}
+  messages = {}
+  chargeFieldMessage = 'Only numbers, -, (), / and . are allowed'
+
+  for field in BOOKING_FORM_CHARGE_FIELDS
+    rules["booking_form[#{field}]"] = pattern: ALPHANUMERIC_CHARGE_PATTERN
+    messages["booking_form[#{field}]"] = pattern: chargeFieldMessage
+
   $('form.booking_form').validate
-    rules:
-      'booking_form[apartment_declaration]':
-        pattern: ALPHANUMERIC_CHARGE_PATTERN
-      'booking_form[infrastructure_and_development]':
-        pattern: ALPHANUMERIC_CHARGE_PATTERN
-      'booking_form[other_charges]':
-        pattern: ALPHANUMERIC_CHARGE_PATTERN
-    messages:
-      'booking_form[apartment_declaration]':
-        pattern: 'Only numbers, -, (), / and . are allowed'
-      'booking_form[infrastructure_and_development]':
-        pattern: 'Only numbers, -, (), / and . are allowed'
-      'booking_form[other_charges]':
-        pattern: 'Only numbers, -, (), / and . are allowed'
+    rules: rules
+    messages: messages
 
 $(document).on 'ready turbolinks:load', ->
   initBookingFormChargeFields()

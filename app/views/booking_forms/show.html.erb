@@ -122,7 +122,7 @@
         <div class="key-value-container">
           <span class="key">FLAT / SHOP COST :</span>
           <span class="value">
-              <%= number_to_indian_currency(@booking_form.flat_cost) %>
+              <%= display_booking_form_charge(@booking_form.flat_cost) %>
             <% if @booking_form.booking_cost_type == "WITH_PACKAGE" %>
                 <span class="with-package" style="font-weight: bold;">(INCLUDING ALL CHARGES)</span>
               <% end %>
@@ -134,7 +134,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">GOVERNMENT CONSIDERATION :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.government_consideration) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.government_consideration) %></span>
         </div>
       </td>
     </tr>
@@ -142,7 +142,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">ACTUAL AGREEMENT COST :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.actual_agreement_cost) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.actual_agreement_cost) %></span>
         </div>
       </td>
     </tr>
@@ -150,7 +150,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">M.S.E.B. CHARGES :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.mseb_and_other_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.mseb_and_other_charges) %></span>
         </div>
       </td>
     </tr>
@@ -158,7 +158,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">WATER CHARGES :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.water_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.water_charges) %></span>
         </div>
       </td>
     </tr>
@@ -166,7 +166,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">ALLOTTED PARKING CHARGES :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.allotted_parking_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.allotted_parking_charges) %></span>
         </div>
       </td>
     </tr>
@@ -174,7 +174,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">MAINTENANCE CHARGES :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.maintenance_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.maintenance_charges) %></span>
         </div>
       </td>
     </tr>
@@ -182,7 +182,7 @@
       <td  colspan="3">
         <div class="key-value-container">
           <span class="key">STAMP DUTY :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.stamp_duty) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.stamp_duty) %></span>
         </div>
       </td>
     </tr>
@@ -190,7 +190,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">REGISTRATION FEES :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.registration_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.registration_charges) %></span>
         </div>
       </td>
     </tr>
@@ -198,7 +198,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">GST:</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.gst) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.gst) %></span>
         </div>
       </td>
     </tr>
@@ -206,7 +206,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">LEGAL CHARGES:</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.legal_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.legal_charges) %></span>
         </div>
       </td>
     </tr>
@@ -238,7 +238,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">BOOKING CHARGES:</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.booking_charges) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.booking_charges) %></span>
         </div>
       </td>
     </tr>
@@ -246,7 +246,7 @@
       <td colspan="3">
         <div class="key-value-container">
           <span class="key">LOAN POSSIBLE :</span>
-          <span class="value"><%= number_to_indian_currency(@booking_form.loan_possible) %></span>
+          <span class="value"><%= display_booking_form_charge(@booking_form.loan_possible) %></span>
         </div>
       </td>
     </tr>
