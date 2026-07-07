@@ -11,7 +11,11 @@ class ContractorsController < ApplicationController
   # GET /contractors/1
   # GET /contractors/1.json
   def show
-    @outgoing_payments = @contractor.outgoing_payments
+    labour_ids = @contractor.contractual_labour_ids
+    @outgoing_payments = OutgoingPayment
+      .where(payment_for: 'CONTRACTOR', payment_for_id: labour_ids)
+      .order('Date(date) ASC')
+      .map(&:serializable_hash)
   end
 
   # GET /contractors/new
