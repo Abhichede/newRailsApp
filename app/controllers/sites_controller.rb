@@ -125,7 +125,17 @@ class SitesController < ApplicationController
     def filter_material
       @materials = @materials.where(supplier_id: params[:supplier_id]) if params[:supplier_id].present?
       @materials = @materials.where('type_of_material = ? AND (challan_no LIKE ? OR bill_no LIKE ?)', params[:type_of_material], "%#{params[:filter_query ]}%", "%#{params[:filter_query ]}%") if params[:filter_query].present?
-      @materials = @materials.where('date = ?', params[:filter_date]) if params[:filter_date].present?
-      @materials = @materials.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+
+      if params[:from_date].present? && params[:to_date].present?
+        @materials = @materials.where('date BETWEEN ? AND ?', params[:from_date], params[:to_date])
+      elsif params[:filter_date].present?
+        @materials = @materials.where('date = ?', params[:filter_date])
+      elsif params[:from_date].present?
+        @materials = @materials.where('date >= ?', params[:from_date])
+      elsif params[:to_date].present?
+        @materials = @materials.where('date <= ?', params[:to_date])
+      end
+
+      @materials = @materials.order('Date(date) ASC, time ASC, created_at ASC').paginate(:page => params[:page], :per_page => 10)
     end
 end

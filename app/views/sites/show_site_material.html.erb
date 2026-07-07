@@ -27,8 +27,10 @@
           end
         end 
       %>
-          <%= date_field_tag :filter_date, params[:filter_date], placeholder: 'Date',
-                      class: 'form-control', id: 'search-date' %>
+          From: <%= date_field_tag :from_date, params[:from_date].presence || params[:filter_date],
+                      placeholder: 'From Date', class: 'form-control', id: 'from-date' %>
+          To: <%= date_field_tag :to_date, params[:to_date].presence || params[:filter_date],
+                      placeholder: 'To Date', class: 'form-control', id: 'to-date' %>
           <%= select_tag :supplier_id, options_for_select(supplier_names, :disabled => 'Select Supplier', selected: params[:supplier_id]),
                          class: 'form-control selectpicker', id: 'filter-supplier', autocomplete: 'off', "data-live-search": true %>
           <div class="input-group">
